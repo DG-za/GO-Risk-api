@@ -1,0 +1,1964 @@
+23-09-2019(Monday) API List
+
+http://localhost/excellence-api/Auth/user_login/
+http://localhost/excellence-api/GetPerformanceElements/
+http://localhost/excellence-api/GetPerformance/
+http://localhost/excellence-api/SavePerformanceMC/
+http://localhost/excellence-api/GetCategories/
+http://localhost/excellence-api/GetElements/
+
+24-09-2019(Tuesday) API List
+
+http://localhost/excellence-api/GetQuestions/
+http://localhost/excellence-api/GetAnswersByElement/
+http://localhost/excellence-api/GetMCByElement/
+http://localhost/excellence-api/GetProof/
+http://localhost/excellence-api/GetDesiredByElement/
+
+25-09-2019(Wednesday) API List
+http://localhost/excellence-api/GetDesiredByElement/ - Updated Successfully
+
+http://localhost/excellence-api/GetProofByElement/
+http://localhost/excellence-api/DeleteQuestion/
+http://localhost/excellence-api/GetActionsByElement/
+http://localhost/excellence-api/GetAggregate/
+http://localhost/excellence-api/GetAllUsers/
+
+26-09-2019(Thursday) API List
+http://localhost/excellence-api/GetBottom5Elements/
+http://localhost/excellence-api/GetBottom5Questions/
+http://localhost/excellence-api/GetComplete/
+http://localhost/excellence-api/GetElementsByCat/
+http://localhost/excellence-api/GetMCAll/
+http://localhost/excellence-api/GetTop5Elements/
+http://localhost/excellence-api/GetTop5Questions/
+http://localhost/excellence-api/GetMilestones/
+
+27-09-2019(Friday) API List
+http://localhost/excellence-api/SaveActionsMeasure/
+http://localhost/excellence-api/SaveActionsMilestone/
+http://localhost/excellence-api/SaveActionsResults/
+http://localhost/excellence-api/SaveActionsRisks/
+http://localhost/excellence-api/SaveActionsVictory/
+http://localhost/excellence-api/SaveComplete/
+http://localhost/excellence-api/SaveDesired/
+http://localhost/excellence-api/SaveElement/
+
+28-09-2019(Saturday) API List
+http://localhost/excellence-api/SaveMC/
+http://localhost/excellence-api/SavePerformanceMC/
+http://localhost/excellence-api/SaveUser/
+http://localhost/excellence-api/SaveQuestion/
+http://localhost/excellence-api/SaveProof/
+http://localhost/excellence-api/CleanDataset/
+
+She-excellence-api
+
+#. Log-In
+
+http://localhost/excellence-api/Auth/user_login/
+
+Header
+
+Content-Type : application/json
+
+Request
+{
+"email":"employee",
+"password":"1515"
+}
+
+Response
+{
+	"status": "true",
+	"statuscode": 200,
+	"response": {
+		"user_id": "35",
+		"email": "employee",
+		"firstname": "John",
+		"lastname": "Doe",
+		"user_type": "employee",
+		"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjM1IiwidXNlcm5hbWUiOiJlbXBsb3llZSIsImlhdCI6MTU2OTI5NDY4NywiZXhwIjoxNTY5MzEyNjg3fQ.THND86OmpUo4Ew9lasNK9Kqbv0PGZ4BlmwjgFl2h29Q"
+	}
+}
+
+#. Get All Performances_Elements(getPerformanceElements.php)
+
+http://localhost/excellence-api/GetPerformanceElements/
+
+Header
+
+Authorization : eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjM1IiwidXNlcm5hbWUiOiJlbXBsb3llZSIsImlhdCI6MTU2OTI5NDY4NywiZXhwIjoxNTY5MzEyNjg3fQ.THND86OmpUo4Ew9lasNK9Kqbv0PGZ4BlmwjgFl2h29Q
+
+Request
+{
+"user_id":"35"
+}
+
+Response
+{
+    "status": "true",
+    "statuscode": 200,
+    "response": [
+        {
+            "id": "1",
+            "name": "Occupational Safety"
+        },
+        {
+            "id": "2",
+            "name": "Process Safety"
+        },
+        {
+            "id": "3",
+            "name": "Health"
+        },
+        {
+            "id": "4",
+            "name": "Environment"
+        },
+        {
+            "id": "5",
+            "name": "Product Stewardship"
+        }
+    ]
+}
+
+#. Get All Performance(getPerformance.php)
+
+http://localhost/excellence-api/GetPerformance/
+
+Header
+
+Authorization : eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjM1IiwidXNlcm5hbWUiOiJlbXBsb3llZSIsImlhdCI6MTU2OTI5NDY4NywiZXhwIjoxNTY5MzEyNjg3fQ.THND86OmpUo4Ew9lasNK9Kqbv0PGZ4BlmwjgFl2h29Q
+
+Request
+{
+"user_id":"35"
+}
+
+Response
+{
+    "status": "true",
+    "statuscode": 200,
+    "response": [
+        {
+            "id": "1",
+            "question": "Performance: actual performance against target",
+            "reactive": "Usually more than 10% outside the target",
+            "compliant": "Usually within 10% of the target",
+            "proactive": "Consistently within 2% of the target",
+            "resilient": "Target exceeded consistently"
+        },
+        {
+            "id": "2",
+            "question": "Trend: Positive, sustained >3 years",
+            "reactive": "Trend is negative",
+            "compliant": "No improvement in trend over past 3 years",
+            "proactive": "Positive trend, sustained performance over 3 years",
+            "resilient": "Trend consistently remain ahead of industry norm"
+        },
+        {
+            "id": "3",
+            "question": "Comparison: Target setting, benchmarking and strategic alignment",
+            "reactive": "Target are stagnant and/or lags industry norms, no/limited comparison or benchmarking",
+            "compliant": "Target are set top-down based on entity average performance, relevant internal comparisons are done and results are on par",
+            "proactive": "Stretched target is set and owned by the team over and above the Group target, Relevant external comparisons are made and are favourable, performance is favourable compared to strategic objectives",
+            "resilient": "Target is industry leading, relevant external comparisons indicate industry leaders, strategic objectives achieved and revised."
+        },
+        {
+            "id": "4",
+            "question": "Confidence: Confidence that performance can be sustained, specific improvement actions, correct lead indicators",
+            "reactive": "Improvement actions are mainly reactive to performance, limited view on lead indicators, non-conformance process play a big role in addressing negative trends",
+            "compliant": "Identification of specific actions to improve performance is done by management teams and operational teams are instructed, lead indicators for compliance are tracked.",
+            "proactive": "Teams take ownership of the trend and drive improvement actions, focussing more on systems, processes and preventive controls, lead indicators for critical control effectiveness are tracked.",
+            "resilient": "Improvement actions focus on embedding behaviour. Improvement actions become a way of doing business. Lead indicators for risk reduction are tracked."
+        }
+    ]
+}
+
+#. Get All Category(getCategories.php)
+
+http://localhost/excellence-api/GetCategories/
+
+Header
+
+Authorization : eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjM1IiwidXNlcm5hbWUiOiJlbXBsb3llZSIsImlhdCI6MTU2OTI5NDY4NywiZXhwIjoxNTY5MzEyNjg3fQ.THND86OmpUo4Ew9lasNK9Kqbv0PGZ4BlmwjgFl2h29Q
+
+Request
+{
+"user_id":"35"
+}
+
+Response
+{
+    "status": "true",
+    "statuscode": 200,
+    "response": {
+        "data": [
+            {
+                "id": "1",
+                "name": "Direction",
+                "byline": "<strong>Ensure the team pulls in the same direction towards zero harm.</strong><br/>\r\nLeadership sets the direction for sustainable zero harm through the use of various enablers. The integrated SHE policy and fundamentals provide the context within which the performance requirements are set. Targets and plans are set for all existing OMEs, growth projects and joint venture activities under our operational control.",
+                "image": "direction.svg"
+            },
+            {
+                "id": "2",
+                "name": "People",
+                "byline": "<strong>Ensure the team has the tools to achieve zero harm.</strong><br/>\r\nRisk-based tools are provided to enable sustainable excellent SHE results in our OMEs. These tools aim to align SHE activities globally and drive regional standardisation where possible. These include management systems, business processes, enabling technology, procedures and toolkits. Utilising these tools, OMEs can meet SHE performance requirements, consistent with applicable legal requirements and improved maturity levels.",
+                "image": "people.svg"
+            },
+            {
+                "id": "3",
+                "name": "Process",
+                "byline": "<strong>Ensure team members are fit and skilled to achieve zero harm.</strong><br/>\r\nPeople-related practices are used to enable sustainable zero harm. Our workforce is enabled through leaders who create a zero harm climate. Leaders focus on zero harm behaviour, learning, skills and competency development. A competent, fit-for-purpose SHE function provides the necessary SHE support to OMEs.\r\n",
+                "image": "process.svg"
+            },
+            {
+                "id": "4",
+                "name": "Results",
+                "byline": "<strong>Ensure SHE results are monitored and utilised.</strong><br/>\r\nSHE results are monitored to measure SHE performance and thereby the effectiveness of SHE risk management and an assertion on assurance. These results inform the focus of continuous improvement activities.\r\n",
+                "image": "results.svg"
+            }
+        ]
+    }
+}
+
+#. Get All Elements(getElements.php)
+
+http://localhost/excellence-api/GetElements/
+
+Header
+
+Authorization : eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjM1IiwidXNlcm5hbWUiOiJlbXBsb3llZSIsImlhdCI6MTU2OTI5NDY4NywiZXhwIjoxNTY5MzEyNjg3fQ.THND86OmpUo4Ew9lasNK9Kqbv0PGZ4BlmwjgFl2h29Q
+
+Request
+{
+"user_id":"35"
+}
+
+Response
+{
+    "status": "true",
+    "statuscode": 200,
+    "response": {
+        "data": [
+            {
+                "id": "1",
+                "name": "1.1 Strategy",
+                "cat": "1",
+                "seq": "a"
+            },
+            {
+                "id": "4",
+                "name": "2.1 Training and Skills",
+                "cat": "2",
+                "seq": "d"
+            },
+            {
+                "id": "8",
+                "name": "3.1 Risk Management",
+                "cat": "3",
+                "seq": "h"
+            },
+            {
+                "id": "15",
+                "name": "4.1 Measurement",
+                "cat": "4",
+                "seq": "o"
+            },
+            {
+                "id": "2",
+                "name": "1.2 Targets and Plans",
+                "cat": "1",
+                "seq": "b"
+            },
+            {
+                "id": "5",
+                "name": "2.2 Human Capital",
+                "cat": "2",
+                "seq": "e"
+            },
+            {
+                "id": "9",
+                "name": "3.2 Operations Control",
+                "cat": "3",
+                "seq": "i"
+            },
+            {
+                "id": "16",
+                "name": "4.2 Improvement",
+                "cat": "4",
+                "seq": "p"
+            },
+            {
+                "id": "3",
+                "name": "1.3 Leadership",
+                "cat": "1",
+                "seq": "c"
+            },
+            {
+                "id": "6",
+                "name": "2.3 Culture and Behaviour",
+                "cat": "2",
+                "seq": "f"
+            },
+            {
+                "id": "10",
+                "name": "3.2.1 Project Management",
+                "cat": "3",
+                "seq": "j"
+            },
+            {
+                "id": "7",
+                "name": "2.4 Engagement",
+                "cat": "2",
+                "seq": "g"
+            },
+            {
+                "id": "11",
+                "name": "3.2.2 Operations and Maintenance",
+                "cat": "3",
+                "seq": "k"
+            },
+            {
+                "id": "12",
+                "name": "3.2.3 Supply Chain",
+                "cat": "3",
+                "seq": "l"
+            },
+            {
+                "id": "13",
+                "name": "3.3 Systems",
+                "cat": "3",
+                "seq": "m"
+            },
+            {
+                "id": "14",
+                "name": "3.4 Governance",
+                "cat": "3",
+                "seq": "n"
+            }
+        ]
+    }
+}
+
+#. Get All Quetions By Element_ID(getQuestions.php)
+
+http://localhost/excellence-api/GetQuestions/
+
+Header
+
+Authorization : eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjM1IiwidXNlcm5hbWUiOiJlbXBsb3llZSIsImlhdCI6MTU2OTI5NDY4NywiZXhwIjoxNTY5MzEyNjg3fQ.THND86OmpUo4Ew9lasNK9Kqbv0PGZ4BlmwjgFl2h29Q
+
+Request
+{
+	"user_id":"35",
+	"element_id":"1"
+}
+
+Response
+{
+    "status": "true",
+    "statuscode": 200,
+    "response": {
+        "data": [
+            {
+                "id": "1",
+                "element": "1",
+                "question": "1. Group SHEQ Policy",
+                "reactive": "A SHEQ Policy does not exist or is only a paper exercise with no visibility or buy-in from leaders.",
+                "compliant": "A formal SHEQ Policy exists, is endorsed by the CEO and is used by the SHEQ team to provide direction.",
+                "proactive": "Leaders commit to the SHEQ Policy and communicate it.",
+                "resilient": "The SHEQ Policy is consistently used by teams to guide SHEQ Strategy and improvement plans."
+            },
+            {
+                "id": "2",
+                "element": "1",
+                "question": "2. Commitment to Zero Harm direction",
+                "reactive": "Zero Harm is a theoretical idea and is supported only by some.",
+                "compliant": "Most leaders and teams understand and support Zero Harm. The SHEQ team drives improvement of SHEQ practices.",
+                "proactive": "All leaders and teams are actively involved in achieving Zero Harm which is evident in continuously improving SHEQ practices.",
+                "resilient": "All leaders and teams\npro-actively work together to embed SHEQ practices which is evident in the achievement of Zero Harm milestones."
+            },
+            {
+                "id": "3",
+                "element": "1",
+                "question": "3. Group SHEQ Strategy",
+                "reactive": "No formal SHEQ Strategy exists, or if it does, it has limited visibility.",
+                "compliant": "The SHEQ Strategy considers the BIGGER values, Group strategy, stakeholder requirements, SHEQ risks and relevant legislation. It is visible and communicated to\nall leaders.",
+                "proactive": "The SHEQ Strategy is translated into SHEQ objectives and plans and cascaded to teams, taking the teams SHEQ\nperformance and risks into account.",
+                "resilient": "The SHEQ Strategy is actively implemented by leaders and teams and it provides a clear roadmap to achieving Zero Harm. Innovation is an integrated part of the SHEQ strategy to reduce SHEQ risks."
+            },
+            {
+                "id": "4",
+                "element": "1",
+                "question": "4. SHEQ Framework and Fundamentals",
+                "reactive": "SHEQ practices are driven by fear or as a reaction\nto incidents. SHEQ Fundamentals are seen as pointless.",
+                "compliant": "Leaders understand the SHEQ Fundamentals\nand the SHEQ Framework is utilised to drive standardised SHEQ practices.",
+                "proactive": "Teams know the SHEQ Fundamentals and implement risk-based SHEQ management through the SHEQ Framework.",
+                "resilient": "Teams reduce SHEQ risks by embedding SHEQ Fundamentals and prioritised continuous embedding and improvement of SHEQ practices."
+            },
+            {
+                "id": "5",
+                "element": "1",
+                "question": "5. SHEQ Resources (people, time and funding)",
+                "reactive": "No or inadequate resources are available to execute the SHEQ Strategy.",
+                "compliant": "Resources are made available to implement prioritised parts of the SHEQ Strategy.",
+                "proactive": "Adequate resources are actively deployed and used to drive the implementation of the SHEQ Strategy.",
+                "resilient": "Resources are available and deployed to actively drive risk reduction, improvement of SHEQ practices and embedding of the\nSHEQ Strategy."
+            }
+        ]
+    }
+}
+
+#. Get All Answer By Element_ID(getAnswersByElement.php)
+
+http://localhost/excellence-api/GetAnswersByElement/
+
+Header
+
+Authorization : eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjM1IiwidXNlcm5hbWUiOiJlbXBsb3llZSIsImlhdCI6MTU2OTI5NDY4NywiZXhwIjoxNTY5MzEyNjg3fQ.THND86OmpUo4Ew9lasNK9Kqbv0PGZ4BlmwjgFl2h29Q
+
+Request
+{
+	"user_id":"35",
+	"element_id":"1"
+}
+
+Response
+{
+    "status": "true",
+    "statuscode": 200,
+    "response": {
+        "data": [
+            {
+                "question": "1",
+                "reactive": "2",
+                "compliant": "0",
+                "proactive": "0",
+                "resilient": "0",
+                "total": "2"
+            },
+            {
+                "question": "2",
+                "reactive": "0",
+                "compliant": "1",
+                "proactive": "1",
+                "resilient": "1",
+                "total": "3"
+            },
+            {
+                "question": "3",
+                "reactive": "0",
+                "compliant": "1",
+                "proactive": "0",
+                "resilient": "2",
+                "total": "3"
+            },
+            {
+                "question": "4",
+                "reactive": "1",
+                "compliant": "1",
+                "proactive": "1",
+                "resilient": "0",
+                "total": "3"
+            },
+            {
+                "question": "5",
+                "reactive": "1",
+                "compliant": "0",
+                "proactive": "1",
+                "resilient": "0",
+                "total": "2"
+            },
+            {
+                "question": "14",
+                "reactive": "1",
+                "compliant": "0",
+                "proactive": "0",
+                "resilient": "0",
+                "total": "1"
+            },
+            {
+                "question": "16",
+                "reactive": "0",
+                "compliant": "1",
+                "proactive": "0",
+                "resilient": "0",
+                "total": "1"
+            }
+        ]
+    }
+}
+
+#. Get All Answer MC By Element_ID(getMCByElement.php)
+
+http://localhost/excellence-api/GetMCByElement/
+
+Header
+
+Authorization : eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjM1IiwidXNlcm5hbWUiOiJlbXBsb3llZSIsImlhdCI6MTU2OTI5NDY4NywiZXhwIjoxNTY5MzEyNjg3fQ.THND86OmpUo4Ew9lasNK9Kqbv0PGZ4BlmwjgFl2h29Q
+
+Request
+{
+	"user_id":"35",
+	"element_id":"1"
+}
+
+Response
+{
+    "status": "true",
+    "statuscode": 200,
+    "response": {
+        "data": [
+            {
+                "name": "1",
+                "value": "5"
+            },
+            {
+                "name": "2",
+                "value": "4"
+            },
+            {
+                "name": "3",
+                "value": "3"
+            },
+            {
+                "name": "4",
+                "value": "3"
+            }
+        ]
+    }
+}
+
+#. Get All Proof By Element_ID(getProof.php)
+
+http://localhost/excellence-api/GetProof/
+
+Header
+
+Authorization : eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjM1IiwidXNlcm5hbWUiOiJlbXBsb3llZSIsImlhdCI6MTU2OTI5NDY4NywiZXhwIjoxNTY5MzEyNjg3fQ.THND86OmpUo4Ew9lasNK9Kqbv0PGZ4BlmwjgFl2h29Q
+
+Request
+{
+	"user_id":"35",
+	"element_id":"1"
+}
+
+Response
+{
+    "status": "true",
+    "statuscode": 200,
+    "response": {
+        "data": [
+            {
+                "id": "1",
+                "element": "1",
+                "type": "1",
+                "proof": "SHE Policy declaration is available"
+            },
+            {
+                "id": "2",
+                "element": "1",
+                "type": "1",
+                "proof": "Practical actions to create team commitment to zero harm (e.g. communication, pledges, team talks)"
+            },
+            {
+                "id": "3",
+                "element": "1",
+                "type": "1",
+                "proof": "Safety climate survey results"
+            },
+            {
+                "id": "4",
+                "element": "1",
+                "type": "1",
+                "proof": "Alignment between the 1S SHE EA and the OME SHE practices regarding legal compliance"
+            },
+            {
+                "id": "5",
+                "element": "1",
+                "type": "1",
+                "proof": "Adherence to management standards \r\n(e.g. audit results, certification)"
+            },
+            {
+                "id": "6",
+                "element": "1",
+                "type": "2",
+                "proof": "SHE policy declaration is used in communication and SHE directional decisions"
+            },
+            {
+                "id": "7",
+                "element": "1",
+                "type": "2",
+                "proof": "Team participation in zero harm journey"
+            },
+            {
+                "id": "8",
+                "element": "1",
+                "type": "2",
+                "proof": "OME SHE procedures and toolkits are aligned with the SHE performance requirements as set out in the One Sasol SHE Excellence approach."
+            },
+            {
+                "id": "9",
+                "element": "1",
+                "type": "2",
+                "proof": "Integrated management system aligned with the One Sasol SHE Excellence approach."
+            }
+        ]
+    }
+}
+
+#. Get All Desired By Element_ID(getDesiredByElement.php)
+
+http://localhost/excellence-api/GetDesiredByElement/
+
+Header
+
+Authorization : eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjM1IiwidXNlcm5hbWUiOiJlbXBsb3llZSIsImlhdCI6MTU2OTI5NDY4NywiZXhwIjoxNTY5MzEyNjg3fQ.THND86OmpUo4Ew9lasNK9Kqbv0PGZ4BlmwjgFl2h29Q
+
+Request
+{
+	"user_id":"35",
+	"element_id":"1"
+}
+
+Response
+{
+    "status": "true",
+    "statuscode": 200,
+    "response": {
+        "data": [
+            [
+                {
+                    "name": "reactive",
+                    "value": "0"
+                },
+                {
+                    "name": "compliant",
+                    "value": "3"
+                },
+                {
+                    "name": "proactive",
+                    "value": "1"
+                }
+            ]
+        ]
+    }
+}
+
+#. Get All Proof By Element_ID Join(getProofByElement.php)
+
+http://localhost/excellence-api/GetProofByElement/
+
+Header
+
+Authorization : eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjM1IiwidXNlcm5hbWUiOiJlbXBsb3llZSIsImlhdCI6MTU2OTI5NDY4NywiZXhwIjoxNTY5MzEyNjg3fQ.THND86OmpUo4Ew9lasNK9Kqbv0PGZ4BlmwjgFl2h29Q
+
+Request
+{
+	"user_id":"35",
+	"element_id":"1"
+}
+
+Response
+{
+    "status": "true",
+    "statuscode": 200,
+    "response": {
+        "data": [
+            {
+                "proof": "Team participation in zero harm journey",
+                "type": "2"
+            },
+            {
+                "proof": "Alignment between the 1S SHE EA and the OME SHE practices regarding legal compliance",
+                "type": "1"
+            },
+            {
+                "proof": "Team participation in zero harm journey",
+                "type": "2"
+            },
+            {
+                "proof": "Alignment between the 1S SHE EA and the OME SHE practices regarding legal compliance",
+                "type": "1"
+            },
+            {
+                "proof": "Team participation in zero harm journey",
+                "type": "2"
+            },
+            {
+                "proof": "Alignment between the 1S SHE EA and the OME SHE practices regarding legal compliance",
+                "type": "1"
+            }
+        ]
+    }
+}
+
+#. Delete Question(deleteQuestion.php)
+
+http://localhost/excellence-api/DeleteQuestion/
+
+Header
+
+Authorization : eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjM1IiwidXNlcm5hbWUiOiJlbXBsb3llZSIsImlhdCI6MTU2OTI5NDY4NywiZXhwIjoxNTY5MzEyNjg3fQ.THND86OmpUo4Ew9lasNK9Kqbv0PGZ4BlmwjgFl2h29Q
+
+Request
+{
+	"user_id":"35",
+	"question_id":"15"
+}
+
+Response
+{
+    "status": "true",
+    "statuscode": 200,
+    "response": "Quetion Deleted Successfully"
+}
+
+#. Get Actions By Element(getActionsByElement.php)
+
+http://localhost/excellence-api/GetActionsByElement/
+
+Header
+
+Authorization : eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjM1IiwidXNlcm5hbWUiOiJlbXBsb3llZSIsImlhdCI6MTU2OTI5NDY4NywiZXhwIjoxNTY5MzEyNjg3fQ.THND86OmpUo4Ew9lasNK9Kqbv0PGZ4BlmwjgFl2h29Q
+
+Request
+{
+	"user_id":"35",
+	"element_id":"1"
+}
+
+Response
+{
+    "status": "true",
+    "statuscode": 200,
+    "response": {
+        "data": [
+            {
+                "results": "<ul><li>Result looks like testing</li></ul>",
+                "definition": "Success looks like testing",
+                "measure": "<ul><li>Measurement looks like testing</li></ul>",
+                "risk": "<ul><li>Risk looks like testing</li></ul>"
+            }
+        ]
+    }
+}
+
+#. Get Aggregate(getAggregate.php)
+
+http://localhost/excellence-api/GetAggregate/
+
+Header
+
+Authorization : eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjM1IiwidXNlcm5hbWUiOiJlbXBsb3llZSIsImlhdCI6MTU2OTI5NDY4NywiZXhwIjoxNTY5MzEyNjg3fQ.THND86OmpUo4Ew9lasNK9Kqbv0PGZ4BlmwjgFl2h29Q
+
+Request
+{
+	"user_id":"35"
+}
+
+Response
+{
+    "status": "true",
+    "statuscode": 200,
+    "response": {
+        "data": [
+            {
+                "name": "1.1 Strategy",
+                "value": "2.2667"
+            },
+            {
+                "name": "1.2 Targets and Plans",
+                "value": "2.2500"
+            },
+            {
+                "name": "1.3 Leadership",
+                "value": "2.2500"
+            },
+            {
+                "name": "2.1 Training and Skills",
+                "value": "2.6000"
+            },
+            {
+                "name": "2.2 Human Capital",
+                "value": "2.6000"
+            },
+            {
+                "name": "2.3 Culture and Behaviour",
+                "value": "2.2222"
+            },
+            {
+                "name": "2.4 Engagement",
+                "value": "2.7778"
+            },
+            {
+                "name": "3.1 Risk Management",
+                "value": "2.5333"
+            },
+            {
+                "name": "3.2 Operations Control",
+                "value": "2.6364"
+            },
+            {
+                "name": "3.2.1 Project Management",
+                "value": "2.2727"
+            },
+            {
+                "name": "3.2.2 Operations and Maintenance",
+                "value": "3.0000"
+            },
+            {
+                "name": "3.2.3 Supply Chain",
+                "value": "2.2500"
+            },
+            {
+                "name": "3.3 Systems",
+                "value": "2.2500"
+            },
+            {
+                "name": "3.4 Governance",
+                "value": "2.5000"
+            },
+            {
+                "name": "4.1 Measurement",
+                "value": "2.3571"
+            },
+            {
+                "name": "4.2 Improvement",
+                "value": "2.2857"
+            }
+        ]
+    }
+}
+
+#. Get All Users(getAllUsers.php)
+
+http://localhost/excellence-api/GetAllUsers/
+
+Header
+
+Authorization : eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjM1IiwidXNlcm5hbWUiOiJlbXBsb3llZSIsImlhdCI6MTU2OTI5NDY4NywiZXhwIjoxNTY5MzEyNjg3fQ.THND86OmpUo4Ew9lasNK9Kqbv0PGZ4BlmwjgFl2h29Q
+
+Request
+{
+	"user_id":"35"
+}
+
+Response
+{
+    "status": "true",
+    "statuscode": 200,
+    "response": {
+        "data": [
+            {
+                "id": "1",
+                "email": "admin",
+                "firstname": "Admin",
+                "lastname": "User",
+                "role": "admin",
+                "password": "007"
+            },
+            {
+                "id": "204",
+                "email": "employee4",
+                "firstname": "Jack",
+                "lastname": "Doe",
+                "role": "employee",
+                "password": "1515"
+            },
+            {
+                "id": "203",
+                "email": "employee3",
+                "firstname": "Jane",
+                "lastname": "Doe",
+                "role": "employee",
+                "password": "1515"
+            },
+            {
+                "id": "202",
+                "email": "employee2",
+                "firstname": "Julie",
+                "lastname": "Doe",
+                "role": "employee",
+                "password": "1515"
+            },
+            {
+                "id": "201",
+                "email": "manager",
+                "firstname": "Manager",
+                "lastname": "User",
+                "role": "manager",
+                "password": "1515"
+            },
+            {
+                "id": "35",
+                "email": "employee",
+                "firstname": "John",
+                "lastname": "Doe",
+                "role": "employee",
+                "password": "bc7316929fe1545bf0b98d114ee3ecb8"
+            }
+        ]
+    }
+}
+
+#. Get Bottom 5 Elements(getBottom5Elements.php)
+
+http://localhost/excellence-api/GetBottom5Elements/
+
+Header
+
+Authorization : eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjM1IiwidXNlcm5hbWUiOiJlbXBsb3llZSIsImlhdCI6MTU2OTI5NDY4NywiZXhwIjoxNTY5MzEyNjg3fQ.THND86OmpUo4Ew9lasNK9Kqbv0PGZ4BlmwjgFl2h29Q
+
+Request
+{
+	"user_id":"35"
+}
+
+Response
+{
+    "status": "true",
+    "statuscode": 200,
+    "response": {
+        "data": [
+            {
+                "name": "2.2 Human Capital",
+                "score": "13"
+            },
+            {
+                "name": "1.3 Leadership",
+                "score": "18"
+            },
+            {
+                "name": "1.2 Targets and Plans",
+                "score": "18"
+            },
+            {
+                "name": "2.3 Culture and Behaviour",
+                "score": "20"
+            },
+            {
+                "name": "3.2.1 Project Management",
+                "score": "25"
+            }
+        ]
+    }
+}
+
+#. Get Bottom 5 Questions(getBottom5Questions.php)
+
+http://localhost/excellence-api/GetBottom5Questions/
+
+Header
+
+Authorization : eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjM1IiwidXNlcm5hbWUiOiJlbXBsb3llZSIsImlhdCI6MTU2OTI5NDY4NywiZXhwIjoxNTY5MzEyNjg3fQ.THND86OmpUo4Ew9lasNK9Kqbv0PGZ4BlmwjgFl2h29Q
+
+Request
+{
+	"user_id":"35"
+}
+
+Response
+{
+    "status": "true",
+    "statuscode": 200,
+    "response": {
+        "data": [
+            {
+                "question": "19. SHEQ\naccountabilities",
+                "element": "2.2 Human Capital",
+                "score": "1"
+            },
+            {
+                "question": "1. Group SHEQ Policy",
+                "element": "1.1 Strategy",
+                "score": "2"
+            },
+            {
+                "question": "6. SHEQ milestones and targets",
+                "element": "1.2 Targets and Plans",
+                "score": "2"
+            },
+            {
+                "question": "10. Accountable leadership",
+                "element": "1.3 Leadership",
+                "score": "2"
+            },
+            {
+                "question": "21. SHEQ function structure",
+                "element": "2.2 Human Capital",
+                "score": "2"
+            }
+        ]
+    }
+}
+
+#. Get Complete(getComplete.php)
+
+http://localhost/excellence-api/GetComplete/
+
+Header
+
+Authorization : eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjM1IiwidXNlcm5hbWUiOiJlbXBsb3llZSIsImlhdCI6MTU2OTI5NDY4NywiZXhwIjoxNTY5MzEyNjg3fQ.THND86OmpUo4Ew9lasNK9Kqbv0PGZ4BlmwjgFl2h29Q
+
+Request
+{
+	"user_id":"35",
+	"complete_user_id":"1"
+}
+
+Response
+{
+    "status": "true",
+    "statuscode": 200,
+    "response": {
+        "data": [
+            {
+                "element": "1"
+            },
+            {
+                "element": "1"
+            },
+            {
+                "element": "2"
+            },
+            {
+                "element": "3"
+            },
+            {
+                "element": "4"
+            },
+            {
+                "element": "6"
+            },
+            {
+                "element": "16"
+            }
+        ]
+    }
+}
+
+#. Get Elements By Category(getElementsByCat.php)
+
+http://localhost/excellence-api/GetElementsByCat/
+
+Header
+
+Authorization : eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjM1IiwidXNlcm5hbWUiOiJlbXBsb3llZSIsImlhdCI6MTU2OTI5NDY4NywiZXhwIjoxNTY5MzEyNjg3fQ.THND86OmpUo4Ew9lasNK9Kqbv0PGZ4BlmwjgFl2h29Q
+
+Request
+{
+	"user_id":"35",
+	"cat_id":"1"
+}
+
+Response
+{
+    "status": "true",
+    "statuscode": 200,
+    "response": {
+        "data": [
+            {
+                "id": "1",
+                "cat": "1",
+                "name": "1.1 Strategy",
+                "sequence": "1"
+            },
+            {
+                "id": "2",
+                "cat": "1",
+                "name": "1.2 Targets and Plans",
+                "sequence": "2"
+            },
+            {
+                "id": "3",
+                "cat": "1",
+                "name": "1.3 Leadership",
+                "sequence": "3"
+            }
+        ]
+    }
+}
+
+#. Get MC All(getMCAll.php)
+
+http://localhost/excellence-api/GetMCAll/
+
+Header
+
+Authorization : eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjM1IiwidXNlcm5hbWUiOiJlbXBsb3llZSIsImlhdCI6MTU2OTIyOTg4OSwiZXhwIjoxNTY5MjQ3ODg5fQ.h4_w-Uk7jB9l5N92ICUWDjbW9-XLywO1OqBXjzimj8E
+
+Request
+{
+	"user_id":"35"
+}
+
+Response
+{
+    "status": "true",
+    "statuscode": 200,
+    "response": {
+        "data": [
+            {
+                "name": "1.1 Strategy",
+                "series": [
+                    {
+                        "name": "1",
+                        "value": "59"
+                    },
+                    {
+                        "name": "2",
+                        "value": "47"
+                    },
+                    {
+                        "name": "3",
+                        "value": "43"
+                    },
+                    {
+                        "name": "4",
+                        "value": "54"
+                    }
+                ]
+            },
+            {
+                "name": "1.2 Targets and Plans",
+                "series": [
+                    {
+                        "name": "1",
+                        "value": "59"
+                    },
+                    {
+                        "name": "2",
+                        "value": "47"
+                    },
+                    {
+                        "name": "3",
+                        "value": "43"
+                    },
+                    {
+                        "name": "4",
+                        "value": "54"
+                    }
+                ]
+            },
+            {
+                "name": "1.3 Leadership",
+                "series": [
+                    {
+                        "name": "1",
+                        "value": "59"
+                    },
+                    {
+                        "name": "2",
+                        "value": "47"
+                    },
+                    {
+                        "name": "3",
+                        "value": "43"
+                    },
+                    {
+                        "name": "4",
+                        "value": "54"
+                    }
+                ]
+            },
+            {
+                "name": "2.1 Training and Skills",
+                "series": [
+                    {
+                        "name": "1",
+                        "value": "59"
+                    },
+                    {
+                        "name": "2",
+                        "value": "47"
+                    },
+                    {
+                        "name": "3",
+                        "value": "43"
+                    },
+                    {
+                        "name": "4",
+                        "value": "54"
+                    }
+                ]
+            },
+            {
+                "name": "2.2 Human Capital",
+                "series": [
+                    {
+                        "name": "1",
+                        "value": "59"
+                    },
+                    {
+                        "name": "2",
+                        "value": "47"
+                    },
+                    {
+                        "name": "3",
+                        "value": "43"
+                    },
+                    {
+                        "name": "4",
+                        "value": "54"
+                    }
+                ]
+            },
+            {
+                "name": "2.3 Culture and Behaviour",
+                "series": [
+                    {
+                        "name": "1",
+                        "value": "59"
+                    },
+                    {
+                        "name": "2",
+                        "value": "47"
+                    },
+                    {
+                        "name": "3",
+                        "value": "43"
+                    },
+                    {
+                        "name": "4",
+                        "value": "54"
+                    }
+                ]
+            },
+            {
+                "name": "2.4 Engagement",
+                "series": [
+                    {
+                        "name": "1",
+                        "value": "59"
+                    },
+                    {
+                        "name": "2",
+                        "value": "47"
+                    },
+                    {
+                        "name": "3",
+                        "value": "43"
+                    },
+                    {
+                        "name": "4",
+                        "value": "54"
+                    }
+                ]
+            },
+            {
+                "name": "3.1 Risk Management",
+                "series": [
+                    {
+                        "name": "1",
+                        "value": "59"
+                    },
+                    {
+                        "name": "2",
+                        "value": "47"
+                    },
+                    {
+                        "name": "3",
+                        "value": "43"
+                    },
+                    {
+                        "name": "4",
+                        "value": "54"
+                    }
+                ]
+            },
+            {
+                "name": "3.2 Operations Control",
+                "series": [
+                    {
+                        "name": "1",
+                        "value": "59"
+                    },
+                    {
+                        "name": "2",
+                        "value": "47"
+                    },
+                    {
+                        "name": "3",
+                        "value": "43"
+                    },
+                    {
+                        "name": "4",
+                        "value": "54"
+                    }
+                ]
+            },
+            {
+                "name": "3.2.1 Project Management",
+                "series": [
+                    {
+                        "name": "1",
+                        "value": "59"
+                    },
+                    {
+                        "name": "2",
+                        "value": "47"
+                    },
+                    {
+                        "name": "3",
+                        "value": "43"
+                    },
+                    {
+                        "name": "4",
+                        "value": "54"
+                    }
+                ]
+            },
+            {
+                "name": "3.2.2 Operations and Maintenance",
+                "series": [
+                    {
+                        "name": "1",
+                        "value": "59"
+                    },
+                    {
+                        "name": "2",
+                        "value": "47"
+                    },
+                    {
+                        "name": "3",
+                        "value": "43"
+                    },
+                    {
+                        "name": "4",
+                        "value": "54"
+                    }
+                ]
+            },
+            {
+                "name": "3.2.3 Supply Chain",
+                "series": [
+                    {
+                        "name": "1",
+                        "value": "59"
+                    },
+                    {
+                        "name": "2",
+                        "value": "47"
+                    },
+                    {
+                        "name": "3",
+                        "value": "43"
+                    },
+                    {
+                        "name": "4",
+                        "value": "54"
+                    }
+                ]
+            },
+            {
+                "name": "3.3 Systems",
+                "series": [
+                    {
+                        "name": "1",
+                        "value": "59"
+                    },
+                    {
+                        "name": "2",
+                        "value": "47"
+                    },
+                    {
+                        "name": "3",
+                        "value": "43"
+                    },
+                    {
+                        "name": "4",
+                        "value": "54"
+                    }
+                ]
+            },
+            {
+                "name": "3.4 Governance",
+                "series": [
+                    {
+                        "name": "1",
+                        "value": "59"
+                    },
+                    {
+                        "name": "2",
+                        "value": "47"
+                    },
+                    {
+                        "name": "3",
+                        "value": "43"
+                    },
+                    {
+                        "name": "4",
+                        "value": "54"
+                    }
+                ]
+            },
+            {
+                "name": "4.1 Measurement",
+                "series": [
+                    {
+                        "name": "1",
+                        "value": "59"
+                    },
+                    {
+                        "name": "2",
+                        "value": "47"
+                    },
+                    {
+                        "name": "3",
+                        "value": "43"
+                    },
+                    {
+                        "name": "4",
+                        "value": "54"
+                    }
+                ]
+            },
+            {
+                "name": "4.2 Improvement",
+                "series": [
+                    {
+                        "name": "1",
+                        "value": "59"
+                    },
+                    {
+                        "name": "2",
+                        "value": "47"
+                    },
+                    {
+                        "name": "3",
+                        "value": "43"
+                    },
+                    {
+                        "name": "4",
+                        "value": "54"
+                    }
+                ]
+            }
+        ]
+    }
+}
+
+#. Get Top 5 Elements(getTop5Elements.php)
+
+http://localhost/excellence-api/GetTop5Elements/
+
+Header
+
+Authorization : eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjM1IiwidXNlcm5hbWUiOiJlbXBsb3llZSIsImlhdCI6MTU2OTIyOTg4OSwiZXhwIjoxNTY5MjQ3ODg5fQ.h4_w-Uk7jB9l5N92ICUWDjbW9-XLywO1OqBXjzimj8E
+
+Request
+{
+	"user_id":"35"
+}
+
+Response
+{
+    "status": "true",
+    "statuscode": 200,
+    "response": {
+        "data": [
+            {
+                "name": "3.3 Systems",
+                "score": "54"
+            },
+            {
+                "name": "3.2.2 Operations and Maintenance",
+                "score": "51"
+            },
+            {
+                "name": "2.4 Engagement",
+                "score": "50"
+            },
+            {
+                "name": "3.1 Risk Management",
+                "score": "38"
+            },
+            {
+                "name": "1.1 Strategy",
+                "score": "34"
+            }
+        ]
+    }
+}
+
+#. Get Top 5 Questions(getTop5Questions.php)
+
+http://localhost/excellence-api/GetTop5Questions/
+
+Header
+
+Authorization : eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjM1IiwidXNlcm5hbWUiOiJlbXBsb3llZSIsImlhdCI6MTU2OTIyOTg4OSwiZXhwIjoxNTY5MjQ3ODg5fQ.h4_w-Uk7jB9l5N92ICUWDjbW9-XLywO1OqBXjzimj8E
+
+Request
+{
+	"user_id":"35"
+}
+
+Response
+{
+    "status": "true",
+    "statuscode": 200,
+    "response": {
+        "data": [
+            {
+                "question": "34. Plan/design for project alignment with SHEQ requirements",
+                "element": "3.2 Operations Control",
+                "score": "29"
+            },
+            {
+                "question": "29. Change\nmanagement processes",
+                "element": "2.4 Engagement",
+                "score": "19"
+            },
+            {
+                "question": "48. Enabling tools and technology",
+                "element": "3.3 Systems",
+                "score": "18"
+            },
+            {
+                "question": "32. SHEQ risk controls",
+                "element": "3.1 Risk Management",
+                "score": "17"
+            },
+            {
+                "question": "30. Effectiveness of SHEQ communication\nand engagement",
+                "element": "2.4 Engagement",
+                "score": "16"
+            }
+        ]
+    }
+}
+
+#. Get Milestones(getMilestones.php)
+
+http://localhost/excellence-api/GetMilestones/
+
+Header
+
+Authorization : eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjM1IiwidXNlcm5hbWUiOiJlbXBsb3llZSIsImlhdCI6MTU2OTIyOTg4OSwiZXhwIjoxNTY5MjQ3ODg5fQ.h4_w-Uk7jB9l5N92ICUWDjbW9-XLywO1OqBXjzimj8E
+
+Request
+{
+	"user_id":"35",
+	"element_id":"1"
+}
+
+Response
+{
+    "status": "true",
+    "statuscode": 200,
+    "response": {
+        "data": [
+            {
+                "element": "1",
+                "milestone": "Plan of action Test",
+                "responsible_person": "[\"35\"]",
+                "start_date": "2019-09-15T22:00:00.000Z",
+                "end_date": "2019-09-29T22:00:00.000Z",
+                "comment": "Comment Test",
+                "status": "0"
+            },
+            {
+                "element": "1",
+                "milestone": "Plan of action Test2",
+                "responsible_person": "[\"204\"]",
+                "start_date": "2019-09-02T22:00:00.000Z",
+                "end_date": "2019-09-08T22:00:00.000Z",
+                "comment": "Comment Test3",
+                "status": "2"
+            },
+            {
+                "element": "1",
+                "milestone": "Plan of action Test3",
+                "responsible_person": "[\"204\"]",
+                "start_date": "2019-09-02T22:00:00.000Z",
+                "end_date": "2019-09-19T22:00:00.000Z",
+                "comment": "Comment Test 4",
+                "status": "1"
+            }
+        ]
+    }
+}
+
+#. Save Action Measure(saveActionsMeasure.php)
+
+http://localhost/excellence-api/SaveActionsMeasure/
+
+Header
+
+Authorization : eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjM1IiwidXNlcm5hbWUiOiJlbXBsb3llZSIsImlhdCI6MTU2OTIyOTg4OSwiZXhwIjoxNTY5MjQ3ODg5fQ.h4_w-Uk7jB9l5N92ICUWDjbW9-XLywO1OqBXjzimj8E
+
+Request
+{
+	"user_id":"35",
+	"element": 1,
+	"measure": "<ul><li>Measurement lookssdsds like sssss</li></ul>" 
+}
+
+Response
+{
+    "status": "true",
+    "statuscode": 200,
+    "response": "Action Measure Replaced Successfully."
+}
+
+#. Save Action Milestone(SaveActionsMilestone.php)
+
+http://localhost/excellence-api/SaveActionsMilestone/
+
+Header
+
+Authorization : eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjM1IiwidXNlcm5hbWUiOiJlbXBsb3llZSIsImlhdCI6MTU2OTIyOTg4OSwiZXhwIjoxNTY5MjQ3ODg5fQ.h4_w-Uk7jB9l5N92ICUWDjbW9-XLywO1OqBXjzimj8E
+
+Request
+{
+	"user_id":"35",
+	"element": 1,
+	"milestone": "Plan of action Test4",
+	"responsible_person" : ["201"],
+	"start_date" : "2019-09-02T22:00:00.000Z",
+	"end_date" : "2019-09-19T22:00:00.000Z",
+	"comment" : "Comment Test 4",
+	"status" : 2
+}
+
+Response
+{
+	"status": "true",
+	"statuscode": 200,
+	"response": "Action Milestone Replace Successfully"
+}
+
+#. Save Action Results(saveActionsResults.php)
+
+http://localhost/excellence-api/SaveActionsResults/
+
+Header
+
+Authorization : eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjM1IiwidXNlcm5hbWUiOiJlbXBsb3llZSIsImlhdCI6MTU2OTIyOTg4OSwiZXhwIjoxNTY5MjQ3ODg5fQ.h4_w-Uk7jB9l5N92ICUWDjbW9-XLywO1OqBXjzimj8E
+
+Request
+{
+	"user_id":"35",
+	"element": 3,
+	"results": "<ul><li>Result looks like testingssss</li></ul>" 
+}
+
+Response
+{
+    "status": "true",
+    "statuscode": 200,
+    "response": "Action Result Replaced Successfully."
+}
+
+
+#. Save Action Risks(saveActionsRisks.php)
+
+http://localhost/excellence-api/SaveActionsRisks/
+
+Header
+
+Authorization : eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjM1IiwidXNlcm5hbWUiOiJlbXBsb3llZSIsImlhdCI6MTU2OTIyOTg4OSwiZXhwIjoxNTY5MjQ3ODg5fQ.h4_w-Uk7jB9l5N92ICUWDjbW9-XLywO1OqBXjzimj8E
+
+Request
+{
+	"user_id":"35",
+	"element":3,
+	"risks": "<ul><li>Risk looks like testingss</li></ul>" 
+}
+
+Response
+{
+    "status": "true",
+    "statuscode": 200,
+    "response": "Save Action Result Replaced Successfully."
+}
+
+#. Save Action Victory(saveActionsVictory.php)
+
+http://localhost/excellence-api/SaveActionsVictory/
+
+Header
+
+Authorization : eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjM1IiwidXNlcm5hbWUiOiJlbXBsb3llZSIsImlhdCI6MTU2OTIyOTg4OSwiZXhwIjoxNTY5MjQ3ODg5fQ.h4_w-Uk7jB9l5N92ICUWDjbW9-XLywO1OqBXjzimj8E
+
+Request
+{
+	"user_id":"35",
+	"element":1,
+	"victory": "Success looks like abcdefsss" 
+}
+
+Response
+{
+    "status": "true",
+    "statuscode": 200,
+    "response": "Action Victory Replaced Successfully."
+}
+
+#. Save Complete(saveComplete.php)
+
+http://localhost/excellence-api/SaveComplete/
+
+Header
+
+Authorization : eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjM1IiwidXNlcm5hbWUiOiJlbXBsb3llZSIsImlhdCI6MTU2OTIyOTg4OSwiZXhwIjoxNTY5MjQ3ODg5fQ.h4_w-Uk7jB9l5N92ICUWDjbW9-XLywO1OqBXjzimj8E
+
+Request
+{
+	"user_id":"35",
+	"user":205,
+	"element":16  
+}
+
+Response
+{
+    "status": "true",
+    "statuscode": 200,
+    "response": "Save Complete Inserted Successfully."
+}
+
+#. Save saveDesired(saveDesired.php)
+
+http://localhost/excellence-api/SaveDesired/
+
+Header
+
+Authorization : eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjM1IiwidXNlcm5hbWUiOiJlbXBsb3llZSIsImlhdCI6MTU2OTIyOTg4OSwiZXhwIjoxNTY5MjQ3ODg5fQ.h4_w-Uk7jB9l5N92ICUWDjbW9-XLywO1OqBXjzimj8E
+
+Request
+{
+	"user_id":"35",
+	"user":205,
+	"element":16,
+	"desired":1
+}
+
+Response
+{
+    "status": "true",
+    "statuscode": 200,
+    "response": "Desired Inserted Successfully."
+}
+
+#. Save Element(saveElement.php)
+
+http://localhost/excellence-api/SaveElement/
+
+Header
+
+Authorization : eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjM1IiwidXNlcm5hbWUiOiJlbXBsb3llZSIsImlhdCI6MTU2OTIyOTg4OSwiZXhwIjoxNTY5MjQ3ODg5fQ.h4_w-Uk7jB9l5N92ICUWDjbW9-XLywO1OqBXjzimj8E
+
+Request
+{
+	"user_id":"35",
+	"name":"check",
+	"category":"5",
+	"sequence":"10"
+}
+
+Response
+{
+    "status": "true",
+    "statuscode": 200,
+    "response": "Save Element Inserted Successfully"
+}
+
+#. Save MC(saveMC.php)
+
+http://localhost/excellence-api/SaveMC/
+
+Header
+
+Authorization : eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjM1IiwidXNlcm5hbWUiOiJlbXBsb3llZSIsImlhdCI6MTU2OTIyOTg4OSwiZXhwIjoxNTY5MjQ3ODg5fQ.h4_w-Uk7jB9l5N92ICUWDjbW9-XLywO1OqBXjzimj8E
+
+Request
+{
+	"user_id":"35",
+	"user":"1",
+	"element":"7",
+	"question":"31",
+	"answer":"3"
+}
+
+Response
+{
+    "status": "true",
+    "statuscode": 200,
+    "response": "Save MC Inserted Successfully"
+}
+
+Request
+{
+	"user_id":"35",
+	"user":"1",
+	"element":"1",
+	"question":"16",
+	"answer":"3"
+}
+
+Response
+{
+    "status": "true",
+    "statuscode": 200,
+    "response": "Save MC Updated Successfully"
+}
+
+#. Insert Performance MC(savePerformanceMC.php)
+
+http://localhost/excellence-api/SavePerformanceMC/
+
+Header
+
+Authorization : eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjM1IiwidXNlcm5hbWUiOiJlbXBsb3llZSIsImlhdCI6MTU2OTI5NDY4NywiZXhwIjoxNTY5MzEyNjg3fQ.THND86OmpUo4Ew9lasNK9Kqbv0PGZ4BlmwjgFl2h29Q
+
+Request
+{
+	"user_id":"35",
+	"user":"1",
+	"element":"1",
+	"question":"1",
+	"answer":"1"
+}
+
+Response
+{
+    "status": "true",
+    "statuscode": 200,
+    "response": "Performance MC Inserted Successfully"
+}
+
+#. Save User(saveUser.php)
+
+http://localhost/excellence-api/SaveUser/
+
+Header
+
+Authorization : eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjM1IiwidXNlcm5hbWUiOiJlbXBsb3llZSIsImlhdCI6MTU2OTI5NDY4NywiZXhwIjoxNTY5MzEyNjg3fQ.THND86OmpUo4Ew9lasNK9Kqbv0PGZ4BlmwjgFl2h29Q
+
+Request
+{
+	"user_id":"35",
+	"email":"check@gmail.com",
+	"firstname":"check",
+	"lastname":"check",
+	"role":"employee",
+	"password":"12345678"
+}
+
+Response
+{
+    "status": "true",
+    "statuscode": 200,
+    "response": {
+        "data": [
+            {
+                "email": "check@gmail.com",
+                "firstname": "check",
+                "lastname": "check",
+                "role": "employee",
+                "password": "25d55ad283aa400af464c76d713c07ad",
+                "id": 205
+            }
+        ]
+    }
+}
+
+#. Save Question(saveQuestion.php)
+
+http://localhost/excellence-api/SaveQuestion/
+
+Header
+
+Authorization : eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjM1IiwidXNlcm5hbWUiOiJlbXBsb3llZSIsImlhdCI6MTU2OTI5NDY4NywiZXhwIjoxNTY5MzEyNjg3fQ.THND86OmpUo4Ew9lasNK9Kqbv0PGZ4BlmwjgFl2h29Q
+
+Request
+{
+	"user_id":"35",
+	"element":"1",
+	"question":"1. Group SHEQ Policy",
+	"reactive":"A SHEQ Policy does not exist or is only a paper exercise with no visibility or buy-in from leaders.",
+	"compliant":"A formal SHEQ Policy exists, is endorsed by the CEO and is used by the SHEQ team to provide direction.",
+	"proactive":"Leaders commit to the SHEQ Policy and communicate it.",
+	"resilient":"The SHEQ Policy is consistently used by teams to guide SHEQ Strategy and improvement plans."
+}
+
+Response
+{
+    "status": "true",
+    "statuscode": 200,
+    "response": {
+        "data": [
+            {
+                "element": "1",
+                "question": "1. Group SHEQ Policy",
+                "reactive": "A SHEQ Policy does not exist or is only a paper exercise with no visibility or buy-in from leaders.",
+                "compliant": "A formal SHEQ Policy exists, is endorsed by the CEO and is used by the SHEQ team to provide direction.",
+                "proactive": "Leaders commit to the SHEQ Policy and communicate it.",
+                "resilient": "The SHEQ Policy is consistently used by teams to guide SHEQ Strategy and improvement plans.",
+                "id": 62
+            }
+        ]
+    }
+}
+
+#. Save Proof(saveProof.php)
+
+http://localhost/excellence-api/SaveProof/
+
+Header
+
+Authorization : eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjM1IiwidXNlcm5hbWUiOiJlbXBsb3llZSIsImlhdCI6MTU2OTI5NDY4NywiZXhwIjoxNTY5MzEyNjg3fQ.THND86OmpUo4Ew9lasNK9Kqbv0PGZ4BlmwjgFl2h29Q
+
+Request
+{
+	"user_id":"35",
+	"user":"1",
+	"element":"1",
+	"proof":[113,121]
+}
+
+Response
+{
+    "status": "true",
+    "statuscode": 200,
+    "response": "Proof Inserted Successfully"
+}
+
+#. Clean Dataset(cleanDataset.php)
+
+http://localhost/excellence-api/CleanDataset/
+
+Header
+
+Authorization : eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjM1IiwidXNlcm5hbWUiOiJlbXBsb3llZSIsImlhdCI6MTU2OTI5NDY4NywiZXhwIjoxNTY5MzEyNjg3fQ.THND86OmpUo4Ew9lasNK9Kqbv0PGZ4BlmwjgFl2h29Q
+
+Request
+{
+	"user_id":"35"
+}
+
+Response
+{
+    "status": "true",
+    "statuscode": 200,
+    "response": {
+        "data": [
+            "Answers Deleted Successfully",
+            "Desired Answers Deleted Successfully",
+            "Answers Proof Deleted Successfully"
+        ]
+    }
+}
+
+		$message = 'Required field(s) user_id,element_id is missing or empty';
+		$user_id = $this->post('user_id');
+		$Element_ID = $this->post('element_id');
+		if(isset($user_id) && isset($Element_ID)){
+		}else{
+			$parameter_required_array = ['status' => "true","statuscode" => 404,'response' => $message];
+			$this->set_response($parameter_required_array, REST_Controller::HTTP_NOT_FOUND);
+		}
