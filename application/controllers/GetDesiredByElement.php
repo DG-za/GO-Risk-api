@@ -44,7 +44,7 @@ class GetDesiredByElement extends REST_Controller {
 						$merge_array[2]['name'] = 'compliant';
 						$merge_array[2]['value'] = $value->n1;
 					}
-					$Pass_Data["data"][] = $merge_array;
+					$Pass_Data["data"] = $merge_array;
 					$valid = ['status' => "true","statuscode" => 200,'response' =>$Pass_Data];
 					$this->set_response($Pass_Data, REST_Controller::HTTP_OK);
 				}else{
