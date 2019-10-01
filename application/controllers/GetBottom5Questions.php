@@ -25,7 +25,7 @@ class GetBottom5Questions extends REST_Controller {
 		$invalid = ['status' => "true","statuscode" => 203,'response' =>"In-Valid token"];
 		$not_found = ['status' => "true","statuscode" => 404,'response' =>"Token not found"];
 		
-		message = 'Required field(s) user_id is missing or empty';
+		$message = 'Required field(s) user_id is missing or empty';
 		$user_id = $this->post('user_id');
 		if(isset($user_id)){
 			$headers = $this->input->request_headers();
