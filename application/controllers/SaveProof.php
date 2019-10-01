@@ -26,7 +26,7 @@ class SaveProof extends REST_Controller {
 		$not_found = ['status' => "true","statuscode" => 404,'response' =>"Token not found"];
 		
 		$message = 'Required field(s) user_id,user,element,proof is missing or empty';
-		$user_id = $this->post('user_id');
+		$user_id = $this->post('user');
 		$user = $this->post('user');
 		$element = $this->post('element');
 		$proof = $this->post('proof');
