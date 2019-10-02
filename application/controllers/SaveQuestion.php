@@ -58,9 +58,8 @@ class SaveQuestion extends REST_Controller {
 						"resilient" => $resilient,
 						"id" => $Insert_saveQuestion_Result
 					];
-					$Pass_Data["data"][] = $data;
-					$inserted = ['status' => "true","statuscode" => 200,'response' =>$Pass_Data];
-					$this->set_response($inserted, REST_Controller::HTTP_OK);
+					$Pass_Data["data"] = $data;
+					$this->set_response($Pass_Data, REST_Controller::HTTP_OK);
 				}else{
 					$not_inserted = ['status' => "true","statuscode" => 200,'response' =>"Save Element not Inserted"];
 					$this->set_response($not_inserted, REST_Controller::HTTP_OK);
