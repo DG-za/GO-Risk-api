@@ -43,7 +43,8 @@ class GetMilestones extends REST_Controller {
 					$valid = ['status' => "true","statuscode" => 200,'response' =>$Pass_Data];
 					$this->set_response($Pass_Data, REST_Controller::HTTP_OK);
 				}else{
-					$this->set_response($no_found, REST_Controller::HTTP_OK);
+					$Pass_Data["data"] = array();
+					$this->set_response($Pass_Data, REST_Controller::HTTP_OK);
 				}
 			}else if($token_status == FALSE){
 				$this->set_response($invalid, REST_Controller::HTTP_NON_AUTHORITATIVE_INFORMATION);
