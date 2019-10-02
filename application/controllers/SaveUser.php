@@ -37,36 +37,36 @@ class SaveUser extends REST_Controller {
 			$token_status = check_token($user_id,$headers['Authorization']);
 			
 			if($token_status == TRUE){
-				$Check_Availability_Result = $this->SaveUser_modal->Check_User_Availability($email);
-				if($Check_Availability_Result==0){
-				$Insert_Array = array(
-					"`email`" => $email,
-					"`firstname`" => $firstname,
-					"`lastname`" => $lastname,
-					"`role`" => $role,
-					"`password`" => $password,
-				);
-				$Insert_saveUser_Result = $this->SaveUser_modal->Insert_User($Insert_Array);
-				if($Insert_saveUser_Result > 0){
-					$data = [
-						'email' => $email,
-						'firstname' => $firstname,
-						'lastname' => $lastname,
-						'role' => $role,
-						'password' => $password,
-						'id'    => $Insert_saveUser_Result
-					];
-					$Pass_Data["data"][] = $data;
-					$inserted = ['status' => "true","statuscode" => 200,'response' => $Pass_Data];
-					$this->set_response($Pass_Data, REST_Controller::HTTP_OK);
-				}else{
-					$not_inserted = ['status' => "true","statuscode" => 200,'response' =>"User not Inserted"];
-					$this->set_response($not_inserted, REST_Controller::HTTP_OK);
-				}
-			}else{
-					$not_available = ['status' => "true","statuscode" => 200,'response' =>"Email ID already registered."];
-					$this->set_response($not_available, REST_Controller::HTTP_OK);
-			}
+				/* $Check_Availability_Result = $this->SaveUser_modal->Check_User_Availability($email);
+				if($Check_Availability_Result==0){ */
+					$Insert_Array = array(
+						"`email`" => $email,
+						"`firstname`" => $firstname,
+						"`lastname`" => $lastname,
+						"`role`" => $role,
+						"`password`" => $password,
+					);
+					$Insert_saveUser_Result = $this->SaveUser_modal->Insert_User($Insert_Array);
+					if($Insert_saveUser_Result > 0){
+						$data = [
+							'email' => $email,
+							'firstname' => $firstname,
+							'lastname' => $lastname,
+							'role' => $role,
+							'password' => $password,
+							'id'    => $Insert_saveUser_Result
+						];
+						$Pass_Data["data"] = $data;
+						$inserted = ['status' => "true","statuscode" => 200,'response' => $Pass_Data];
+						$this->set_response($Pass_Data, REST_Controller::HTTP_OK);
+					}else{
+						$not_inserted = ['status' => "true","statuscode" => 200,'response' =>"User not Inserted"];
+						$this->set_response($not_inserted, REST_Controller::HTTP_OK);
+					}
+				/* }else{
+						$not_available = ['status' => "true","statuscode" => 200,'response' =>"Email ID already registered."];
+						$this->set_response($not_available, REST_Controller::HTTP_OK);
+				} */
 			}else if($token_status == FALSE){
 				$this->set_response($invalid, REST_Controller::HTTP_NON_AUTHORITATIVE_INFORMATION);
 			}else{
