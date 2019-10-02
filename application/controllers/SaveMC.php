@@ -70,8 +70,11 @@ class SaveMC extends REST_Controller {
 					);
 					$Insert_saveMC_Result = $this->SaveMC_modal->Insert_saveMC($Insert_Array);
 					if($Insert_saveMC_Result){
-						$inserted = ['status' => "true","statuscode" => 200,'response' =>"Save MC Inserted Successfully"];
-						$this->set_response($inserted, REST_Controller::HTTP_OK);
+						$data = [
+							'status' => "success"
+						];
+						$Pass_Data["data"] = $data;
+						$this->set_response($Pass_Data, REST_Controller::HTTP_OK);
 					}else{
 						$not_inserted = ['status' => "true","statuscode" => 200,'response' =>"Save MC not Inserted"];
 						$this->set_response($not_inserted, REST_Controller::HTTP_OK);

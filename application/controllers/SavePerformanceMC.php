@@ -43,8 +43,11 @@ class SavePerformanceMC extends REST_Controller {
 				);
 				$Insert_Performance_MC_Result = $this->SavePerformanceMC_modal->Insert_Performance_MC($Insert_Array);
 				if($Insert_Performance_MC_Result){
-					$inserted = ['status' => "true","statuscode" => 200,'response' =>"Performance MC Inserted Successfully"];
-					$this->set_response($inserted, REST_Controller::HTTP_OK);
+					$data = [
+						'status' => "success"
+					];
+					$Pass_Data["data"] = $data;
+					$this->set_response($Pass_Data, REST_Controller::HTTP_OK);
 				}else{
 					$not_inserted = ['status' => "true","statuscode" => 200,'response' =>"Performance MC not Inserted"];
 					$this->set_response($not_inserted, REST_Controller::HTTP_OK);

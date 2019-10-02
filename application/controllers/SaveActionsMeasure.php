@@ -40,8 +40,7 @@ class SaveActionsMeasure extends REST_Controller {
 				 );
 				 $SaveActionsMeasure_Result = $this->SaveActionsMeasure_modal->Replace_Action_Measure($Replace_Measure_Array);
 				 if($SaveActionsMeasure_Result){
-						$Replaced = ['status' => "true","statuscode" => 200,'response' =>"Action Measure Replaced Successfully."];
-						$this->set_response($Replaced, REST_Controller::HTTP_OK);
+						echo "Success";
 				 }else{
 						$Not_Replaced = ['status' => "true","statuscode" => 200,'response' =>"Action Measure Not Replaced."];
 						$this->set_response($Not_Replaced, REST_Controller::HTTP_OK);

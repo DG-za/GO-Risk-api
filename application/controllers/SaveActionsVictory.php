@@ -41,8 +41,7 @@ class SaveActionsVictory extends REST_Controller {
 				);
 				$Replace_Victory_Result = $this->SaveActionsVictory_modal->Replace_Action_Victory($Replace_Victory_Array);
 				if($Replace_Victory_Result){
-					$Replaced = ['status' => "true","statuscode" => 200,'response' =>"Action Victory Replaced Successfully."];
-					$this->set_response($Replaced, REST_Controller::HTTP_OK);
+					echo "Success";
 				}else{
 					$Not_Replaced = ['status' => "true","statuscode" => 200,'response' =>"Action Victory Not Replaced."];
 					$this->set_response($Not_Replaced, REST_Controller::HTTP_OK);

@@ -57,7 +57,6 @@ class SaveUser extends REST_Controller {
 							'id'    => $Insert_saveUser_Result
 						];
 						$Pass_Data["data"] = $data;
-						$inserted = ['status' => "true","statuscode" => 200,'response' => $Pass_Data];
 						$this->set_response($Pass_Data, REST_Controller::HTTP_OK);
 					}else{
 						$not_inserted = ['status' => "true","statuscode" => 200,'response' =>"User not Inserted"];
