@@ -31,7 +31,7 @@ class SaveComplete extends REST_Controller {
 		$element = $this->post('element');
 		if(isset($user_id)  && isset($element)){
 			$headers = $this->input->request_headers();
-			$token_status = check_token($this->post('user_id'),$headers['Authorization']);
+			$token_status = check_token($user_id,$headers['Authorization']);
 			
 			if($token_status == TRUE){
 				 $Insert_SaveComplete_Array = array(
