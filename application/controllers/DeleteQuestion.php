@@ -27,7 +27,7 @@ class DeleteQuestion extends REST_Controller {
 		
 		$message = 'Required field(s) user_id,question_id is missing or empty';
 		$user_id = $this->post('user_id');
-		$Question_ID = $this->post('question_id');
+		$Question_ID = $this->post('id');
 		if(isset($user_id) && isset($Question_ID)){
 			$headers = $this->input->request_headers();
 			$token_status = check_token($user_id,$headers['Authorization']);
