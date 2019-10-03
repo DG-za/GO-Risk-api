@@ -9,4 +9,23 @@ class GetPerformanceElements_modal extends CI_Model {
 		$query_result = $this->db->get();
 		return $query_result->result();
 	}
+	
+	/* Get performance_elements ans given by same user_ID */
+	public function Get_All_Answer_is_Done_By_User_ID($Where_Array){
+		$this->db->select("COUNT(`id`) as `count_id`");
+		$this->db->from("`performance`");
+		$query_result = $this->db->get()->result();
+		$performance_count = $query_result[0]->count_id;
+		
+		$this->db->select("COUNT(`id`) as `count_id`");
+		$this->db->from("`performance_mc`");
+		$this->db->where($Where_Array);
+		$query_result = $this->db->get()->result();
+		$performance_mc_count = $query_result[0]->count_id;
+		if($performance_mc_count == $performance_count){
+			return true;
+		}else{
+			return false;
+		}
+	}
 }

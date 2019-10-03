@@ -27,30 +27,53 @@ class SavePerformanceMC extends REST_Controller {
 		
 		$message = 'Required field(s) user_id,user,element,question,answer is missing or empty';
 		$user_id = $this->post('user');
-		$user = $this->post('user');
 		$element = $this->post('element');
 		$question = $this->post('question');
 		$answer = $this->post('answer');
-		if(isset($user_id) && isset($user) && isset($element) && isset($question) && isset($answer)){
+		if(isset($user_id) && isset($element) && isset($question) && isset($answer)){
 			$headers = $this->input->request_headers();
 			$token_status = check_token($user_id,$headers['Authorization']);
 			
 			if($token_status == TRUE){
-				$Insert_Array = array(
-					"`question`" => $element,
-					"`element`" => $question,
-					"`answer`" => $answer,
+				$Where_Array = array(
+					"`question`" => $question,
+					"`element`" => $element,
+					"`user`" => $user_id,
 				);
-				$Insert_Performance_MC_Result = $this->SavePerformanceMC_modal->Insert_Performance_MC($Insert_Array);
-				if($Insert_Performance_MC_Result){
-					$data = [
-						'status' => "success"
-					];
-					$Pass_Data["data"] = $data;
-					$this->set_response($Pass_Data, REST_Controller::HTTP_OK);
+				$Get_Answer_if_Exist = $this->SavePerformanceMC_modal->Get_Answer_if_Exist($Where_Array);
+				if($Get_Answer_if_Exist > 0){
+					$Update_Array = array(
+						"`answer`" => $answer,
+					);
+					$Update_Performance_MC_Result = $this->SavePerformanceMC_modal->Update_Performance_MC($Update_Array,$Where_Array);
+					if($Update_Performance_MC_Result){
+						$data = [
+							'status' => "success"
+						];
+						$Pass_Data["data"] = $data;
+						$this->set_response($Pass_Data, REST_Controller::HTTP_OK);
+					}else{
+						$not_inserted = ['status' => "true","statuscode" => 200,'response' =>"Performance MC not Inserted"];
+						$this->set_response($not_inserted, REST_Controller::HTTP_OK);
+					}
 				}else{
-					$not_inserted = ['status' => "true","statuscode" => 200,'response' =>"Performance MC not Inserted"];
-					$this->set_response($not_inserted, REST_Controller::HTTP_OK);
+					$Insert_Array = array(
+						"`question`" => $question,
+						"`element`" => $element,
+						"`answer`" => $answer,
+						"`user`" => $user_id,
+					);
+					$Insert_Performance_MC_Result = $this->SavePerformanceMC_modal->Insert_Performance_MC($Insert_Array);
+					if($Insert_Performance_MC_Result){
+						$data = [
+							'status' => "success"
+						];
+						$Pass_Data["data"] = $data;
+						$this->set_response($Pass_Data, REST_Controller::HTTP_OK);
+					}else{
+						$not_inserted = ['status' => "true","statuscode" => 200,'response' =>"Performance MC not Inserted"];
+						$this->set_response($not_inserted, REST_Controller::HTTP_OK);
+					}
 				}
 			}else if($token_status == FALSE){
 				$this->set_response($invalid, REST_Controller::HTTP_NON_AUTHORITATIVE_INFORMATION);
