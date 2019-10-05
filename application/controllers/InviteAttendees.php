@@ -38,24 +38,29 @@ class InviteAttendees extends REST_Controller {
 			if($token_status == TRUE){
 				$Insert_Array = array(
 					"`email`" => $email,
+					"`firstname`"=>$firstname,
+					"`lastname`"=>$lastname,
 					"`date`" => date('Y-m-d'),
 					"`isexpiry`" => 0,
 				);
 				$Insert_saveUser_Result = $this->InviteAttendees_modal->Insert_User($Insert_Array);
 				$token['email'] = $email;
-				$token['id'] = $Insert_saveUser_Result;
+				$token['firstname'] = $firstname;
+				$token['lastname'] = $lastname;
 				$AToken = JWT::encode($token, $this->config->item('jwt_key'));
 				$link = $serverLink."/attendees-registration/".$AToken;
 		        $subject = "she-excellence Invitation";
-		        $message = "<h6>Hello  ".$firstname."</h6>";
-		        $message .= "<p>You are invite to she-excellence’s account. Please follow the link below and register in to your account to proceed.</p>";
-		        $message .= "<a href='".$link."' target='_blank'>".$link."</a><p>";
-		        $message .="Sincerely,</p><p>The she-excellence Team</p>";
+		        $message = "<p>Hello  ".$firstname."</p>";
+		        $message .= "<p>You are invite to she-excellence account. Please link to below activation link to create your own account.</p>";
+		        $message .= "<a href='".$link."' target='_blank'>Create Account</a>";
+		        $message .="<p>Sincerely,<br/>The she-excellence Team</p>";
 				$this->InviteAttendees_modal->sendMail($email,$subject,$message);
 				if($Insert_saveUser_Result > 0){
 					$data = [
 						"email" => $email,
 						"date" => date('Y-m-d'),
+						"firstname"=>$firstname,
+						"lastname"=>$lastname,
 						"isexpiry" => 0,
 						"id'"   => $Insert_saveUser_Result
 					];
