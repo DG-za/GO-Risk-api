@@ -35,6 +35,7 @@ class SaveElement extends REST_Controller {
 			$token_status = check_token($user_id,$headers['Authorization']);
 			
 			if($token_status == TRUE){
+				$Pass_Data = array();
 				$Insert_Array = array(
 					"`name`" => $name,
 					"`cat`" => $category,
@@ -42,9 +43,13 @@ class SaveElement extends REST_Controller {
 					"`alt_sequence`" => "a",
 				);
 				$Insert_saveElement_Result = $this->SaveElement_modal->Insert_Element($Insert_Array);
-				if($Insert_saveElement_Result){
-					$inserted = ['status' => "true","statuscode" => 200,'response' =>"Save Element Inserted Successfully"];
-					$this->set_response($inserted, REST_Controller::HTTP_OK);
+				if($Insert_saveElement_Result > 0){
+					$data = [
+						'name' => $name,
+						'id'    => $Insert_saveElement_Result,
+					];
+					$Pass_Data["data"] = $data;
+					$this->set_response($Pass_Data, REST_Controller::HTTP_OK);
 				}else{
 					$not_inserted = ['status' => "true","statuscode" => 200,'response' =>"Save Element not Inserted"];
 					$this->set_response($not_inserted, REST_Controller::HTTP_OK);

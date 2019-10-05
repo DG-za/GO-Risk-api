@@ -15,6 +15,8 @@ class GetElements extends REST_Controller {
 	
 	public function __construct() {
 		parent::__construct();
+		
+		$this->load->model('auth_model');
 		$this->load->helper('check_token');				
 		$this->load->model('GetElements_modal');
 	}
@@ -34,6 +36,7 @@ class GetElements extends REST_Controller {
 			
 			if($token_status == TRUE){
 				$All_Elements = $this->GetElements_modal->All_Elements();
+
 				$Pass_Data = array();
 				if(!empty($All_Elements)){
 					foreach($All_Elements as $key => $value){

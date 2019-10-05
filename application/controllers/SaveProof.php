@@ -46,8 +46,11 @@ class SaveProof extends REST_Controller {
 					$Insert_Answer_Proof_Result = $this->SaveProof_modal->Insert_Answer_Proof($Insert_Array);
 				}
 				if($Insert_Answer_Proof_Result){
-					$inserted = ['status' => "true","statuscode" => 200,'response' =>"Proof Inserted Successfully"];
-					$this->set_response($inserted, REST_Controller::HTTP_OK);
+					$data = [
+						'status' => "success"
+					];
+					$Pass_Data["data"] = $data;
+					$this->set_response($Pass_Data, REST_Controller::HTTP_OK);
 				}else{
 					$not_inserted = ['status' => "true","statuscode" => 200,'response' =>"Proof not Inserted"];
 					$this->set_response($not_inserted, REST_Controller::HTTP_OK);

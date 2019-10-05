@@ -36,10 +36,14 @@ class GetPerformanceElements extends REST_Controller {
 				$Pass_Data = array();
 				if(!empty($All_Performances)){
 					foreach($All_Performances as $key => $value){
-						$merge_array = array("id" => $value->id,"name" => $value->name);
+						$Where_Array = array(
+							"`element`" => $value->id,
+							"`user`" => $user_id,
+						);
+						$Show_Check_Bool_Val = $this->GetPerformanceElements_modal->Get_All_Answer_is_Done_By_User_ID($Where_Array);
+						$merge_array = array("id" => $value->id,"name" => $value->name,"check_val" => $Show_Check_Bool_Val);
 						$Pass_Data["data"][] = $merge_array;
 					}
-					//$valid = ['status' => "true","statuscode" => 200,'response' =>$Pass_Data];
 					$this->set_response($Pass_Data, REST_Controller::HTTP_OK);
 				}else{
 					$this->set_response($no_found, REST_Controller::HTTP_OK);

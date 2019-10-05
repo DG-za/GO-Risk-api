@@ -40,8 +40,7 @@ class SaveActionsRisks extends REST_Controller {
 				);
 				$Replace_Risks_Result = $this->SaveActionsRisks_modal->Replace_Action_Risk($Replace_Risks_Array);
 				if($Replace_Risks_Result){
-					$Replaced = ['status' => "true","statuscode" => 200,'response' =>"Action Risks Replaced Successfully."];
-					$this->set_response($Replaced, REST_Controller::HTTP_OK);
+					echo "Success";
 				}else{
 					$Not_Replaced = ['status' => "true","statuscode" => 200,'response' =>"Action Risks Not Replaced."];
 					$this->set_response($Not_Replaced, REST_Controller::HTTP_OK);

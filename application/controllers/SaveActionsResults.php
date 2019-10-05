@@ -40,8 +40,7 @@ class SaveActionsResults extends REST_Controller {
 				);
 				$SaveActionsResult_Result = $this->SaveActionsResults_modal->Replace_Action_Result($Replace_Action_Result_Array);
 				if($SaveActionsResult_Result){
-					$Replaced = ['status' => "true","statuscode" => 200,'response' =>"Action Result Replaced Successfully."];
-					$this->set_response($Replaced, REST_Controller::HTTP_OK);
+					echo "Success";
 				}else{
 					$Not_Replaced = ['status' => "true","statuscode" => 200,'response' =>"Action Result Not Replaced."];
 					$this->set_response($Not_Replaced, REST_Controller::HTTP_OK);

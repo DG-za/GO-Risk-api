@@ -1,21 +1,23 @@
+
+
 <?php
 require_once APPPATH . '/libraries/REST_Controller.php';
 require_once APPPATH . '/libraries/JWT.php';
 use \Firebase\JWT\JWT;
 
-class SaveUser extends REST_Controller {
+class SaveAttendees extends REST_Controller {
 	/***************************************************************
 	*  Project Name : 4Xcellence Solutions
 	*  Created By :   
 	*  Created Date : 28-09-2019
-	*  Description : A controller contain SaveUser related methods
+	*  Description : A controller contain SaveAttendees related methods
 	*  Modification History :
 	*  
 	***************************************************************/
 	
 	public function __construct() {
 		parent::__construct();
-		$this->load->helper('check_token');				
+		//$this->load->helper('check_token');				
 		$this->load->model('SaveUser_modal');
 	}
 	
@@ -32,40 +34,41 @@ class SaveUser extends REST_Controller {
 		$lastname = $this->post('lastname');
 		$role = $this->post('role');
 		$password = md5($this->post('password'));
-		if(isset($user_id) && isset($email) && isset($firstname) && isset($lastname) && isset($role) && isset($password)){
+		if(isset($email) && isset($firstname) && isset($lastname) && isset($role) && isset($password)){
 			$headers = $this->input->request_headers();
-			$token_status = check_token($user_id,$headers['Authorization']);
+			//$token_status = check_token($user_id,$headers['Authorization']);
 			
-			if($token_status == TRUE){
-				/* $Check_Availability_Result = $this->SaveUser_modal->Check_User_Availability($email);
-				if($Check_Availability_Result==0){ */
-					$Insert_Array = array(
-						"`email`" => $email,
-						"`firstname`" => $firstname,
-						"`lastname`" => $lastname,
-						"`role`" => $role,
-						"`password`" => $password,
-					);
-					$Insert_saveUser_Result = $this->SaveUser_modal->Insert_User($Insert_Array);
-					if($Insert_saveUser_Result > 0){
-						$data = [
-							'email' => $email,
-							'firstname' => $firstname,
-							'lastname' => $lastname,
-							'role' => $role,
-							'password' => $password,
-							'id'    => $Insert_saveUser_Result
-						];
-						$Pass_Data["data"] = $data;
-						$this->set_response($Pass_Data, REST_Controller::HTTP_OK);
-					}else{
-						$not_inserted = ['status' => "true","statuscode" => 200,'response' =>"User not Inserted"];
-						$this->set_response($not_inserted, REST_Controller::HTTP_OK);
-					}
-				/* }else{
-						$not_available = ['status' => "true","statuscode" => 200,'response' =>"Email ID already registered."];
-						$this->set_response($not_available, REST_Controller::HTTP_OK);
-				} */
+			if(true){
+				$Check_Availability_Result = $this->SaveUser_modal->Check_User_Availability($email);
+				if($Check_Availability_Result==0){
+				$Insert_Array = array(
+					"`email`" => $email,
+					"`firstname`" => $firstname,
+					"`lastname`" => $lastname,
+					"`role`" => $role,
+					"`password`" => $password,
+				);
+				$Insert_saveUser_Result = $this->SaveUser_modal->Insert_User($Insert_Array);
+				if($Insert_saveUser_Result > 0){
+					$data = [
+						'email' => $email,
+						'firstname' => $firstname,
+						'lastname' => $lastname,
+						'role' => $role,
+						'password' => $password,
+						'id'    => $Insert_saveUser_Result
+					];
+					$Pass_Data["data"][] = $data;
+					$inserted = ['status' => "true","statuscode" => 200,'response' => $Pass_Data];
+					$this->set_response($Pass_Data, REST_Controller::HTTP_OK);
+				}else{
+					$not_inserted = ['status' => "true","statuscode" => 200,'response' =>"User not Inserted"];
+					$this->set_response($not_inserted, REST_Controller::HTTP_OK);
+				}
+			}else{
+					$not_available = ['status' => "true","statuscode" => 200,'response' =>"Email ID already registered."];
+					$this->set_response($not_available, REST_Controller::HTTP_OK);
+			}
 			}else if($token_status == FALSE){
 				$this->set_response($invalid, REST_Controller::HTTP_NON_AUTHORITATIVE_INFORMATION);
 			}else{

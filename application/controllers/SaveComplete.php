@@ -40,8 +40,11 @@ class SaveComplete extends REST_Controller {
 				 );
 				 $Insert_Complete_Result = $this->SaveComplete_modal->Insert_Complete($Insert_SaveComplete_Array);
 				 if($Insert_Complete_Result){
-						$Inserted = ['status' => "true","statuscode" => 200,'response' =>"Save Complete Inserted Successfully."];
-						$this->set_response($Inserted, REST_Controller::HTTP_OK);
+						$data = [
+							'status' => "success"
+						];
+						$Pass_Data["data"] = $data;
+						$this->set_response($Pass_Data, REST_Controller::HTTP_OK);
 				 }else{
 						$Not_Inserted = ['status' => "true","statuscode" => 200,'response' =>"Save Complete Not Inserted."];
 						$this->set_response($Not_Inserted, REST_Controller::HTTP_OK);

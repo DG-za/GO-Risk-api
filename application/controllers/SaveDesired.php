@@ -42,8 +42,11 @@ class SaveDesired extends REST_Controller {
 				);
 				$Insert_Desired_Result = $this->SaveDesired_modal->Insert_Desired($Insert_Desired_Array);
 				if($Insert_Desired_Result){
-					$Inserted = ['status' => "true","statuscode" => 200,'response' =>"Desired Inserted Successfully."];
-					$this->set_response($Inserted, REST_Controller::HTTP_OK);
+					$data = [
+						'status' => "success"
+					];
+					$Pass_Data["data"] = $data;
+					$this->set_response($Pass_Data, REST_Controller::HTTP_OK);
 				}else{
 					$Not_Inserted = ['status' => "true","statuscode" => 200,'response' =>"Desired Not Inserted."];
 					$this->set_response($Not_Inserted, REST_Controller::HTTP_OK);

@@ -50,8 +50,7 @@ class SaveActionsMilestone extends REST_Controller {
 				);
 				$Replace_Actions_Milestone_Result = $this->SaveActionsMilestone_modal->Replace_Actions_Milestone($Replace_Actions_Milestone_Array);
 				if($Replace_Actions_Milestone_Result){
-					$Replaced = ['status' => "true","statuscode" => 200,'response' =>"Action Milestone Replace Successfully"];
-					$this->set_response($Replaced, REST_Controller::HTTP_OK);
+					echo "Success";
 				}else{
 					$Not_Replaced = ['status' => "true","statuscode" => 200,'response' =>"Action Milestone Not Replace"];
 					$this->set_response($Not_Replaced, REST_Controller::HTTP_OK);

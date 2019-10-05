@@ -37,8 +37,7 @@ class GetComplete extends REST_Controller {
 				$Pass_Data = array();
 				if(!empty($getComplete_Result)){
 					foreach($getComplete_Result as $key => $value){
-						$merge_array = array("element" => $value->element);
-						$Pass_Data["data"][] = $merge_array;
+						$Pass_Data["data"][] = $value->element;
 					}
 					$valid = ['status' => "true","statuscode" => 200,'response' =>$Pass_Data];
 					$this->set_response($Pass_Data, REST_Controller::HTTP_OK);
