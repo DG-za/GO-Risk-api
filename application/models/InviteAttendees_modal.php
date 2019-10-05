@@ -29,4 +29,21 @@ class InviteAttendees_modal extends CI_Model {
        $this->email->message($message);
        $this->email->send();
     }
+    public function Update_InviteStatus($id)
+   {  
+      $this->db->where('id', $id);
+      if($this->db->update('inviteattendees', array('isexpiry' => 1))){
+         return true;
+       }else{
+         return false;
+       }
+   } 
+   public function GetExpiredStatus($id)
+   {
+     $this->db->select('isexpiry');
+     $this->db->where('id', $id);
+     $query = $this->db->get('inviteattendees');
+     $query = $query->row();
+     return $query->isexpiry;
+   }
 }

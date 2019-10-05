@@ -30,14 +30,6 @@ class InviteAttendees extends REST_Controller {
 		$email = $this->post('email');
 		$serverLink = $this->post('serverLink');
 		$firstname = $this->post('firstname');
-		$token['email'] = $email;
-		$AToken = JWT::encode($token, $this->config->item('jwt_key'));
-		$link = $serverLink."/attendees-registration/".$AToken;
-        $subject = "she-excellence Invitation";
-        $message = "<h6>Hello  ".$firstname."</h6>";
-        $message .= "<p>You are invite to she-excellence’s account. Please follow the link below and register in to your account to proceed.</p>";
-        $message .= "<a href='".$link."' target='_blank'>".$link."</a><p>";
-        $message .="Sincerely,</p><p>The she-excellence Team</p>";
 		$lastname = $this->post('lastname');
 		if(isset($email) && isset($firstname) && isset($user_id)){
 			$headers = $this->input->request_headers();
@@ -46,16 +38,23 @@ class InviteAttendees extends REST_Controller {
 			if($token_status == TRUE){
 				$Insert_Array = array(
 					"`email`" => $email,
-					"`accesstoken`" => $AToken,
 					"`date`" => date('Y-m-d'),
 					"`isexpiry`" => 0,
 				);
 				$Insert_saveUser_Result = $this->InviteAttendees_modal->Insert_User($Insert_Array);
+				$token['email'] = $email;
+				$token['id'] = $Insert_saveUser_Result;
+				$AToken = JWT::encode($token, $this->config->item('jwt_key'));
+				$link = $serverLink."/attendees-registration/".$AToken;
+		        $subject = "she-excellence Invitation";
+		        $message = "<h6>Hello  ".$firstname."</h6>";
+		        $message .= "<p>You are invite to she-excellence’s account. Please follow the link below and register in to your account to proceed.</p>";
+		        $message .= "<a href='".$link."' target='_blank'>".$link."</a><p>";
+		        $message .="Sincerely,</p><p>The she-excellence Team</p>";
 				$this->InviteAttendees_modal->sendMail($email,$subject,$message);
 				if($Insert_saveUser_Result > 0){
 					$data = [
 						"email" => $email,
-						"accesstoken" => $AToken,
 						"date" => date('Y-m-d'),
 						"isexpiry" => 0,
 						"id'"   => $Insert_saveUser_Result
@@ -78,4 +77,41 @@ class InviteAttendees extends REST_Controller {
 			$this->set_response($parameter_required_array, REST_Controller::HTTP_NOT_FOUND);
 		}
 	}
+	public function statusUpdate_post(){
+        
+        $valid = ['status' => "true","statuscode" => 200,'response' =>"Token Valid"];
+        $no_found = ['status' => "true","statuscode" => 200,'response' =>"No Record Found"];
+        $invalid = ['status' => "true","statuscode" => 203,'response' =>"In-Valid token"];
+        $not_found = ['status' => "true","statuscode" => 404,'response' =>"Token not found"];
+        
+        $message = 'Required field(s) user_id,email,firstname,lastname,role,password is missing or empty';
+        
+        $id = $this->post('id');
+        
+        if(isset($id)){
+         
+            $headers = $this->input->request_headers();
+        
+        
+            $Update_InviteStatus_Result = $this->InviteAttendees_modal->Update_InviteStatus($id);
+        
+                     $Pass_Data["data"][] =$Update_InviteStatus_Result;
+                     $inserted = ['status' => "true","statuscode" => 200,'response' => $Pass_Data];
+                      $this->set_response($Pass_Data, REST_Controller::HTTP_OK);
+                }else{
+                     $not_inserted = ['status' => "true","statuscode" => 200,'response' =>"User not Inserted"];
+    
+            }
+    }
+    public function GetExpiredStatus_post(){
+        $id = $this->post('id');
+        $result = $this->InviteAttendees_modal->GetExpiredStatus($id);
+        $Pass_Data["data"][] =$result;
+	    $inserted = ['status' => "true","statuscode" => 200,'response' => $Pass_Data];
+	    $this->set_response($Pass_Data, REST_Controller::HTTP_OK);
+    }
+   
+
+
+
 }
