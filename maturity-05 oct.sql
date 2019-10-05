@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 03, 2019 at 02:43 PM
+-- Generation Time: Oct 05, 2019 at 04:52 PM
 -- Server version: 10.1.30-MariaDB
 -- PHP Version: 7.2.2
 
@@ -39,7 +39,8 @@ CREATE TABLE `actions_measure` (
 
 INSERT INTO `actions_measure` (`element`, `measure`) VALUES
 (1, '<ul><li>Measurement looks like testing</li></ul>'),
-(2, '<ul><li>Measurement Practise 1</li><li>Measurement Practise 2<br></li><li>Measurement Practise 3<br></li></ul>');
+(2, '<ul><li>Measurement Practise 1</li><li>Measurement Practise 2<br></li><li>Measurement Practise 3<br></li></ul>'),
+(3, '<ul><li>dfg</li></ul>');
 
 -- --------------------------------------------------------
 
@@ -84,7 +85,8 @@ CREATE TABLE `actions_results` (
 
 INSERT INTO `actions_results` (`element`, `results`) VALUES
 (1, '<ul><li>Result looks like testing</li></ul>'),
-(2, '<ul><li>As soon as possible</li></ul>');
+(2, '<ul><li>As soon as possible</li></ul>'),
+(3, '<ul><li>dfg</li></ul>');
 
 -- --------------------------------------------------------
 
@@ -103,7 +105,8 @@ CREATE TABLE `actions_risks` (
 
 INSERT INTO `actions_risks` (`element`, `risk`) VALUES
 (1, '<ul><li>Risk looks like testing</li></ul>'),
-(2, '<ul><li>Risk 1</li><li>Risk 2</li><li>Risk 3<br></li></ul>');
+(2, '<ul><li>Risk 1</li><li>Risk 2</li><li>Risk 3<br></li></ul>'),
+(3, '<ul><li>dfg</li></ul>');
 
 -- --------------------------------------------------------
 
@@ -122,7 +125,8 @@ CREATE TABLE `actions_victory` (
 
 INSERT INTO `actions_victory` (`element`, `definition`) VALUES
 (1, 'Success looks like testing'),
-(2, 'Success looks like abcdef');
+(2, 'Success looks like abcdef'),
+(3, 'dfgfdg');
 
 -- --------------------------------------------------------
 
@@ -177,7 +181,9 @@ INSERT INTO `answer_complete` (`id`, `user`, `element`) VALUES
 (34, 1, 5),
 (35, 1, 7),
 (36, 1, 8),
-(37, 1, 9);
+(37, 1, 9),
+(38, 1, 10),
+(39, 201, 4);
 
 -- --------------------------------------------------------
 
@@ -216,7 +222,9 @@ INSERT INTO `answer_desired` (`id`, `user`, `element`, `desired`) VALUES
 (50, 1, 5, 3),
 (51, 1, 7, 3),
 (52, 1, 8, 4),
-(53, 1, 9, 2);
+(53, 1, 9, 2),
+(54, 1, 10, 3),
+(55, 201, 4, 3);
 
 -- --------------------------------------------------------
 
@@ -292,7 +300,14 @@ INSERT INTO `answer_mc` (`id`, `user`, `element`, `question`, `answer`) VALUES
 (338, 1, 8, 31, 1),
 (339, 1, 8, 32, 3),
 (340, 1, 8, 33, 4),
-(341, 1, 9, 34, 3);
+(341, 1, 9, 34, 3),
+(342, 1, 10, 35, 1),
+(343, 1, 10, 36, 3),
+(344, 201, 4, 14, 1),
+(345, 201, 4, 15, 2),
+(346, 201, 4, 16, 4),
+(347, 201, 4, 17, 3),
+(348, 201, 4, 18, 1);
 
 -- --------------------------------------------------------
 
@@ -421,7 +436,9 @@ INSERT INTO `answer_proof` (`id`, `user`, `element`, `proof`) VALUES
 (107, 1, 7, 147),
 (108, 1, 8, 158),
 (109, 1, 8, 155),
-(110, 1, 9, 28);
+(110, 1, 9, 28),
+(111, 201, 4, 129),
+(112, 201, 4, 124);
 
 -- --------------------------------------------------------
 
@@ -483,7 +500,11 @@ INSERT INTO `ci_sessions` (`id`, `user_id`, `token`, `ip_address`, `timestamp`, 
 ('19e6a2892d57570f', 201, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjIwMSIsInVzZXJuYW1lIjoibWFuYWdlciIsImlhdCI6MTU3MDAwNjE2NSwiZXhwIjoxNTcwMDI0MTY1fQ.7Dfh3ZnzvwRqhlcCJ-vPa_N0lbQlALqHT-UR0Td5z1M', '::1', 0, ''),
 ('7b100a5ed8b641d6', 201, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjIwMSIsInVzZXJuYW1lIjoibWFuYWdlciIsImlhdCI6MTU3MDAxMDAyNiwiZXhwIjoxNTcwMDI4MDI2fQ.plMlnnSVwtoZmnTiQMG46I-Muh1aBkdYZwvqxufkiCQ', '::1', 0, ''),
 ('4394e6a31dc6132c', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcwMDEwMDQzLCJleHAiOjE1NzAwMjgwNDN9.YQ10OK3e_Pq8Vbdy8iGEYh9q8RPsmKKDGJflAeV7YhE', '::1', 0, ''),
-('01db6871567bed5e', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcwMTA1MzgyLCJleHAiOjE1NzAxMjMzODJ9.ZHsuj9q1owIZbKHW7TX-XHUTk2mIIMtV_Ouqy757iAw', '::1', 0, '');
+('01db6871567bed5e', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcwMTA1MzgyLCJleHAiOjE1NzAxMjMzODJ9.ZHsuj9q1owIZbKHW7TX-XHUTk2mIIMtV_Ouqy757iAw', '::1', 0, ''),
+('77ceaee6430ac6be', 201, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjIwMSIsInVzZXJuYW1lIjoibWFuYWdlciIsImlhdCI6MTU3MDE5MTgyNCwiZXhwIjoxNTcwMjA5ODI0fQ.0PhZgVft5CpGu2hLtbhqa-cplratOKs3avZ3tRcs2_8', '::1', 0, ''),
+('f741944ae6027d7a', 201, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjIwMSIsInVzZXJuYW1lIjoibWFuYWdlciIsImlhdCI6MTU3MDI4NTk4OCwiZXhwIjoxNTcwMzAzOTg4fQ.xR4b4RNdaeLndu_N4GzZzGsn1CRjBQqeoXzogn3YGnY', '::1', 0, ''),
+('9ae8e95bb15a5337', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcwMjg1OTk2LCJleHAiOjE1NzAzMDM5OTZ9.zQ7qrtGsuZMKP3GbTFWh7hRYVOGATYvMOWM1qyTpxwk', '::1', 0, ''),
+('027be1fac677bec1', 201, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjIwMSIsInVzZXJuYW1lIjoibWFuYWdlciIsImlhdCI6MTU3MDI4NjAzNiwiZXhwIjoxNTcwMzA0MDM2fQ.XLHP6HWDZNFAItWbR-CMjhow6cYWuvzV6qc3-Xcm5Go', '::1', 0, '');
 
 -- --------------------------------------------------------
 
@@ -520,6 +541,20 @@ INSERT INTO `elements` (`id`, `cat`, `name`, `sequence`, `alt_sequence`) VALUES
 (14, 3, '3.4 Governance', 7, 'n'),
 (15, 4, '4.1 Measurement', 1, 'o'),
 (16, 4, '4.2 Improvement', 2, 'p');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `inviteattendees`
+--
+
+CREATE TABLE `inviteattendees` (
+  `id` int(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `accesstoken` varchar(255) NOT NULL,
+  `date` date NOT NULL,
+  `isexpiry` int(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -588,22 +623,14 @@ CREATE TABLE `performance_mc` (
 --
 
 INSERT INTO `performance_mc` (`id`, `question`, `element`, `answer`, `user`) VALUES
-(1, 1, 1, 1, 1),
-(2, 2, 1, 4, 1),
-(3, 3, 1, 2, 1),
-(4, 4, 1, 3, 1),
-(5, 1, 2, 1, 1),
-(6, 2, 2, 2, 1),
-(7, 3, 2, 4, 1),
-(8, 4, 2, 3, 1),
-(9, 1, 3, 1, 1),
-(10, 2, 3, 2, 1),
-(11, 3, 3, 4, 1),
-(12, 4, 3, 1, 1),
-(13, 1, 4, 1, 1),
-(14, 2, 4, 2, 1),
-(15, 3, 4, 1, 1),
-(16, 4, 4, 4, 1);
+(1, 1, 1, 1, 201),
+(2, 2, 1, 2, 201),
+(3, 3, 1, 4, 201),
+(4, 4, 1, 3, 201),
+(5, 1, 2, 1, 201),
+(6, 2, 2, 3, 201),
+(7, 3, 2, 2, 201),
+(8, 4, 2, 4, 201);
 
 -- --------------------------------------------------------
 
@@ -976,6 +1003,12 @@ ALTER TABLE `elements`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `inviteattendees`
+--
+ALTER TABLE `inviteattendees`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `performance`
 --
 ALTER TABLE `performance`
@@ -1019,25 +1052,25 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `answer_complete`
 --
 ALTER TABLE `answer_complete`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT for table `answer_desired`
 --
 ALTER TABLE `answer_desired`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 
 --
 -- AUTO_INCREMENT for table `answer_mc`
 --
 ALTER TABLE `answer_mc`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=342;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=349;
 
 --
 -- AUTO_INCREMENT for table `answer_proof`
 --
 ALTER TABLE `answer_proof`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=111;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=113;
 
 --
 -- AUTO_INCREMENT for table `category`
@@ -1050,6 +1083,12 @@ ALTER TABLE `category`
 --
 ALTER TABLE `elements`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+
+--
+-- AUTO_INCREMENT for table `inviteattendees`
+--
+ALTER TABLE `inviteattendees`
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `performance`
@@ -1067,7 +1106,7 @@ ALTER TABLE `performance_elements`
 -- AUTO_INCREMENT for table `performance_mc`
 --
 ALTER TABLE `performance_mc`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `proofs`
@@ -1085,7 +1124,7 @@ ALTER TABLE `questions`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=207;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=209;
 
 DELIMITER $$
 --
