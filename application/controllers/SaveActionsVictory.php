@@ -29,6 +29,10 @@ class SaveActionsVictory extends REST_Controller {
 		$user_id = $this->post('user_id');
 		//$Element_ID = $this->post('element_id');
 		$element = $this->post('element');
+		$teammembers = $this->post('teammembers');
+		$performance_elements = $this->post('performance_elements') ;
+		$focusareaname= $this->post('focusareaname');
+		$focusareaowner=$this->post('focusareaowner');
 		$victory = $this->post('victory');  
 		if(isset($user_id) && isset($element) && isset($victory)){
 			$headers = $this->input->request_headers();
@@ -37,7 +41,12 @@ class SaveActionsVictory extends REST_Controller {
 			if($token_status == TRUE){
 				$Replace_Victory_Array = array(
 					"`element`" => $element,
-					"`definition`" => $victory 
+					"`definition`" => $victory,
+					"`teammembers`" => $teammembers,
+					"`performance_elements`" => $performance_elements,
+					"`focusareaname`" => $focusareaname,
+					"`focusareaowner`" => $focusareaowner
+
 				);
 				$Replace_Victory_Result = $this->SaveActionsVictory_modal->Replace_Action_Victory($Replace_Victory_Array);
 				if($Replace_Victory_Result){
