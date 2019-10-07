@@ -24,7 +24,6 @@ class GetPerformanceElements extends REST_Controller {
 		$no_found = ['status' => "true","statuscode" => 200,'response' =>"No Record Found"];
 		$invalid = ['status' => "true","statuscode" => 203,'response' =>"In-Valid token"];
 		$not_found = ['status' => "true","statuscode" => 404,'response' =>"Token not found"];
-		
 		$message = 'Required field(s) user_id is missing or empty';
 		$user_id = $this->post('user_id');
 		if(isset($user_id)){
@@ -58,4 +57,36 @@ class GetPerformanceElements extends REST_Controller {
 			$this->set_response($parameter_required_array, REST_Controller::HTTP_NOT_FOUND);
 		}
 	}
+	function getAllPerformances()
+	{
+		$valid = ['status' => "true","statuscode" => 200,'response' =>"Token Valid"];
+		$no_found = ['status' => "true","statuscode" => 200,'response' =>"No Record Found"];
+		$invalid = ['status' => "true","statuscode" => 203,'response' =>"In-Valid token"];
+		$not_found = ['status' => "true","statuscode" => 404,'response' =>"Token not found"];
+		$message = 'Required field(s) user_id is missing or empty';
+		$user_id = $this->post('user_id');
+		if(isset($user_id)){
+			$headers = $this->input->request_headers();
+			$token_status = check_token($user_id,$headers['Authorization']);
+			
+			if($token_status == TRUE){
+				$All_Performances = $this->GetPerformanceElements_modal->All_Performances_Elements();
+				$Pass_Data = array();
+				if(!empty($All_Performances)){
+					$Pass_Data["data"][] = $All_Performances;
+					$this->set_response($Pass_Data, REST_Controller::HTTP_OK);
+				}else{
+					$this->set_response($no_found, REST_Controller::HTTP_OK);
+				}
+			}else if($token_status == FALSE){
+				$this->set_response($invalid, REST_Controller::HTTP_NON_AUTHORITATIVE_INFORMATION);
+			}else{
+				$this->set_response($not_found, REST_Controller::HTTP_NOT_FOUND);
+			}
+		}else{
+			$parameter_required_array = ['status' => "true","statuscode" => 404,'response' => $message];
+			$this->set_response($parameter_required_array, REST_Controller::HTTP_NOT_FOUND);
+		}
+	}
+
 }
