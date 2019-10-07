@@ -67,7 +67,9 @@ class Auth extends REST_Controller {
 			}
 		}
 	}
-	
+	/*public function sendMail_post(){
+		return $this->auth_model->sendMail();
+	}*/
 	/* For Clone */
 	public function my_clone_post(){
 		$valid = ['status' => "true","statuscode" => 200,'response' =>"Valid token"];
