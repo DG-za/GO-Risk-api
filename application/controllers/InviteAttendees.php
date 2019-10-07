@@ -25,32 +25,26 @@ class InviteAttendees extends REST_Controller {
 		$no_found = ['status' => "true","statuscode" => 200,'response' =>"No Record Found"];
 		$invalid = ['status' => "true","statuscode" => 203,'response' =>"In-Valid token"];
 		$not_found = ['status' => "true","statuscode" => 404,'response' =>"Token not found"];
-		$message = 'Required field(s) user_id,email,firstname is missing or empty';
+		$message = 'Required field(s) user_id,email is missing or empty';
 		$user_id = $this->post('user_id');
 		$email = $this->post('email');
 		$serverLink = $this->post('serverLink');
-		$firstname = $this->post('firstname');
-		$lastname = $this->post('lastname');
-		if(isset($email) && isset($firstname) && isset($user_id)){
+		if(isset($email) &&   isset($user_id)){
 			$headers = $this->input->request_headers();
 			$token_status = check_token($user_id,$headers['Authorization']);
 			
 			if($token_status == TRUE){
 				$Insert_Array = array(
 					"`email`" => $email,
-					"`firstname`"=>$firstname,
-					"`lastname`"=>$lastname,
 					"`date`" => date('Y-m-d'),
 					"`isexpiry`" => 0,
 				);
 				$Insert_saveUser_Result = $this->InviteAttendees_modal->Insert_User($Insert_Array);
 				$token['email'] = $email;
-				$token['firstname'] = $firstname;
-				$token['lastname'] = $lastname;
 				$AToken = JWT::encode($token, $this->config->item('jwt_key'));
 				$link = $serverLink."/attendees-registration/".$AToken;
 		        $subject = "she-excellence Invitation";
-		        $message = "<p>Hello  ".$firstname."</p>";
+		        $message = "<p>Hello  ".$email."</p>";
 		        $message .= "<p>You are invite to she-excellence account. Please link to below activation link to create your own account.</p>";
 		        $message .= "<a href='".$link."' target='_blank'>Create Account</a>";
 		        $message .="<p>Sincerely,<br/>The she-excellence Team</p>";
@@ -59,8 +53,7 @@ class InviteAttendees extends REST_Controller {
 					$data = [
 						"email" => $email,
 						"date" => date('Y-m-d'),
-						"firstname"=>$firstname,
-						"lastname"=>$lastname,
+						
 						"isexpiry" => 0,
 						"id'"   => $Insert_saveUser_Result
 					];
