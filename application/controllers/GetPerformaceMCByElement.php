@@ -3,12 +3,12 @@ require_once APPPATH . '/libraries/REST_Controller.php';
 require_once APPPATH . '/libraries/JWT.php';
 use \Firebase\JWT\JWT;
 
-class SaveActionsMeasure extends REST_Controller {
+class GetPerformaceMCByElement extends REST_Controller {
 	/***************************************************************
 	*  Project Name : 4Xcellence Solutions
 	*  Created By :   
-	*  Created Date : 27-09-2019
-	*  Description : A controller contain SaveActionsMeasure related methods
+	*  Created Date : 24-09-2019
+	*  Description : A controller contain GetPerformaceMCByElement related methods
 	*  Modification History :
 	*  
 	***************************************************************/
@@ -16,7 +16,7 @@ class SaveActionsMeasure extends REST_Controller {
 	public function __construct() {
 		parent::__construct();
 		$this->load->helper('check_token');				
-		$this->load->model('SaveActionsMeasure_modal');
+		$this->load->model('GetPerformaceMCByElement_modal');
 	}
 	
 	public function index_post(){
@@ -25,28 +25,26 @@ class SaveActionsMeasure extends REST_Controller {
 		$invalid = ['status' => "true","statuscode" => 203,'response' =>"In-Valid token"];
 		$not_found = ['status' => "true","statuscode" => 404,'response' =>"Token not found"];
 		
-		$message = 'Required field(s) user_id,element,measure is missing or empty';
+		$message = 'Required field(s) user_id,element_id is missing or empty';
 		$user_id = $this->post('user_id');
-		$element = $this->post('element');
-		$measure = $this->post('measure');
-		$victory = $this->post('victoryId'); 
-		if(isset($user_id) && isset($element) && isset($measure)){
+		$Element_ID = $this->post('element_id');
+		if(isset($user_id) && isset($Element_ID)){
 			$headers = $this->input->request_headers();
 			$token_status = check_token($user_id,$headers['Authorization']);
 			
-			if($token_status == TRUE){ 
-				 $Replace_Measure_Array = array(
-						"`element`" => $element,
-						"`measure`" => $measure,
-						"`victory`" => $victory
-				 );
-				 $SaveActionsMeasure_Result = $this->SaveActionsMeasure_modal->Replace_Action_Measure($Replace_Measure_Array);
-				 if($SaveActionsMeasure_Result){
-						echo "Success";
-				 }else{
-						$Not_Replaced = ['status' => "true","statuscode" => 200,'response' =>"Action Measure Not Replaced."];
-						$this->set_response($Not_Replaced, REST_Controller::HTTP_OK);
-				 }
+			if($token_status == TRUE){
+				$All_Answer = $this->GetPerformaceMCByElement_modal->Get_Performace_Answer_MC_by_Element_ID($Element_ID);
+				$Pass_Data = array();
+				if(!empty($All_Answer)){
+					foreach($All_Answer as $key => $value){
+						$merge_array = array("name" => $value->answer,"value" => $value->num);
+						$Pass_Data["data"][] = $merge_array;
+					}
+					$valid = ['status' => "true","statuscode" => 200,'response' =>$Pass_Data];
+					$this->set_response($Pass_Data, REST_Controller::HTTP_OK);
+				}else{
+					$this->set_response($no_found, REST_Controller::HTTP_OK);
+				}
 			}else if($token_status == FALSE){
 				$this->set_response($invalid, REST_Controller::HTTP_NON_AUTHORITATIVE_INFORMATION);
 			}else{

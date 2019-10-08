@@ -4,6 +4,12 @@ class SaveActionsVictory_modal extends CI_Model {
 	/* Replace Action Victory */
 	public function Replace_Action_Victory($Replace_Victory_Array){
 		$result = $this->db->replace('actions_victory',$Replace_Victory_Array);
-		return $result;
+		$insert_id = $this->db->insert_id();
+		if($result){
+			return $insert_id;
+		}else{
+			return 0;
+		}
+		
 	}
 }

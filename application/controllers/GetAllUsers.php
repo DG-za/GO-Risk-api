@@ -54,4 +54,41 @@ class GetAllUsers extends REST_Controller {
 			$this->set_response($parameter_required_array, REST_Controller::HTTP_NOT_FOUND);
 		}
 	}
+	public function getUsers_post(){
+		$valid = ['status' => "true","statuscode" => 200,'response' =>"Token Valid"];
+		$no_found = ['status' => "true","statuscode" => 200,'response' =>"No Record Found"];
+		$invalid = ['status' => "true","statuscode" => 203,'response' =>"In-Valid token"];
+		$not_found = ['status' => "true","statuscode" => 404,'response' =>"Token not found"];
+
+
+		
+		$message = 'Required field(s) user_id is missing or empty';
+		$user_id = $this->post('user_id');
+		if(isset($user_id)){
+			$headers = $this->input->request_headers();
+			$token_status = check_token($user_id,$headers['Authorization']);
+			
+			if($token_status == TRUE){
+				$getAllUsers_Result = $this->GetAllUsers_modal->getUsers_function();
+				$Pass_Data = array();
+				if(!empty($getAllUsers_Result)){
+					foreach($getAllUsers_Result as $key => $value){
+						$merge_array = array("id" => $value->id,"email" => $value->email,"firstname" => $value->firstname,"lastname" => $value->lastname,"role" => $value->role);
+						$Pass_Data["data"][] = $merge_array;
+					}
+					$valid = ['status' => "true","statuscode" => 200,'response' =>$Pass_Data];
+					$this->set_response($Pass_Data, REST_Controller::HTTP_OK);
+				}else{
+					$this->set_response($no_found, REST_Controller::HTTP_OK);
+				}
+			}else if($token_status == FALSE){
+				$this->set_response($invalid, REST_Controller::HTTP_NON_AUTHORITATIVE_INFORMATION);
+			}else{
+				$this->set_response($not_found, REST_Controller::HTTP_NOT_FOUND);
+			}
+		}else{
+			$parameter_required_array = ['status' => "true","statuscode" => 404,'response' => $message];
+			$this->set_response($parameter_required_array, REST_Controller::HTTP_NOT_FOUND);
+		}
+	}
 }

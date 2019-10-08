@@ -29,6 +29,7 @@ class SaveActionsRisks extends REST_Controller {
 		$user_id = $this->post('user_id');
 		$element = $this->post('element');
 		$risks = $this->post('risks');  
+		$victory = $this->post('victoryId');
 		if(isset($user_id) && isset($element) && isset($risks)){
 			$headers = $this->input->request_headers();
 			$token_status = check_token($user_id,$headers['Authorization']);
@@ -36,7 +37,8 @@ class SaveActionsRisks extends REST_Controller {
 			if($token_status == TRUE){
 				$Replace_Risks_Array = array(
 					"`element`" => $element,
-					"`risk`" => $risks 
+					"`risk`" => $risks,
+					"`victory`" => $victory
 				);
 				$Replace_Risks_Result = $this->SaveActionsRisks_modal->Replace_Action_Risk($Replace_Risks_Array);
 				if($Replace_Risks_Result){
