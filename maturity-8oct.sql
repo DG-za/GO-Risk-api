@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 05, 2019 at 04:52 PM
+-- Generation Time: Oct 08, 2019 at 03:01 PM
 -- Server version: 10.1.30-MariaDB
 -- PHP Version: 7.2.2
 
@@ -29,18 +29,11 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `actions_measure` (
+  `id` int(255) NOT NULL,
   `element` int(11) NOT NULL,
-  `measure` text NOT NULL
+  `measure` text NOT NULL,
+  `victory` int(255) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `actions_measure`
---
-
-INSERT INTO `actions_measure` (`element`, `measure`) VALUES
-(1, '<ul><li>Measurement looks like testing</li></ul>'),
-(2, '<ul><li>Measurement Practise 1</li><li>Measurement Practise 2<br></li><li>Measurement Practise 3<br></li></ul>'),
-(3, '<ul><li>dfg</li></ul>');
 
 -- --------------------------------------------------------
 
@@ -49,24 +42,16 @@ INSERT INTO `actions_measure` (`element`, `measure`) VALUES
 --
 
 CREATE TABLE `actions_milestone` (
+  `id` int(255) NOT NULL,
   `element` int(11) NOT NULL,
   `milestone` varchar(150) NOT NULL,
   `responsible_person` text NOT NULL,
   `start_date` text NOT NULL,
   `end_date` text NOT NULL,
   `comment` text NOT NULL,
-  `status` int(11) NOT NULL
+  `status` int(11) NOT NULL,
+  `victory` int(255) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `actions_milestone`
---
-
-INSERT INTO `actions_milestone` (`element`, `milestone`, `responsible_person`, `start_date`, `end_date`, `comment`, `status`) VALUES
-(1, 'Plan of action Test', '[\"35\"]', '2019-09-15T22:00:00.000Z', '2019-09-29T22:00:00.000Z', 'Comment Test', 0),
-(1, 'Plan of action Test2', '[\"204\"]', '2019-09-02T22:00:00.000Z', '2019-09-08T22:00:00.000Z', 'Comment Test3', 2),
-(1, 'Plan of action Test3', '[\"204\"]', '2019-09-02T22:00:00.000Z', '2019-09-19T22:00:00.000Z', 'Comment Test 4', 1),
-(2, 'Milestone 1', '[\"203\",\"202\"]', '2019-09-02T22:00:00.000Z', '2019-10-30T22:00:00.000Z', 'Comment on milestone', 1);
 
 -- --------------------------------------------------------
 
@@ -75,18 +60,11 @@ INSERT INTO `actions_milestone` (`element`, `milestone`, `responsible_person`, `
 --
 
 CREATE TABLE `actions_results` (
+  `id` int(255) NOT NULL,
   `element` int(11) NOT NULL,
-  `results` text NOT NULL
+  `results` text NOT NULL,
+  `victory` int(255) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `actions_results`
---
-
-INSERT INTO `actions_results` (`element`, `results`) VALUES
-(1, '<ul><li>Result looks like testing</li></ul>'),
-(2, '<ul><li>As soon as possible</li></ul>'),
-(3, '<ul><li>dfg</li></ul>');
 
 -- --------------------------------------------------------
 
@@ -95,18 +73,11 @@ INSERT INTO `actions_results` (`element`, `results`) VALUES
 --
 
 CREATE TABLE `actions_risks` (
+  `id` int(255) NOT NULL,
   `element` int(11) NOT NULL,
-  `risk` text NOT NULL
+  `risk` text NOT NULL,
+  `victory` int(255) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `actions_risks`
---
-
-INSERT INTO `actions_risks` (`element`, `risk`) VALUES
-(1, '<ul><li>Risk looks like testing</li></ul>'),
-(2, '<ul><li>Risk 1</li><li>Risk 2</li><li>Risk 3<br></li></ul>'),
-(3, '<ul><li>dfg</li></ul>');
 
 -- --------------------------------------------------------
 
@@ -115,18 +86,15 @@ INSERT INTO `actions_risks` (`element`, `risk`) VALUES
 --
 
 CREATE TABLE `actions_victory` (
+  `id` int(20) NOT NULL,
   `element` int(11) NOT NULL,
-  `definition` text NOT NULL
+  `definition` text NOT NULL,
+  `teammembers` text NOT NULL,
+  `performance_elements` varchar(255) NOT NULL,
+  `focusareaname` varchar(255) NOT NULL,
+  `focusareaowner` varchar(255) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `actions_victory`
---
-
-INSERT INTO `actions_victory` (`element`, `definition`) VALUES
-(1, 'Success looks like testing'),
-(2, 'Success looks like abcdef'),
-(3, 'dfgfdg');
 
 -- --------------------------------------------------------
 
@@ -183,7 +151,8 @@ INSERT INTO `answer_complete` (`id`, `user`, `element`) VALUES
 (36, 1, 8),
 (37, 1, 9),
 (38, 1, 10),
-(39, 201, 4);
+(39, 201, 4),
+(40, 201, 16);
 
 -- --------------------------------------------------------
 
@@ -224,7 +193,8 @@ INSERT INTO `answer_desired` (`id`, `user`, `element`, `desired`) VALUES
 (52, 1, 8, 4),
 (53, 1, 9, 2),
 (54, 1, 10, 3),
-(55, 201, 4, 3);
+(55, 201, 4, 3),
+(56, 201, 16, 3);
 
 -- --------------------------------------------------------
 
@@ -307,7 +277,11 @@ INSERT INTO `answer_mc` (`id`, `user`, `element`, `question`, `answer`) VALUES
 (345, 201, 4, 15, 2),
 (346, 201, 4, 16, 4),
 (347, 201, 4, 17, 3),
-(348, 201, 4, 18, 1);
+(348, 201, 4, 18, 1),
+(349, 201, 16, 57, 1),
+(350, 201, 16, 58, 2),
+(351, 201, 16, 59, 4),
+(352, 201, 16, 60, 3);
 
 -- --------------------------------------------------------
 
@@ -438,7 +412,9 @@ INSERT INTO `answer_proof` (`id`, `user`, `element`, `proof`) VALUES
 (109, 1, 8, 155),
 (110, 1, 9, 28),
 (111, 201, 4, 129),
-(112, 201, 4, 124);
+(112, 201, 4, 124),
+(113, 201, 16, 115),
+(114, 201, 16, 119);
 
 -- --------------------------------------------------------
 
@@ -504,7 +480,11 @@ INSERT INTO `ci_sessions` (`id`, `user_id`, `token`, `ip_address`, `timestamp`, 
 ('77ceaee6430ac6be', 201, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjIwMSIsInVzZXJuYW1lIjoibWFuYWdlciIsImlhdCI6MTU3MDE5MTgyNCwiZXhwIjoxNTcwMjA5ODI0fQ.0PhZgVft5CpGu2hLtbhqa-cplratOKs3avZ3tRcs2_8', '::1', 0, ''),
 ('f741944ae6027d7a', 201, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjIwMSIsInVzZXJuYW1lIjoibWFuYWdlciIsImlhdCI6MTU3MDI4NTk4OCwiZXhwIjoxNTcwMzAzOTg4fQ.xR4b4RNdaeLndu_N4GzZzGsn1CRjBQqeoXzogn3YGnY', '::1', 0, ''),
 ('9ae8e95bb15a5337', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcwMjg1OTk2LCJleHAiOjE1NzAzMDM5OTZ9.zQ7qrtGsuZMKP3GbTFWh7hRYVOGATYvMOWM1qyTpxwk', '::1', 0, ''),
-('027be1fac677bec1', 201, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjIwMSIsInVzZXJuYW1lIjoibWFuYWdlciIsImlhdCI6MTU3MDI4NjAzNiwiZXhwIjoxNTcwMzA0MDM2fQ.XLHP6HWDZNFAItWbR-CMjhow6cYWuvzV6qc3-Xcm5Go', '::1', 0, '');
+('027be1fac677bec1', 201, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjIwMSIsInVzZXJuYW1lIjoibWFuYWdlciIsImlhdCI6MTU3MDI4NjAzNiwiZXhwIjoxNTcwMzA0MDM2fQ.XLHP6HWDZNFAItWbR-CMjhow6cYWuvzV6qc3-Xcm5Go', '::1', 0, ''),
+('2e717d8fd5194cc8', 201, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjIwMSIsInVzZXJuYW1lIjoibWFuYWdlciIsImlhdCI6MTU3MDI4OTE2NywiZXhwIjoxNTcwMzA3MTY3fQ.ErxP8LEL_Da5_Xxg9m2Z1avsKTOcXvnq1aK2k5ZmHKY', '::1', 0, ''),
+('a91731c580501afd', 201, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjIwMSIsInVzZXJuYW1lIjoibWFuYWdlciIsImlhdCI6MTU3MDQzMTQwNywiZXhwIjoxNTcwNDQ5NDA3fQ.hEC2A4-QJ34BrubcCRzeuSNFjyAwA81m-VPvhz2ptOk', '::1', 0, ''),
+('0214cdef96e4f0a4', 201, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjIwMSIsInVzZXJuYW1lIjoibWFuYWdlciIsImlhdCI6MTU3MDQzMzc3NCwiZXhwIjoxNTcwNDUxNzc0fQ.X0B8XA6M2dIbcVfcck8AflSK7h6HtxQ3VgQH0tP1-Lc', '::1', 0, ''),
+('434f6dcca2f55a2d', 201, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjIwMSIsInVzZXJuYW1lIjoibWFuYWdlciIsImlhdCI6MTU3MDQ0MzU4NCwiZXhwIjoxNTcwNDYxNTg0fQ.G_oaLksy1Pe1gmfCZ9LCuJ7lc8ZCqAvHbLh6TJrsjmI', '::1', 0, '');
 
 -- --------------------------------------------------------
 
@@ -630,7 +610,15 @@ INSERT INTO `performance_mc` (`id`, `question`, `element`, `answer`, `user`) VAL
 (5, 1, 2, 1, 201),
 (6, 2, 2, 3, 201),
 (7, 3, 2, 2, 201),
-(8, 4, 2, 4, 201);
+(8, 4, 2, 4, 201),
+(9, 1, 3, 1, 201),
+(10, 2, 3, 2, 201),
+(11, 3, 3, 4, 201),
+(12, 4, 3, 3, 201),
+(13, 1, 4, 1, 201),
+(14, 2, 4, 2, 201),
+(15, 3, 4, 3, 201),
+(16, 4, 4, 4, 201);
 
 -- --------------------------------------------------------
 
@@ -930,14 +918,14 @@ INSERT INTO `user` (`id`, `email`, `firstname`, `lastname`, `role`, `password`) 
 -- Indexes for table `actions_measure`
 --
 ALTER TABLE `actions_measure`
-  ADD PRIMARY KEY (`element`),
+  ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `element` (`element`);
 
 --
 -- Indexes for table `actions_milestone`
 --
 ALTER TABLE `actions_milestone`
-  ADD PRIMARY KEY (`milestone`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `actions_results`
@@ -956,7 +944,7 @@ ALTER TABLE `actions_risks`
 -- Indexes for table `actions_victory`
 --
 ALTER TABLE `actions_victory`
-  ADD PRIMARY KEY (`element`),
+  ADD PRIMARY KEY (`id`),
   ADD KEY `element` (`element`);
 
 --
@@ -1049,28 +1037,46 @@ ALTER TABLE `user`
 --
 
 --
+-- AUTO_INCREMENT for table `actions_measure`
+--
+ALTER TABLE `actions_measure`
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `actions_milestone`
+--
+ALTER TABLE `actions_milestone`
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `actions_victory`
+--
+ALTER TABLE `actions_victory`
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `answer_complete`
 --
 ALTER TABLE `answer_complete`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT for table `answer_desired`
 --
 ALTER TABLE `answer_desired`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
 
 --
 -- AUTO_INCREMENT for table `answer_mc`
 --
 ALTER TABLE `answer_mc`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=349;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=353;
 
 --
 -- AUTO_INCREMENT for table `answer_proof`
 --
 ALTER TABLE `answer_proof`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=113;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=115;
 
 --
 -- AUTO_INCREMENT for table `category`
@@ -1088,7 +1094,7 @@ ALTER TABLE `elements`
 -- AUTO_INCREMENT for table `inviteattendees`
 --
 ALTER TABLE `inviteattendees`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `performance`
@@ -1106,7 +1112,7 @@ ALTER TABLE `performance_elements`
 -- AUTO_INCREMENT for table `performance_mc`
 --
 ALTER TABLE `performance_mc`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `proofs`
