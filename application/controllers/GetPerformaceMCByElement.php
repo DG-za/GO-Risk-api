@@ -35,10 +35,19 @@ class GetPerformaceMCByElement extends REST_Controller {
 			if($token_status == TRUE){
 				$All_Answer = $this->GetPerformaceMCByElement_modal->Get_Performace_Answer_MC_by_Element_ID($Element_ID);
 				$Pass_Data = array();
+				$Exist_answers = array();
 				if(!empty($All_Answer)){
 					foreach($All_Answer as $key => $value){
 						$merge_array = array("name" => $value->answer,"value" => $value->num);
+						$Exist_answers[] = $value->answer;
 						$Pass_Data["data"][] = $merge_array;
+					}
+					$Answer_Array = array(1,2,3,4);
+					foreach($Answer_Array as $value){
+						if(!in_array($value,$Exist_answers)){
+							$merge_array = array("name" => $value,"value" => 0);
+							$Pass_Data["data"][] = $merge_array;
+						}
 					}
 					$valid = ['status' => "true","statuscode" => 200,'response' =>$Pass_Data];
 					$this->set_response($Pass_Data, REST_Controller::HTTP_OK);
