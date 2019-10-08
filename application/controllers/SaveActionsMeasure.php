@@ -29,6 +29,7 @@ class SaveActionsMeasure extends REST_Controller {
 		$user_id = $this->post('user_id');
 		$element = $this->post('element');
 		$measure = $this->post('measure');
+		$victory = $this->post('victoryId'); 
 		if(isset($user_id) && isset($element) && isset($measure)){
 			$headers = $this->input->request_headers();
 			$token_status = check_token($user_id,$headers['Authorization']);
@@ -36,7 +37,8 @@ class SaveActionsMeasure extends REST_Controller {
 			if($token_status == TRUE){ 
 				 $Replace_Measure_Array = array(
 						"`element`" => $element,
-						"`measure`" => $measure 
+						"`measure`" => $measure,
+						"`victory`" => $victory
 				 );
 				 $SaveActionsMeasure_Result = $this->SaveActionsMeasure_modal->Replace_Action_Measure($Replace_Measure_Array);
 				 if($SaveActionsMeasure_Result){

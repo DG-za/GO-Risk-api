@@ -34,6 +34,7 @@ class SaveActionsMilestone extends REST_Controller {
 		$end_date = $this->post('end_date');  
 		$comment = $this->post('comment');
 		$status = $this->post('status'); 
+		$victory1 = $this->post('victoryId');
 		if(isset($user_id) && isset($element) && isset($milestone) && isset($responsible_person) && isset($start_date) && isset($end_date) && isset($comment) && isset($status)){
 			$headers = $this->input->request_headers();
 			$token_status = check_token($user_id,$headers['Authorization']);
@@ -46,7 +47,8 @@ class SaveActionsMilestone extends REST_Controller {
 					"`start_date`" => $start_date,
 					"`end_date`" => $end_date,
 					"`comment`" => $comment,
-					"`status`" => $status
+					"`status`" => $status,
+					"`victory`" => $victory1
 				);
 				$Replace_Actions_Milestone_Result = $this->SaveActionsMilestone_modal->Replace_Actions_Milestone($Replace_Actions_Milestone_Array);
 				if($Replace_Actions_Milestone_Result){

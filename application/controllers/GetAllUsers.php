@@ -59,6 +59,8 @@ class GetAllUsers extends REST_Controller {
 		$no_found = ['status' => "true","statuscode" => 200,'response' =>"No Record Found"];
 		$invalid = ['status' => "true","statuscode" => 203,'response' =>"In-Valid token"];
 		$not_found = ['status' => "true","statuscode" => 404,'response' =>"Token not found"];
+
+
 		
 		$message = 'Required field(s) user_id is missing or empty';
 		$user_id = $this->post('user_id');
@@ -71,7 +73,7 @@ class GetAllUsers extends REST_Controller {
 				$Pass_Data = array();
 				if(!empty($getAllUsers_Result)){
 					foreach($getAllUsers_Result as $key => $value){
-						$merge_array = array("id" => $value->id,"email" => $value->email,"firstname" => $value->firstname,"lastname" => $value->lastname,"role" => $value->role,"password" => $value->password);
+						$merge_array = array("id" => $value->id,"email" => $value->email,"firstname" => $value->firstname,"lastname" => $value->lastname,"role" => $value->role);
 						$Pass_Data["data"][] = $merge_array;
 					}
 					$valid = ['status' => "true","statuscode" => 200,'response' =>$Pass_Data];

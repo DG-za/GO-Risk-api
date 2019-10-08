@@ -28,7 +28,8 @@ class SaveActionsResults extends REST_Controller {
 		$message = 'Required field(s) user_id,element,results is missing or empty';
 		$user_id = $this->post('user_id');
 		$element = $this->post('element');
-		$results = $this->post('results');  
+		$results = $this->post('results'); 
+		$victory = $this->post('victoryId'); 
 		if(isset($user_id) && isset($element) && isset($results)){
 			$headers = $this->input->request_headers();
 			$token_status = check_token($user_id,$headers['Authorization']);
@@ -36,7 +37,8 @@ class SaveActionsResults extends REST_Controller {
 			if($token_status == TRUE){
 				$Replace_Action_Result_Array = array(
 					"`element`" => $element,
-					"`results`" => $results 
+					"`results`" => $results,
+					"`victory`" => $victory
 				);
 				$SaveActionsResult_Result = $this->SaveActionsResults_modal->Replace_Action_Result($Replace_Action_Result_Array);
 				if($SaveActionsResult_Result){
