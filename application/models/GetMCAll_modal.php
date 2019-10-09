@@ -13,9 +13,6 @@ class GetMCAll_modal extends CI_Model {
 	
 	/* Get All `answer_mc` by Elements_ID */
 	public function Get_All_answer_mc_By_Elements_ID_Function($ID){
-		/*$Where_Array = array(
-			"`element`" => $ID,
-		);*/
 		$this->db->select("`answer` as `name`,count(`answer`) as `value`");
 		$this->db->from("`answer_mc`");
 		$this->db->where("`element`",$ID);

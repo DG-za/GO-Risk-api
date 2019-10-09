@@ -3,12 +3,12 @@ require_once APPPATH . '/libraries/REST_Controller.php';
 require_once APPPATH . '/libraries/JWT.php';
 use \Firebase\JWT\JWT;
 
-class GetActionsByElement extends REST_Controller {
+class GetMaturityReporting extends REST_Controller {
 	/***************************************************************
 	*  Project Name : 4Xcellence Solutions
 	*  Created By :   
-	*  Created Date : 25-09-2019
-	*  Description : A controller contain GetActionsByElement related methods
+	*  Created Date : 24-09-2019
+	*  Description : A controller contain GetMaturityReporting related methods
 	*  Modification History :
 	*  
 	***************************************************************/
@@ -16,7 +16,7 @@ class GetActionsByElement extends REST_Controller {
 	public function __construct() {
 		parent::__construct();
 		$this->load->helper('check_token');				
-		$this->load->model('GetActionsByElement_modal');
+		$this->load->model('GetMaturityReporting_modal');
 	}
 	
 	public function index_post(){
@@ -25,32 +25,40 @@ class GetActionsByElement extends REST_Controller {
 		$invalid = ['status' => "true","statuscode" => 203,'response' =>"In-Valid token"];
 		$not_found = ['status' => "true","statuscode" => 404,'response' =>"Token not found"];
 		
-		$message = 'Required field(s) user_id,element_id is missing or empty';
+		$message = 'Required field(s) user_id is missing or empty';
 		$user_id = $this->post('user_id');
-		$Element_ID = $this->post('element_id');
-		if(isset($user_id) && isset($Element_ID)){
+		
+		if(isset($user_id)){
 			$headers = $this->input->request_headers();
 			$token_status = check_token($user_id,$headers['Authorization']);
-			
 			if($token_status == TRUE){
-				$merge_Array = array();
-				$results = $this->GetActionsByElement_modal->get_Action_Results($Element_ID);
-				if(!empty($results)){
-					$merge_Array["results"] = $results[0]->results;
+				$results_performance_mc = $this->GetMaturityReporting_modal->GetMaturityReporting_performance_mc();
+				$Pass_Data["data"] = array();
+				if(!empty($results_performance_mc)){
+					$P_Count = 0;
+					$P_A_Count = 0;
+					foreach($results_performance_mc as $RPM){
+						$P_Count++;
+						$P_A_Count += (double)$RPM->count_p_answer;
+					}
+					$P_A_Average = $P_A_Count / $P_Count;
+					$Pass_Data["data"]["performance_mc"] = number_format($P_A_Average,2);
+				}else{
+					$Pass_Data["data"]["performance_mc"] = number_format(0,2);
 				}
-				$definition = $this->GetActionsByElement_modal->get_Action_Definition($Element_ID);
-				if(!empty($definition)){
-					$merge_Array["definition"] = $definition[0]->definition;
+				$results_answer_mc = $this->GetMaturityReporting_modal->GetMaturityReporting_answer_mc();
+				if(!empty($results_answer_mc)){
+					$A_Count = 0;
+					$A_A_Count = 0;
+					foreach($results_answer_mc as $RPM){
+						$A_Count++;
+						$A_A_Count += (double)$RPM->count_a_answer;
+					}
+					$A_A_Average = $A_A_Count / $A_Count;
+					$Pass_Data["data"]["answer_mc"] = number_format($A_A_Average,2);
+				}else{
+					$Pass_Data["data"]["answer_mc"] = number_format(0,2);
 				}
-				$measure = $this->GetActionsByElement_modal->get_Action_Measure($Element_ID);
-				if(!empty($measure)){
-					$merge_Array["measure"] = $measure[0]->measure;
-				}
-				$risk = $this->GetActionsByElement_modal->get_Action_Risk($Element_ID);
-				if(!empty($risk)){
-					$merge_Array["risk"] = $risk[0]->risk;
-				}
-				$Pass_Data["data"] = $merge_Array;
 				$this->set_response($Pass_Data, REST_Controller::HTTP_OK);
 			}else if($token_status == FALSE){
 				$this->set_response($invalid, REST_Controller::HTTP_NON_AUTHORITATIVE_INFORMATION);
