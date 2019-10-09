@@ -42,11 +42,11 @@ class InviteAttendees extends REST_Controller {
 				$token['email'] = $email;
 				$AToken = JWT::encode($token, $this->config->item('jwt_key'));
 				$link = $serverLink."/attendees-registration/".$AToken;
-		        $subject = "she-excellence Invitation";
-		        $message = "<p>Hello  ".$email."</p>";
-		        $message .= "<p>You are invite to she-excellence account. Please link to below activation link to create your own account.</p>";
+		        $subject = "Invitation: Maturity Assessment";
+		        $message = "<p>Hi,</p>";
+		        $message .= "<p>You have been invited to complete a Maturity Assessment. Please click on the activation link below to complete your registration.</p>";
 		        $message .= "<a href='".$link."' target='_blank'>Create Account</a>";
-		        $message .="<p>Sincerely,<br/>The she-excellence Team</p>";
+		        $message .="<p>Kind Regards,<br/>4Xcellence Solutions</p>";
 				$this->InviteAttendees_modal->sendMail($email,$subject,$message);
 				if($Insert_saveUser_Result > 0){
 					$data = [
