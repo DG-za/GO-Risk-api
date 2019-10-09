@@ -27,7 +27,7 @@ class GetProofByElement extends REST_Controller {
 		
 		$message = 'Required field(s) user_id,element_id is missing or empty';
 		$user_id = $this->post('user_id');
-		$Element_ID = $this->post('element_id');
+		$Element_ID = $this->post('element');
 		if(isset($user_id) && isset($Element_ID)){
 			$headers = $this->input->request_headers();
 			$token_status = check_token($user_id,$headers['Authorization']);
