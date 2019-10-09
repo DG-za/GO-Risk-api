@@ -51,7 +51,6 @@ class GetActionsByElement extends REST_Controller {
 					$merge_Array["risk"] = $risk[0]->risk;
 				}
 				$Pass_Data["data"] = $merge_Array;
-				$valid = ['status' => "true","statuscode" => 200,'response' =>$Pass_Data];
 				$this->set_response($Pass_Data, REST_Controller::HTTP_OK);
 			}else if($token_status == FALSE){
 				$this->set_response($invalid, REST_Controller::HTTP_NON_AUTHORITATIVE_INFORMATION);
