@@ -1,4 +1,3 @@
-
 <?php
 require_once APPPATH . '/libraries/REST_Controller.php';
 require_once APPPATH . '/libraries/JWT.php';
