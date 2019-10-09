@@ -32,6 +32,7 @@ class GetPerformanceAnswerByElement extends REST_Controller {
 			$headers = $this->input->request_headers();
 			$token_status = check_token($user_id,$headers['Authorization']);
 			
+			$Pass_Data["data"] = array();
 			if($token_status == TRUE){
 				$All_Performance_Answer = $this->GetPerformanceAnswerByElement_modal->Get_Performance_Answer_by_Element_ID($Element_ID);
 				if(!empty($All_Performance_Answer)){
@@ -39,10 +40,18 @@ class GetPerformanceAnswerByElement extends REST_Controller {
 						$merge_array = array("question" => $value->question,"poor" => $value->n1,"mediocre" => $value->n2,"good" => $value->n3,"excellent" => $value->n4,"total" => $value->total);
 						$Pass_Data["data"][] = $merge_array;
 					}
-					$valid = ['status' => "true","statuscode" => 200,'response' =>$Pass_Data];
 					$this->set_response($Pass_Data, REST_Controller::HTTP_OK);
 				}else{
-					$this->set_response($no_found, REST_Controller::HTTP_OK);
+					$All_Performance_Quetion_ID = $this->GetPerformanceAnswerByElement_modal->Get_Performance_Quetion_ID();
+					if(!empty($All_Performance_Quetion_ID)){
+						foreach($All_Performance_Quetion_ID as $key => $value){
+						$merge_array = array("question" => $value->id,"poor" => "0","mediocre" => "0","good" => "0","excellent" => "0","total" => "0");
+						$Pass_Data["data"][] = $merge_array;
+					}
+					$this->set_response($Pass_Data, REST_Controller::HTTP_OK);
+					}else{
+						$this->set_response($no_found, REST_Controller::HTTP_OK);
+					}
 				}
 			}else if($token_status == FALSE){
 				$this->set_response($invalid, REST_Controller::HTTP_NON_AUTHORITATIVE_INFORMATION);

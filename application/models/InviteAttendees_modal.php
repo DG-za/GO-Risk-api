@@ -9,25 +9,25 @@ class InviteAttendees_modal extends CI_Model {
 	public function sendMail($emaila,$subject,$messages)
     {
       
-       $config = Array(
-           'protocol' => 'smtp',
-           'smtp_host' => 'ssl://smtp.gmail.com',
-           'smtp_port' => 465,
-           'smtp_user' => 'mt.sparkle031@gmail.com',
-           'smtp_pass' => 'sparkle1#',
-           'smtp_timeout' => '4',
-           'mailtype'  => 'html',
-           'charset'   => 'iso-8859-1'
-       );
-       $this->load->library('email', $config);
-       $this->email->set_newline("\r\n");
-       $from_email = "mt.sparkle031@gmail.com";
-       $this->email->from($from_email, 'she-excellence-app');
-       $this->email->to($emaila);
-       $this->email->subject($subject);
-       $message = $messages;
-       $this->email->message($message);
-       $this->email->send();
+        $config = Array(
+          'protocol' => 'smtp',
+          'smtp_host' => 'smtp.she-excellence.co.za',
+          'smtp_port' => 587,
+          'smtp_user' => 'noreply@she-excellence.co.za',
+          'smtp_pass' => 'Crispworks123!',
+          'smtp_timeout' => '4',
+          'mailtype'  => 'html',
+          'charset'   => 'iso-8859-1'
+      );
+      $this->load->library('email', $config);
+      $this->email->set_newline("\r\n");
+      $from_email = "noreply@she-excellence.co.za";
+      $this->email->from($from_email, '4Xcellence Solutions');
+      $this->email->to($emaila);
+      $this->email->subject($subject);
+      $message = $messages;
+      $this->email->message($message);
+      $this->email->send();
     }
     public function Update_InviteStatus($id)
    {  

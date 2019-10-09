@@ -32,18 +32,22 @@ class GetPerformaceMCByElement extends REST_Controller {
 			$headers = $this->input->request_headers();
 			$token_status = check_token($user_id,$headers['Authorization']);
 			
+			$Pass_Data["data"] = array();
 			if($token_status == TRUE){
 				$All_Answer = $this->GetPerformaceMCByElement_modal->Get_Performace_Answer_MC_by_Element_ID($Element_ID);
-				$Pass_Data = array();
 				if(!empty($All_Answer)){
 					foreach($All_Answer as $key => $value){
 						$merge_array = array("name" => $value->answer,"value" => $value->num);
 						$Pass_Data["data"][] = $merge_array;
 					}
-					$valid = ['status' => "true","statuscode" => 200,'response' =>$Pass_Data];
 					$this->set_response($Pass_Data, REST_Controller::HTTP_OK);
 				}else{
-					$this->set_response($no_found, REST_Controller::HTTP_OK);
+					$Answer_Array = array("1","2","3","4");
+					foreach($Answer_Array as $AA){
+						$merge_array = array("name" => $AA,"value" => "0");
+						$Pass_Data["data"][] = $merge_array;
+					}
+					$this->set_response($Pass_Data, REST_Controller::HTTP_OK);
 				}
 			}else if($token_status == FALSE){
 				$this->set_response($invalid, REST_Controller::HTTP_NON_AUTHORITATIVE_INFORMATION);

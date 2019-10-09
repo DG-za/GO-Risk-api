@@ -15,4 +15,13 @@ class GetPerformanceAnswerByElement_modal extends CI_Model {
 		$query_result = $this->db->get();
 		return $query_result->result();
 	}
+	
+	/* Get All Performance Quetion ID */
+	public function Get_Performance_Quetion_ID(){
+		$this->db->select("`id`");
+		$this->db->from("`performance`");
+		$this->db->order_by("`id`", "asc");
+		$query_result = $this->db->get();
+		return $query_result->result();
+	}
 }
