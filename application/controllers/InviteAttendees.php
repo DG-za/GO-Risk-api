@@ -39,6 +39,7 @@ class InviteAttendees extends REST_Controller {
 					"`isexpiry`" => 0,
 				);
 				$Insert_saveUser_Result = $this->InviteAttendees_modal->Insert_User($Insert_Array);
+				$token['id'] = $Insert_saveUser_Result;
 				$token['email'] = $email;
 				$AToken = JWT::encode($token, $this->config->item('jwt_key'));
 				$link = $serverLink."/attendees-registration/".$AToken;
