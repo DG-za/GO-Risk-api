@@ -45,10 +45,16 @@ class GetDesiredByElement extends REST_Controller {
 						$merge_array[2]['value'] = $value->n1;
 					}
 					$Pass_Data["data"] = $merge_array;
-					$valid = ['status' => "true","statuscode" => 200,'response' =>$Pass_Data];
 					$this->set_response($Pass_Data, REST_Controller::HTTP_OK);
 				}else{
-					$this->set_response($no_found, REST_Controller::HTTP_OK);
+					$merge_array[0]['name'] = 'resilient';
+					$merge_array[0]['value'] = 0;
+					$merge_array[1]['name'] = 'proactive';
+					$merge_array[1]['value'] = 0;
+					$merge_array[2]['name'] = 'compliant';
+					$merge_array[2]['value'] = 0;
+					$Pass_Data["data"] = $merge_array;
+					$this->set_response($Pass_Data, REST_Controller::HTTP_OK);
 				}
 			}else if($token_status == FALSE){
 				$this->set_response($invalid, REST_Controller::HTTP_NON_AUTHORITATIVE_INFORMATION);

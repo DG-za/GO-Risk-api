@@ -33,7 +33,7 @@ class GetPerformanceMCAll extends REST_Controller {
 			
 			if($token_status == TRUE){
 				$All_Elements = $this->GetPerformanceMCAll_modal->Get_All_Performance_Elements_Function();
-				$Pass_Data = array();
+				$Pass_Data["data"] = array();
 				if(!empty($All_Elements)){
 					foreach($All_Elements as $key => $value){
 						$id = $value->id;
@@ -49,7 +49,6 @@ class GetPerformanceMCAll extends REST_Controller {
 							$Pass_Data["data"][] = $merge_array;
 						}
 					}
-					$valid = ['status' => "true","statuscode" => 200,'response' =>$Pass_Data];
 					$this->set_response($Pass_Data, REST_Controller::HTTP_OK);
 				}else{
 					$this->set_response($no_found, REST_Controller::HTTP_OK);
