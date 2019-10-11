@@ -36,14 +36,33 @@ class GetAnswersByElement extends REST_Controller {
 				$All_Answer = $this->GetAnswersByElement_modal->Get_Answer_by_Element_ID($Element_ID);
 				$Pass_Data = array();
 				if(!empty($All_Answer)){
+					$Q_id_Array = array();
 					foreach($All_Answer as $key => $value){
 						$merge_array = array("question" => $value->question,"reactive" => $value->n1,"compliant" => $value->n2,"proactive" => $value->n3,"resilient" => $value->n4,"total" => $value->total);
+						$Q_id_Array[] = $value->question;
 						$Pass_Data["data"][] = $merge_array;
 					}
-					$valid = ['status' => "true","statuscode" => 200,'response' =>$Pass_Data];
+					$All_Quetion = $this->GetAnswersByElement_modal->Get_Question_by_Element_ID($Element_ID);
+					if(!empty($All_Quetion)){
+						foreach($All_Quetion as $key => $value){
+							if(!in_array($value->id,$Q_id_Array)){
+								$merge_array = array("question" => $value->id,"reactive" => "0","compliant" => "0","proactive" => "0","resilient" => "0","total" => "0");
+								$Pass_Data["data"][] = $merge_array;
+							}
+						}
+					}
 					$this->set_response($Pass_Data, REST_Controller::HTTP_OK);
 				}else{
-					$this->set_response($no_found, REST_Controller::HTTP_OK);
+					$All_Quetion = $this->GetAnswersByElement_modal->Get_Question_by_Element_ID($Element_ID);
+					if(!empty($All_Quetion)){
+						foreach($All_Quetion as $key => $value){
+							$merge_array = array("question" => $value->id,"reactive" => "0","compliant" => "0","proactive" => "0","resilient" => "0","total" => "0");
+							$Pass_Data["data"][] = $merge_array;
+						}
+						$this->set_response($Pass_Data, REST_Controller::HTTP_OK);
+					}else{
+						$this->set_response($no_found, REST_Controller::HTTP_OK);
+					}
 				}
 			}else if($token_status == FALSE){
 				$this->set_response($invalid, REST_Controller::HTTP_NON_AUTHORITATIVE_INFORMATION);
