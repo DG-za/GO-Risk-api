@@ -44,6 +44,9 @@ class ActionOperation_modal extends CI_Model {
    public function insertActionCall($update_id,$victory_data,$risk_data,$results_data,$measure_data,$milestones_data)
    {
       if($update_id != ''){
+          $this->load->helper('date');
+          date_default_timezone_set('UTC');
+          $victory_data["last_midified"] = date("Y-m-d h-i-s");
           $this->db->where('id', $update_id);
           $victory_data_result = $this->db->update('actions_victory',$victory_data);
           $this->db->where('victory', $update_id);
@@ -53,8 +56,19 @@ class ActionOperation_modal extends CI_Model {
           $this->db->where('victory', $update_id);
           $actions_measure_result = $this->db->update('actions_measure',$measure_data);
           foreach ($milestones_data as $key => $value) {
-             $this->db->where('victory', $value['victory']);
-             $actions_milestone_result=$this->db->update('actions_milestone',$value);
+            unset($value['person_name']);
+            if($value['id'] == '')
+             {
+                     $value['element']= $victory_data['element'];
+                     $value['victory']= $update_id;
+                     $actions_milestone_result = $this->db->insert("actions_milestone",$value);
+             }
+             else
+             {
+                     $this->db->where('id', $value['id']);
+                     $actions_milestone_result=$this->db->update('actions_milestone',$value);
+             }
+             
          }
          if($victory_data_result && $risk_data_result && $actions_results_result && $actions_measure_result &&  $actions_milestone_result)
            {
