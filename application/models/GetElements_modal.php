@@ -9,6 +9,5 @@ class GetElements_modal extends CI_Model {
 		$query_result = $this->db->get();
 		return $query_result->result();
 	}
-
 	
 }
