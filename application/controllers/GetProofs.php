@@ -34,7 +34,6 @@ class GetProofs extends REST_Controller {
 			if($token_status == TRUE){
 				$All_Proof = $this->GetProofs_modal->Get_Proofs();
 				if(!empty($All_Proof)){
-					$valid = ['status' => "true","statuscode" => 200,'response' =>$All_Proof];
 					$this->set_response($All_Proof, REST_Controller::HTTP_OK);
 				}else{
 					$this->set_response($no_found, REST_Controller::HTTP_OK);
