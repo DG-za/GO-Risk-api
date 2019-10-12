@@ -2,7 +2,6 @@
 class GetProofs_modal extends CI_Model {
 	
 	public function Get_Proofs(){
-
 		$this->db->select("*");
 		$this->db->from("`proofs`");
 		$this->db->join('performance_elements', 'proofs.element = performance_elements.sequence','left');
