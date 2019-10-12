@@ -36,7 +36,7 @@ class GetBottom5Questions extends REST_Controller {
 				$Pass_Data = array();
 				if(!empty($getBottom5Questions_Result)){
 					foreach($getBottom5Questions_Result as $key => $value){
-						$merge_array = array("question" => $value->question,"element" => $value->element,"score" => $value->score);
+						$merge_array = array("question" => $value->question,"element" => $value->element,"score" => $value->score,"count"=>$value->count);
 						$Pass_Data["data"][] = $merge_array;
 					}
 					$valid = ['status' => "true","statuscode" => 200,'response' =>$Pass_Data];
