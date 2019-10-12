@@ -39,7 +39,6 @@ class GetCategories extends REST_Controller {
 						$merge_array = array("id" => $value->id,"name" => $value->name,"byline" => $value->byline,"image" => $value->image);
 						$Pass_Data["data"][] = $merge_array;
 					}
-					//$valid = ['status' => "true","statuscode" => 200,'response' =>$Pass_Data];
 					$this->set_response($Pass_Data, REST_Controller::HTTP_OK);
 				}else{
 					$this->set_response($no_found, REST_Controller::HTTP_OK);

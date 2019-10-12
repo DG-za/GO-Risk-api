@@ -3,12 +3,12 @@ require_once APPPATH . '/libraries/REST_Controller.php';
 require_once APPPATH . '/libraries/JWT.php';
 use \Firebase\JWT\JWT;
 
-class GetPerformanceMCAll extends REST_Controller {
+class GetProofs extends REST_Controller {
 	/***************************************************************
 	*  Project Name : 4Xcellence Solutions
 	*  Created By :   
-	*  Created Date : 26-09-2019
-	*  Description : A controller contain GetPerformanceMCAll related methods
+	*  Created Date : 24-09-2019
+	*  Description : A controller contain GetProof related methods
 	*  Modification History :
 	*  
 	***************************************************************/
@@ -16,7 +16,7 @@ class GetPerformanceMCAll extends REST_Controller {
 	public function __construct() {
 		parent::__construct();
 		$this->load->helper('check_token');				
-		$this->load->model('GetPerformanceMCAll_modal');
+		$this->load->model('GetProofs_modal');
 	}
 	
 	public function index_post(){
@@ -29,27 +29,12 @@ class GetPerformanceMCAll extends REST_Controller {
 		$user_id = $this->post('user_id');
 		if(isset($user_id)){
 			$headers = $this->input->request_headers();
-			$token_status = check_token($this->post('user_id'),$headers['Authorization']);
+			$token_status = check_token($user_id,$headers['Authorization']);
 			
 			if($token_status == TRUE){
-				$All_Elements = $this->GetPerformanceMCAll_modal->Get_All_Performance_Elements_Function();
-				$Pass_Data["data"] = array();
-				if(!empty($All_Elements)){
-					foreach($All_Elements as $key => $value){
-						$id = $value->id;
-						$name = $value->name;
-						$merge_array["name"] = $name;
-						$merge_array["series"] = array();
-						$All_Answer_MC = $this->GetPerformanceMCAll_modal->Get_All_answer_mc_By_Performance_Elements_ID_Function($id);
-						if(!empty($All_Answer_MC)){
-							foreach($All_Answer_MC as $key_mc => $value_mc){
-								$merge_array_mc = array("name" => $value_mc->name,"value" => $value_mc->value);
-								$merge_array["series"][] = $merge_array_mc;
-							}
-							$Pass_Data["data"][] = $merge_array;
-						}
-					}
-					$this->set_response($Pass_Data, REST_Controller::HTTP_OK);
+				$All_Proof = $this->GetProofs_modal->Get_Proofs();
+				if(!empty($All_Proof)){
+					$this->set_response($All_Proof, REST_Controller::HTTP_OK);
 				}else{
 					$this->set_response($no_found, REST_Controller::HTTP_OK);
 				}

@@ -4,7 +4,7 @@ class GetMaturityReporting_modal extends CI_Model {
 	/* Get Maturity Reporting from `performance_mc` */
 	public function GetMaturityReporting_performance_mc(){
 		$Group_by_Array = array("`element`","`question`");
-		$this->db->select("COUNT(`answer`) as `count_p_answer`");
+		$this->db->select("answer as `count_p_answer`");
 		$this->db->from("`performance_mc`");
 		$this->db->group_by($Group_by_Array);
 		$query_result = $this->db->get();
@@ -14,7 +14,7 @@ class GetMaturityReporting_modal extends CI_Model {
 	/* Get Maturity Reporting from `answer_mc` */
 	public function GetMaturityReporting_answer_mc(){
 		$Group_by_Array = array("`element`","`question`");
-		$this->db->select("COUNT(`answer`) as `count_a_answer`");
+		$this->db->select("answer as `count_a_answer`");
 		$this->db->from("`answer_mc`");
 		$this->db->group_by($Group_by_Array);
 		$query_result = $this->db->get();

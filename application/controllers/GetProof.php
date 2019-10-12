@@ -37,7 +37,12 @@ class GetProof extends REST_Controller {
 				$Pass_Data = array();
 				if(!empty($All_Proof)){
 					foreach($All_Proof as $key => $value){
-						$merge_array = array("id" => $value->id,"element" => $value->element,"type" => $value->type,"proof" => $value->proof);
+						$Count_Result = $this->GetProof_modal->Get_Proof_count_by_Proof_ID($value->id);
+						$amount = 0;
+						if(!empty($Count_Result)){
+							$amount = $Count_Result[0]->count_id;
+						}
+						$merge_array = array("id" => $value->id,"element" => $value->element,"type" => $value->type,"proof" => $value->proof,"amount" => $amount);
 						$Pass_Data["data"][] = $merge_array;
 					}
 					$valid = ['status' => "true","statuscode" => 200,'response' =>$Pass_Data];

@@ -42,9 +42,12 @@ class GetMaturityReporting extends REST_Controller {
 						$P_A_Count += (double)$RPM->count_p_answer;
 					}
 					$P_A_Average = $P_A_Count / $P_Count;
-					$Pass_Data["data"]["performance_mc"] = number_format($P_A_Average,2);
+					if($P_A_Average > 4){
+						$P_A_Average = 4;
+					}
+					$Pass_Data["data"]["performance_mc"] = number_format($P_A_Average,1);
 				}else{
-					$Pass_Data["data"]["performance_mc"] = number_format(0,2);
+					$Pass_Data["data"]["performance_mc"] = number_format(0,1);
 				}
 				$results_answer_mc = $this->GetMaturityReporting_modal->GetMaturityReporting_answer_mc();
 				if(!empty($results_answer_mc)){
@@ -55,9 +58,12 @@ class GetMaturityReporting extends REST_Controller {
 						$A_A_Count += (double)$RPM->count_a_answer;
 					}
 					$A_A_Average = $A_A_Count / $A_Count;
-					$Pass_Data["data"]["answer_mc"] = number_format($A_A_Average,2);
+					if($A_A_Average > 4){
+						$A_A_Average = 4;
+					}
+					$Pass_Data["data"]["answer_mc"] = number_format($A_A_Average,1);
 				}else{
-					$Pass_Data["data"]["answer_mc"] = number_format(0,2);
+					$Pass_Data["data"]["answer_mc"] = number_format(0,1);
 				}
 				$this->set_response($Pass_Data, REST_Controller::HTTP_OK);
 			}else if($token_status == FALSE){
