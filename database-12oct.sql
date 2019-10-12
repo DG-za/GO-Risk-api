@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 09, 2019 at 07:12 PM
+-- Generation Time: Oct 12, 2019 at 02:05 PM
 -- Server version: 10.1.30-MariaDB
 -- PHP Version: 7.2.2
 
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `prepare-clean`
+-- Database: `maturity`
 --
 
 -- --------------------------------------------------------
@@ -93,7 +93,8 @@ CREATE TABLE `actions_victory` (
   `performance_elements` varchar(255) NOT NULL,
   `focusareaname` varchar(255) NOT NULL,
   `focusareaowner` varchar(255) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `last_midified` timestamp NULL DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -167,8 +168,8 @@ CREATE TABLE `category` (
 
 INSERT INTO `category` (`id`, `name`, `byline`, `image`) VALUES
 (1, 'Direction', '<strong>Ensure the team pulls in the same direction towards zero harm.</strong><br/>\r\nLeadership sets the direction for sustainable zero harm through the use of various enablers. The integrated SHE policy and fundamentals provide the context within which the performance requirements are set. Targets and plans are set for all existing OMEs, growth projects and joint venture activities under our operational control.', 'direction.svg'),
-(2, 'Tools', '<strong>Ensure the team has the tools to achieve zero harm.</strong><br/>\r\nRisk-based tools are provided to enable sustainable excellent SHE results in our OMEs. These tools aim to align SHE activities globally and drive regional standardisation where possible. These include management systems, business processes, enabling technology, procedures and toolkits. Utilising these tools, OMEs can meet SHE performance requirements, consistent with applicable legal requirements and improved maturity levels.', 'tools.svg'),
-(3, 'People', '<strong>Ensure team members are fit and skilled to achieve zero harm.</strong><br/>\r\nPeople-related practices are used to enable sustainable zero harm. Our workforce is enabled through leaders who create a zero harm climate. Leaders focus on zero harm behaviour, learning, skills and competency development. A competent, fit-for-purpose SHE function provides the necessary SHE support to OMEs.\r\n', 'people.svg'),
+(2, 'People', '<strong>Ensure team members are fit and skilled to achieve zero harm.</strong><br/>\r\nPeople-related practices are used to enable sustainable zero harm. Our workforce is enabled through leaders who create a zero harm climate. Leaders focus on zero harm behaviour, learning, skills and competency development. A competent, fit-for-purpose SHE function provides the necessary SHE support to OMEs.\r\n', 'people.svg'),
+(3, 'Tools', '<strong>Ensure the team has the tools to achieve zero harm.</strong><br/>\r\nRisk-based tools are provided to enable sustainable excellent SHE results in our OMEs. These tools aim to align SHE activities globally and drive regional standardisation where possible. These include management systems, business processes, enabling technology, procedures and toolkits. Utilising these tools, OMEs can meet SHE performance requirements, consistent with applicable legal requirements and improved maturity levels.', 'tools.svg'),
 (4, 'Results', '<strong>Ensure SHE results are monitored and utilised.</strong><br/>\r\nSHE results are monitored to measure SHE performance and thereby the effectiveness of SHE risk management and an assertion on assurance. These results inform the focus of continuous improvement activities.\r\n', 'results.svg');
 
 -- --------------------------------------------------------
@@ -185,6 +186,13 @@ CREATE TABLE `ci_sessions` (
   `timestamp` int(10) UNSIGNED NOT NULL DEFAULT '0',
   `data` blob NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `ci_sessions`
+--
+
+INSERT INTO `ci_sessions` (`id`, `user_id`, `token`, `ip_address`, `timestamp`, `data`) VALUES
+('cd6b4e3f8bf0bda9', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcwODgxODM1LCJleHAiOjE1NzA4OTk4MzV9.in1c9jDchOAwLuIzil7y58n5GIAh82_e4_DaWl7UztU', '::1', 0, '');
 
 -- --------------------------------------------------------
 
@@ -207,16 +215,16 @@ CREATE TABLE `elements` (
 INSERT INTO `elements` (`id`, `cat`, `name`, `sequence`, `alt_sequence`) VALUES
 (8, 1, '1.2 SHE Fundamentals', 1, 'b'),
 (9, 1, '1.3 Targets and plans', 2, 'c'),
-(10, 2, '2.1 SHE Risk Management', 0, 'd'),
-(11, 2, '2.2.a Project Management', 1, 'e'),
-(12, 2, '2.2.b Operations and Maintenance', 3, 'f'),
-(13, 2, '2.2.c Supply Chain Management', 5, 'g'),
-(14, 2, '2.3 SHE incident management', 2, 'h'),
-(15, 2, '2.4 Governance and assurance', 4, 'i'),
-(16, 3, '3.1 Climate and Behaviour', 0, 'j'),
-(17, 3, '3.2 Training and skills', 1, 'k'),
-(18, 3, '3.3 Management of people', 2, 'l'),
-(19, 3, '3.4 Stakeholder engagement', 3, 'm'),
+(10, 3, '3.1 SHE Risk Management', 0, 'h'),
+(11, 3, '3.2.a Project Management', 1, 'i'),
+(12, 3, '3.2.b Operations and Maintenance', 2, 'j'),
+(13, 3, '3.2.c Supply Chain Management', 3, 'k'),
+(14, 3, '3.3 SHE incident management', 4, 'l'),
+(15, 3, '3.4 Governance and assurance', 5, 'm'),
+(16, 2, '2.1 SHE Climate and Behaviour', 0, 'd'),
+(17, 2, '2.2 Training and skills', 1, 'e'),
+(18, 2, '2.3 Management of people', 2, 'f'),
+(19, 2, '2.4 Stakeholder engagement', 3, 'g'),
 (20, 4, '4.1 Measure and report', 0, 'n'),
 (21, 4, '4.2 Improvement', 1, 'o'),
 (22, 1, '1.1 SHE Policy & Strategy', 0, 'a');
@@ -234,6 +242,14 @@ CREATE TABLE `inviteattendees` (
   `date` date NOT NULL,
   `isexpiry` int(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `inviteattendees`
+--
+
+INSERT INTO `inviteattendees` (`id`, `email`, `accesstoken`, `date`, `isexpiry`) VALUES
+(3, 'christo@crispworks.co.za', '', '2019-10-09', 0),
+(9, 'YOUR-EMAIL@sasol.com', '', '2019-10-10', 0);
 
 -- --------------------------------------------------------
 
@@ -564,6 +580,26 @@ INSERT INTO `questions` (`id`, `element`, `question`, `reactive`, `compliant`, `
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `sub_elements`
+--
+
+CREATE TABLE `sub_elements` (
+  `id` int(11) NOT NULL,
+  `sub_elements_id` int(11) NOT NULL,
+  `sub_elements_name` varchar(500) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `sub_elements`
+--
+
+INSERT INTO `sub_elements` (`id`, `sub_elements_id`, `sub_elements_name`) VALUES
+(1, 1, 'Compliant'),
+(2, 2, 'Resilient');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `user`
 --
 
@@ -592,8 +628,7 @@ INSERT INTO `user` (`id`, `email`, `firstname`, `lastname`, `role`, `password`) 
 -- Indexes for table `actions_measure`
 --
 ALTER TABLE `actions_measure`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `element` (`element`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `actions_milestone`
@@ -605,21 +640,19 @@ ALTER TABLE `actions_milestone`
 -- Indexes for table `actions_results`
 --
 ALTER TABLE `actions_results`
-  ADD PRIMARY KEY (`element`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `actions_risks`
 --
 ALTER TABLE `actions_risks`
-  ADD PRIMARY KEY (`element`),
-  ADD KEY `element` (`element`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `actions_victory`
 --
 ALTER TABLE `actions_victory`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `element` (`element`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `answer_complete`
@@ -701,6 +734,12 @@ ALTER TABLE `questions`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `sub_elements`
+--
+ALTER TABLE `sub_elements`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
@@ -723,6 +762,18 @@ ALTER TABLE `actions_milestone`
   MODIFY `id` int(255) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `actions_results`
+--
+ALTER TABLE `actions_results`
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `actions_risks`
+--
+ALTER TABLE `actions_risks`
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `actions_victory`
 --
 ALTER TABLE `actions_victory`
@@ -732,25 +783,25 @@ ALTER TABLE `actions_victory`
 -- AUTO_INCREMENT for table `answer_complete`
 --
 ALTER TABLE `answer_complete`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `answer_desired`
 --
 ALTER TABLE `answer_desired`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `answer_mc`
 --
 ALTER TABLE `answer_mc`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT for table `answer_proof`
 --
 ALTER TABLE `answer_proof`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `category`
@@ -768,7 +819,7 @@ ALTER TABLE `elements`
 -- AUTO_INCREMENT for table `inviteattendees`
 --
 ALTER TABLE `inviteattendees`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `performance`
@@ -786,7 +837,7 @@ ALTER TABLE `performance_elements`
 -- AUTO_INCREMENT for table `performance_mc`
 --
 ALTER TABLE `performance_mc`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `proofs`
@@ -801,10 +852,24 @@ ALTER TABLE `questions`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
 
 --
+-- AUTO_INCREMENT for table `sub_elements`
+--
+ALTER TABLE `sub_elements`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=209;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=219;
+
+DELIMITER $$
+--
+-- Events
+--
+CREATE DEFINER=`root`@`localhost` EVENT `fnRemoveToken` ON SCHEDULE EVERY 10 SECOND STARTS '2019-09-20 00:00:00' ON COMPLETION NOT PRESERVE ENABLE COMMENT 'It will work for the token removal' DO DELETE FROM ci_sessions where user_id= 35$$
+
+DELIMITER ;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
