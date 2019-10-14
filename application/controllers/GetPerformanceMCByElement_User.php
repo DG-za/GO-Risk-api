@@ -3,12 +3,12 @@ require_once APPPATH . '/libraries/REST_Controller.php';
 require_once APPPATH . '/libraries/JWT.php';
 use \Firebase\JWT\JWT;
 
-class GetPerformaceMCByElement extends REST_Controller {
+class GetPerformanceMCByElement_User extends REST_Controller {
 	/***************************************************************
 	*  Project Name : 4Xcellence Solutions
 	*  Created By :   
 	*  Created Date : 24-09-2019
-	*  Description : A controller contain GetPerformaceMCByElement related methods
+	*  Description : A controller contain GetPerformanceMCByElement related methods
 	*  Modification History :
 	*  
 	***************************************************************/
@@ -16,7 +16,7 @@ class GetPerformaceMCByElement extends REST_Controller {
 	public function __construct() {
 		parent::__construct();
 		$this->load->helper('check_token');				
-		$this->load->model('GetPerformaceMCByElement_modal');
+		$this->load->model('GetPerformanceMCByElement_User_modal');
 	}
 	
 	public function index_post(){
@@ -34,20 +34,14 @@ class GetPerformaceMCByElement extends REST_Controller {
 			
 			$Pass_Data["data"] = array();
 			if($token_status == TRUE){
-				$All_Answer = $this->GetPerformaceMCByElement_modal->Get_Performace_Answer_MC_by_Element_ID($Element_ID);
+				$All_Answer = $this->GetPerformanceMCByElement_User_modal->Get_Performance_Answer_MC_by_Element_ID_and_User_ID($Element_ID,$user_id);
 				if(!empty($All_Answer)){
 					foreach($All_Answer as $key => $value){
-						$merge_array = array("name" => $value->answer,"value" => $value->num);
-						$Pass_Data["data"][] = $merge_array;
+						$Pass_Data["data"][$value->question] = $value;
 					}
 					$this->set_response($Pass_Data, REST_Controller::HTTP_OK);
 				}else{
-					$Answer_Array = array("1","2","3","4");
-					foreach($Answer_Array as $AA){
-						$merge_array = array("name" => $AA,"value" => "0");
-						$Pass_Data["data"][] = $merge_array;
-					}
-					$this->set_response($Pass_Data, REST_Controller::HTTP_OK);
+					$this->set_response($no_found, REST_Controller::HTTP_OK);
 				}
 			}else if($token_status == FALSE){
 				$this->set_response($invalid, REST_Controller::HTTP_NON_AUTHORITATIVE_INFORMATION);

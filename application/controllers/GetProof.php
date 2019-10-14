@@ -45,7 +45,41 @@ class GetProof extends REST_Controller {
 						$merge_array = array("id" => $value->id,"element" => $value->element,"type" => $value->type,"proof" => $value->proof,"amount" => $amount);
 						$Pass_Data["data"][] = $merge_array;
 					}
-					$valid = ['status' => "true","statuscode" => 200,'response' =>$Pass_Data];
+					$this->set_response($Pass_Data, REST_Controller::HTTP_OK);
+				}else{
+					$this->set_response($no_found, REST_Controller::HTTP_OK);
+				}
+			}else if($token_status == FALSE){
+				$this->set_response($invalid, REST_Controller::HTTP_NON_AUTHORITATIVE_INFORMATION);
+			}else{
+				$this->set_response($not_found, REST_Controller::HTTP_NOT_FOUND);
+			}
+		}else{
+			$parameter_required_array = ['status' => "true","statuscode" => 404,'response' => $message];
+			$this->set_response($parameter_required_array, REST_Controller::HTTP_NOT_FOUND);
+		}
+	}
+	
+	public function get_all_proof_types_post(){
+		$valid = ['status' => "true","statuscode" => 200,'response' =>"Token Valid"];
+		$no_found = ['status' => "true","statuscode" => 200,'response' =>"No Record Found"];
+		$invalid = ['status' => "true","statuscode" => 203,'response' =>"In-Valid token"];
+		$not_found = ['status' => "true","statuscode" => 404,'response' =>"Token not found"];
+		
+		$message = 'Required field(s) user_id is missing or empty';
+		$user_id = $this->post('user_id');
+		if(isset($user_id)){
+			$headers = $this->input->request_headers();
+			$token_status = check_token($user_id,$headers['Authorization']);
+			
+			if($token_status == TRUE){
+				$All_Proof_Types = $this->GetProof_modal->Get_All_Proof_Types();
+				$Pass_Data = array();
+				if(!empty($All_Proof_Types)){
+					foreach($All_Proof_Types as $key => $value){
+						$merge_array = array("id" => $value->id,"proof_type_id" => $value->proof_type_id,"proof_type_name" => $value->proof_type_name);
+						$Pass_Data["data"][] = $merge_array;
+					}
 					$this->set_response($Pass_Data, REST_Controller::HTTP_OK);
 				}else{
 					$this->set_response($no_found, REST_Controller::HTTP_OK);

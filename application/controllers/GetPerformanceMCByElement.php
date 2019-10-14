@@ -3,12 +3,12 @@ require_once APPPATH . '/libraries/REST_Controller.php';
 require_once APPPATH . '/libraries/JWT.php';
 use \Firebase\JWT\JWT;
 
-class GetMCAll extends REST_Controller {
+class GetPerformanceMCByElement extends REST_Controller {
 	/***************************************************************
 	*  Project Name : 4Xcellence Solutions
 	*  Created By :   
-	*  Created Date : 26-09-2019
-	*  Description : A controller contain GetMCAll related methods
+	*  Created Date : 24-09-2019
+	*  Description : A controller contain GetPerformanceMCByElement related methods
 	*  Modification History :
 	*  
 	***************************************************************/
@@ -16,7 +16,7 @@ class GetMCAll extends REST_Controller {
 	public function __construct() {
 		parent::__construct();
 		$this->load->helper('check_token');				
-		$this->load->model('GetMCAll_modal');
+		$this->load->model('GetPerformanceMCByElement_modal');
 	}
 	
 	public function index_post(){
@@ -24,34 +24,41 @@ class GetMCAll extends REST_Controller {
 		$no_found = ['status' => "true","statuscode" => 200,'response' =>"No Record Found"];
 		$invalid = ['status' => "true","statuscode" => 203,'response' =>"In-Valid token"];
 		$not_found = ['status' => "true","statuscode" => 404,'response' =>"Token not found"];
-		$message = 'Required field(s) user_id is missing or empty';
+		
+		$message = 'Required field(s) user_id,element_id is missing or empty';
 		$user_id = $this->post('user_id');
-		if(isset($user_id)){
+		$Element_ID = $this->post('element_id');
+		if(isset($user_id) && isset($Element_ID)){
 			$headers = $this->input->request_headers();
-			$token_status = check_token($this->post('user_id'),$headers['Authorization']);
+			$token_status = check_token($user_id,$headers['Authorization']);
 			
+			$Pass_Data["data"] = array();
 			if($token_status == TRUE){
-				$All_Elements = $this->GetMCAll_modal->Get_All_Elements_Function();
-				$Pass_Data = array();
-				if(!empty($All_Elements)){
-					foreach($All_Elements as $key => $value){
-						$id = $value->id;
-						$name = $value->name;
-						$merge_array["name"] = $name;
-						$merge_array["series"] = array();
-						$All_Answer_MC = $this->GetMCAll_modal->Get_All_answer_mc_By_Elements_ID_Function($id);
-						if(!empty($All_Answer_MC)){
-							foreach($All_Answer_MC as $key_mc => $value_mc){
-								$merge_array_mc = array("name" => $value_mc->name,"value" => $value_mc->score/$value_mc->value,"score"=>$value_mc->score);
-								$merge_array["series"][] = $merge_array_mc;
-							}
-							$Pass_Data["data"][] = $merge_array;
+				$All_Answer = $this->GetPerformanceMCByElement_modal->Get_Performance_Answer_MC_by_Element_ID($Element_ID);
+				$Get_Answer_Array = array();
+				$merge_array = array();
+				if(!empty($All_Answer)){
+					foreach($All_Answer as $key => $value){
+						$merge_array[$value->answer] = array("name" => $value->answer,"value" => $value->num);
+						$Get_Answer_Array[] = $value->answer;
+					}
+					$Answer_Array = array("1","2","3","4");
+					foreach($Answer_Array as $AA){
+						if(!in_array($AA,$Get_Answer_Array)){
+							$blank_merge_array = array("name" => $AA,"value" => 0);
+							$Pass_Data["data"][] = $blank_merge_array;
+						}else{
+							$Pass_Data["data"][] = $merge_array[$AA];
 						}
 					}
-					$valid = ['status' => "true","statuscode" => 200,'response' =>$Pass_Data];
 					$this->set_response($Pass_Data, REST_Controller::HTTP_OK);
 				}else{
-					$this->set_response($no_found, REST_Controller::HTTP_OK);
+					$Answer_Array = array("1","2","3","4");
+					foreach($Answer_Array as $AA){
+						$merge_array = array("name" => $AA,"value" => 0);
+						$Pass_Data["data"][] = $merge_array;
+					}
+					$this->set_response($Pass_Data, REST_Controller::HTTP_OK);
 				}
 			}else if($token_status == FALSE){
 				$this->set_response($invalid, REST_Controller::HTTP_NON_AUTHORITATIVE_INFORMATION);
