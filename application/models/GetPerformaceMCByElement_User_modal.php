@@ -8,7 +8,7 @@ class GetPerformaceMCByElement_User_modal extends CI_Model {
 			"`user`" => $user_id,
 		);
 		
-		$this->db->select("`*");
+		$this->db->select("*");
 		$this->db->from("`performance_mc`");
 		$this->db->where($where_Array);
 		$this->db->order_by("`answer`", "asc");
