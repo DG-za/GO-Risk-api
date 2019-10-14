@@ -12,7 +12,7 @@ class GetPerformanceMCAll_modal extends CI_Model {
 	
 	/* Get All `answer_mc` by Elements_ID */
 	public function Get_All_answer_mc_By_Performance_Elements_ID_Function($ID){
-		$this->db->select("`answer` as `name`,count(`answer`) as `value`");
+		$this->db->select("`answer` as `name`,count(`answer`) as `value`,sum(`answer`) as `score`");
 		$this->db->from("`performance_mc`");
 		$this->db->where("`element`",$ID);
 		$this->db->group_by("`answer`");
