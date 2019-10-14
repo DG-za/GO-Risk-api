@@ -3,12 +3,12 @@ require_once APPPATH . '/libraries/REST_Controller.php';
 require_once APPPATH . '/libraries/JWT.php';
 use \Firebase\JWT\JWT;
 
-class GetPerformaceMCByElement extends REST_Controller {
+class GetPerformanceMCByElement extends REST_Controller {
 	/***************************************************************
 	*  Project Name : 4Xcellence Solutions
 	*  Created By :   
 	*  Created Date : 24-09-2019
-	*  Description : A controller contain GetPerformaceMCByElement related methods
+	*  Description : A controller contain GetPerformanceMCByElement related methods
 	*  Modification History :
 	*  
 	***************************************************************/
@@ -16,7 +16,7 @@ class GetPerformaceMCByElement extends REST_Controller {
 	public function __construct() {
 		parent::__construct();
 		$this->load->helper('check_token');				
-		$this->load->model('GetPerformaceMCByElement_modal');
+		$this->load->model('GetPerformanceMCByElement_modal');
 	}
 	
 	public function index_post(){
@@ -34,7 +34,7 @@ class GetPerformaceMCByElement extends REST_Controller {
 			
 			$Pass_Data["data"] = array();
 			if($token_status == TRUE){
-				$All_Answer = $this->GetPerformaceMCByElement_modal->Get_Performace_Answer_MC_by_Element_ID($Element_ID);
+				$All_Answer = $this->GetPerformanceMCByElement_modal->Get_Performance_Answer_MC_by_Element_ID($Element_ID);
 				$Get_Answer_Array = array();
 				$merge_array = array();
 				if(!empty($All_Answer)){

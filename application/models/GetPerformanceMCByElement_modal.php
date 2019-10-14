@@ -1,8 +1,8 @@
 <?php 
-class GetPerformaceMCByElement_modal extends CI_Model {
+class GetPerformanceMCByElement_modal extends CI_Model {
 	
 	/* Get All Answer MC By Element_ID */
-	public function Get_Performace_Answer_MC_by_Element_ID($Element_ID){
+	public function Get_Performance_Answer_MC_by_Element_ID($Element_ID){
 		$where_Array = array(
 			"`element`" => $Element_ID,
 		);
