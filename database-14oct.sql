@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 12, 2019 at 02:05 PM
+-- Generation Time: Oct 14, 2019 at 09:40 PM
 -- Server version: 10.1.30-MariaDB
 -- PHP Version: 7.2.2
 
@@ -35,6 +35,17 @@ CREATE TABLE `actions_measure` (
   `victory` int(255) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `actions_measure`
+--
+
+INSERT INTO `actions_measure` (`id`, `element`, `measure`, `victory`) VALUES
+(1, 16, '<ul _ngcontent-mph-c36=\"\"><li _ngcontent-mph-c36=\"\">test</li></ul>', 1),
+(2, 9, '<ul _ngcontent-vyi-c18=\"\"><li _ngcontent-vyi-c18=\"\">Test</li></ul>', 2),
+(3, 9, '<ul _ngcontent-scs-c39=\"\"><li _ngcontent-scs-c39=\"\">dfgdfg</li></ul>', 3),
+(4, 8, '<ul _ngcontent-hgj-c14=\"\"><li _ngcontent-hgj-c14=\"\">Test</li></ul>', 4),
+(5, 9, '<ul _ngcontent-hpy-c28=\"\"><li _ngcontent-hpy-c28=\"\">Test</li></ul>', 5);
+
 -- --------------------------------------------------------
 
 --
@@ -53,6 +64,20 @@ CREATE TABLE `actions_milestone` (
   `victory` int(255) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `actions_milestone`
+--
+
+INSERT INTO `actions_milestone` (`id`, `element`, `milestone`, `responsible_person`, `start_date`, `end_date`, `comment`, `status`, `victory`) VALUES
+(1, 22, 'test', '[\"201\"]', '2019-10-09T22:00:00.000Z', '2019-10-15T22:00:00.000Z', 'commentss', 1, 1),
+(5, 22, 'test', '[\"201\"]', '2019-10-09T22:00:00.000Z', '2019-10-15T22:00:00.000Z', 'commentss', 1, 1),
+(4, 22, 'test', '[\"201\"]', '2019-10-09T22:00:00.000Z', '2019-10-15T22:00:00.000Z', 'commentss', 0, 1),
+(6, 22, 'test', '[\"201\"]', '2019-10-09T22:00:00.000Z', '2019-10-15T22:00:00.000Z', 'commentss', 1, 1),
+(7, 9, 'Test', '[\"201\"]', '2019-10-15T22:00:00.000Z', '2019-10-24T22:00:00.000Z', 'Test', 1, 2),
+(8, 9, 'Action 1 Name', '[\"201\"]', '2019-10-07T22:00:00.000Z', '2019-10-22T22:00:00.000Z', 'commdfdf', 1, 3),
+(9, 8, 'Test', 'Test', '2019-10-14T22:00:00.000Z', '2019-10-09T22:00:00.000Z', 'Test', 1, 4),
+(10, 9, 'test', 'test', '2019-10-14T22:00:00.000Z', '2019-10-01T22:00:00.000Z', 'test', 1, 5);
+
 -- --------------------------------------------------------
 
 --
@@ -66,6 +91,17 @@ CREATE TABLE `actions_results` (
   `victory` int(255) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `actions_results`
+--
+
+INSERT INTO `actions_results` (`id`, `element`, `results`, `victory`) VALUES
+(1, 16, '2019-10-15T22:00:00.000Z', 1),
+(2, 9, '<ul _ngcontent-vyi-c18=\"\"><li _ngcontent-vyi-c18=\"\">Test</li></ul>', 2),
+(3, 9, '<ul _ngcontent-scs-c39=\"\"><li _ngcontent-scs-c39=\"\">dfvdf</li></ul>', 3),
+(4, 8, '2019-10-14T22:00:00.000Z', 4),
+(5, 9, '2019-10-14T22:00:00.000Z', 5);
+
 -- --------------------------------------------------------
 
 --
@@ -78,6 +114,17 @@ CREATE TABLE `actions_risks` (
   `risk` text NOT NULL,
   `victory` int(255) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `actions_risks`
+--
+
+INSERT INTO `actions_risks` (`id`, `element`, `risk`, `victory`) VALUES
+(1, 16, '<ul _ngcontent-mph-c36=\"\"><li _ngcontent-mph-c36=\"\">test</li></ul>', 1),
+(2, 9, '<ul _ngcontent-vyi-c18=\"\"><li _ngcontent-vyi-c18=\"\">Test</li></ul>', 2),
+(3, 9, '<ul _ngcontent-scs-c39=\"\"><li _ngcontent-scs-c39=\"\">dfgfdgdfg</li></ul>', 3),
+(4, 8, '<ul _ngcontent-hgj-c14=\"\"><li _ngcontent-hgj-c14=\"\">Test</li></ul>', 4),
+(5, 9, '<ul _ngcontent-hpy-c28=\"\"><li _ngcontent-hpy-c28=\"\">Test</li></ul>', 5);
 
 -- --------------------------------------------------------
 
@@ -97,6 +144,17 @@ CREATE TABLE `actions_victory` (
   `last_midified` timestamp NULL DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `actions_victory`
+--
+
+INSERT INTO `actions_victory` (`id`, `element`, `definition`, `teammembers`, `performance_elements`, `focusareaname`, `focusareaowner`, `created_at`, `last_midified`) VALUES
+(1, 16, 'testing', '[\"201\"]', '2', 'Name1', '201', '2019-10-12 12:42:26', '2019-10-14 03:47:11'),
+(2, 9, 'Defin', '[\"201\"]', '4', 'Test', '201', '2019-10-12 14:30:01', '2019-10-14 07:22:48'),
+(3, 9, 'Definimnkdfj;nv;kdf', '[\"201\"]', '4', 'Name', '201', '2019-10-14 07:25:47', '2019-10-14 07:22:54'),
+(4, 8, 'Test', '[\"220\",\"219\"]', '2', 'Test', '201', '2019-10-14 18:17:31', NULL),
+(5, 9, 'Test', '[\"220\",\"219\"]', '2', 'Test', '220', '2019-10-14 19:31:47', NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -108,6 +166,30 @@ CREATE TABLE `answer_complete` (
   `user` int(11) NOT NULL,
   `element` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `answer_complete`
+--
+
+INSERT INTO `answer_complete` (`id`, `user`, `element`) VALUES
+(9, 1, 22),
+(10, 1, 8),
+(11, 1, 10),
+(12, 1, 9),
+(13, 1, 16),
+(14, 1, 18),
+(15, 1, 17),
+(16, 1, 19),
+(17, 1, 11),
+(18, 1, 12),
+(19, 1, 14),
+(20, 219, 22),
+(21, 219, 8),
+(22, 219, 9),
+(23, 219, 10),
+(24, 201, 10),
+(25, 220, 22),
+(26, 220, 10);
 
 -- --------------------------------------------------------
 
@@ -121,6 +203,30 @@ CREATE TABLE `answer_desired` (
   `element` int(11) NOT NULL,
   `desired` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `answer_desired`
+--
+
+INSERT INTO `answer_desired` (`id`, `user`, `element`, `desired`) VALUES
+(11, 1, 22, 3),
+(12, 1, 8, 4),
+(13, 1, 10, 3),
+(14, 1, 9, 2),
+(15, 1, 16, 4),
+(16, 1, 18, 4),
+(17, 1, 17, 2),
+(18, 1, 19, 2),
+(19, 1, 11, 3),
+(20, 1, 12, 3),
+(21, 1, 14, 4),
+(22, 219, 22, 3),
+(23, 219, 8, 3),
+(24, 219, 9, 3),
+(25, 219, 10, 3),
+(26, 201, 10, 3),
+(27, 220, 22, 3),
+(28, 220, 10, 3);
 
 -- --------------------------------------------------------
 
@@ -136,6 +242,90 @@ CREATE TABLE `answer_mc` (
   `answer` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `answer_mc`
+--
+
+INSERT INTO `answer_mc` (`id`, `user`, `element`, `question`, `answer`) VALUES
+(41, 1, 22, 64, 2),
+(42, 1, 22, 65, 3),
+(43, 1, 22, 66, 4),
+(44, 1, 22, 67, 1),
+(45, 1, 8, 8, 1),
+(46, 1, 8, 10, 3),
+(47, 1, 8, 68, 1),
+(48, 1, 8, 69, 2),
+(49, 1, 10, 16, 1),
+(50, 1, 10, 17, 3),
+(51, 1, 10, 18, 4),
+(52, 1, 10, 19, 1),
+(53, 1, 10, 20, 4),
+(54, 1, 9, 12, 1),
+(55, 1, 9, 13, 3),
+(56, 1, 9, 14, 4),
+(57, 1, 9, 15, 1),
+(58, 1, 16, 43, 1),
+(59, 1, 16, 44, 4),
+(60, 1, 16, 45, 2),
+(61, 1, 16, 46, 3),
+(62, 1, 16, 47, 3),
+(63, 1, 18, 52, 1),
+(64, 1, 18, 53, 4),
+(65, 1, 18, 54, 2),
+(66, 1, 18, 55, 3),
+(67, 1, 18, 56, 3),
+(68, 1, 17, 48, 1),
+(69, 1, 17, 49, 4),
+(70, 1, 17, 50, 3),
+(71, 1, 17, 51, 1),
+(72, 1, 19, 57, 1),
+(73, 1, 19, 58, 2),
+(74, 1, 19, 59, 3),
+(75, 1, 11, 21, 1),
+(76, 1, 11, 22, 3),
+(77, 1, 11, 23, 2),
+(78, 1, 11, 24, 4),
+(79, 1, 12, 25, 1),
+(80, 1, 12, 26, 2),
+(81, 1, 12, 27, 4),
+(82, 1, 12, 28, 4),
+(83, 1, 14, 33, 1),
+(84, 1, 14, 34, 2),
+(85, 1, 14, 35, 3),
+(86, 1, 14, 36, 4),
+(87, 1, 14, 37, 2),
+(88, 219, 22, 64, 1),
+(89, 219, 22, 65, 3),
+(90, 219, 22, 66, 4),
+(91, 219, 22, 67, 2),
+(92, 219, 8, 8, 1),
+(93, 219, 8, 10, 4),
+(94, 219, 8, 68, 2),
+(95, 219, 8, 69, 3),
+(96, 219, 9, 12, 1),
+(97, 219, 9, 13, 1),
+(98, 219, 9, 14, 1),
+(99, 219, 9, 15, 1),
+(100, 219, 10, 16, 1),
+(101, 219, 10, 17, 1),
+(102, 219, 10, 18, 1),
+(103, 219, 10, 19, 1),
+(104, 219, 10, 20, 1),
+(105, 201, 10, 16, 1),
+(106, 201, 10, 17, 1),
+(107, 201, 10, 18, 1),
+(108, 201, 10, 19, 1),
+(109, 201, 10, 20, 1),
+(110, 220, 22, 64, 3),
+(111, 220, 22, 65, 2),
+(112, 220, 22, 66, 3),
+(113, 220, 22, 67, 2),
+(114, 220, 10, 16, 1),
+(115, 220, 10, 17, 1),
+(116, 220, 10, 18, 1),
+(117, 220, 10, 19, 1),
+(118, 220, 10, 20, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -148,6 +338,58 @@ CREATE TABLE `answer_proof` (
   `element` int(11) NOT NULL,
   `proof` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `answer_proof`
+--
+
+INSERT INTO `answer_proof` (`id`, `user`, `element`, `proof`) VALUES
+(23, 1, 22, 9),
+(24, 1, 22, 4),
+(25, 1, 8, 19),
+(26, 1, 8, 20),
+(27, 1, 8, 14),
+(28, 1, 8, 12),
+(29, 1, 8, 16),
+(30, 1, 10, 40),
+(31, 1, 10, 38),
+(32, 1, 9, 29),
+(33, 1, 9, 30),
+(34, 1, 9, 25),
+(35, 1, 9, 22),
+(36, 1, 16, 121),
+(37, 1, 16, 120),
+(38, 1, 16, 116),
+(39, 1, 16, 113),
+(40, 1, 16, 114),
+(41, 1, 18, 138),
+(42, 1, 18, 139),
+(43, 1, 18, 134),
+(44, 1, 18, 133),
+(45, 1, 17, 130),
+(46, 1, 17, 129),
+(47, 1, 17, 125),
+(48, 1, 19, 144),
+(49, 1, 19, 141),
+(50, 1, 19, 142),
+(51, 1, 11, 53),
+(52, 1, 11, 52),
+(53, 1, 11, 56),
+(54, 1, 12, 71),
+(55, 1, 12, 70),
+(56, 1, 12, 67),
+(57, 1, 14, 93),
+(58, 1, 14, 96),
+(59, 1, 14, 98),
+(60, 219, 22, 8),
+(61, 219, 22, 5),
+(62, 219, 8, 18),
+(63, 219, 8, 15),
+(64, 219, 9, 29),
+(65, 219, 10, 39),
+(66, 201, 10, 38),
+(67, 220, 22, 9),
+(68, 220, 10, 40);
 
 -- --------------------------------------------------------
 
@@ -192,7 +434,75 @@ CREATE TABLE `ci_sessions` (
 --
 
 INSERT INTO `ci_sessions` (`id`, `user_id`, `token`, `ip_address`, `timestamp`, `data`) VALUES
-('cd6b4e3f8bf0bda9', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcwODgxODM1LCJleHAiOjE1NzA4OTk4MzV9.in1c9jDchOAwLuIzil7y58n5GIAh82_e4_DaWl7UztU', '::1', 0, '');
+('cd6b4e3f8bf0bda9', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcwODgxODM1LCJleHAiOjE1NzA4OTk4MzV9.in1c9jDchOAwLuIzil7y58n5GIAh82_e4_DaWl7UztU', '::1', 0, ''),
+('4943f09f9b3d21b7', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcwODkxODU0LCJleHAiOjE1NzA5MDk4NTR9.1CBfor1FIf-D1_-dKtgtq3k-PGXDu2fzoO6T5_3ynBE', '::1', 0, ''),
+('9f0b40eee534a249', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcwODkxODY3LCJleHAiOjE1NzA5MDk4Njd9.JICh8LkR-QL8mL1owhv2ZCO6vULdxdbJrwPoMpUZ6lY', '::1', 0, ''),
+('dac1d083a67920b4', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcwODk5Nzg0LCJleHAiOjE1NzA5MTc3ODR9.CfPVlcgAQubHLX5Glc6bwAh3_PecD_bU7d_9JpN5MS0', '::1', 0, ''),
+('b9a5cccf58f8e4d9', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcwOTU5NjY0LCJleHAiOjE1NzA5Nzc2NjR9.Quv48dBkXfh-q7J8zAW8HOFgOX6GjHV0_mY94OkoHVY', '::1', 0, ''),
+('42488357526e684e', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxMDM2OTk1LCJleHAiOjE1NzEwNTQ5OTV9.mz-7AU-AGhmr3Qwt6pFEkZYBeKwTKcE9jv2Y6RksNT4', '::1', 0, ''),
+('a5bfecf65e1a751c', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxMDM3MDIyLCJleHAiOjE1NzEwNTUwMjJ9.lsypvX6bvGAuT6qJiFrbWOrRGi0jriOZehZR18e7u6o', '::1', 0, ''),
+('3479839f70061246', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxMDM3NTY2LCJleHAiOjE1NzEwNTU1NjZ9.24EUVHrWVJEd6iE1MFuciZd70yQCL1VEh9iLih-IiQI', '::1', 0, ''),
+('5d2252a08bffa184', 201, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjIwMSIsInVzZXJuYW1lIjoibWFuYWdlciIsImlhdCI6MTU3MTAzODA1NywiZXhwIjoxNTcxMDU2MDU3fQ.ab_FQKlZuDliZDtUlW76xsSOQJ_QgO651C3bd78UFoE', '::1', 0, ''),
+('552e6b4fb03b7466', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxMDM4MDg3LCJleHAiOjE1NzEwNTYwODd9.WubK2eS-T-hFOftK2qwYSfmTHSG3SUjz1YPFiTUDKxY', '::1', 0, ''),
+('03cae3466cd4b011', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxMDQyMjI0LCJleHAiOjE1NzEwNjAyMjR9.UUdqnL0OxFLIAQHnxQnbL1wPxO6MU4OIp6zE5LwH9F8', '::1', 0, ''),
+('070c7aef7fd7aa7e', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxMDQyNzMxLCJleHAiOjE1NzEwNjA3MzF9.mUt_n_RF8GsQ4cyPWoZya1oZ0qTVfDRzv4JF4vFpfnQ', '::1', 0, ''),
+('42ea997f11b114ca', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxMDQ0MzI5LCJleHAiOjE1NzEwNjIzMjl9.0-QUNpU7N-g3EqRQM_Grj8sTdcuRz5lG-SRkAe6NKk4', '::1', 0, ''),
+('7f4503bba130bdb8', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxMDQ0MzYzLCJleHAiOjE1NzEwNjIzNjN9.K9na5NzWwbRKldPQs6eWrPsFYT3UAQbOv-RvYHkRFDw', '::1', 0, ''),
+('9c9e3d0a5f378f58', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxMDQ0Mzg3LCJleHAiOjE1NzEwNjIzODd9.n8SFZ7s5zF4eRY7WOx9kna7VIJbPY1LTTBy-sfplmPg', '::1', 0, ''),
+('cc4639533f93d8d7', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxMDQ0NTA1LCJleHAiOjE1NzEwNjI1MDV9.4kk7kpzXIqxx5yKXLnPIXH2ktBu4thWL0UOiXkw6lZY', '::1', 0, ''),
+('300990063067c348', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxMDQ0NTMyLCJleHAiOjE1NzEwNjI1MzJ9.tm9vJRkjOQPD-jWbZGtuHFalwTwughPDXHmVBUwy1Ms', '::1', 0, ''),
+('93bad56d20e3c1de', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxMDQ0NTQ0LCJleHAiOjE1NzEwNjI1NDR9.-D0e4RBZBfhG_LSnAdq3c_sq1CSkbV4W8tbUzYqNNRo', '::1', 0, ''),
+('fd3036da8ed5ad40', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxMDQ0NTUxLCJleHAiOjE1NzEwNjI1NTF9.uY7ealVAS4Tm4yqhIv86c9JgCt0Jg_AzGBKHuax7dHs', '::1', 0, ''),
+('79cd0dc253aa06d7', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxMDQ0NzIwLCJleHAiOjE1NzEwNjI3MjB9.7JmZTOFSJFlU96TUvS3-VrBJMtWfNj8O5bL9l15Pdb0', '::1', 0, ''),
+('15dee04b307b1c0e', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxMDQ1NTAyLCJleHAiOjE1NzEwNjM1MDJ9.gArt5JmHBZZ7w-2AKeeY1Yn8mIRwCm9pqhawnKcOZkg', '::1', 0, ''),
+('9c69ea57fbb1eea1', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxMDQ1NTE5LCJleHAiOjE1NzEwNjM1MTl9.B_89UkwJ_J4fjWNLdLiTwIE6BQ8sNgQgV-KvllgiCXg', '::1', 0, ''),
+('6b39d561961f66a6', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxMDQ1NTc3LCJleHAiOjE1NzEwNjM1Nzd9.VJgkYIrqxZrF-B11HN-XYDv7O6qXi6Z4RFp6OCV2Grs', '::1', 0, ''),
+('853697ec2f816fb7', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxMDQ1Njc1LCJleHAiOjE1NzEwNjM2NzV9.dCIRZLZJzD0k9WBGpj9hliuH2fTkdIdiepkzf1P_FEs', '::1', 0, ''),
+('ad804c319a18f745', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxMDQ1NjgwLCJleHAiOjE1NzEwNjM2ODB9.zZuovmzvnsFn9aORWes6FLwyrbVrUMMiMVXirpzpzqs', '::1', 0, ''),
+('fff20a736a81c2df', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxMDQ1Njk2LCJleHAiOjE1NzEwNjM2OTZ9.ovl49gxz6U62_KollQXC8_39Qr8E7zR19ks765q_B3s', '::1', 0, ''),
+('240f90c2a8bb436e', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxMDQ1NzA2LCJleHAiOjE1NzEwNjM3MDZ9.f_3xhscbvH2e2tR5Htz2R-mD0yi21fNwmDUQfgJnybk', '::1', 0, ''),
+('6390a0ca0ba67f05', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxMDQ1NzE1LCJleHAiOjE1NzEwNjM3MTV9.7Fo8EN0eNM01uonCTNYzZR3K3IhH6JZJ_AHbgNUtI0M', '::1', 0, ''),
+('41971f5e73814198', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxMDUxMTYxLCJleHAiOjE1NzEwNjkxNjF9.4FZ45wie8RRPmtntRMypKK3I6E5C7Wu0-ZOmxZSENFs', '::1', 0, ''),
+('783a0b7e42f5a276', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxMDUxMTczLCJleHAiOjE1NzEwNjkxNzN9.K2p9Ni5jE8yxMpZWP5xX8V-S9BIRzf3THxWR_L18s3E', '::1', 0, ''),
+('3838708f8f94d724', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxMDU3OTAzLCJleHAiOjE1NzEwNzU5MDN9.OSSzaPE27-KyHSus13Ic0_bGRqum4LUb0JbtsaKkDRs', '::1', 0, ''),
+('48079c1b645bd035', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxMDU3OTQzLCJleHAiOjE1NzEwNzU5NDN9.YJ-510SUAaIJi_-JpsqEfqd82lH5bxX3c4jdg4bUCbM', '::1', 0, ''),
+('621a1c4c734b38b2', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxMDU5MTUxLCJleHAiOjE1NzEwNzcxNTF9.-vGaRctpz3JG8UsIRvKCQXvABFyveqMkOCjHCVidUew', '::1', 0, ''),
+('a9e0ed6a3c3f179f', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxMDU5MzU3LCJleHAiOjE1NzEwNzczNTd9.5hr4d1VNKCcY6phUfPf70AlA6koxAdVkuUEJYRcXiFA', '::1', 0, ''),
+('8ec099bb46b94aad', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxMDU5NjE1LCJleHAiOjE1NzEwNzc2MTV9.vuw9d08NG5f2CIb4E4G6Emfu31KHiyTzo15TOVfAe9w', '::1', 0, ''),
+('6f39b169e989eeda', 201, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjIwMSIsInVzZXJuYW1lIjoibWFuYWdlciIsImlhdCI6MTU3MTA2MDc4NSwiZXhwIjoxNTcxMDc4Nzg1fQ.MXDEc0p4wdedB7JBDXN9aR-V9cthIRnaZpLTymVP2bs', '::1', 0, ''),
+('6d3a2307f70a1492', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxMDYwOTQxLCJleHAiOjE1NzEwNzg5NDF9.hbn_gw_e-oSjXbabQ-fAkzOGbwX9XwDrzi7JFQFMUMQ', '::1', 0, ''),
+('8fdc238576189750', 201, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjIwMSIsInVzZXJuYW1lIjoibWFuYWdlciIsImlhdCI6MTU3MTA2MTQ0OSwiZXhwIjoxNTcxMDc5NDQ5fQ.5lGfuSRXr0tn_szDfwlILvQyy3PTHbNeEmLicnh3j4o', '::1', 0, ''),
+('b55644f868267963', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxMDYzODkwLCJleHAiOjE1NzEwODE4OTB9.naFlFFS8ws7onBYIJNnfiFL_oSoM6h3aIiBnr2sk_OU', '::1', 0, ''),
+('c73349d0cef1ae3e', 219, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjIxOSIsInVzZXJuYW1lIjoiZW1wbG95ZWUiLCJpYXQiOjE1NzEwNjM5NDcsImV4cCI6MTU3MTA4MTk0N30.Zm7s4Y56cVDNBOzvD14XmBVfNi1F19ZLAacY-9t-J2I', '::1', 0, ''),
+('c37a9ea392127c03', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxMDYzOTY4LCJleHAiOjE1NzEwODE5Njh9.HlWSVuYDTUm6orokh5wOEWLFrIVA-riBUh0T5OdksAM', '::1', 0, ''),
+('94fb05e7b709f4e0', 219, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjIxOSIsInVzZXJuYW1lIjoiZW1wbG95ZWUiLCJpYXQiOjE1NzEwNjQ0OTMsImV4cCI6MTU3MTA4MjQ5M30.BYhW-I7-J7uv3g2iFCXTX59i7YAWC71qEUwBExNo6vM', '::1', 0, ''),
+('d8516f9fef5a3d8a', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxMDY0NTIxLCJleHAiOjE1NzEwODI1MjF9.P-DjtYC1CVmUnKV7EDkGuA1ew8nrEs8RPy1Yjr-Tp0o', '::1', 0, ''),
+('1a1e3b0c35051a8c', 201, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjIwMSIsInVzZXJuYW1lIjoibWFuYWdlciIsImlhdCI6MTU3MTA2NDYxMSwiZXhwIjoxNTcxMDgyNjExfQ.9gHaeVDazHEp7G25T8RHL1RL_xfwF3eD3dVRI119KYA', '::1', 0, ''),
+('1e552889b462cea1', 220, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjIyMCIsInVzZXJuYW1lIjoiZW1wbG95ZWUxIiwiaWF0IjoxNTcxMDY0NjYwLCJleHAiOjE1NzEwODI2NjB9.BngdwHWE77Yds4K5k-JthoeSPbkzJ_4-OZctPPg1If0', '::1', 0, ''),
+('77f2167937a8c7d5', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxMDczOTk3LCJleHAiOjE1NzEwOTE5OTd9.e_2wiUeo7Z8-i03Q3QWKewp5krzrJk8zTxbQa2zw0hM', '::1', 0, ''),
+('4e28074d166942f3', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxMDc0NzUzLCJleHAiOjE1NzEwOTI3NTN9.BV2T7VkuzF66ZLF8H88z3-SGKHkecKfviQBotLsy7pI', '::1', 0, ''),
+('aab8372eabf808b1', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxMDc0NzYwLCJleHAiOjE1NzEwOTI3NjB9.wjc52KfjL2eSpySXMzqj4EHKJzEHjq03H1_DXIubQ9w', '::1', 0, ''),
+('590e7ebb5f55e2fe', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxMDc0Nzc0LCJleHAiOjE1NzEwOTI3NzR9.cb18ODo0VhihQsTK7wjddYfgIxchBLdAiUCTOnJsrhQ', '::1', 0, ''),
+('fdec68fc6311c3ab', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxMDc0NzgxLCJleHAiOjE1NzEwOTI3ODF9.aS-Ou2mLwellntHLajGIc0vYcbmmtximpUoiEq1OJ0A', '::1', 0, ''),
+('6457ec0f99ecd7a1', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxMDc1MTE1LCJleHAiOjE1NzEwOTMxMTV9.xSyExySDfuJMuiNb3gCYqaxkZ269iOGSCapsCgiNYLA', '::1', 0, ''),
+('b04c0d211e749141', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxMDc1NDQ5LCJleHAiOjE1NzEwOTM0NDl9.iQ4LAjd6cXXqEemFGQIWDWF3g29y6h0z4YHHC930pVY', '::1', 0, ''),
+('1efb42eb013c6503', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxMDc2MDI3LCJleHAiOjE1NzEwOTQwMjd9.T_aZiJCN13TkSiTo-5C5lfU4-lE4Jc2W2sSPPc4OUsg', '::1', 0, ''),
+('8ad0e9d705479615', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxMDc2MDY1LCJleHAiOjE1NzEwOTQwNjV9.ELMdNapT6mYIvd4Z17p3IdgwWq1QUXjA6RoV6Av5oVg', '::1', 0, ''),
+('f75f1a6cfcea8b5e', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxMDc2MDgzLCJleHAiOjE1NzEwOTQwODN9.yueKtLTi9pMGdtrikA-UIn9SkATc6FGdXhMiXl1QtLk', '::1', 0, ''),
+('14b523aeef49d969', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxMDc2MTQ1LCJleHAiOjE1NzEwOTQxNDV9.QpxriovmAoQ9Ps7IaluFf_rllJeg0u51wmiJw5REwwI', '::1', 0, ''),
+('1371ace92bf0113a', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxMDc2MTY1LCJleHAiOjE1NzEwOTQxNjV9.X3aTK2UesX-PSmSKw0ySwIWxCb20nx1IPBqkJaS-NyY', '::1', 0, ''),
+('c45e721c303c0cb7', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxMDc2MjI5LCJleHAiOjE1NzEwOTQyMjl9.5poO6o-_LHqLmA7D-jA3ZTA5pKypZD5SYaow77_ftZw', '::1', 0, ''),
+('bdc8f5c8f033a3db', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxMDc2MzExLCJleHAiOjE1NzEwOTQzMTF9.f1aWxJgQsrhiHWwXJ37zYRqKq2jkEsGxvPy6uQR2jRs', '::1', 0, ''),
+('4bb4cafb4e9cc15b', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxMDc2MzIzLCJleHAiOjE1NzEwOTQzMjN9.MnbzDR_KqPQd88oAkxNPBheopImmgz3IrcmpYiVfU_8', '::1', 0, ''),
+('371310d65eca557e', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxMDc2NDMxLCJleHAiOjE1NzEwOTQ0MzF9.BD3THAPhd7HXimSIUX6Wwt7RXv7T2Swkj4bV86Smwok', '::1', 0, ''),
+('ce291070d7af0ff4', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxMDc2NDQ1LCJleHAiOjE1NzEwOTQ0NDV9.3S6UN2AvMVgiApG2BYgdjCpUiDuZtnO5P6aq5TERJzk', '::1', 0, ''),
+('da681696dafbf10b', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxMDc2NDY1LCJleHAiOjE1NzEwOTQ0NjV9.X-lPmNee1EsPnjlve5wrabBjuDkT5iVUYqdq45SKdYU', '::1', 0, ''),
+('fcc32bde9e2a5e4f', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxMDc2NDg1LCJleHAiOjE1NzEwOTQ0ODV9.fDQKgDZyEKJLtuuzVq3o-_HNaUbdAO-4AaI5ZOciORk', '::1', 0, ''),
+('c4d4d28313d73fff', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxMDc2NTE3LCJleHAiOjE1NzEwOTQ1MTd9.DwNQ10qAhQZIDPaY2ITu2uK_z3YZxqgBufjYvwhQqqo', '::1', 0, ''),
+('5f4203701f84bf14', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxMDc3MDEzLCJleHAiOjE1NzEwOTUwMTN9.DRaiEQnYx7V-3ZvS7gO5_PGXS80dlTW8dcxMzPkeYpg', '::1', 0, ''),
+('75497d265b0a5410', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxMDc3ODk3LCJleHAiOjE1NzEwOTU4OTd9.GLBnYpGqJaIIVuotcBDdbyt95TjoMsfzwlu-HSI0DHI', '::1', 0, ''),
+('3911dee0362cd28f', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxMDgxMTgzLCJleHAiOjE1NzEwOTkxODN9.q0MxmIgUFmxdrF4Z9KHSLAy3q0ckkb2BJjuTvP4fm6o', '::1', 0, ''),
+('fb4d56cb062473db', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxMDgxNDY1LCJleHAiOjE1NzEwOTk0NjV9.b-1imjmPOJkUM9uFBuHNDFWsxojV-faYlSc-hOqh-2g', '::1', 0, '');
 
 -- --------------------------------------------------------
 
@@ -312,6 +622,72 @@ CREATE TABLE `performance_mc` (
   `answer` int(11) NOT NULL,
   `user` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `performance_mc`
+--
+
+INSERT INTO `performance_mc` (`id`, `question`, `element`, `answer`, `user`) VALUES
+(1, 1, 1, 1, 1),
+(2, 2, 1, 1, 1),
+(3, 3, 1, 1, 1),
+(4, 4, 1, 1, 1),
+(5, 1, 2, 2, 1),
+(6, 2, 2, 1, 1),
+(7, 3, 2, 2, 1),
+(8, 4, 2, 1, 1),
+(9, 1, 1, 1, 201),
+(10, 2, 1, 2, 201),
+(11, 3, 1, 1, 201),
+(12, 4, 1, 2, 201),
+(13, 1, 2, 2, 201),
+(14, 2, 2, 4, 201),
+(15, 3, 2, 1, 201),
+(16, 4, 2, 1, 201),
+(17, 1, 3, 1, 201),
+(18, 2, 3, 2, 201),
+(19, 3, 3, 4, 201),
+(20, 4, 3, 3, 201),
+(21, 1, 4, 1, 201),
+(22, 2, 4, 2, 201),
+(23, 3, 4, 4, 201),
+(24, 4, 4, 3, 201),
+(25, 1, 5, 3, 201),
+(26, 2, 5, 1, 201),
+(27, 3, 5, 2, 201),
+(28, 4, 5, 4, 201),
+(29, 1, 3, 4, 1),
+(30, 2, 3, 3, 1),
+(31, 3, 3, 2, 1),
+(32, 4, 3, 1, 1),
+(33, 1, 4, 4, 1),
+(34, 2, 4, 3, 1),
+(35, 3, 4, 3, 1),
+(36, 4, 4, 3, 1),
+(37, 1, 5, 4, 1),
+(38, 2, 5, 2, 1),
+(39, 3, 5, 4, 1),
+(40, 4, 5, 4, 1),
+(41, 1, 1, 1, 219),
+(42, 2, 1, 4, 219),
+(43, 3, 1, 3, 219),
+(44, 4, 1, 4, 219),
+(45, 1, 2, 3, 219),
+(46, 2, 2, 4, 219),
+(47, 3, 2, 2, 219),
+(48, 4, 2, 2, 219),
+(49, 1, 3, 3, 219),
+(50, 2, 3, 3, 219),
+(51, 3, 3, 4, 219),
+(52, 4, 3, 2, 219),
+(53, 1, 4, 3, 219),
+(54, 2, 4, 4, 219),
+(55, 3, 4, 2, 219),
+(56, 4, 4, 4, 219),
+(57, 1, 5, 3, 219),
+(58, 2, 5, 1, 219),
+(59, 3, 5, 4, 219),
+(60, 4, 5, 4, 219);
 
 -- --------------------------------------------------------
 
@@ -495,6 +871,26 @@ INSERT INTO `proofs` (`id`, `element`, `type`, `proof`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `proof_types`
+--
+
+CREATE TABLE `proof_types` (
+  `id` int(11) NOT NULL,
+  `proof_type_id` int(11) NOT NULL,
+  `proof_type_name` varchar(255) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `proof_types`
+--
+
+INSERT INTO `proof_types` (`id`, `proof_type_id`, `proof_type_name`) VALUES
+(1, 1, 'Compliant'),
+(2, 2, 'Resilient');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `questions`
 --
 
@@ -580,26 +976,6 @@ INSERT INTO `questions` (`id`, `element`, `question`, `reactive`, `compliant`, `
 -- --------------------------------------------------------
 
 --
--- Table structure for table `sub_elements`
---
-
-CREATE TABLE `sub_elements` (
-  `id` int(11) NOT NULL,
-  `sub_elements_id` int(11) NOT NULL,
-  `sub_elements_name` varchar(500) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `sub_elements`
---
-
-INSERT INTO `sub_elements` (`id`, `sub_elements_id`, `sub_elements_name`) VALUES
-(1, 1, 'Compliant'),
-(2, 2, 'Resilient');
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `user`
 --
 
@@ -618,7 +994,9 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`id`, `email`, `firstname`, `lastname`, `role`, `password`) VALUES
 (1, 'admin', 'Admin', 'User', 'admin', '9e94b15ed312fa42232fd87a55db0d39'),
-(201, 'manager', 'Manager', 'User', 'manager', 'bc7316929fe1545bf0b98d114ee3ecb8');
+(201, 'manager', 'Manager', 'User', 'manager', 'bc7316929fe1545bf0b98d114ee3ecb8'),
+(220, 'employee1', 'Employee', 'User', 'employee', 'bc7316929fe1545bf0b98d114ee3ecb8'),
+(219, 'employee', 'Employee', 'User', 'employee', 'bc7316929fe1545bf0b98d114ee3ecb8');
 
 --
 -- Indexes for dumped tables
@@ -728,15 +1106,15 @@ ALTER TABLE `proofs`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `questions`
+-- Indexes for table `proof_types`
 --
-ALTER TABLE `questions`
+ALTER TABLE `proof_types`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `sub_elements`
+-- Indexes for table `questions`
 --
-ALTER TABLE `sub_elements`
+ALTER TABLE `questions`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -753,55 +1131,55 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `actions_measure`
 --
 ALTER TABLE `actions_measure`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `actions_milestone`
 --
 ALTER TABLE `actions_milestone`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `actions_results`
 --
 ALTER TABLE `actions_results`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `actions_risks`
 --
 ALTER TABLE `actions_risks`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `actions_victory`
 --
 ALTER TABLE `actions_victory`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `answer_complete`
 --
 ALTER TABLE `answer_complete`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `answer_desired`
 --
 ALTER TABLE `answer_desired`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `answer_mc`
 --
 ALTER TABLE `answer_mc`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=119;
 
 --
 -- AUTO_INCREMENT for table `answer_proof`
 --
 ALTER TABLE `answer_proof`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
 
 --
 -- AUTO_INCREMENT for table `category`
@@ -813,7 +1191,7 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT for table `elements`
 --
 ALTER TABLE `elements`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `inviteattendees`
@@ -831,37 +1209,37 @@ ALTER TABLE `performance`
 -- AUTO_INCREMENT for table `performance_elements`
 --
 ALTER TABLE `performance_elements`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `performance_mc`
 --
 ALTER TABLE `performance_mc`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
 
 --
 -- AUTO_INCREMENT for table `proofs`
 --
 ALTER TABLE `proofs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=161;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=163;
+
+--
+-- AUTO_INCREMENT for table `proof_types`
+--
+ALTER TABLE `proof_types`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `questions`
 --
 ALTER TABLE `questions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
-
---
--- AUTO_INCREMENT for table `sub_elements`
---
-ALTER TABLE `sub_elements`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=219;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=221;
 
 DELIMITER $$
 --
