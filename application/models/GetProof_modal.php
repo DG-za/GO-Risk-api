@@ -27,4 +27,12 @@ class GetProof_modal extends CI_Model {
 		$query_result = $this->db->get();
 		return $query_result->result();
 	}
+	
+	public function Get_All_Proof_Types(){
+		$this->db->select("`id`,`proof_type_id`,`proof_type_name`");
+		$this->db->from("`proof_types`");
+		$this->db->order_by("`proof_type_id`", "asc");
+		$query_result = $this->db->get();
+		return $query_result->result();
+	}
 }
