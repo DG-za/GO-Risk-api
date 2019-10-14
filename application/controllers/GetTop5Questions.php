@@ -36,7 +36,7 @@ class GetTop5Questions extends REST_Controller {
 				$Pass_Data = array();
 				if(!empty($getTop5Questions_Result)){
 					foreach($getTop5Questions_Result as $key => $value){
-						$merge_array = array("question" => $value->question,"element" => $value->element,"score" => $value->score,"count" => $value->count);
+						$merge_array = array("question" => $value->question,"element" => $value->element,"score" => $value->score,"count" => $value->count,"newScore" =>number_format((float)$value->score/$value->count,1,'.',''));
 						$Pass_Data["data"][] = $merge_array;
 					}
 					$valid = ['status' => "true","statuscode" => 200,'response' =>$Pass_Data];
