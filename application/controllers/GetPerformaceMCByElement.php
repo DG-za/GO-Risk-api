@@ -35,16 +35,27 @@ class GetPerformaceMCByElement extends REST_Controller {
 			$Pass_Data["data"] = array();
 			if($token_status == TRUE){
 				$All_Answer = $this->GetPerformaceMCByElement_modal->Get_Performace_Answer_MC_by_Element_ID($Element_ID);
+				$Get_Answer_Array = array();
+				$merge_array = array();
 				if(!empty($All_Answer)){
 					foreach($All_Answer as $key => $value){
-						$merge_array = array("name" => $value->answer,"value" => $value->num);
-						$Pass_Data["data"][] = $merge_array;
+						$merge_array[$value->answer] = array("name" => $value->answer,"value" => $value->num);
+						$Get_Answer_Array[] = $value->answer;
+					}
+					$Answer_Array = array("1","2","3","4");
+					foreach($Answer_Array as $AA){
+						if(!in_array($AA,$Get_Answer_Array)){
+							$blank_merge_array = array("name" => $AA,"value" => 0);
+							$Pass_Data["data"][] = $blank_merge_array;
+						}else{
+							$Pass_Data["data"][] = $merge_array[$AA];
+						}
 					}
 					$this->set_response($Pass_Data, REST_Controller::HTTP_OK);
 				}else{
 					$Answer_Array = array("1","2","3","4");
 					foreach($Answer_Array as $AA){
-						$merge_array = array("name" => $AA,"value" => "0");
+						$merge_array = array("name" => $AA,"value" => 0);
 						$Pass_Data["data"][] = $merge_array;
 					}
 					$this->set_response($Pass_Data, REST_Controller::HTTP_OK);
