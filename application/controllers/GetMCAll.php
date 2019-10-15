@@ -42,7 +42,8 @@ class GetMCAll extends REST_Controller {
 						$All_Answer_MC = $this->GetMCAll_modal->Get_All_answer_mc_By_Elements_ID_Function($id);
 						if(!empty($All_Answer_MC)){
 							foreach($All_Answer_MC as $key_mc => $value_mc){
-								$merge_array_mc = array("name" => $value_mc->name,"value" => $value_mc->score/$value_mc->value,"score"=>$value_mc->score);
+								$merge_array_mc = array("name" => $value_mc->name,"value" => number_format($value_mc->score/$value_mc->value,1),"score"=>$value_mc->score);
+								// $merge_array_mc = array("name" => $value_mc->name,"value" => $value_mc->score/$value_mc->value,"score"=>$value_mc->score);
 								$merge_array["series"][] = $merge_array_mc;
 							}
 							$Pass_Data["data"][] = $merge_array;
