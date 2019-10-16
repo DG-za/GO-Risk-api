@@ -1,7 +1,7 @@
 # she-excellence-ci-api
 CodeIgniter API for SHE-Excellence Angular application
 
-# Test Server Details
+## Test Server Details
 
 Test URL: https://rms.crispworks.co.za
 
