@@ -56,7 +56,7 @@ class GetMCAll extends REST_Controller {
 					foreach($All_Answer_MC as $key_mc => $value_mc){
 						$merge_array_mc = array(
 							"name" => $value_mc->name,
-							"value" => $value_mc->score/$value_mc->value,
+							"value" => number_format($value_mc->score/$value_mc->value,1),
 							"score"=>$value_mc->score
 						);
 						$merge_array["series"][] = $merge_array_mc;
