@@ -3,7 +3,7 @@ CodeIgniter API for SHE-Excellence Angular application
 
 # Test Server Details
 
-Test URL: rms.crispworks.co.za
+Test URL: https://rms.crispworks.co.za
 
 FTP Access: <br />
 www63.cpt1.host-h.net <br />
