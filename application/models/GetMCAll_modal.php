@@ -7,6 +7,7 @@ class GetMCAll_modal extends CI_Model {
 		$this->db->select("`id`,`name`");
 		$this->db->from("`elements`");
 		$this->db->group_by($Group_by_Array);
+		$this->db->order_by(`name`,`desc`);
 		$query_result = $this->db->get();
 		return $query_result->result();
 	}
@@ -16,7 +17,8 @@ class GetMCAll_modal extends CI_Model {
 		$this->db->select("`answer` as `name`, count(DISTINCT `user`) as `value`, count(`answer`) as `score`");
 		// Old query // $this->db->select("`answer` as `name`,count(`answer`) as `value`,sum(`answer`) as `score`");
 		$this->db->from("`answer_mc`");
-		$this->db->where("`element`",$ID);
+		$this->db->like("`element`",$ID);
+		//$this->db->where("`element`",$ID);
 		$this->db->group_by("`answer`");
 		$query_result = $this->db->get();
 		return $query_result->result();
