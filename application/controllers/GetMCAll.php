@@ -32,22 +32,50 @@ class GetMCAll extends REST_Controller {
 			
 			if($token_status == TRUE){
 				$All_Elements = $this->GetMCAll_modal->Get_All_Elements_Function();
-				$Pass_Data = array();
+				$Pass_Data = array();				
 				if(!empty($All_Elements)){
 					foreach($All_Elements as $key => $value){
-						$id = $value->id;
-						$name = $value->name;
-						$merge_array["name"] = $name;
-						$merge_array["series"] = array();
-						$All_Answer_MC = $this->GetMCAll_modal->Get_All_answer_mc_By_Elements_ID_Function($id);
-						if(!empty($All_Answer_MC)){
-							foreach($All_Answer_MC as $key_mc => $value_mc){
-								$merge_array_mc = array("name" => $value_mc->name,"value" => $value_mc->score/$value_mc->value,"score"=>$value_mc->score);
-								$merge_array["series"][] = $merge_array_mc;
-							}
-							$Pass_Data["data"][] = $merge_array;
+				$customArr = array('1','2','3','4');
+				$id = $value->id;
+				$name = $value->name;
+				$merge_array["name"] = $name;
+				$merge_array["series"] = array();
+				$All_Answer_MC = $this->GetMCAll_modal->Get_All_answer_mc_By_Elements_ID_Function($id);
+				
+				$elementsArr = [];
+				if(!empty($All_Answer_MC)){	
+				/* Add matched elemets to the $elementsArr */					
+					for($i=0; $i<4; $i++){
+						if(isset($All_Answer_MC[$i]->name)){
+						$elementsArr[$i] = $All_Answer_MC[$i]->name;
 						}
 					}
+
+
+					$customTempArr = array_diff($customArr, $elementsArr);
+					foreach($All_Answer_MC as $key_mc => $value_mc){
+						$merge_array_mc = array(
+							"name" => $value_mc->name,
+							"value" => number_format($value_mc->score/$value_mc->value,1),
+							"score"=>$value_mc->score
+						);
+						$merge_array["series"][] = $merge_array_mc;
+					}
+
+					/* Adding Blank Json Object to main array */
+					foreach($customTempArr as $key => $value) {
+						$merge_array_mc = array(
+							"name" => $value,
+							"value" => 0,
+							"score"=>'0'
+						);
+						$merge_array["series"][] =$merge_array_mc;
+					}
+					$price = array_column($merge_array["series"], 'name');
+					array_multisort($price, SORT_ASC, $merge_array["series"]);
+							$Pass_Data["data"][] = $merge_array;
+						} 
+					} 
 					$valid = ['status' => "true","statuscode" => 200,'response' =>$Pass_Data];
 					$this->set_response($Pass_Data, REST_Controller::HTTP_OK);
 				}else{
@@ -63,4 +91,5 @@ class GetMCAll extends REST_Controller {
 			$this->set_response($parameter_required_array, REST_Controller::HTTP_NOT_FOUND);
 		}
 	}
+
 }

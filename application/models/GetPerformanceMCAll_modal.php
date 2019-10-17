@@ -16,6 +16,7 @@ class GetPerformanceMCAll_modal extends CI_Model {
 		// Old query // $this->db->select("`answer` as `name`,count(`answer`) as `value`,sum(`answer`) as `score`");
 		$this->db->from("`performance_mc`");
 		$this->db->where("`element`",$ID);
+		$this->db->order_by("name", "asc");
 		$this->db->group_by("`answer`");
 		$query_result = $this->db->get();
 		return $query_result->result();
