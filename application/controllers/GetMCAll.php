@@ -44,15 +44,14 @@ class GetMCAll extends REST_Controller {
 				
 				$elementsArr = [];
 				if(!empty($All_Answer_MC)){	
-				/* Add matched elemets to the $elementsArr */					
+				    /* Add matched elemets to the $elementsArr */			
 					for($i=0; $i<4; $i++){
 						if(isset($All_Answer_MC[$i]->name)){
 						$elementsArr[$i] = $All_Answer_MC[$i]->name;
 						}
 					}
 
-
-					$customTempArr = array_diff($customArr, $elementsArr);
+					/* Default code */
 					foreach($All_Answer_MC as $key_mc => $value_mc){
 						$merge_array_mc = array(
 							"name" => $value_mc->name,
@@ -63,6 +62,7 @@ class GetMCAll extends REST_Controller {
 					}
 
 					/* Adding Blank Json Object to main array */
+					$customTempArr = array_diff($customArr, $elementsArr);
 					foreach($customTempArr as $key => $value) {
 						$merge_array_mc = array(
 							"name" => $value,
@@ -71,8 +71,11 @@ class GetMCAll extends REST_Controller {
 						);
 						$merge_array["series"][] =$merge_array_mc;
 					}
+
+					/* Sorting Array in Ascending order like name wise */
 					$price = array_column($merge_array["series"], 'name');
 					array_multisort($price, SORT_ASC, $merge_array["series"]);
+
 							$Pass_Data["data"][] = $merge_array;
 						} 
 					} 

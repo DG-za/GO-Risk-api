@@ -35,11 +35,39 @@ class GetMCByElement extends REST_Controller {
 			if($token_status == TRUE){
 				$All_Answer = $this->GetMCByElement_modal->Get_Answer_MC_by_Element_ID($Element_ID);
 				$Pass_Data = array();
+				$customArr = array('1','2','3','4');
+				$elementsArr = [];
 				if(!empty($All_Answer)){
+
+					/* Add matched elemets to the $elementsArr */			
+					for($i=0; $i<4; $i++){
+						if(isset($All_Answer[$i]->answer)){
+						$elementsArr[$i] = $All_Answer[$i]->answer;
+						}
+					}
+						
+					/* Default code */				
 					foreach($All_Answer as $key => $value){
-						$merge_array = array("name" => $value->answer,"value" => $value->num);
+						$merge_array = array(
+							"name" => $value->answer,
+							"value" => $value->num);
 						$Pass_Data["data"][] = $merge_array;
 					}
+
+					/* Adding Blank Json Object to main array */
+					$customTempArr = array_diff($customArr, $elementsArr);
+					foreach($customTempArr as $key => $value) {
+						$merge_array_mc = array(
+							"name" => $value,
+							"value" => 0							
+						);
+						$Pass_Data["data"][] =$merge_array_mc;
+					} 
+
+					/* Sorting Array in Ascending order like name wise */
+					$price = array_column($Pass_Data["data"], 'name');
+					array_multisort($price, SORT_ASC, $Pass_Data["data"]);
+
 					$valid = ['status' => "true","statuscode" => 200,'response' =>$Pass_Data];
 					$this->set_response($Pass_Data, REST_Controller::HTTP_OK);
 				}else{
