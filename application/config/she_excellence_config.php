@@ -29,10 +29,11 @@ $config['base_url'] = '';
 /* email configuration */
 
 $config['protocol']    = "smtp";
-$config['smtp_host']   = "ssl://smtp.gmail.com";
-$config['smtp_port']   = "465";
-$config['smtp_user']   = 'rahul.avsimt@gmail.com';
-$config['smtp_pass']   = 'rahul2834@jyo';
-$config['charset']     = "utf-8";
+$config['smtp_host']   = "smtp.she-excellence.co.za";
+$config['smtp_port']   = "587";
+$config['smtp_user']   = 'noreply@she-excellence.co.za';
+$config['smtp_pass']   = 'Crispworks123!';
+$config['charset']     = "iso-8859-1";
 $config['mailtype']    = "html";
 $config['newline']     = "\r\n";
+
