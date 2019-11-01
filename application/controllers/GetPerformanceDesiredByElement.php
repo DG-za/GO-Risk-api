@@ -3,12 +3,12 @@ require_once APPPATH . '/libraries/REST_Controller.php';
 require_once APPPATH . '/libraries/JWT.php';
 use \Firebase\JWT\JWT;
 
-class GetMCByElement extends REST_Controller {
+class GetPerformanceDesiredByElement extends REST_Controller {
 	/***************************************************************
 	*  Project Name : 4Xcellence Solutions
 	*  Created By :   
-	*  Created Date : 24-09-2019
-	*  Description : A controller contain GetMCByElement related methods
+	*  Created Date : 25-09-2019
+	*  Description : A controller contain GetDesiredByElement related methods
 	*  Modification History :
 	*  
 	***************************************************************/
@@ -16,7 +16,7 @@ class GetMCByElement extends REST_Controller {
 	public function __construct() {
 		parent::__construct();
 		$this->load->helper('check_token');				
-		$this->load->model('GetMCByElement_modal');
+		$this->load->model('GetPerformanceDesiredByElement_modal');
 	}
 	
 	public function index_post(){
@@ -33,48 +33,27 @@ class GetMCByElement extends REST_Controller {
 			$token_status = check_token($user_id,$headers['Authorization']);
 			
 			if($token_status == TRUE){
-				$All_Answer = $this->GetMCByElement_modal->Get_Answer_MC_by_Element_ID($Element_ID);
+				$All_Desired = $this->GetPerformanceDesiredByElement_modal->Get_Desired_by_Element_ID($Element_ID);
 				$Pass_Data = array();
-				$customArr = array('1','2','3','4');
-				$elementsArr = [];
-				if(!empty($All_Answer)){
-
-					/* Add matched elemets to the $elementsArr */			
-					for($i=0; $i<4; $i++){
-						if(isset($All_Answer[$i]->answer)){
-						$elementsArr[$i] = $All_Answer[$i]->answer;
-						}
+				if(!empty($All_Desired)){
+					foreach($All_Desired as $key => $value){
+						$merge_array[0]['name'] = 'resilient';
+						$merge_array[0]['value'] = $value->n3;
+						$merge_array[1]['name'] = 'proactive';
+						$merge_array[1]['value'] = $value->n2;
+						$merge_array[2]['name'] = 'compliant';
+						$merge_array[2]['value'] = $value->n1;
 					}
-						
-					/* Default code */				
-					foreach($All_Answer as $key => $value){
-						$merge_array = array(
-							"name" => $value->answer,
-							"value" => $value->num);
-						$Pass_Data["data"][] = $merge_array;
-					}
-
-					/* Adding Blank Json Object to main array */
-					$customTempArr = array_diff($customArr, $elementsArr);
-					foreach($customTempArr as $key => $value) {
-						$merge_array_mc = array(
-							"name" => $value,
-							"value" => 0							
-						);
-						$Pass_Data["data"][] =$merge_array_mc;
-					} 
-
-					/* Sorting Array in Ascending order like name wise */
-					$price = array_column($Pass_Data["data"], 'name');
-					array_multisort($price, SORT_ASC, $Pass_Data["data"]);
-
-					$valid = ['status' => "true","statuscode" => 200,'response' =>$Pass_Data];
+					$Pass_Data["data"] = $merge_array;
 					$this->set_response($Pass_Data, REST_Controller::HTTP_OK);
 				}else{
-					$Pass_Data["data"][0] = array("name" => 1,"value" => 0);
-					$Pass_Data["data"][1] = array("name" => 2,"value" => 0);
-					$Pass_Data["data"][2] = array("name" => 3,"value" => 0);
-					$Pass_Data["data"][3] = array("name" => 4,"value" => 0);
+					$merge_array[0]['name'] = 'resilient';
+					$merge_array[0]['value'] = 0;
+					$merge_array[1]['name'] = 'proactive';
+					$merge_array[1]['value'] = 0;
+					$merge_array[2]['name'] = 'compliant';
+					$merge_array[2]['value'] = 0;
+					$Pass_Data["data"] = $merge_array;
 					$this->set_response($Pass_Data, REST_Controller::HTTP_OK);
 				}
 			}else if($token_status == FALSE){
