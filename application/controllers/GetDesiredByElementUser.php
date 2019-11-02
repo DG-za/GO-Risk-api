@@ -28,30 +28,31 @@ class GetDesiredByElementUser extends REST_Controller {
 		$message = 'Required field(s) user_id,element_id is missing or empty';
 		$user_id = $this->post('user_id');
 		$Element_ID = $this->post('element_id');
+		$assessment_type = $this->post('assessment_type');
 		if(isset($user_id) && isset($Element_ID)){
 			$headers = $this->input->request_headers();
 			$token_status = check_token($user_id,$headers['Authorization']);
 			
 			if($token_status == TRUE){
-				$All_Desired = $this->GetDesiredByElement_User_modal->Get_Desired_by_Element_ID_User($Element_ID,$user_id);
+				$All_Desired = $this->GetDesiredByElement_User_modal->Get_Desired_by_Element_ID_User($Element_ID,$user_id,$assessment_type);
 				$Pass_Data = array();
 				if(!empty($All_Desired)){
 					foreach($All_Desired as $key => $value){
-						$merge_array[0]['name'] = 'resilient';
-						$merge_array[0]['value'] = $value->n3;
+						$merge_array[0]['name'] = 'compliant';
+						$merge_array[0]['value'] = $value->n1;
 						$merge_array[1]['name'] = 'proactive';
 						$merge_array[1]['value'] = $value->n2;
-						$merge_array[2]['name'] = 'compliant';
-						$merge_array[2]['value'] = $value->n1;
+						$merge_array[2]['name'] = 'resilient';
+						$merge_array[2]['value'] = $value->n3;
 					}
 					$Pass_Data["data"] = $merge_array;
 					$this->set_response($Pass_Data, REST_Controller::HTTP_OK);
 				}else{
-					$merge_array[0]['name'] = 'resilient';
+					$merge_array[0]['name'] = 'compliant';
 					$merge_array[0]['value'] = 0;
 					$merge_array[1]['name'] = 'proactive';
 					$merge_array[1]['value'] = 0;
-					$merge_array[2]['name'] = 'compliant';
+					$merge_array[2]['name'] = 'resilient';
 					$merge_array[2]['value'] = 0;
 					$Pass_Data["data"] = $merge_array;
 					$this->set_response($Pass_Data, REST_Controller::HTTP_OK);
