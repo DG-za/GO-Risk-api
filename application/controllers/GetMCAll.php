@@ -40,23 +40,31 @@ class GetMCAll extends REST_Controller {
 				$name = $value->name;
 				$merge_array["name"] = $name;
 				$merge_array["series"] = array();
-				$All_Answer_MC = $this->GetMCAll_modal->Get_All_answer_mc_By_Elements_ID_Function($id);
+				$All_Answers_By_Element = $this->GetMCAll_modal->Get_Structured_Answers_By_Element($id);
+				$Total_Answers_By_Element = $this->GetMCAll_modal->Get_Total_Answers_By_Element($id);
 				
 				$elementsArr = [];
-				if(!empty($All_Answer_MC)){	
+				if(!empty($All_Answers_By_Element)){
 				    /* Add matched elemets to the $elementsArr */			
 					for($i=0; $i<4; $i++){
-						if(isset($All_Answer_MC[$i]->name)){
-						$elementsArr[$i] = $All_Answer_MC[$i]->name;
+						if(isset($All_Answers_By_Element[$i]->name)){
+						$elementsArr[$i] = $All_Answers_By_Element[$i]->name;
 						}
 					}
 
-					/* Default code */
-					foreach($All_Answer_MC as $key_mc => $value_mc){
+					/* Get total count of answers for this element */
+					foreach($Total_Answers_By_Element as $key => $value){
+						$total = $value->total;
+					}
+
+					/* Build array for chart */
+					foreach($All_Answers_By_Element as $key_mc => $value_mc){
 						$merge_array_mc = array(
 							"name" => $value_mc->name,
-							"value" => number_format($value_mc->score/$value_mc->value,1),
-							"score"=>$value_mc->score
+							"value" => number_format(($value_mc->value/$total)*100,1),
+							"count"=>$value_mc->value,
+							"sum"=>$value_mc->sum,
+							"total" => $total
 						);
 						$merge_array["series"][] = $merge_array_mc;
 					}
@@ -67,7 +75,7 @@ class GetMCAll extends REST_Controller {
 						$merge_array_mc = array(
 							"name" => $value,
 							"value" => 0,
-							"score"=>'0'
+							"sum"=>'0'
 						);
 						$merge_array["series"][] =$merge_array_mc;
 					}
@@ -77,8 +85,8 @@ class GetMCAll extends REST_Controller {
 					array_multisort($price, SORT_ASC, $merge_array["series"]);
 
 							$Pass_Data["data"][] = $merge_array;
-						} 
-					} 
+						}
+					}
 					$valid = ['status' => "true","statuscode" => 200,'response' =>$Pass_Data];
 					$this->set_response($Pass_Data, REST_Controller::HTTP_OK);
 				}else{

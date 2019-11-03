@@ -33,7 +33,8 @@ class GetMCByElement extends REST_Controller {
 			$token_status = check_token($user_id,$headers['Authorization']);
 			
 			if($token_status == TRUE){
-				$All_Answer = $this->GetMCByElement_modal->Get_Answer_MC_by_Element_ID($Element_ID);
+				$All_Answer = $this->GetMCByElement_modal->Get_Structured_Answers_by_Element($Element_ID);
+				$Total_Answers_By_Element = $this->GetMCByElement_modal->Get_Total_Answers_by_Element($Element_ID);
 				$Pass_Data = array();
 				$customArr = array('1','2','3','4');
 				$elementsArr = [];
@@ -45,12 +46,21 @@ class GetMCByElement extends REST_Controller {
 						$elementsArr[$i] = $All_Answer[$i]->answer;
 						}
 					}
-						
-					/* Default code */				
+
+					/* Get total count of answers for this element */
+					foreach($Total_Answers_By_Element as $key => $value){
+						$total = $value->total;
+					}
+
+					/* Build array for chart */			
 					foreach($All_Answer as $key => $value){
 						$merge_array = array(
 							"name" => $value->answer,
-							"value" => $value->num);
+							// "count" => $value->count,
+							// "sum" => $value->sum,
+							// "total" => $total,
+							"value" => number_format(($value->sum/$total),1));
+							// "value" => $value->count);
 						$Pass_Data["data"][] = $merge_array;
 					}
 

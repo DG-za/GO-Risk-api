@@ -3,12 +3,12 @@ require_once APPPATH . '/libraries/REST_Controller.php';
 require_once APPPATH . '/libraries/JWT.php';
 use \Firebase\JWT\JWT;
 
-class GetPerformanceMCByElement extends REST_Controller {
+class GetDesiredByElementUser extends REST_Controller {
 	/***************************************************************
 	*  Project Name : 4Xcellence Solutions
 	*  Created By :   
-	*  Created Date : 24-09-2019
-	*  Description : A controller contain GetPerformanceMCByElement related methods
+	*  Created Date : 25-09-2019
+	*  Description : A controller contain GetDesiredByElement related methods
 	*  Modification History :
 	*  
 	***************************************************************/
@@ -16,7 +16,7 @@ class GetPerformanceMCByElement extends REST_Controller {
 	public function __construct() {
 		parent::__construct();
 		$this->load->helper('check_token');				
-		$this->load->model('GetPerformanceMCByElement_modal');
+		$this->load->model('GetDesiredByElement_User_modal');
 	}
 	
 	public function index_post(){
@@ -28,52 +28,33 @@ class GetPerformanceMCByElement extends REST_Controller {
 		$message = 'Required field(s) user_id,element_id is missing or empty';
 		$user_id = $this->post('user_id');
 		$Element_ID = $this->post('element_id');
+		$assessment_type = $this->post('assessment_type');
 		if(isset($user_id) && isset($Element_ID)){
 			$headers = $this->input->request_headers();
 			$token_status = check_token($user_id,$headers['Authorization']);
 			
-			$Pass_Data["data"] = array();
 			if($token_status == TRUE){
-				$All_Answer = $this->GetPerformanceMCByElement_modal->Get_Structured_Performance_Answers_by_Element($Element_ID);
-				$Total_Answers_By_Element = $this->GetPerformanceMCByElement_modal->Get_Total_Performance_Answers_by_Element($Element_ID);
-
-				$Get_Answer_Array = array();
-				$merge_array = array();
-				if(!empty($All_Answer)){
-
-					/* Get total count of answers for this element */
-					foreach($Total_Answers_By_Element as $key => $value){
-						$total = $value->total;
+				$All_Desired = $this->GetDesiredByElement_User_modal->Get_Desired_by_Element_ID_User($Element_ID,$user_id,$assessment_type);
+				$Pass_Data = array();
+				if(!empty($All_Desired)){
+					foreach($All_Desired as $key => $value){
+						$merge_array[0]['name'] = 'compliant';
+						$merge_array[0]['value'] = $value->n1;
+						$merge_array[1]['name'] = 'proactive';
+						$merge_array[1]['value'] = $value->n2;
+						$merge_array[2]['name'] = 'resilient';
+						$merge_array[2]['value'] = $value->n3;
 					}
-
-					/* Build array for chart */	
-					foreach($All_Answer as $key => $value){
-						$merge_array[$value->answer] = array(
-							"name" => $value->answer,
-							// "count" => $value->count,
-							// "sum" => $value->sum,
-							// "total" => $total,
-							"value" => number_format(($value->sum/$total),1));
-							// "value" => $value->num);
-						$Get_Answer_Array[] = $value->answer;
-					}
-
-					$Answer_Array = array("1","2","3","4");
-					foreach($Answer_Array as $AA){
-						if(!in_array($AA,$Get_Answer_Array)){
-							$blank_merge_array = array("name" => $AA,"value" => 0);
-							$Pass_Data["data"][] = $blank_merge_array;
-						}else{
-							$Pass_Data["data"][] = $merge_array[$AA];
-						}
-					}
+					$Pass_Data["data"] = $merge_array;
 					$this->set_response($Pass_Data, REST_Controller::HTTP_OK);
 				}else{
-					$Answer_Array = array("1","2","3","4");
-					foreach($Answer_Array as $AA){
-						$merge_array = array("name" => $AA,"value" => 0);
-						$Pass_Data["data"][] = $merge_array;
-					}
+					$merge_array[0]['name'] = 'compliant';
+					$merge_array[0]['value'] = 0;
+					$merge_array[1]['name'] = 'proactive';
+					$merge_array[1]['value'] = 0;
+					$merge_array[2]['name'] = 'resilient';
+					$merge_array[2]['value'] = 0;
+					$Pass_Data["data"] = $merge_array;
 					$this->set_response($Pass_Data, REST_Controller::HTTP_OK);
 				}
 			}else if($token_status == FALSE){

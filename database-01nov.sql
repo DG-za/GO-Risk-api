@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 14, 2019 at 09:40 PM
+-- Generation Time: Nov 01, 2019 at 12:36 PM
 -- Server version: 10.1.30-MariaDB
 -- PHP Version: 7.2.2
 
@@ -40,11 +40,8 @@ CREATE TABLE `actions_measure` (
 --
 
 INSERT INTO `actions_measure` (`id`, `element`, `measure`, `victory`) VALUES
-(1, 16, '<ul _ngcontent-mph-c36=\"\"><li _ngcontent-mph-c36=\"\">test</li></ul>', 1),
-(2, 9, '<ul _ngcontent-vyi-c18=\"\"><li _ngcontent-vyi-c18=\"\">Test</li></ul>', 2),
-(3, 9, '<ul _ngcontent-scs-c39=\"\"><li _ngcontent-scs-c39=\"\">dfgdfg</li></ul>', 3),
-(4, 8, '<ul _ngcontent-hgj-c14=\"\"><li _ngcontent-hgj-c14=\"\">Test</li></ul>', 4),
-(5, 9, '<ul _ngcontent-hpy-c28=\"\"><li _ngcontent-hpy-c28=\"\">Test</li></ul>', 5);
+(1, 22, '<ul _ngcontent-ttf-c8=\"\"><li _ngcontent-ttf-c8=\"\">test</li></ul>', 1),
+(2, 8, '<ul _ngcontent-kfw-c17=\"\"><li _ngcontent-kfw-c17=\"\">testing</li></ul>', 2);
 
 -- --------------------------------------------------------
 
@@ -69,14 +66,9 @@ CREATE TABLE `actions_milestone` (
 --
 
 INSERT INTO `actions_milestone` (`id`, `element`, `milestone`, `responsible_person`, `start_date`, `end_date`, `comment`, `status`, `victory`) VALUES
-(1, 22, 'test', '[\"201\"]', '2019-10-09T22:00:00.000Z', '2019-10-15T22:00:00.000Z', 'commentss', 1, 1),
-(5, 22, 'test', '[\"201\"]', '2019-10-09T22:00:00.000Z', '2019-10-15T22:00:00.000Z', 'commentss', 1, 1),
-(4, 22, 'test', '[\"201\"]', '2019-10-09T22:00:00.000Z', '2019-10-15T22:00:00.000Z', 'commentss', 0, 1),
-(6, 22, 'test', '[\"201\"]', '2019-10-09T22:00:00.000Z', '2019-10-15T22:00:00.000Z', 'commentss', 1, 1),
-(7, 9, 'Test', '[\"201\"]', '2019-10-15T22:00:00.000Z', '2019-10-24T22:00:00.000Z', 'Test', 1, 2),
-(8, 9, 'Action 1 Name', '[\"201\"]', '2019-10-07T22:00:00.000Z', '2019-10-22T22:00:00.000Z', 'commdfdf', 1, 3),
-(9, 8, 'Test', 'Test', '2019-10-14T22:00:00.000Z', '2019-10-09T22:00:00.000Z', 'Test', 1, 4),
-(10, 9, 'test', 'test', '2019-10-14T22:00:00.000Z', '2019-10-01T22:00:00.000Z', 'test', 1, 5);
+(1, 22, 'test', 'test', '2019-10-22T11:00:00.000Z', '2019-10-30T11:00:00.000Z', 'test', 1, 1),
+(2, 22, 'test2', 'test', '2019-10-15T11:00:00.000Z', '2019-10-29T11:00:00.000Z', 'test', 0, 1),
+(3, 8, 'admin', 'Name1', '2019-11-11T11:00:00.000Z', '2019-11-13T11:00:00.000Z', 'employee', 0, 2);
 
 -- --------------------------------------------------------
 
@@ -96,11 +88,8 @@ CREATE TABLE `actions_results` (
 --
 
 INSERT INTO `actions_results` (`id`, `element`, `results`, `victory`) VALUES
-(1, 16, '2019-10-15T22:00:00.000Z', 1),
-(2, 9, '<ul _ngcontent-vyi-c18=\"\"><li _ngcontent-vyi-c18=\"\">Test</li></ul>', 2),
-(3, 9, '<ul _ngcontent-scs-c39=\"\"><li _ngcontent-scs-c39=\"\">dfvdf</li></ul>', 3),
-(4, 8, '2019-10-14T22:00:00.000Z', 4),
-(5, 9, '2019-10-14T22:00:00.000Z', 5);
+(1, 22, '2019-09-30T11:00:00.000Z', 1),
+(2, 8, '2019-11-11T11:00:00.000Z', 2);
 
 -- --------------------------------------------------------
 
@@ -120,11 +109,8 @@ CREATE TABLE `actions_risks` (
 --
 
 INSERT INTO `actions_risks` (`id`, `element`, `risk`, `victory`) VALUES
-(1, 16, '<ul _ngcontent-mph-c36=\"\"><li _ngcontent-mph-c36=\"\">test</li></ul>', 1),
-(2, 9, '<ul _ngcontent-vyi-c18=\"\"><li _ngcontent-vyi-c18=\"\">Test</li></ul>', 2),
-(3, 9, '<ul _ngcontent-scs-c39=\"\"><li _ngcontent-scs-c39=\"\">dfgfdgdfg</li></ul>', 3),
-(4, 8, '<ul _ngcontent-hgj-c14=\"\"><li _ngcontent-hgj-c14=\"\">Test</li></ul>', 4),
-(5, 9, '<ul _ngcontent-hpy-c28=\"\"><li _ngcontent-hpy-c28=\"\">Test</li></ul>', 5);
+(1, 22, '<ul _ngcontent-ttf-c8=\"\"><li _ngcontent-ttf-c8=\"\">test</li></ul>', 1),
+(2, 8, '<ul _ngcontent-kfw-c17=\"\"><li _ngcontent-kfw-c17=\"\">testing</li></ul>', 2);
 
 -- --------------------------------------------------------
 
@@ -149,11 +135,8 @@ CREATE TABLE `actions_victory` (
 --
 
 INSERT INTO `actions_victory` (`id`, `element`, `definition`, `teammembers`, `performance_elements`, `focusareaname`, `focusareaowner`, `created_at`, `last_midified`) VALUES
-(1, 16, 'testing', '[\"201\"]', '2', 'Name1', '201', '2019-10-12 12:42:26', '2019-10-14 03:47:11'),
-(2, 9, 'Defin', '[\"201\"]', '4', 'Test', '201', '2019-10-12 14:30:01', '2019-10-14 07:22:48'),
-(3, 9, 'Definimnkdfj;nv;kdf', '[\"201\"]', '4', 'Name', '201', '2019-10-14 07:25:47', '2019-10-14 07:22:54'),
-(4, 8, 'Test', '[\"220\",\"219\"]', '2', 'Test', '201', '2019-10-14 18:17:31', NULL),
-(5, 9, 'Test', '[\"220\",\"219\"]', '2', 'Test', '220', '2019-10-14 19:31:47', NULL);
+(1, 22, 'test', '[\"201\"]', '2', 'test', '201', '2019-10-19 23:15:18', NULL),
+(2, 8, 'test', '[\"201\"]', '4', 'Test', '222', '2019-11-01 10:06:09', '2019-10-31 21:06:33');
 
 -- --------------------------------------------------------
 
@@ -172,24 +155,43 @@ CREATE TABLE `answer_complete` (
 --
 
 INSERT INTO `answer_complete` (`id`, `user`, `element`) VALUES
-(9, 1, 22),
-(10, 1, 8),
-(11, 1, 10),
-(12, 1, 9),
-(13, 1, 16),
-(14, 1, 18),
-(15, 1, 17),
-(16, 1, 19),
-(17, 1, 11),
-(18, 1, 12),
-(19, 1, 14),
-(20, 219, 22),
-(21, 219, 8),
-(22, 219, 9),
-(23, 219, 10),
-(24, 201, 10),
-(25, 220, 22),
-(26, 220, 10);
+(14, 219, 18),
+(15, 219, 19),
+(13, 219, 17),
+(12, 219, 16),
+(11, 219, 9),
+(10, 219, 8),
+(9, 219, 22),
+(16, 219, 10),
+(17, 219, 11),
+(18, 219, 12),
+(19, 219, 13),
+(20, 220, 22),
+(21, 219, 14),
+(22, 220, 8),
+(23, 219, 15),
+(24, 219, 20),
+(25, 220, 9),
+(26, 219, 21),
+(27, 220, 16),
+(28, 220, 17),
+(29, 220, 18),
+(30, 220, 19),
+(31, 220, 10),
+(32, 220, 11),
+(33, 220, 12),
+(34, 220, 13),
+(35, 220, 14),
+(36, 220, 15),
+(37, 220, 20),
+(38, 220, 21),
+(39, 221, 22),
+(42, 1, 22),
+(43, 1, 8),
+(44, 1, 16),
+(45, 201, 22),
+(46, 201, 8),
+(47, 201, 9);
 
 -- --------------------------------------------------------
 
@@ -209,24 +211,45 @@ CREATE TABLE `answer_desired` (
 --
 
 INSERT INTO `answer_desired` (`id`, `user`, `element`, `desired`) VALUES
-(11, 1, 22, 3),
-(12, 1, 8, 4),
-(13, 1, 10, 3),
-(14, 1, 9, 2),
-(15, 1, 16, 4),
-(16, 1, 18, 4),
-(17, 1, 17, 2),
-(18, 1, 19, 2),
-(19, 1, 11, 3),
-(20, 1, 12, 3),
-(21, 1, 14, 4),
-(22, 219, 22, 3),
-(23, 219, 8, 3),
-(24, 219, 9, 3),
-(25, 219, 10, 3),
-(26, 201, 10, 3),
-(27, 220, 22, 3),
-(28, 220, 10, 3);
+(18, 219, 10, 4),
+(17, 219, 19, 3),
+(16, 219, 18, 3),
+(15, 219, 17, 3),
+(14, 219, 16, 4),
+(13, 219, 9, 3),
+(12, 219, 8, 3),
+(11, 219, 22, 3),
+(19, 219, 11, 3),
+(20, 219, 12, 4),
+(21, 219, 13, 3),
+(22, 220, 22, 2),
+(23, 219, 14, 3),
+(24, 220, 8, 2),
+(25, 219, 15, 3),
+(26, 219, 20, 3),
+(27, 220, 9, 2),
+(28, 219, 21, 4),
+(29, 220, 16, 2),
+(30, 220, 17, 2),
+(31, 220, 18, 3),
+(32, 220, 19, 2),
+(33, 220, 10, 3),
+(34, 220, 11, 2),
+(35, 220, 12, 3),
+(36, 220, 13, 3),
+(37, 220, 14, 3),
+(38, 220, 15, 3),
+(39, 220, 20, 3),
+(40, 220, 21, 3),
+(41, 221, 22, 2),
+(42, 1, 22, 3),
+(43, 1, 8, 4),
+(44, 1, 22, 3),
+(45, 1, 8, 3),
+(46, 1, 16, 3),
+(47, 201, 22, 3),
+(48, 201, 8, 3),
+(49, 201, 9, 4);
 
 -- --------------------------------------------------------
 
@@ -247,84 +270,275 @@ CREATE TABLE `answer_mc` (
 --
 
 INSERT INTO `answer_mc` (`id`, `user`, `element`, `question`, `answer`) VALUES
-(41, 1, 22, 64, 2),
-(42, 1, 22, 65, 3),
-(43, 1, 22, 66, 4),
-(44, 1, 22, 67, 1),
-(45, 1, 8, 8, 1),
-(46, 1, 8, 10, 3),
-(47, 1, 8, 68, 1),
-(48, 1, 8, 69, 2),
-(49, 1, 10, 16, 1),
-(50, 1, 10, 17, 3),
-(51, 1, 10, 18, 4),
-(52, 1, 10, 19, 1),
-(53, 1, 10, 20, 4),
-(54, 1, 9, 12, 1),
-(55, 1, 9, 13, 3),
-(56, 1, 9, 14, 4),
-(57, 1, 9, 15, 1),
-(58, 1, 16, 43, 1),
-(59, 1, 16, 44, 4),
-(60, 1, 16, 45, 2),
-(61, 1, 16, 46, 3),
-(62, 1, 16, 47, 3),
-(63, 1, 18, 52, 1),
-(64, 1, 18, 53, 4),
-(65, 1, 18, 54, 2),
-(66, 1, 18, 55, 3),
-(67, 1, 18, 56, 3),
-(68, 1, 17, 48, 1),
-(69, 1, 17, 49, 4),
-(70, 1, 17, 50, 3),
-(71, 1, 17, 51, 1),
-(72, 1, 19, 57, 1),
-(73, 1, 19, 58, 2),
-(74, 1, 19, 59, 3),
-(75, 1, 11, 21, 1),
-(76, 1, 11, 22, 3),
-(77, 1, 11, 23, 2),
-(78, 1, 11, 24, 4),
-(79, 1, 12, 25, 1),
-(80, 1, 12, 26, 2),
-(81, 1, 12, 27, 4),
-(82, 1, 12, 28, 4),
-(83, 1, 14, 33, 1),
-(84, 1, 14, 34, 2),
-(85, 1, 14, 35, 3),
-(86, 1, 14, 36, 4),
-(87, 1, 14, 37, 2),
-(88, 219, 22, 64, 1),
-(89, 219, 22, 65, 3),
-(90, 219, 22, 66, 4),
-(91, 219, 22, 67, 2),
-(92, 219, 8, 8, 1),
-(93, 219, 8, 10, 4),
-(94, 219, 8, 68, 2),
-(95, 219, 8, 69, 3),
-(96, 219, 9, 12, 1),
-(97, 219, 9, 13, 1),
-(98, 219, 9, 14, 1),
-(99, 219, 9, 15, 1),
-(100, 219, 10, 16, 1),
-(101, 219, 10, 17, 1),
-(102, 219, 10, 18, 1),
-(103, 219, 10, 19, 1),
-(104, 219, 10, 20, 1),
-(105, 201, 10, 16, 1),
-(106, 201, 10, 17, 1),
-(107, 201, 10, 18, 1),
-(108, 201, 10, 19, 1),
-(109, 201, 10, 20, 1),
-(110, 220, 22, 64, 3),
-(111, 220, 22, 65, 2),
-(112, 220, 22, 66, 3),
-(113, 220, 22, 67, 2),
-(114, 220, 10, 16, 1),
-(115, 220, 10, 17, 1),
-(116, 220, 10, 18, 1),
-(117, 220, 10, 19, 1),
-(118, 220, 10, 20, 1);
+(61, 219, 17, 51, 2),
+(60, 219, 17, 50, 2),
+(59, 219, 17, 49, 3),
+(58, 219, 17, 48, 2),
+(57, 219, 16, 47, 2),
+(56, 219, 16, 46, 2),
+(55, 219, 16, 45, 2),
+(54, 219, 16, 44, 1),
+(314, 201, 8, 8, 1),
+(52, 219, 9, 15, 2),
+(51, 219, 9, 14, 2),
+(50, 219, 9, 13, 2),
+(49, 219, 9, 12, 2),
+(48, 219, 8, 69, 2),
+(47, 219, 8, 68, 2),
+(46, 219, 8, 10, 2),
+(45, 219, 8, 8, 2),
+(316, 201, 8, 68, 4),
+(43, 219, 22, 66, 3),
+(42, 219, 22, 65, 2),
+(41, 219, 22, 64, 2),
+(62, 219, 18, 52, 2),
+(63, 219, 18, 53, 1),
+(64, 219, 18, 55, 2),
+(65, 219, 18, 54, 1),
+(66, 219, 18, 56, 2),
+(67, 219, 19, 57, 2),
+(68, 219, 19, 58, 1),
+(69, 219, 19, 59, 2),
+(70, 219, 10, 16, 3),
+(71, 219, 10, 17, 2),
+(72, 219, 10, 18, 1),
+(73, 219, 10, 19, 2),
+(74, 219, 10, 20, 2),
+(75, 219, 11, 21, 2),
+(76, 219, 11, 22, 3),
+(77, 219, 11, 23, 2),
+(78, 219, 11, 24, 2),
+(79, 219, 12, 25, 1),
+(80, 219, 12, 26, 1),
+(81, 219, 12, 27, 2),
+(82, 219, 12, 28, 1),
+(83, 219, 13, 29, 2),
+(84, 219, 13, 30, 3),
+(85, 219, 13, 31, 2),
+(86, 219, 13, 32, 2),
+(87, 220, 22, 64, 2),
+(88, 220, 22, 65, 2),
+(89, 220, 22, 66, 2),
+(315, 201, 8, 10, 3),
+(91, 219, 14, 33, 1),
+(92, 219, 14, 34, 2),
+(93, 219, 14, 35, 1),
+(94, 219, 14, 36, 1),
+(95, 219, 14, 37, 1),
+(96, 220, 8, 8, 2),
+(97, 220, 8, 10, 1),
+(98, 220, 8, 68, 1),
+(99, 220, 8, 69, 2),
+(100, 219, 15, 38, 2),
+(101, 219, 15, 39, 2),
+(102, 219, 15, 40, 2),
+(103, 219, 15, 41, 1),
+(104, 219, 15, 42, 2),
+(105, 220, 9, 12, 2),
+(106, 220, 9, 13, 1),
+(107, 220, 9, 14, 2),
+(108, 220, 9, 15, 1),
+(109, 219, 20, 70, 2),
+(110, 219, 20, 71, 2),
+(111, 219, 20, 72, 1),
+(112, 219, 21, 60, 2),
+(113, 219, 21, 61, 2),
+(114, 219, 21, 62, 1),
+(115, 219, 21, 63, 2),
+(313, 1, 9, 15, 1),
+(117, 220, 16, 44, 1),
+(118, 220, 16, 45, 2),
+(119, 220, 16, 46, 2),
+(120, 220, 16, 47, 2),
+(121, 220, 17, 48, 2),
+(122, 220, 17, 49, 2),
+(123, 220, 17, 50, 2),
+(124, 220, 17, 51, 1),
+(125, 220, 18, 52, 2),
+(126, 220, 18, 53, 2),
+(127, 220, 18, 54, 2),
+(128, 220, 18, 55, 1),
+(129, 220, 18, 56, 1),
+(130, 220, 19, 57, 2),
+(131, 220, 19, 58, 1),
+(132, 220, 19, 59, 1),
+(133, 220, 10, 16, 2),
+(134, 220, 10, 17, 1),
+(135, 220, 10, 18, 1),
+(136, 220, 10, 19, 1),
+(137, 220, 10, 20, 1),
+(138, 220, 11, 21, 2),
+(139, 220, 11, 22, 1),
+(140, 220, 11, 23, 2),
+(141, 220, 11, 24, 1),
+(142, 220, 12, 25, 1),
+(143, 220, 12, 26, 2),
+(144, 220, 12, 27, 1),
+(145, 220, 12, 28, 1),
+(146, 220, 13, 29, 2),
+(147, 220, 13, 30, 1),
+(148, 220, 13, 31, 2),
+(149, 220, 13, 32, 1),
+(150, 220, 14, 33, 1),
+(151, 220, 14, 34, 1),
+(152, 220, 14, 35, 2),
+(153, 220, 14, 36, 1),
+(154, 220, 14, 37, 2),
+(155, 220, 15, 38, 2),
+(156, 220, 15, 39, 2),
+(157, 220, 15, 40, 2),
+(158, 220, 15, 41, 1),
+(159, 220, 15, 42, 1),
+(160, 220, 20, 70, 2),
+(161, 220, 20, 71, 2),
+(162, 220, 20, 72, 1),
+(163, 220, 21, 60, 1),
+(164, 220, 21, 61, 2),
+(165, 220, 21, 62, 1),
+(166, 220, 21, 63, 1),
+(167, 221, 22, 64, 4),
+(168, 221, 22, 65, 2),
+(169, 221, 22, 66, 2),
+(309, 1, 16, 47, 1),
+(171, 221, 8, 8, 2),
+(172, 221, 8, 10, 3),
+(173, 221, 8, 68, 1),
+(174, 221, 8, 69, 3),
+(175, 221, 9, 12, 2),
+(176, 221, 9, 13, 1),
+(177, 221, 9, 14, 2),
+(178, 221, 9, 15, 3),
+(312, 1, 9, 14, 4),
+(180, 221, 16, 44, 1),
+(181, 221, 16, 45, 2),
+(182, 221, 16, 46, 2),
+(183, 221, 16, 47, 2),
+(184, 221, 17, 48, 2),
+(185, 221, 17, 49, 3),
+(186, 221, 17, 50, 2),
+(187, 221, 17, 51, 1),
+(188, 221, 18, 52, 1),
+(189, 221, 18, 53, 1),
+(190, 221, 18, 54, 2),
+(191, 221, 18, 55, 1),
+(192, 221, 18, 56, 3),
+(193, 221, 19, 57, 2),
+(194, 221, 19, 58, 2),
+(195, 221, 19, 59, 1),
+(196, 221, 10, 16, 3),
+(197, 221, 10, 17, 2),
+(198, 221, 10, 18, 1),
+(199, 221, 10, 19, 3),
+(200, 221, 10, 20, 2),
+(201, 221, 11, 21, 3),
+(202, 221, 11, 22, 4),
+(203, 221, 11, 23, 3),
+(204, 221, 11, 24, 3),
+(205, 221, 12, 25, 3),
+(206, 221, 12, 26, 3),
+(207, 221, 12, 27, 3),
+(208, 221, 12, 28, 2),
+(209, 221, 13, 29, 3),
+(235, 222, 8, 8, 3),
+(210, 221, 13, 30, 3),
+(308, 1, 16, 46, 3),
+(211, 221, 13, 31, 3),
+(233, 222, 22, 66, 4),
+(232, 222, 22, 65, 4),
+(212, 221, 13, 32, 2),
+(213, 221, 14, 33, 1),
+(214, 221, 14, 34, 3),
+(215, 221, 14, 35, 3),
+(216, 221, 14, 36, 1),
+(217, 221, 14, 37, 3),
+(218, 221, 15, 38, 3),
+(219, 221, 15, 39, 3),
+(220, 221, 15, 40, 1),
+(221, 221, 15, 41, 2),
+(222, 221, 15, 42, 3),
+(223, 221, 20, 70, 3),
+(224, 221, 20, 71, 2),
+(225, 221, 20, 72, 1),
+(226, 221, 21, 60, 2),
+(227, 1, 22, 64, 1),
+(228, 221, 21, 61, 2),
+(229, 221, 21, 62, 1),
+(230, 221, 21, 63, 1),
+(231, 222, 22, 64, 4),
+(236, 222, 8, 10, 3),
+(237, 222, 8, 68, 3),
+(238, 222, 8, 69, 2),
+(239, 222, 9, 12, 4),
+(240, 222, 9, 13, 3),
+(241, 222, 9, 14, 3),
+(242, 222, 9, 15, 3),
+(311, 1, 9, 13, 2),
+(244, 222, 16, 44, 3),
+(245, 222, 16, 45, 3),
+(246, 222, 16, 46, 2),
+(247, 222, 16, 47, 3),
+(248, 222, 18, 52, 3),
+(249, 222, 18, 53, 2),
+(250, 222, 18, 54, 2),
+(251, 222, 18, 55, 1),
+(252, 222, 18, 56, 3),
+(253, 222, 17, 48, 3),
+(254, 222, 17, 49, 3),
+(255, 222, 17, 50, 3),
+(256, 222, 17, 51, 2),
+(257, 222, 19, 57, 3),
+(258, 222, 19, 58, 3),
+(259, 222, 19, 59, 2),
+(260, 222, 10, 16, 3),
+(261, 222, 10, 17, 3),
+(262, 222, 10, 18, 3),
+(263, 222, 10, 19, 3),
+(264, 222, 10, 20, 2),
+(265, 222, 12, 25, 3),
+(266, 222, 12, 26, 3),
+(267, 222, 12, 27, 2),
+(268, 222, 12, 28, 3),
+(269, 222, 14, 33, 2),
+(270, 222, 14, 34, 2),
+(271, 222, 14, 35, 2),
+(272, 222, 14, 36, 2),
+(273, 222, 14, 37, 2),
+(274, 222, 11, 21, 2),
+(275, 222, 11, 22, 3),
+(276, 222, 11, 23, 3),
+(277, 222, 11, 24, 2),
+(278, 222, 13, 29, 2),
+(279, 222, 13, 30, 3),
+(280, 222, 13, 31, 3),
+(281, 222, 13, 32, 3),
+(282, 222, 15, 38, 3),
+(283, 222, 15, 39, 2),
+(284, 222, 15, 40, 3),
+(285, 222, 15, 41, 2),
+(286, 222, 15, 42, 2),
+(287, 222, 20, 70, 2),
+(288, 222, 20, 71, 2),
+(289, 222, 20, 72, 2),
+(290, 222, 21, 60, 2),
+(291, 222, 21, 61, 2),
+(292, 222, 21, 62, 2),
+(293, 222, 21, 63, 2),
+(294, 223, 22, 64, 2),
+(295, 223, 22, 65, 3),
+(296, 223, 22, 66, 4),
+(307, 1, 16, 45, 4),
+(298, 1, 22, 65, 2),
+(299, 1, 22, 66, 1),
+(306, 1, 16, 44, 2),
+(301, 201, 22, 64, 1),
+(302, 201, 22, 65, 2),
+(303, 201, 22, 66, 4),
+(310, 1, 9, 12, 3),
+(317, 201, 8, 69, 1),
+(318, 201, 9, 12, 1),
+(319, 201, 9, 13, 3),
+(320, 201, 9, 14, 4),
+(321, 201, 9, 15, 2);
 
 -- --------------------------------------------------------
 
@@ -344,52 +558,61 @@ CREATE TABLE `answer_proof` (
 --
 
 INSERT INTO `answer_proof` (`id`, `user`, `element`, `proof`) VALUES
-(23, 1, 22, 9),
-(24, 1, 22, 4),
-(25, 1, 8, 19),
-(26, 1, 8, 20),
-(27, 1, 8, 14),
-(28, 1, 8, 12),
-(29, 1, 8, 16),
-(30, 1, 10, 40),
-(31, 1, 10, 38),
-(32, 1, 9, 29),
-(33, 1, 9, 30),
-(34, 1, 9, 25),
-(35, 1, 9, 22),
-(36, 1, 16, 121),
-(37, 1, 16, 120),
-(38, 1, 16, 116),
-(39, 1, 16, 113),
-(40, 1, 16, 114),
-(41, 1, 18, 138),
-(42, 1, 18, 139),
-(43, 1, 18, 134),
-(44, 1, 18, 133),
-(45, 1, 17, 130),
-(46, 1, 17, 129),
-(47, 1, 17, 125),
-(48, 1, 19, 144),
-(49, 1, 19, 141),
-(50, 1, 19, 142),
-(51, 1, 11, 53),
-(52, 1, 11, 52),
-(53, 1, 11, 56),
-(54, 1, 12, 71),
-(55, 1, 12, 70),
-(56, 1, 12, 67),
-(57, 1, 14, 93),
-(58, 1, 14, 96),
-(59, 1, 14, 98),
-(60, 219, 22, 8),
-(61, 219, 22, 5),
-(62, 219, 8, 18),
-(63, 219, 8, 15),
-(64, 219, 9, 29),
-(65, 219, 10, 39),
-(66, 201, 10, 38),
-(67, 220, 22, 9),
-(68, 220, 10, 40);
+(32, 219, 16, 112),
+(31, 219, 16, 115),
+(30, 219, 9, 27),
+(29, 219, 9, 26),
+(28, 219, 9, 22),
+(27, 219, 8, 16),
+(26, 219, 8, 13),
+(25, 219, 22, 7),
+(24, 219, 22, 8),
+(23, 219, 22, 1),
+(33, 219, 16, 118),
+(34, 219, 17, 124),
+(35, 219, 17, 127),
+(36, 219, 18, 133),
+(37, 219, 18, 136),
+(38, 219, 19, 141),
+(39, 219, 19, 144),
+(40, 219, 10, 32),
+(41, 219, 10, 45),
+(42, 219, 11, 47),
+(43, 219, 11, 60),
+(44, 219, 11, 62),
+(45, 219, 12, 71),
+(46, 219, 12, 74),
+(47, 219, 13, 80),
+(48, 219, 13, 87),
+(49, 220, 22, 1),
+(50, 220, 22, 5),
+(51, 219, 14, 94),
+(52, 219, 14, 95),
+(53, 219, 15, 103),
+(54, 219, 15, 108),
+(55, 219, 20, 145),
+(56, 219, 20, 148),
+(57, 219, 21, 156),
+(58, 219, 21, 160),
+(59, 221, 22, 1),
+(60, 221, 22, 5),
+(61, 221, 22, 3),
+(62, 221, 22, 2),
+(63, 1, 22, 9),
+(64, 1, 22, 5),
+(65, 1, 8, 15),
+(66, 1, 22, 9),
+(67, 1, 8, 19),
+(68, 1, 8, 14),
+(69, 1, 16, 121),
+(70, 1, 16, 116),
+(71, 1, 16, 115),
+(72, 201, 22, 4),
+(73, 201, 22, 7),
+(74, 201, 8, 11),
+(75, 201, 8, 19),
+(76, 201, 9, 24),
+(77, 201, 9, 29);
 
 -- --------------------------------------------------------
 
@@ -434,75 +657,155 @@ CREATE TABLE `ci_sessions` (
 --
 
 INSERT INTO `ci_sessions` (`id`, `user_id`, `token`, `ip_address`, `timestamp`, `data`) VALUES
-('cd6b4e3f8bf0bda9', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcwODgxODM1LCJleHAiOjE1NzA4OTk4MzV9.in1c9jDchOAwLuIzil7y58n5GIAh82_e4_DaWl7UztU', '::1', 0, ''),
-('4943f09f9b3d21b7', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcwODkxODU0LCJleHAiOjE1NzA5MDk4NTR9.1CBfor1FIf-D1_-dKtgtq3k-PGXDu2fzoO6T5_3ynBE', '::1', 0, ''),
-('9f0b40eee534a249', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcwODkxODY3LCJleHAiOjE1NzA5MDk4Njd9.JICh8LkR-QL8mL1owhv2ZCO6vULdxdbJrwPoMpUZ6lY', '::1', 0, ''),
-('dac1d083a67920b4', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcwODk5Nzg0LCJleHAiOjE1NzA5MTc3ODR9.CfPVlcgAQubHLX5Glc6bwAh3_PecD_bU7d_9JpN5MS0', '::1', 0, ''),
-('b9a5cccf58f8e4d9', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcwOTU5NjY0LCJleHAiOjE1NzA5Nzc2NjR9.Quv48dBkXfh-q7J8zAW8HOFgOX6GjHV0_mY94OkoHVY', '::1', 0, ''),
-('42488357526e684e', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxMDM2OTk1LCJleHAiOjE1NzEwNTQ5OTV9.mz-7AU-AGhmr3Qwt6pFEkZYBeKwTKcE9jv2Y6RksNT4', '::1', 0, ''),
-('a5bfecf65e1a751c', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxMDM3MDIyLCJleHAiOjE1NzEwNTUwMjJ9.lsypvX6bvGAuT6qJiFrbWOrRGi0jriOZehZR18e7u6o', '::1', 0, ''),
-('3479839f70061246', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxMDM3NTY2LCJleHAiOjE1NzEwNTU1NjZ9.24EUVHrWVJEd6iE1MFuciZd70yQCL1VEh9iLih-IiQI', '::1', 0, ''),
-('5d2252a08bffa184', 201, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjIwMSIsInVzZXJuYW1lIjoibWFuYWdlciIsImlhdCI6MTU3MTAzODA1NywiZXhwIjoxNTcxMDU2MDU3fQ.ab_FQKlZuDliZDtUlW76xsSOQJ_QgO651C3bd78UFoE', '::1', 0, ''),
-('552e6b4fb03b7466', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxMDM4MDg3LCJleHAiOjE1NzEwNTYwODd9.WubK2eS-T-hFOftK2qwYSfmTHSG3SUjz1YPFiTUDKxY', '::1', 0, ''),
-('03cae3466cd4b011', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxMDQyMjI0LCJleHAiOjE1NzEwNjAyMjR9.UUdqnL0OxFLIAQHnxQnbL1wPxO6MU4OIp6zE5LwH9F8', '::1', 0, ''),
-('070c7aef7fd7aa7e', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxMDQyNzMxLCJleHAiOjE1NzEwNjA3MzF9.mUt_n_RF8GsQ4cyPWoZya1oZ0qTVfDRzv4JF4vFpfnQ', '::1', 0, ''),
-('42ea997f11b114ca', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxMDQ0MzI5LCJleHAiOjE1NzEwNjIzMjl9.0-QUNpU7N-g3EqRQM_Grj8sTdcuRz5lG-SRkAe6NKk4', '::1', 0, ''),
-('7f4503bba130bdb8', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxMDQ0MzYzLCJleHAiOjE1NzEwNjIzNjN9.K9na5NzWwbRKldPQs6eWrPsFYT3UAQbOv-RvYHkRFDw', '::1', 0, ''),
-('9c9e3d0a5f378f58', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxMDQ0Mzg3LCJleHAiOjE1NzEwNjIzODd9.n8SFZ7s5zF4eRY7WOx9kna7VIJbPY1LTTBy-sfplmPg', '::1', 0, ''),
-('cc4639533f93d8d7', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxMDQ0NTA1LCJleHAiOjE1NzEwNjI1MDV9.4kk7kpzXIqxx5yKXLnPIXH2ktBu4thWL0UOiXkw6lZY', '::1', 0, ''),
-('300990063067c348', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxMDQ0NTMyLCJleHAiOjE1NzEwNjI1MzJ9.tm9vJRkjOQPD-jWbZGtuHFalwTwughPDXHmVBUwy1Ms', '::1', 0, ''),
-('93bad56d20e3c1de', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxMDQ0NTQ0LCJleHAiOjE1NzEwNjI1NDR9.-D0e4RBZBfhG_LSnAdq3c_sq1CSkbV4W8tbUzYqNNRo', '::1', 0, ''),
-('fd3036da8ed5ad40', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxMDQ0NTUxLCJleHAiOjE1NzEwNjI1NTF9.uY7ealVAS4Tm4yqhIv86c9JgCt0Jg_AzGBKHuax7dHs', '::1', 0, ''),
-('79cd0dc253aa06d7', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxMDQ0NzIwLCJleHAiOjE1NzEwNjI3MjB9.7JmZTOFSJFlU96TUvS3-VrBJMtWfNj8O5bL9l15Pdb0', '::1', 0, ''),
-('15dee04b307b1c0e', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxMDQ1NTAyLCJleHAiOjE1NzEwNjM1MDJ9.gArt5JmHBZZ7w-2AKeeY1Yn8mIRwCm9pqhawnKcOZkg', '::1', 0, ''),
-('9c69ea57fbb1eea1', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxMDQ1NTE5LCJleHAiOjE1NzEwNjM1MTl9.B_89UkwJ_J4fjWNLdLiTwIE6BQ8sNgQgV-KvllgiCXg', '::1', 0, ''),
-('6b39d561961f66a6', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxMDQ1NTc3LCJleHAiOjE1NzEwNjM1Nzd9.VJgkYIrqxZrF-B11HN-XYDv7O6qXi6Z4RFp6OCV2Grs', '::1', 0, ''),
-('853697ec2f816fb7', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxMDQ1Njc1LCJleHAiOjE1NzEwNjM2NzV9.dCIRZLZJzD0k9WBGpj9hliuH2fTkdIdiepkzf1P_FEs', '::1', 0, ''),
-('ad804c319a18f745', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxMDQ1NjgwLCJleHAiOjE1NzEwNjM2ODB9.zZuovmzvnsFn9aORWes6FLwyrbVrUMMiMVXirpzpzqs', '::1', 0, ''),
-('fff20a736a81c2df', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxMDQ1Njk2LCJleHAiOjE1NzEwNjM2OTZ9.ovl49gxz6U62_KollQXC8_39Qr8E7zR19ks765q_B3s', '::1', 0, ''),
-('240f90c2a8bb436e', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxMDQ1NzA2LCJleHAiOjE1NzEwNjM3MDZ9.f_3xhscbvH2e2tR5Htz2R-mD0yi21fNwmDUQfgJnybk', '::1', 0, ''),
-('6390a0ca0ba67f05', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxMDQ1NzE1LCJleHAiOjE1NzEwNjM3MTV9.7Fo8EN0eNM01uonCTNYzZR3K3IhH6JZJ_AHbgNUtI0M', '::1', 0, ''),
-('41971f5e73814198', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxMDUxMTYxLCJleHAiOjE1NzEwNjkxNjF9.4FZ45wie8RRPmtntRMypKK3I6E5C7Wu0-ZOmxZSENFs', '::1', 0, ''),
-('783a0b7e42f5a276', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxMDUxMTczLCJleHAiOjE1NzEwNjkxNzN9.K2p9Ni5jE8yxMpZWP5xX8V-S9BIRzf3THxWR_L18s3E', '::1', 0, ''),
-('3838708f8f94d724', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxMDU3OTAzLCJleHAiOjE1NzEwNzU5MDN9.OSSzaPE27-KyHSus13Ic0_bGRqum4LUb0JbtsaKkDRs', '::1', 0, ''),
-('48079c1b645bd035', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxMDU3OTQzLCJleHAiOjE1NzEwNzU5NDN9.YJ-510SUAaIJi_-JpsqEfqd82lH5bxX3c4jdg4bUCbM', '::1', 0, ''),
-('621a1c4c734b38b2', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxMDU5MTUxLCJleHAiOjE1NzEwNzcxNTF9.-vGaRctpz3JG8UsIRvKCQXvABFyveqMkOCjHCVidUew', '::1', 0, ''),
-('a9e0ed6a3c3f179f', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxMDU5MzU3LCJleHAiOjE1NzEwNzczNTd9.5hr4d1VNKCcY6phUfPf70AlA6koxAdVkuUEJYRcXiFA', '::1', 0, ''),
-('8ec099bb46b94aad', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxMDU5NjE1LCJleHAiOjE1NzEwNzc2MTV9.vuw9d08NG5f2CIb4E4G6Emfu31KHiyTzo15TOVfAe9w', '::1', 0, ''),
-('6f39b169e989eeda', 201, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjIwMSIsInVzZXJuYW1lIjoibWFuYWdlciIsImlhdCI6MTU3MTA2MDc4NSwiZXhwIjoxNTcxMDc4Nzg1fQ.MXDEc0p4wdedB7JBDXN9aR-V9cthIRnaZpLTymVP2bs', '::1', 0, ''),
-('6d3a2307f70a1492', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxMDYwOTQxLCJleHAiOjE1NzEwNzg5NDF9.hbn_gw_e-oSjXbabQ-fAkzOGbwX9XwDrzi7JFQFMUMQ', '::1', 0, ''),
-('8fdc238576189750', 201, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjIwMSIsInVzZXJuYW1lIjoibWFuYWdlciIsImlhdCI6MTU3MTA2MTQ0OSwiZXhwIjoxNTcxMDc5NDQ5fQ.5lGfuSRXr0tn_szDfwlILvQyy3PTHbNeEmLicnh3j4o', '::1', 0, ''),
-('b55644f868267963', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxMDYzODkwLCJleHAiOjE1NzEwODE4OTB9.naFlFFS8ws7onBYIJNnfiFL_oSoM6h3aIiBnr2sk_OU', '::1', 0, ''),
-('c73349d0cef1ae3e', 219, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjIxOSIsInVzZXJuYW1lIjoiZW1wbG95ZWUiLCJpYXQiOjE1NzEwNjM5NDcsImV4cCI6MTU3MTA4MTk0N30.Zm7s4Y56cVDNBOzvD14XmBVfNi1F19ZLAacY-9t-J2I', '::1', 0, ''),
-('c37a9ea392127c03', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxMDYzOTY4LCJleHAiOjE1NzEwODE5Njh9.HlWSVuYDTUm6orokh5wOEWLFrIVA-riBUh0T5OdksAM', '::1', 0, ''),
-('94fb05e7b709f4e0', 219, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjIxOSIsInVzZXJuYW1lIjoiZW1wbG95ZWUiLCJpYXQiOjE1NzEwNjQ0OTMsImV4cCI6MTU3MTA4MjQ5M30.BYhW-I7-J7uv3g2iFCXTX59i7YAWC71qEUwBExNo6vM', '::1', 0, ''),
-('d8516f9fef5a3d8a', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxMDY0NTIxLCJleHAiOjE1NzEwODI1MjF9.P-DjtYC1CVmUnKV7EDkGuA1ew8nrEs8RPy1Yjr-Tp0o', '::1', 0, ''),
-('1a1e3b0c35051a8c', 201, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjIwMSIsInVzZXJuYW1lIjoibWFuYWdlciIsImlhdCI6MTU3MTA2NDYxMSwiZXhwIjoxNTcxMDgyNjExfQ.9gHaeVDazHEp7G25T8RHL1RL_xfwF3eD3dVRI119KYA', '::1', 0, ''),
-('1e552889b462cea1', 220, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjIyMCIsInVzZXJuYW1lIjoiZW1wbG95ZWUxIiwiaWF0IjoxNTcxMDY0NjYwLCJleHAiOjE1NzEwODI2NjB9.BngdwHWE77Yds4K5k-JthoeSPbkzJ_4-OZctPPg1If0', '::1', 0, ''),
-('77f2167937a8c7d5', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxMDczOTk3LCJleHAiOjE1NzEwOTE5OTd9.e_2wiUeo7Z8-i03Q3QWKewp5krzrJk8zTxbQa2zw0hM', '::1', 0, ''),
-('4e28074d166942f3', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxMDc0NzUzLCJleHAiOjE1NzEwOTI3NTN9.BV2T7VkuzF66ZLF8H88z3-SGKHkecKfviQBotLsy7pI', '::1', 0, ''),
-('aab8372eabf808b1', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxMDc0NzYwLCJleHAiOjE1NzEwOTI3NjB9.wjc52KfjL2eSpySXMzqj4EHKJzEHjq03H1_DXIubQ9w', '::1', 0, ''),
-('590e7ebb5f55e2fe', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxMDc0Nzc0LCJleHAiOjE1NzEwOTI3NzR9.cb18ODo0VhihQsTK7wjddYfgIxchBLdAiUCTOnJsrhQ', '::1', 0, ''),
-('fdec68fc6311c3ab', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxMDc0NzgxLCJleHAiOjE1NzEwOTI3ODF9.aS-Ou2mLwellntHLajGIc0vYcbmmtximpUoiEq1OJ0A', '::1', 0, ''),
-('6457ec0f99ecd7a1', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxMDc1MTE1LCJleHAiOjE1NzEwOTMxMTV9.xSyExySDfuJMuiNb3gCYqaxkZ269iOGSCapsCgiNYLA', '::1', 0, ''),
-('b04c0d211e749141', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxMDc1NDQ5LCJleHAiOjE1NzEwOTM0NDl9.iQ4LAjd6cXXqEemFGQIWDWF3g29y6h0z4YHHC930pVY', '::1', 0, ''),
-('1efb42eb013c6503', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxMDc2MDI3LCJleHAiOjE1NzEwOTQwMjd9.T_aZiJCN13TkSiTo-5C5lfU4-lE4Jc2W2sSPPc4OUsg', '::1', 0, ''),
-('8ad0e9d705479615', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxMDc2MDY1LCJleHAiOjE1NzEwOTQwNjV9.ELMdNapT6mYIvd4Z17p3IdgwWq1QUXjA6RoV6Av5oVg', '::1', 0, ''),
-('f75f1a6cfcea8b5e', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxMDc2MDgzLCJleHAiOjE1NzEwOTQwODN9.yueKtLTi9pMGdtrikA-UIn9SkATc6FGdXhMiXl1QtLk', '::1', 0, ''),
-('14b523aeef49d969', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxMDc2MTQ1LCJleHAiOjE1NzEwOTQxNDV9.QpxriovmAoQ9Ps7IaluFf_rllJeg0u51wmiJw5REwwI', '::1', 0, ''),
-('1371ace92bf0113a', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxMDc2MTY1LCJleHAiOjE1NzEwOTQxNjV9.X3aTK2UesX-PSmSKw0ySwIWxCb20nx1IPBqkJaS-NyY', '::1', 0, ''),
-('c45e721c303c0cb7', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxMDc2MjI5LCJleHAiOjE1NzEwOTQyMjl9.5poO6o-_LHqLmA7D-jA3ZTA5pKypZD5SYaow77_ftZw', '::1', 0, ''),
-('bdc8f5c8f033a3db', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxMDc2MzExLCJleHAiOjE1NzEwOTQzMTF9.f1aWxJgQsrhiHWwXJ37zYRqKq2jkEsGxvPy6uQR2jRs', '::1', 0, ''),
-('4bb4cafb4e9cc15b', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxMDc2MzIzLCJleHAiOjE1NzEwOTQzMjN9.MnbzDR_KqPQd88oAkxNPBheopImmgz3IrcmpYiVfU_8', '::1', 0, ''),
-('371310d65eca557e', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxMDc2NDMxLCJleHAiOjE1NzEwOTQ0MzF9.BD3THAPhd7HXimSIUX6Wwt7RXv7T2Swkj4bV86Smwok', '::1', 0, ''),
-('ce291070d7af0ff4', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxMDc2NDQ1LCJleHAiOjE1NzEwOTQ0NDV9.3S6UN2AvMVgiApG2BYgdjCpUiDuZtnO5P6aq5TERJzk', '::1', 0, ''),
-('da681696dafbf10b', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxMDc2NDY1LCJleHAiOjE1NzEwOTQ0NjV9.X-lPmNee1EsPnjlve5wrabBjuDkT5iVUYqdq45SKdYU', '::1', 0, ''),
-('fcc32bde9e2a5e4f', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxMDc2NDg1LCJleHAiOjE1NzEwOTQ0ODV9.fDQKgDZyEKJLtuuzVq3o-_HNaUbdAO-4AaI5ZOciORk', '::1', 0, ''),
-('c4d4d28313d73fff', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxMDc2NTE3LCJleHAiOjE1NzEwOTQ1MTd9.DwNQ10qAhQZIDPaY2ITu2uK_z3YZxqgBufjYvwhQqqo', '::1', 0, ''),
-('5f4203701f84bf14', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxMDc3MDEzLCJleHAiOjE1NzEwOTUwMTN9.DRaiEQnYx7V-3ZvS7gO5_PGXS80dlTW8dcxMzPkeYpg', '::1', 0, ''),
-('75497d265b0a5410', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxMDc3ODk3LCJleHAiOjE1NzEwOTU4OTd9.GLBnYpGqJaIIVuotcBDdbyt95TjoMsfzwlu-HSI0DHI', '::1', 0, ''),
-('3911dee0362cd28f', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxMDgxMTgzLCJleHAiOjE1NzEwOTkxODN9.q0MxmIgUFmxdrF4Z9KHSLAy3q0ckkb2BJjuTvP4fm6o', '::1', 0, ''),
-('fb4d56cb062473db', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxMDgxNDY1LCJleHAiOjE1NzEwOTk0NjV9.b-1imjmPOJkUM9uFBuHNDFWsxojV-faYlSc-hOqh-2g', '::1', 0, '');
+('4355e5d2ecea356f', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcwNjQ0NzYwLCJleHAiOjE1NzA2NjI3NjB9.jxXfUyC9xiULXOcIZN3ItmbZAygD0PUafqA8hiqF-lc', '102.132.141.56', 0, ''),
+('66ff8a16a7efadd2', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcwNjQ0ODIzLCJleHAiOjE1NzA2NjI4MjN9.uSsJX6NXr4ai-neo2vHWOqVykN6SKnZzlEO7kkAfDkY', '102.132.141.56', 0, ''),
+('f9d8dfc12e03e358', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcwNjQ1NjYxLCJleHAiOjE1NzA2NjM2NjF9.qdkgMsAap-7Apvj1DzqjcyrPNsKlAcQ3kYufiv00NFA', '102.132.141.56', 0, ''),
+('7b51793d883f64bf', 201, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjIwMSIsInVzZXJuYW1lIjoibWFuYWdlciIsImlhdCI6MTU3MDY0NTY3NywiZXhwIjoxNTcwNjYzNjc3fQ.3x_LBDlJzl7XFch8qa1-Ve6MwDCgEKhnr1ItcBaL8Dc', '102.132.141.56', 0, ''),
+('71aa97cb6590a223', 201, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjIwMSIsInVzZXJuYW1lIjoibWFuYWdlciIsImlhdCI6MTU3MDY0NjE1MywiZXhwIjoxNTcwNjY0MTUzfQ.gZwDJeyJvGWpze59Ik8MHPqak8T20unM92SlXLadnKU', '102.132.141.56', 0, ''),
+('ae9ec399aa959a37', 201, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjIwMSIsInVzZXJuYW1lIjoibWFuYWdlciIsImlhdCI6MTU3MDY0NjQyMiwiZXhwIjoxNTcwNjY0NDIyfQ.95bSPIeVnXgyiyjcbbIX3pXil6PuGEKTeMa6Y_El8ZQ', '102.132.141.56', 0, ''),
+('82c8617b1aedc2b5', 210, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjIxMCIsInVzZXJuYW1lIjoiY2hwcmV0QGdtYWlsLmNvbSIsImlhdCI6MTU3MDY0NzkzNywiZXhwIjoxNTcwNjY1OTM3fQ.vPuKz4OWSxKJvtKqncUvB6k1XkR_jZ4D3oXTQ06uf4Q', '102.132.141.56', 0, ''),
+('e3696dfa72569873', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcwNjU2NTI0LCJleHAiOjE1NzA2NzQ1MjR9.dOMEItC2cpaYDu4CeFD9cGlnkrd_3Esn4BnT8BVkxig', '102.132.141.56', 0, ''),
+('417422d8c80e4a9d', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcwNjU2NTg5LCJleHAiOjE1NzA2NzQ1ODl9.d6DeO_pWIIyhZOvXRwnDgicOgLQbAnZRuDgtR8qQ7Is', '102.132.141.56', 0, ''),
+('0db5fc43ed6e45a3', 201, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjIwMSIsInVzZXJuYW1lIjoibWFuYWdlciIsImlhdCI6MTU3MDY1NjY2NCwiZXhwIjoxNTcwNjc0NjY0fQ.GKnBU4H4rnRzQB9P3-2Eu_ysKFqSrk9vIqB_QvIg-Vk', '102.132.141.56', 0, ''),
+('6653e65890813548', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcwNjU2ODE5LCJleHAiOjE1NzA2NzQ4MTl9.wWHOnqJtdnQ3pV6tFSTwKV_7Xmtne-r0978XbaIg_Rk', '102.132.141.56', 0, ''),
+('a8ee0e81aba5a02f', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcwNjU3ODEwLCJleHAiOjE1NzA2NzU4MTB9.n_fTDBT2e9ycnvD9voNpvz7nnDsrPoE5HgnaF6_zzjU', '102.132.141.56', 0, ''),
+('5560734387c227e3', 211, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjIxMSIsInVzZXJuYW1lIjoiY2hyaXN0b0BjcmlzcHdvcmtzLmNvLnphIiwiaWF0IjoxNTcwNjU3OTg5LCJleHAiOjE1NzA2NzU5ODl9.0MNR1SzMUNHUehZk1KKHyZs_2spLoREI3Ultxuf8fr8', '102.132.141.56', 0, ''),
+('4625fdd2c048160b', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcwNjU5MDA5LCJleHAiOjE1NzA2NzcwMDl9.I6SEZl819CPisfEJIcfS7q75yk11FPa0NaCrm0ZbxhA', '102.132.141.56', 0, ''),
+('92f9a72148355649', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcwNjU5Mzk3LCJleHAiOjE1NzA2NzczOTd9.Z85RJlWr8r8EmaCDLXE3N1k3oHqJx-enjVsWgbTwyVY', '102.132.141.56', 0, ''),
+('056cd79584c81a29', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcwNjU5ODM0LCJleHAiOjE1NzA2Nzc4MzR9.cVBtt1W3faUN1k85PjxOYmyQQPS5jCfPYc2gmsG2bX4', '102.132.141.56', 0, ''),
+('63717ffa08686a4a', 212, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjIxMiIsInVzZXJuYW1lIjoicmloYW4uc2NoYWxrd3lrQDR4Y2VsbGVuY2Uuc29sdXRpb25zIiwiaWF0IjoxNTcwNjYwOTEzLCJleHAiOjE1NzA2Nzg5MTN9.h-Mlo3U2aMRNAQ-PwF97kEcl-kyst10RDpcQx1KNV0A', '1.144.109.167', 0, ''),
+('92bdbad398b4ef5e', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcwNjkzMzk0LCJleHAiOjE1NzA3MTEzOTR9.Lg1WyQL7PI3GxfY2h_rFV_WNYBxTpbxuMCiAPu6Z5i8', '102.132.141.56', 0, ''),
+('226538d5b9aafd25', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcwNjkzNTAxLCJleHAiOjE1NzA3MTE1MDF9.UaRzyD1J4Apf33MzOclALYI0894ZYwAAllOW-m28DmQ', '102.132.141.56', 0, ''),
+('c7000a6d0d4490dc', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcwNjkzNTIzLCJleHAiOjE1NzA3MTE1MjN9.lxBZKVi_RKX7i-KGEDPNpppOBV3kAjEaIDbpX1OujrM', '102.132.141.56', 0, ''),
+('66608420f299815e', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcwNjkzNTYyLCJleHAiOjE1NzA3MTE1NjJ9.tJFYlqkvLsUHAuwNHQD8fiIef5u-lpLJBBK3UWqkNiw', '102.132.141.56', 0, ''),
+('c2dbb1f38c0b3c22', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcwNjkzNjc5LCJleHAiOjE1NzA3MTE2Nzl9.XLHnFSNU4_mlodwBN7AbPhpq15ktwv2KQcg7G4rOF1o', '41.189.87.94', 0, ''),
+('3ee31d28b4ca7adc', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcwNjkzNjgwLCJleHAiOjE1NzA3MTE2ODB9.tj4bGBjk2OknzL8OC3FD4ekmmnihnJgW1Qtpb6q3FXw', '102.132.141.56', 0, ''),
+('08d9dd4693720a57', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcwNjkzOTA3LCJleHAiOjE1NzA3MTE5MDd9.7_BMECFX9zm3E0vQUD7GgFlOjtrHdkhNL6LKSq-vX9U', '102.132.141.56', 0, ''),
+('f74c6dabe23a3733', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcwNjk0Njg4LCJleHAiOjE1NzA3MTI2ODh9.DNP5InUfbfjlpaX7erH67mQBNFjYzS8J7Bit0lY72fY', '102.132.141.56', 0, ''),
+('52c6677f1f1640aa', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcwNjk0ODE4LCJleHAiOjE1NzA3MTI4MTh9.LAsPwmrC_3PYyF5UhIX_TOxkDxW0fFvKmOhrXjAARAw', '102.132.141.56', 0, ''),
+('f6908ca99527810f', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcwNjk3MTE5LCJleHAiOjE1NzA3MTUxMTl9.eYScyMKgtKfm8Gaar1b1AE6qpFUcJHJqDxcTwVZlQvU', '102.132.141.56', 0, ''),
+('c1797bf13fee7493', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcwNjk3NzU1LCJleHAiOjE1NzA3MTU3NTV9.ygXHlYvRBb9-aSECjz2TLMsRhpAGmMmQdDV4sfgQBEQ', '169.255.76.236', 0, ''),
+('4c842d7f67b770f7', 216, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjIxNiIsInVzZXJuYW1lIjoibWFyaW5kYS5zd2FydEBzYXNvbC5jb20iLCJpYXQiOjE1NzA3MDc1MjMsImV4cCI6MTU3MDcyNTUyM30.7TdyryyTxK0PlscUn6klGwYUrkTYSt7e3G_gEMkt6YE', '105.22.32.98', 0, ''),
+('f71c91fb8ed9b3a6', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcwNzA3Nzk2LCJleHAiOjE1NzA3MjU3OTZ9.VvbPDIzsZd2awRV_KpuPL9u8T-oPxN0LyUmweQ11zlc', '102.132.141.56', 0, ''),
+('ef6063061199131d', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcwNzA3ODExLCJleHAiOjE1NzA3MjU4MTF9.M5k_Ik-V2CKJt2vf9Y6IRF4uQcIkcmkycTy68E3l0vs', '102.132.141.56', 0, ''),
+('780bb61264044588', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcwNzA3ODI0LCJleHAiOjE1NzA3MjU4MjR9.wqo6ecJ2fV7-rxrE1UBtt1wOkTec8ZPWh6euegsh1Jk', '102.132.141.56', 0, ''),
+('ca72580a56368a32', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcwNzA3ODU5LCJleHAiOjE1NzA3MjU4NTl9.nW_w0B3iYu2yM2TdMu2Xh9dXrjTEDoavfbWztCmR6AY', '102.132.141.56', 0, ''),
+('0f3269584ec410b4', 217, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjIxNyIsInVzZXJuYW1lIjoid2ltcGllLnBpZXRlcnNAc2Fzb2wuY29tIiwiaWF0IjoxNTcwNzE4NDQ4LCJleHAiOjE1NzA3MzY0NDh9.1_Rc7GdSzIh-u2t5dxa6FiWM--HQFdERmLxFw6fFhnc', '102.129.55.226', 0, ''),
+('362e5fc2747d2bf8', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcwNzE5MDMzLCJleHAiOjE1NzA3MzcwMzN9.oQHvxqokV33N-OkF3trzDw_6RzY0x7T_fgdYzLohS_A', '102.132.141.56', 0, ''),
+('f6045a8a00381089', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcwNzE5MTI5LCJleHAiOjE1NzA3MzcxMjl9.uyT6aCqdzfTqeBFv7FsE0Zzb6vRQXMGQXkTIp4ncyK8', '102.132.141.56', 0, ''),
+('0d1eb01f96642255', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcwNzE5MjE4LCJleHAiOjE1NzA3MzcyMTh9.tHSzlf-EkPkYNu--ZpKRZDTBKcq-_8Icx_BCFd0F26Y', '102.132.141.56', 0, ''),
+('3ff26eef1abe2ff6', 217, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjIxNyIsInVzZXJuYW1lIjoid2ltcGllLnBpZXRlcnNAc2Fzb2wuY29tIiwiaWF0IjoxNTcwNzE5NDY2LCJleHAiOjE1NzA3Mzc0NjZ9.eUA0G4_calFqmiNY7In-AxrACCnNpzgbwR5SceNN56c', '102.129.55.226', 0, ''),
+('5697c3cd5e8db171', 217, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjIxNyIsInVzZXJuYW1lIjoid2ltcGllLnBpZXRlcnNAc2Fzb2wuY29tIiwiaWF0IjoxNTcwNzIwMTY0LCJleHAiOjE1NzA3MzgxNjR9.Vt_ERMR7wanyWqkCsseY3gZyqjinHsjPDi6jYkoq2Xk', '41.13.28.130', 0, ''),
+('4b0d20828ae71b32', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcwNzIwNDE5LCJleHAiOjE1NzA3Mzg0MTl9.4ChR0MQEuYEKmHsaAsTZrYBQGnPoq_gaHp44Gii3JX8', '102.132.141.56', 0, ''),
+('ae0fc0be95e188a4', 217, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjIxNyIsInVzZXJuYW1lIjoid2ltcGllLnBpZXRlcnNAc2Fzb2wuY29tIiwiaWF0IjoxNTcwNzIwNjIwLCJleHAiOjE1NzA3Mzg2MjB9.VWSoH-gLueEnCEChdLAHl-3f2dIDiLcP6weEP0ubNTM', '102.129.55.226', 0, ''),
+('2aad3cf66a399672', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcwNzIwOTIzLCJleHAiOjE1NzA3Mzg5MjN9.KrRwcntiYJW7071MZgYmX4gReVByDf5IyV_u1jtLTvk', '102.132.141.56', 0, ''),
+('0fe105ef1b33f0f6', 216, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjIxNiIsInVzZXJuYW1lIjoibWFyaW5kYS5zd2FydEBzYXNvbC5jb20iLCJpYXQiOjE1NzA3MjM5MjYsImV4cCI6MTU3MDc0MTkyNn0._x-cK7dq_ICMdUYiFPe7D5HvOuM2lmqkjx96rL0oi5Y', '105.225.202.30', 0, ''),
+('ad5347c4d2909eae', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcwNzI0MDA0LCJleHAiOjE1NzA3NDIwMDR9.jOvNevMVKlK07-TnYNoE_1E7Ro22YZxiC2WRQPHoCo8', '102.132.141.56', 0, ''),
+('cf734cd992d7bd27', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcwNzI0MTM5LCJleHAiOjE1NzA3NDIxMzl9.sQN7oJGUGSGbDXWpSZwJ5z8swOp7ndDzzSINgmpuV1o', '102.132.141.56', 0, ''),
+('6a982adf4393f74f', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcwNzI2Mzc0LCJleHAiOjE1NzA3NDQzNzR9.Gu7sweA5lwWOjNKo36BCER4QlLsGuu-EGIExRacqu-c', '123.201.227.168', 0, ''),
+('0521d561abd5a201', 201, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjIwMSIsInVzZXJuYW1lIjoibWFuYWdlciIsImlhdCI6MTU3MDcyNjY2NSwiZXhwIjoxNTcwNzQ0NjY1fQ.qrXRjwfjVIQhzIyRLaXIxIq93JTTXz9luV6EQ0nkxB8', '123.201.227.168', 0, ''),
+('d96a1d84a5bdb011', 201, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjIwMSIsInVzZXJuYW1lIjoibWFuYWdlciIsImlhdCI6MTU3MDcyNjcwNCwiZXhwIjoxNTcwNzQ0NzA0fQ.goQFkv92JFQkGD173F5WYISrrG-hShxjepHhwoXNndY', '123.201.227.168', 0, ''),
+('b8e2496615ee58de', 201, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjIwMSIsInVzZXJuYW1lIjoibWFuYWdlciIsImlhdCI6MTU3MDcyNjk5NywiZXhwIjoxNTcwNzQ0OTk3fQ.ekSYl8_LyWL-ftKed1UbGJkAkYKxoB6NnWsYsM93aTA', '123.201.227.168', 0, ''),
+('4d9c853f7e1188cf', 201, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjIwMSIsInVzZXJuYW1lIjoibWFuYWdlciIsImlhdCI6MTU3MDcyNzMyNCwiZXhwIjoxNTcwNzQ1MzI0fQ.AiTf4vrNUBOe_-q8X-BU4mwJKrj-T6zovEFOl-tZtKc', '123.201.227.168', 0, ''),
+('6e4cdf1dbcc78fe3', 216, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjIxNiIsInVzZXJuYW1lIjoibWFyaW5kYS5zd2FydEBzYXNvbC5jb20iLCJpYXQiOjE1NzA3MjgwNjQsImV4cCI6MTU3MDc0NjA2NH0.3YA34EUVcbDSnLipYkfxMbP-9FbZN0kLuH7duNzwx4Q', '102.132.141.56', 0, ''),
+('04b3bc1eeb36a05f', 216, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjIxNiIsInVzZXJuYW1lIjoibWFyaW5kYS5zd2FydEBzYXNvbC5jb20iLCJpYXQiOjE1NzA3MjgxMDksImV4cCI6MTU3MDc0NjEwOX0.PAAUVNi0C7sTSHIeL3DJRKvmyfc7_X4GsmWJ7GFj_vo', '102.132.141.56', 0, ''),
+('cfd0ccf7746cea45', 216, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjIxNiIsInVzZXJuYW1lIjoibWFyaW5kYS5zd2FydEBzYXNvbC5jb20iLCJpYXQiOjE1NzA3MjgxNDYsImV4cCI6MTU3MDc0NjE0Nn0.vHpNZs92A1F-qMkWDnx25rRRSvohDkDrD7CQ8BPdH14', '102.132.141.56', 0, ''),
+('d525d89b78deb170', 216, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjIxNiIsInVzZXJuYW1lIjoibWFyaW5kYS5zd2FydEBzYXNvbC5jb20iLCJpYXQiOjE1NzA3MjgxNzYsImV4cCI6MTU3MDc0NjE3Nn0.zxgdmEpcX8xi6wRz5uo9x4yLiVbC9EcBLCQCfZ4j31s', '102.132.141.56', 0, ''),
+('a0fc7daae73d8eea', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcwNzI4MzY3LCJleHAiOjE1NzA3NDYzNjd9.6RQdRHIFgAcG9JBtjYtJsiyT7nu6-TRttt66tJLpUUs', '102.132.141.56', 0, ''),
+('5af33eff60fc3fd6', 216, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjIxNiIsInVzZXJuYW1lIjoibWFyaW5kYS5zd2FydEBzYXNvbC5jb20iLCJpYXQiOjE1NzA3MzAyNzcsImV4cCI6MTU3MDc0ODI3N30.Blr5nxC8E0tRyyxR8XZOf2mDhHAe93-tzCDKRzTfGNE', '105.225.202.30', 0, ''),
+('44397385ddeae6de', 217, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjIxNyIsInVzZXJuYW1lIjoid2ltcGllLnBpZXRlcnNAc2Fzb2wuY29tIiwiaWF0IjoxNTcwNzcwOTE2LCJleHAiOjE1NzA3ODg5MTZ9.Qy_RpcMzb03VL0sDUAdb6fSnHgCfcMRLza5BoFrIO9E', '197.98.201.95', 0, ''),
+('3d6cc216b56a3ae4', 217, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjIxNyIsInVzZXJuYW1lIjoid2ltcGllLnBpZXRlcnNAc2Fzb2wuY29tIiwiaWF0IjoxNTcwNzgwMzI0LCJleHAiOjE1NzA3OTgzMjR9.OPWTGReQQ8yen8X_X67pVopdAZXst2hHYN1Yqk_7lMA', '197.98.201.95', 0, ''),
+('6156dad0d961d176', 217, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjIxNyIsInVzZXJuYW1lIjoid2ltcGllLnBpZXRlcnNAc2Fzb2wuY29tIiwiaWF0IjoxNTcwNzgwNjQ4LCJleHAiOjE1NzA3OTg2NDh9.1PYD3iDr3VG00Xo8IkelfgIqiCE57nhJ0k_HF5etdx8', '197.98.201.95', 0, ''),
+('22b3753bbe5d3da7', 217, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjIxNyIsInVzZXJuYW1lIjoid2ltcGllLnBpZXRlcnNAc2Fzb2wuY29tIiwiaWF0IjoxNTcwNzgwNzg3LCJleHAiOjE1NzA3OTg3ODd9.TFnt28ImdYrNnFda-2qJkqT1aKMjUrKtWxaU1_CvjAc', '61.14.49.250', 0, ''),
+('1d7ebe03306d56ee', 218, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjIxOCIsInVzZXJuYW1lIjoibWFyaW5kYS5zd2FydEBjc2lkZWV4Y2VsbGVuY2UuY29tIiwiaWF0IjoxNTcwNzg5NDU4LCJleHAiOjE1NzA4MDc0NTh9.ZYm7Qia0B1F6zarKFrBzjSNao2_xh3xgeT32GthdAUc', '105.227.118.203', 0, ''),
+('fac26b2d7fcb1036', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcwNzg5NTIzLCJleHAiOjE1NzA4MDc1MjN9.B2fRhLJd_muGM6Gdc7AsD4G8dTwjRSAhLrkYbh8xQM0', '105.227.118.203', 0, ''),
+('927b46b2e01ae55f', 218, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjIxOCIsInVzZXJuYW1lIjoibWFyaW5kYS5zd2FydEBjc2lkZWV4Y2VsbGVuY2UuY29tIiwiaWF0IjoxNTcwNzkwNzM3LCJleHAiOjE1NzA4MDg3Mzd9.gUAMR5fuGx5nkmfCM-RilSl05HwG0RXr_QqsNeR6YN4', '105.227.118.203', 0, ''),
+('3471f4aec20b53ff', 217, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjIxNyIsInVzZXJuYW1lIjoid2ltcGllLnBpZXRlcnNAc2Fzb2wuY29tIiwiaWF0IjoxNTcwNzkxNjQ2LCJleHAiOjE1NzA4MDk2NDZ9.cVM02WrGZHTbUpAlRbcQS7SWQkxVrqS4rSO6P0dJdAY', '197.98.201.95', 0, ''),
+('90cb1254fa0f0e3c', 218, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjIxOCIsInVzZXJuYW1lIjoibWFyaW5kYS5zd2FydEBjc2lkZWV4Y2VsbGVuY2UuY29tIiwiaWF0IjoxNTcwNzkzMTgwLCJleHAiOjE1NzA4MTExODB9.fFAGY_TxqWYJPN_j2j7qQsV0BoSk5DvYrWlQYECsRuw', '102.132.141.56', 0, ''),
+('2ee4fa225708b29b', 218, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjIxOCIsInVzZXJuYW1lIjoibWFyaW5kYS5zd2FydEBjc2lkZWV4Y2VsbGVuY2UuY29tIiwiaWF0IjoxNTcwNzkzMjc0LCJleHAiOjE1NzA4MTEyNzR9.0700RvjRt1PFM_CKjQYM4Q34a4HTzNpjdzIO_4JDdQg', '102.132.141.56', 0, ''),
+('0d4b5b6a20d5119b', 218, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjIxOCIsInVzZXJuYW1lIjoibWFyaW5kYS5zd2FydEBjc2lkZWV4Y2VsbGVuY2UuY29tIiwiaWF0IjoxNTcwNzkzNTUwLCJleHAiOjE1NzA4MTE1NTB9.3nzoJx5I0MMVEozRhXSSspaMUlir74CwhKrQT2qoHXU', '105.227.118.203', 0, ''),
+('ef2a7754a8f155e0', 218, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjIxOCIsInVzZXJuYW1lIjoibWFyaW5kYS5zd2FydEBjc2lkZWV4Y2VsbGVuY2UuY29tIiwiaWF0IjoxNTcwNzkzNTkyLCJleHAiOjE1NzA4MTE1OTJ9.zufiwrNINQ2g_pJ6-UdhLwWn27gjY9C4Q8XO2ZfweEM', '105.227.118.203', 0, ''),
+('dbd0c21068337707', 218, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjIxOCIsInVzZXJuYW1lIjoibWFyaW5kYS5zd2FydEBjc2lkZWV4Y2VsbGVuY2UuY29tIiwiaWF0IjoxNTcwNzkzODU2LCJleHAiOjE1NzA4MTE4NTZ9.cfAfI10ACdbFQNoOhIc4AnwGioIISBRnmi2oafglcuk', '105.227.118.203', 0, ''),
+('8ca7849b143468b3', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcwOTU5NjQ4LCJleHAiOjE1NzA5Nzc2NDh9.j977-Q_m22Qp42Vi0rO9co6cDKp57ZAgU-ZuNt2PZIY', '102.132.141.56', 0, ''),
+('179d4fb5572e155e', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxMDM2MTEwLCJleHAiOjE1NzEwNTQxMTB9.UXghnSkWnFnJhVheiXRbwc3UUNAGgNS6o2rgM8YKDoQ', '105.227.118.203', 0, ''),
+('1330c93aa2474e68', 219, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjIxOSIsInVzZXJuYW1lIjoiZnJhbnMud2ViZXJAc2Fzb2wuY29tIiwiaWF0IjoxNTcxMDQxNzE1LCJleHAiOjE1NzEwNTk3MTV9.8lk0udV3fcIqvc1aqkCeS8eCgf9c5UMQA0DifQ0-I3s', '197.98.201.100', 0, ''),
+('9b7031a6a4a8dd60', 220, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjIyMCIsInVzZXJuYW1lIjoiY2hhbnRhbC5jaGl0cmF5QHNhc29sLmNvbSIsImlhdCI6MTU3MTA0MTg4NywiZXhwIjoxNTcxMDU5ODg3fQ.o5Y92i9CKPyDpTdYfyOCsFEn3H7bGTr51xEOQo53jaM', '197.98.201.100', 0, ''),
+('287c1a3dea3a71e0', 220, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjIyMCIsInVzZXJuYW1lIjoiY2hhbnRhbC5jaGl0cmF5QHNhc29sLmNvbSIsImlhdCI6MTU3MTA0MzAwNiwiZXhwIjoxNTcxMDYxMDA2fQ.Uxod4oYPAgPnUsx2ZyL6XzVHlqqLVAT_4k-UGP_GJMY', '197.98.201.100', 0, ''),
+('45664ab630569fb5', 219, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjIxOSIsInVzZXJuYW1lIjoiZnJhbnMud2ViZXJAc2Fzb2wuY29tIiwiaWF0IjoxNTcxMDQzNjM3LCJleHAiOjE1NzEwNjE2Mzd9.UNxg3r4RMjc1EmW-6oqtizIy7Ctj9z90bfbSdKaG0M8', '197.98.201.100', 0, ''),
+('aca0962557831cf8', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxMDc5Mjg5LCJleHAiOjE1NzEwOTcyODl9.5oTPCf6eAlVsLz4u2779ip4kTKzCPvIsssHDt6zyITA', '196.208.103.42', 0, ''),
+('a55604768a8fa182', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxMDc5MzYxLCJleHAiOjE1NzEwOTczNjF9.wIa37UK9xYMf3DkA53ikF_BIy8dHLeygt6zcBQQ76LU', '196.208.103.42', 0, ''),
+('ef5d5857546af71e', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxMDgyNzk4LCJleHAiOjE1NzExMDA3OTh9.q01ovLklvft8Z6VSZ-nXKJ6btlMCSXfOx4EeY3Onn90', '102.132.141.56', 0, ''),
+('33722578d6945b1b', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxMDgyODIxLCJleHAiOjE1NzExMDA4MjF9.BnWVSccN3BP-TwPr14--Ed2MgBkvidEKlx692fNN9gQ', '102.132.141.56', 0, ''),
+('d9347b43fbe0276e', 221, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjIyMSIsInVzZXJuYW1lIjoiYW5vb3AucGF0ZWxAc2Fzb2wuY29tIiwiaWF0IjoxNTcxMTE1NTE1LCJleHAiOjE1NzExMzM1MTV9.8hqAYsYX1SqWjCdyqXbiwbCRqD9MMl54WDk3xhKfjn0', '41.26.224.199', 0, ''),
+('df748a2cbd19532c', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxMTI1Mzg4LCJleHAiOjE1NzExNDMzODh9.zSWTYULXPUOWUJCw1oGXf7h33bKZwvDQI1SSTE2w2vw', '102.132.141.56', 0, ''),
+('914ee6fba4c2ac25', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxMTI1OTYzLCJleHAiOjE1NzExNDM5NjN9.7QneqJHUE6Ii7xlmR_hEok-7KgHyKQ3cK0cXEuzYJ9c', '102.132.141.56', 0, ''),
+('b6595a2802e6425b', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxMTI2NTc5LCJleHAiOjE1NzExNDQ1Nzl9.PdfVDomrS04C1yovomBLfLCIWdRY2SeCfSzyMJtybdM', '102.132.141.56', 0, ''),
+('84aca8415cfe85d0', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxMTI4NjQwLCJleHAiOjE1NzExNDY2NDB9.Na1EJY5z4ubWq8rV08I4hSlqXOhHtfcapbDKPMPzJeA', '::1', 0, ''),
+('11b6deebb73046a6', 201, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjIwMSIsInVzZXJuYW1lIjoibWFuYWdlciIsImlhdCI6MTU3MTEzMTEzMywiZXhwIjoxNTcxMTQ5MTMzfQ.qPIloefOVPiadlszbrD9-dClg-LggRkgpjGAfehCwZ0', '::1', 0, ''),
+('c31229db60c18c06', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxMTY3ODQ0LCJleHAiOjE1NzExODU4NDR9.WJVnwZCKEmceRhUw3CsDlr1yS8OwJcBGiM0_dfPRDmg', '::1', 0, ''),
+('9d892321333907cb', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxMjM2MjcxLCJleHAiOjE1NzEyNTQyNzF9.EH-6oIqf4mcZDkYmnE_DNbwTUt0HuR8YFAbQqOFgk-s', '::1', 0, ''),
+('db10ba8d7576f012', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcxNTI2MjAyLCJleHAiOjE1NzE1NDQyMDJ9.eYswUkRsjdffFuv6ipxbVoWXzG2_tpCXJ5q05SQdbIQ', '::1', 0, ''),
+('2ed5ae61a92c3c27', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcyNjAwNDk2LCJleHAiOjE1NzI2MTg0OTZ9.tK-I0nPQV8hnn8IaJDCxGhp1wfKVynKGT-8xjJzlgIY', '::1', 0, ''),
+('a07c939d19f760b8', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcyNjAxMjI0LCJleHAiOjE1NzI2MTkyMjR9.gdE-XIhNHNs3ivYeGPbrFusNM4SvLWb_5TzJ4XIFMG8', '::1', 0, ''),
+('c24d88a8bb958f7e', 201, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjIwMSIsInVzZXJuYW1lIjoibWFuYWdlciIsImlhdCI6MTU3MjYwMTI3NiwiZXhwIjoxNTcyNjE5Mjc2fQ.2rCGC-saWxhfnTTsVh0NSqbk_zWrudwa8iEkn6fYJT8', '::1', 0, ''),
+('81a6c75a953fe48c', 201, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjIwMSIsInVzZXJuYW1lIjoibWFuYWdlciIsImlhdCI6MTU3MjYwMjEzMSwiZXhwIjoxNTcyNjIwMTMxfQ.FbRoBBOaRVlL3B3CGPeNECdjQqxuF7ab-pxMcdRqgpc', '::1', 0, ''),
+('1e2a1dbc5758afb3', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcyNjAyNzI2LCJleHAiOjE1NzI2MjA3MjZ9.l7q_ciylO_1Qi9223Txk3OZyGhDioqqhZn0hgi19aSs', '::1', 0, ''),
+('edb9da056f6de223', 222, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjIyMiIsInVzZXJuYW1lIjoiZW1wbG95ZWUiLCJpYXQiOjE1NzI2MDMwNDMsImV4cCI6MTU3MjYyMTA0M30.g4-mvuOSbRi3M-DSexN72OLB_91LB8QvYq67zLSQqGY', '::1', 0, ''),
+('10ad3416a4d37838', 201, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjIwMSIsInVzZXJuYW1lIjoibWFuYWdlciIsImlhdCI6MTU3MjYwMzA1MSwiZXhwIjoxNTcyNjIxMDUxfQ.LSujQiYKCaIB6c2kEUpl5YoXxYm6VLuaTHJ0GY3rsEs', '::1', 0, ''),
+('cd6888a9edfecb36', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcyNjAzMjYxLCJleHAiOjE1NzI2MjEyNjF9.gLCJBWdzJ__dVGJJ9yYivqPCFA2GMVThWR9RL6z-T90', '::1', 0, ''),
+('f7a83b66a1dce36b', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTcyNjA4MTE5LCJleHAiOjE1NzI2MjYxMTl9.dsMt9iuaX8oNzI6jwsNV_3Q-I5u48KFhvWqoESfLl0M', '::1', 0, '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `company_colours`
+--
+
+CREATE TABLE `company_colours` (
+  `id` int(11) NOT NULL,
+  `reactive` varchar(50) NOT NULL,
+  `compliant` varchar(50) NOT NULL,
+  `proactive` varchar(50) NOT NULL,
+  `resilient` varchar(50) NOT NULL,
+  `chart1` varchar(50) NOT NULL,
+  `chart2` varchar(50) NOT NULL,
+  `chart3` varchar(50) NOT NULL,
+  `chart4` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `company_colours`
+--
+
+INSERT INTO `company_colours` (`id`, `reactive`, `compliant`, `proactive`, `resilient`, `chart1`, `chart2`, `chart3`, `chart4`) VALUES
+(1, '#f1552f', '#e7bb10', '#8cc63e', '#18b3eb', '#003671', '#004d8f', '#002750', '#00407f');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `company_details`
+--
+
+CREATE TABLE `company_details` (
+  `id` int(11) NOT NULL,
+  `company_name` text NOT NULL,
+  `maturity_top_heading` text NOT NULL,
+  `maturity_welcome_heading` text NOT NULL,
+  `maturity_welcome_statement` text NOT NULL,
+  `maturity_diagram_image` text NOT NULL,
+  `maturity_introduction_statement1` text NOT NULL,
+  `maturity_introduction_statement2` text NOT NULL,
+  `maturity_introduction_statement3` text NOT NULL,
+  `maturity_introduction_statement4` text NOT NULL,
+  `maturity_introduction_statement5` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `company_details`
+--
+
+INSERT INTO `company_details` (`id`, `company_name`, `maturity_top_heading`, `maturity_welcome_heading`, `maturity_welcome_statement`, `maturity_diagram_image`, `maturity_introduction_statement1`, `maturity_introduction_statement2`, `maturity_introduction_statement3`, `maturity_introduction_statement4`, `maturity_introduction_statement5`) VALUES
+(1, 'Sasol', 'SHE MATURITY ASSESSMENT', 'One Sasol SHE Excellence Approach', 'We will be doing a maturity assessment on the Sasol SHE Excellence Approach.', 'maturity-diagram-sasol.jpg', 'To measure the level of maturity of SHE practices and performance results, the SHE maturity assessment methodology is based on a two-stage assessment. Firstly, SHE performance results are assessed (y-axis) and secondly, the maturity of SHE practices are assessed (x-axis).', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -559,6 +862,10 @@ CREATE TABLE `inviteattendees` (
 
 INSERT INTO `inviteattendees` (`id`, `email`, `accesstoken`, `date`, `isexpiry`) VALUES
 (3, 'christo@crispworks.co.za', '', '2019-10-09', 0),
+(4, 'rihan.schalkwyk@4xcellence.solutions', '', '2019-10-09', 0),
+(5, 'marinda.swart@4xcellence.solutions', '', '2019-10-09', 0),
+(6, 'marinda.swart@sasol.com', '', '2019-10-10', 0),
+(8, 'marinda.swart@sasol.com', '', '2019-10-10', 0),
 (9, 'YOUR-EMAIL@sasol.com', '', '2019-10-10', 0);
 
 -- --------------------------------------------------------
@@ -585,6 +892,26 @@ INSERT INTO `performance` (`id`, `question`, `poor`, `mediocre`, `good`, `excell
 (2, 'Trend: Positive, sustained >3 years', 'Trend is negative', 'No improvement in trend over past 3 years', 'Positive trend, sustained performance over 3 years', 'Trend consistently remain ahead of industry norm'),
 (3, 'Comparison: Target setting, benchmarking and strategic alignment', 'Target are stagnant and/or lags industry norms, no/limited comparison or benchmarking', 'Target are set top-down based on entity average performance, relevant internal comparisons are done and results are on par', 'Stretched target is set and owned by the team over and above the Group target, Relevant external comparisons are made and are favourable, performance is favourable compared to strategic objectives', 'Target is industry leading, relevant external comparisons indicate industry leaders, strategic objectives achieved and revised.'),
 (4, 'Confidence: Confidence that performance can be sustained, specific improvement actions, correct lead indicators', 'Improvement actions are mainly reactive to performance, limited view on lead indicators, non-conformance process play a big role in addressing negative trends', 'Identification of specific actions to improve performance is done by management teams and operational teams are instructed, lead indicators for compliance are tracked.', 'Teams take ownership of the trend and drive improvement actions, focussing more on systems, processes and preventive controls, lead indicators for critical control effectiveness are tracked.', 'Improvement actions focus on embedding behaviour. Improvement actions become a way of doing business. Lead indicators for risk reduction are tracked.');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `performance_desired`
+--
+
+CREATE TABLE `performance_desired` (
+  `id` int(25) NOT NULL,
+  `user` int(25) NOT NULL,
+  `element` int(25) NOT NULL,
+  `desired` int(25) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `performance_desired`
+--
+
+INSERT INTO `performance_desired` (`id`, `user`, `element`, `desired`) VALUES
+(1, 201, 4, 2);
 
 -- --------------------------------------------------------
 
@@ -628,66 +955,62 @@ CREATE TABLE `performance_mc` (
 --
 
 INSERT INTO `performance_mc` (`id`, `question`, `element`, `answer`, `user`) VALUES
-(1, 1, 1, 1, 1),
-(2, 2, 1, 1, 1),
-(3, 3, 1, 1, 1),
-(4, 4, 1, 1, 1),
-(5, 1, 2, 2, 1),
-(6, 2, 2, 1, 1),
-(7, 3, 2, 2, 1),
-(8, 4, 2, 1, 1),
-(9, 1, 1, 1, 201),
-(10, 2, 1, 2, 201),
-(11, 3, 1, 1, 201),
-(12, 4, 1, 2, 201),
-(13, 1, 2, 2, 201),
-(14, 2, 2, 4, 201),
-(15, 3, 2, 1, 201),
-(16, 4, 2, 1, 201),
-(17, 1, 3, 1, 201),
-(18, 2, 3, 2, 201),
-(19, 3, 3, 4, 201),
-(20, 4, 3, 3, 201),
-(21, 1, 4, 1, 201),
-(22, 2, 4, 2, 201),
-(23, 3, 4, 4, 201),
-(24, 4, 4, 3, 201),
-(25, 1, 5, 3, 201),
-(26, 2, 5, 1, 201),
-(27, 3, 5, 2, 201),
-(28, 4, 5, 4, 201),
-(29, 1, 3, 4, 1),
-(30, 2, 3, 3, 1),
-(31, 3, 3, 2, 1),
-(32, 4, 3, 1, 1),
-(33, 1, 4, 4, 1),
-(34, 2, 4, 3, 1),
-(35, 3, 4, 3, 1),
-(36, 4, 4, 3, 1),
-(37, 1, 5, 4, 1),
-(38, 2, 5, 2, 1),
-(39, 3, 5, 4, 1),
-(40, 4, 5, 4, 1),
-(41, 1, 1, 1, 219),
-(42, 2, 1, 4, 219),
-(43, 3, 1, 3, 219),
-(44, 4, 1, 4, 219),
-(45, 1, 2, 3, 219),
-(46, 2, 2, 4, 219),
-(47, 3, 2, 2, 219),
-(48, 4, 2, 2, 219),
-(49, 1, 3, 3, 219),
-(50, 2, 3, 3, 219),
-(51, 3, 3, 4, 219),
-(52, 4, 3, 2, 219),
-(53, 1, 4, 3, 219),
-(54, 2, 4, 4, 219),
-(55, 3, 4, 2, 219),
-(56, 4, 4, 4, 219),
-(57, 1, 5, 3, 219),
-(58, 2, 5, 1, 219),
-(59, 3, 5, 4, 219),
-(60, 4, 5, 4, 219);
+(16, 4, 1, 1, 219),
+(15, 3, 1, 2, 219),
+(14, 2, 1, 2, 219),
+(13, 1, 1, 1, 219),
+(17, 1, 2, 1, 219),
+(18, 2, 2, 1, 219),
+(19, 3, 2, 2, 219),
+(20, 4, 2, 2, 219),
+(21, 1, 3, 2, 219),
+(22, 2, 3, 2, 219),
+(23, 3, 3, 2, 219),
+(24, 4, 3, 1, 219),
+(25, 1, 4, 2, 219),
+(26, 2, 4, 3, 219),
+(27, 3, 4, 2, 219),
+(28, 4, 4, 2, 219),
+(29, 1, 5, 2, 219),
+(30, 2, 5, 3, 219),
+(31, 3, 5, 2, 219),
+(32, 4, 5, 2, 219),
+(33, 1, 1, 3, 220),
+(34, 2, 1, 3, 220),
+(35, 3, 1, 1, 220),
+(36, 4, 1, 1, 220),
+(37, 1, 2, 2, 220),
+(38, 2, 2, 1, 220),
+(39, 3, 2, 2, 220),
+(40, 4, 2, 2, 220),
+(41, 1, 3, 2, 220),
+(42, 2, 3, 3, 220),
+(43, 3, 3, 2, 220),
+(44, 4, 3, 2, 220),
+(45, 1, 4, 2, 220),
+(46, 2, 4, 3, 220),
+(47, 3, 4, 2, 220),
+(48, 4, 4, 1, 220),
+(49, 1, 5, 2, 220),
+(50, 2, 5, 3, 220),
+(51, 3, 5, 1, 220),
+(52, 4, 5, 1, 220),
+(53, 1, 1, 4, 201),
+(54, 2, 1, 3, 201),
+(55, 3, 1, 2, 201),
+(56, 4, 1, 1, 201),
+(57, 1, 2, 1, 201),
+(58, 2, 2, 3, 201),
+(59, 3, 2, 4, 201),
+(60, 4, 2, 2, 201),
+(61, 1, 3, 1, 201),
+(62, 2, 3, 3, 201),
+(63, 3, 3, 2, 201),
+(64, 4, 3, 4, 201),
+(65, 1, 4, 1, 201),
+(66, 2, 4, 2, 201),
+(67, 3, 4, 4, 201),
+(68, 4, 4, 3, 201);
 
 -- --------------------------------------------------------
 
@@ -945,7 +1268,6 @@ INSERT INTO `questions` (`id`, `element`, `question`, `reactive`, `compliant`, `
 (40, 15, 'We have a formal SHE document governance process in place.', 'No', 'Yes', 'Yes, and easily accessible in the OME', 'Yes, and fully integrated with the SHE management system and Group SHE document management system'),
 (41, 15, 'We apply learnings from SHE assurance deviations.', 'Not always', 'Yes, we understand our recent audit findings.', 'Yes, assurance deviations are analysed, root causes identified and corrective and preventive actions are implemented.', 'Yes, we update all relevant inspections and logbooks to reflect the improvement actions, with specific focus on the improvement of critical control assurance deviations. '),
 (42, 15, 'We drive risk-based combined assurance.', 'No, mainly only through external (4th level) of assurance. ', 'Yes, internal and external audits are in place.', 'Yes, we focus especially on 1st level of assurance activities to ensure that we are more pro-active in addressing inefficiencies. ', 'Yes, our assurance activities are optimised across all levels of assurance to reduce the burden on the OME.'),
-(43, 16, 'BT climate diagnostics are conducted regularly.', 'No BT diagnostics conducted.  Hope for the best and play by luck. ', 'BT diagnostics are conducted to analyse the SHE climate and inform leaders. ', 'Leaders request BT diagnostics pro-actively, even when SHE results are positive. Improvement plans are put in place, tracked and assurance on effectiveness is provided.', 'Leaders have a standard rhythm of when BT diagnostics are conducted in order to track effectiveness of improvement plans and ensure sustainable improvement.'),
 (44, 16, 'Our team SHE climate is conducive to zero harm. ', 'Some individuals still perform work unsafely and try to hide incidents for fear of reprisal.', 'Leaders consistently manage the production balance for sustainable safe operations. \nNo work is done unless it is done safely.\n', 'Individuals are empowered to take personal accountability for SHE. Leaders create a climate of openness, care, trust and accountability.', 'Desired SHE behaviours are embedded into the culture of teams. This is evident in sustained SHE performance and behaviours.'),
 (45, 16, 'Our leaders are visible and personally drive the journey to zero harm.', 'Leadership visible mostly during or after SHE incidents.', 'Leaders are visible as per planned site visits and during incident investigations. ', 'Leaders engage with their teams on a face-to-face basis about SHE matters. ', 'Leaders own and personally drive significant SHE issues immediately. '),
 (46, 16, 'The Life Saving Rules are implemented.', 'No', 'Yes', 'Yes, teams take ownership for the effective application of the LSR as seen in reduced high severity incidents.', 'Yes, we continuously review our LSRs and update them in anticipation of emerging SHE risk exposure. '),
@@ -966,7 +1288,6 @@ INSERT INTO `questions` (`id`, `element`, `question`, `reactive`, `compliant`, `
 (61, 21, 'We conduct management reviews.', 'No not always', 'The suitability, adequacy and effectiveness of our SHE management system is formally reviewed.', 'Learnings from assurance deviations and incidents are used to proactively identify improvement areas for the our SHE approach.', 'Employees on all levels contribute to the improvement of our SHE approach.'),
 (62, 21, 'We have a process in place to continuously improve our SHE practices.', 'No, only on an ad hoc basis or with a new programme', 'Yes, our improvement actions are always logged, discussed, and tracked to completion.', 'Yes, we specifically focus on reducing risk exposure and the improvement of control effectiveness. SHE meeting agendas include SHE improvement. ', 'Yes, my team also continuously benchmark against other businesses and focus on improving systems and enabling technologies.'),
 (63, 21, 'We assess the impact of our improvement plans.', 'No', 'Yes, based on the SHE performance statistics.', 'Yes, we also actively track the elimination of repeat SHE incidents and risk exposure.', 'Yes, even once we have proven success we further plan, do, review and improve on the improvement plan to ensure that we achieve sustainable zero harm. '),
-(67, 22, 'We adhere to all relevant management standards.', 'No not all', 'Yes, we know what standards are relevant and align our performance requirements to enable adherence.   ', 'Yes, optimised SHE processes are driven by assigned owners and enable leaders to manage team-specific SHE risks effectively.', 'Yes, our integrated management systems enable continuous improvement of SHE performance.'),
 (68, 8, 'Accountable leadership', 'Leaders are only visible during or after SHE incidents and create a SHE climate of fear and blame. The SHE function mainly takes ownership for SHE.', 'Leaders are visibly committed to zero harm. Leaders enable teams to fulfil their SHE responsibilities and lead by example.', 'Leaders inspire people, creates a SHE climate conducive to achieving zero harm and proactively address SHE performance through improved SHE practices. ', 'Leaders consistently set the tone for sustainable zero harm and genuinely care for their people. The systems and culture to enable zero harm prevail after the leader leaves the team. '),
 (69, 8, 'SHE event prevention', 'There is limited understanding of SHE risks and controls in teams. The culture is re-active.', 'SHE risks and related controls are identified, assessed, prioritised and communicated to teams to ensure legal compliance. ', 'Risk-based SHE practices are applied in teams. Risk controls are verified and assurance is given on the effectiveness of all critical controls. SHE activities are prioritised based on a thorough understanding of risk profile and exposure.', 'Integrated management of SHE risks across disciplines.  Learnings from control failures are implemented, checked for effectiveness and embedded. Controls are improved continuously to reduce risk.'),
 (70, 20, 'We manage the capturing our SHE data to ensure data quality.', 'Informally. ', 'Yes, we capture data according to a procedure and the SHE team verifies data accuracy.', 'Yes, we have automated systems to manage data input quality.', 'Yes, we have automated systems that allow real-time capturing and reporting of data.'),
@@ -995,8 +1316,7 @@ CREATE TABLE `user` (
 INSERT INTO `user` (`id`, `email`, `firstname`, `lastname`, `role`, `password`) VALUES
 (1, 'admin', 'Admin', 'User', 'admin', '9e94b15ed312fa42232fd87a55db0d39'),
 (201, 'manager', 'Manager', 'User', 'manager', 'bc7316929fe1545bf0b98d114ee3ecb8'),
-(220, 'employee1', 'Employee', 'User', 'employee', 'bc7316929fe1545bf0b98d114ee3ecb8'),
-(219, 'employee', 'Employee', 'User', 'employee', 'bc7316929fe1545bf0b98d114ee3ecb8');
+(222, 'employee', 'John', 'Doe', 'employee', 'bc7316929fe1545bf0b98d114ee3ecb8');
 
 --
 -- Indexes for dumped tables
@@ -1070,6 +1390,18 @@ ALTER TABLE `ci_sessions`
   ADD KEY `ci_sessions_timestamp` (`timestamp`);
 
 --
+-- Indexes for table `company_colours`
+--
+ALTER TABLE `company_colours`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `company_details`
+--
+ALTER TABLE `company_details`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `elements`
 --
 ALTER TABLE `elements`
@@ -1085,6 +1417,12 @@ ALTER TABLE `inviteattendees`
 -- Indexes for table `performance`
 --
 ALTER TABLE `performance`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `performance_desired`
+--
+ALTER TABLE `performance_desired`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -1131,55 +1469,55 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `actions_measure`
 --
 ALTER TABLE `actions_measure`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `actions_milestone`
 --
 ALTER TABLE `actions_milestone`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `actions_results`
 --
 ALTER TABLE `actions_results`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `actions_risks`
 --
 ALTER TABLE `actions_risks`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `actions_victory`
 --
 ALTER TABLE `actions_victory`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `answer_complete`
 --
 ALTER TABLE `answer_complete`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT for table `answer_desired`
 --
 ALTER TABLE `answer_desired`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 --
 -- AUTO_INCREMENT for table `answer_mc`
 --
 ALTER TABLE `answer_mc`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=119;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=322;
 
 --
 -- AUTO_INCREMENT for table `answer_proof`
 --
 ALTER TABLE `answer_proof`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=78;
 
 --
 -- AUTO_INCREMENT for table `category`
@@ -1188,10 +1526,22 @@ ALTER TABLE `category`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
+-- AUTO_INCREMENT for table `company_colours`
+--
+ALTER TABLE `company_colours`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `company_details`
+--
+ALTER TABLE `company_details`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `elements`
 --
 ALTER TABLE `elements`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `inviteattendees`
@@ -1206,22 +1556,28 @@ ALTER TABLE `performance`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
+-- AUTO_INCREMENT for table `performance_desired`
+--
+ALTER TABLE `performance_desired`
+  MODIFY `id` int(25) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `performance_elements`
 --
 ALTER TABLE `performance_elements`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `performance_mc`
 --
 ALTER TABLE `performance_mc`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
 
 --
 -- AUTO_INCREMENT for table `proofs`
 --
 ALTER TABLE `proofs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=163;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=161;
 
 --
 -- AUTO_INCREMENT for table `proof_types`
@@ -1233,13 +1589,13 @@ ALTER TABLE `proof_types`
 -- AUTO_INCREMENT for table `questions`
 --
 ALTER TABLE `questions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=221;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=223;
 
 DELIMITER $$
 --
