@@ -34,14 +34,30 @@ class GetPerformanceMCByElement extends REST_Controller {
 			
 			$Pass_Data["data"] = array();
 			if($token_status == TRUE){
-				$All_Answer = $this->GetPerformanceMCByElement_modal->Get_Performance_Answer_MC_by_Element_ID($Element_ID);
+				$All_Answer = $this->GetPerformanceMCByElement_modal->Get_Structured_Performance_Answers_by_Element($Element_ID);
+				$Total_Answers_By_Element = $this->GetPerformanceMCByElement_modal->Get_Total_Performance_Answers_by_Element($Element_ID);
+
 				$Get_Answer_Array = array();
 				$merge_array = array();
 				if(!empty($All_Answer)){
+
+					/* Get total count of answers for this element */
+					foreach($Total_Answers_By_Element as $key => $value){
+						$total = $value->total;
+					}
+
+					/* Build array for chart */	
 					foreach($All_Answer as $key => $value){
-						$merge_array[$value->answer] = array("name" => $value->answer,"value" => $value->num);
+						$merge_array[$value->answer] = array(
+							"name" => $value->answer,
+							// "count" => $value->count,
+							// "sum" => $value->sum,
+							// "total" => $total,
+							"value" => number_format(($value->sum/$total),1));
+							// "value" => $value->num);
 						$Get_Answer_Array[] = $value->answer;
 					}
+
 					$Answer_Array = array("1","2","3","4");
 					foreach($Answer_Array as $AA){
 						if(!in_array($AA,$Get_Answer_Array)){
