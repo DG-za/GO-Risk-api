@@ -105,6 +105,7 @@ class ActionOperation extends REST_Controller {
 		$victory_data = array(
 			'element'=>$element = $this->post('element'),
 			'definition'=>$definition = $this->post('definition'),
+			'outcome_id' =>$outcome_id = $this->post('outcome_id'),
 			'teammembers'=>$teammembers = $this->post('teammembers'),
 			'performance_elements'=>$performance_elements = $this->post('performance_elements'),
 			'focusareaname'=>$focusareaname = $this->post('focusareaname'),
