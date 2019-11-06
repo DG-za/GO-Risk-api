@@ -1,0 +1,197 @@
+<?php 
+class GetSessionProgress_model extends CI_Model {
+	
+/********** THIS IS FOR THE PERFORMACE MODULE *******/
+/* Count total total_answers of performance */
+ /* public function get_count_total_answers_by_performance($user_id){
+  	$this->db->select('count(*)');
+	$this->db->from('performance_mc');
+	$this->db->where('user',user_id);
+	$query_result = $this->db->get();
+	return $query_result->result();
+  }*/
+
+/* Count total elemets of performance*/
+/*public function get_count_total_elemets_by_performance(){
+  	$this->db->select('count(*)');
+	$this->db->from('performance_elements');	
+	$query_result = $this->db->get();
+	return $query_result->result();
+  }*/
+
+/* Count total performance */
+/*public function get_count_total_performance(){
+  	$this->db->select('count(*)');
+	$this->db->from('performance');	
+	$query_result = $this->db->get();
+	return $query_result->result();
+  }*/
+
+public function get_progress_of_performance($user_id){
+	$this->db->select('count(*) as total_answers');
+	$this->db->from('performance_mc');
+	$this->db->where('user',$user_id);
+	$query_result = $this->db->get()->result();
+	$total_answers = $query_result[0]->total_answers;
+
+	$this->db->select('count(*) as total_elements');
+	$this->db->from('performance_elements');	
+	$query_result = $this->db->get()->result();;
+	$total_elements = $query_result[0]->total_elements;
+
+	$this->db->select('count(*) as total_performance');
+	$this->db->from('performance');	
+	$query_result = $this->db->get()->result();
+	$total_performance = $query_result[0]->total_performance;
+
+	$total_questions = $total_elements * $total_performance;
+	$progress = ( $total_answers/$total_questions) * 100;
+    //echo $total_answers."=".$total_elements."=".$total_performance."=".$total_questions;
+	if(!empty($progress)){
+		$progress = $progress;
+	}else{
+		$progress = 0;
+	}
+	return $progress;
+  }
+
+/********** THIS IS FOR THE PRACTICE MODULE *******/
+public function get_progress_of_practice($user_id){
+	$this->db->select('count(*) as total_answers');
+	$this->db->from('answer_mc');
+	$this->db->where('user',$user_id);
+	$query_result = $this->db->get()->result();
+	$total_answers = $query_result[0]->total_answers;
+
+	$this->db->select('count(*) as total_questions');
+	$this->db->from('questions');	
+	$query_result = $this->db->get()->result();
+	$total_questions = $query_result[0]->total_questions;	
+	$progress = ( $total_answers/$total_questions) * 100;
+	if(!empty($progress)){
+		$progress = $progress;
+	}else{
+		$progress = 0;
+	}
+	return $progress;
+}
+
+public function getUsersByRole_function($role){
+		$this->db->select("`id`,`email`,`firstname`,`lastname`,`role`");
+		$this->db->where("`role`"  , $role);
+		$this->db->from("`user`");
+		$query_result = $this->db->get();
+		return $query_result->result();
+}
+
+/* FUNCTION FOR THE PERFORMANCE ASSESSMENT */
+/* Get answers of performance */
+public function get_answers_of_performance($emp_id,$element_id){
+		$this->db->select('pm.id,pm.question as question_id,p.question,pm.answer,pm.element');
+		$this->db->from("performance_mc pm");
+		$this->db->join("performance p","p.id = pm.question");
+		$this->db->where("pm.user" , $emp_id);	
+		$this->db->where("pm.element",$element_id);	
+		$this->db->order_by("pm.id","ASC");
+		$query_result = $this->db->get();
+		//echo $this->db->last_query();
+		return $query_result->result();	
+}
+
+public function get_single_answer_of_performance($que_id,$ans_arr_id){
+		$this->db->select('*');
+		$this->db->from("performance");		
+		$this->db->where("id" , $que_id);	
+		$query_result = $this->db->get();		
+		return $query_result->row($ans_arr_id);	
+}
+
+public function get_performance_element_name($ele_id){
+		$this->db->select('name');
+		$this->db->from("performance_elements");		
+		$this->db->where("id" , $ele_id);	
+		$query_result = $this->db->get();		
+		return $query_result->row('name');	
+}
+
+/* Get elemets of performance */
+public function get_performance_elements(){
+		$this->db->select('*');
+		$this->db->from("performance_elements");
+		$query_result = $this->db->get();		
+		return $query_result->result();
+}
+
+public function delete_answer_of_performance($del_id){
+		$this->db->where('id', $del_id);
+	    $this->db->delete('performance_mc');   	    
+	    if ( $this->db->affected_rows() > 0 ){
+	    	return 1;
+	    }else { 
+	    	return 0;
+	    }		
+}
+
+/* FUNCTION FOR THE PRACTICE ASSESSMENT */
+/* Get categories of practice */
+public function get_practice_categories(){
+	    $this->db->select('*');
+		$this->db->from("category");
+		$query_result = $this->db->get();		
+		return $query_result->result();
+}
+
+
+/* Get elemets of practices assessment */
+public function get_practice_elements($cat_id){
+	   $this->db->select('*');
+	   $this->db->where("cat",$cat_id);
+	   $this->db->order_by("sequence","ASC");
+	   $this->db->from("elements");
+	   $query_result = $this->db->get();		
+	   return $query_result->result();
+}
+
+/* Get answers of practice assessment */
+
+public function get_answers_of_practice($emp_id,$element_id){
+		$this->db->select('am.id,am.question as question_id,q.question,am.answer,am.element');
+		$this->db->from("answer_mc am");
+		$this->db->join("questions q","q.id = am.question");
+		$this->db->where("am.user" , $emp_id);	
+		$this->db->where("am.element",$element_id);	
+		$this->db->order_by("am.id","ASC");
+		$query_result = $this->db->get();
+		//echo $this->db->last_query();
+		return $query_result->result();	
+
+}
+
+/* Get name of the element */
+public function get_practice_element_name($ele_id){
+		$this->db->select('name');
+		$this->db->from("elements");		
+		$this->db->where("id" , $ele_id);	
+		$query_result = $this->db->get();		
+		return $query_result->row('name');	
+}
+
+public function get_single_answer_of_practice($que_id,$ans_arr_id){
+		$this->db->select('*');
+		$this->db->from("questions");		
+		$this->db->where("id" , $que_id);	
+		$query_result = $this->db->get();		
+		return $query_result->row($ans_arr_id);	
+}
+
+public function delete_answer_of_practice($del_id){
+		$this->db->where('id', $del_id);
+	    $this->db->delete('answer_mc');   	    
+	    if ( $this->db->affected_rows() > 0 ){
+	    	return 1;
+	    }else { 
+	    	return 0;
+	    }	
+}
+
+}

@@ -7,7 +7,7 @@ class GetAllUsers extends REST_Controller {
 	/***************************************************************
 	*  Project Name : 4Xcellence Solutions
 	*  Created By :   
-	*  Created Date : 25-09-2019
+	*  Created Date : 24-10-2019
 	*  Description : A controller contain GetAllUsers related methods
 	*  Modification History :
 	*  
@@ -56,6 +56,7 @@ class GetAllUsers extends REST_Controller {
 			$this->set_response($parameter_required_array, REST_Controller::HTTP_NOT_FOUND);
 		}
 	}
+
 	public function getUsers_post(){
 		$valid = ['status' => "true","statuscode" => 200,'response' =>"Token Valid"];
 		$no_found = ['status' => "true","statuscode" => 200,'response' =>"No Record Found"];
@@ -93,4 +94,7 @@ class GetAllUsers extends REST_Controller {
 			$this->set_response($parameter_required_array, REST_Controller::HTTP_NOT_FOUND);
 		}
 	}
+
+
+
 }

@@ -3,7 +3,7 @@ require_once APPPATH . '/libraries/REST_Controller.php';
 require_once APPPATH . '/libraries/JWT.php';
 use \Firebase\JWT\JWT;
 
-class GetDesiredByElementUser extends REST_Controller {
+class GetDesiredByElement_User extends REST_Controller {
 	/***************************************************************
 	*  Project Name : 4Xcellence Solutions
 	*  Created By :   
