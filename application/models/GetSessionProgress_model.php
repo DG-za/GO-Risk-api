@@ -1,31 +1,6 @@
 <?php 
 class GetSessionProgress_model extends CI_Model {
-	
-/********** THIS IS FOR THE PERFORMACE MODULE *******/
-/* Count total total_answers of performance */
- /* public function get_count_total_answers_by_performance($user_id){
-  	$this->db->select('count(*)');
-	$this->db->from('performance_mc');
-	$this->db->where('user',user_id);
-	$query_result = $this->db->get();
-	return $query_result->result();
-  }*/
 
-/* Count total elemets of performance*/
-/*public function get_count_total_elemets_by_performance(){
-  	$this->db->select('count(*)');
-	$this->db->from('performance_elements');	
-	$query_result = $this->db->get();
-	return $query_result->result();
-  }*/
-
-/* Count total performance */
-/*public function get_count_total_performance(){
-  	$this->db->select('count(*)');
-	$this->db->from('performance');	
-	$query_result = $this->db->get();
-	return $query_result->result();
-  }*/
 
 public function get_progress_of_performance($user_id){
 	$this->db->select('count(*) as total_answers');
@@ -35,7 +10,7 @@ public function get_progress_of_performance($user_id){
 	$total_answers = $query_result[0]->total_answers;
 
 	$this->db->select('count(*) as total_elements');
-	$this->db->from('performance_elements');	
+	$this->db->from('performance_areas');	
 	$query_result = $this->db->get()->result();;
 	$total_elements = $query_result[0]->total_elements;
 
@@ -106,18 +81,18 @@ public function get_single_answer_of_performance($que_id,$ans_arr_id){
 		return $query_result->row($ans_arr_id);	
 }
 
-public function get_performance_element_name($ele_id){
+public function get_performance_area_name($ele_id){
 		$this->db->select('name');
-		$this->db->from("performance_elements");		
+		$this->db->from("performance_areas");		
 		$this->db->where("id" , $ele_id);	
 		$query_result = $this->db->get();		
 		return $query_result->row('name');	
 }
 
 /* Get elemets of performance */
-public function get_performance_elements(){
+public function get_performance_areas(){
 		$this->db->select('*');
-		$this->db->from("performance_elements");
+		$this->db->from("performance_areas");
 		$query_result = $this->db->get();		
 		return $query_result->result();
 }

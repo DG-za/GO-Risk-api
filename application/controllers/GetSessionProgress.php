@@ -134,8 +134,7 @@ public function get_answers_of_performance_post(){
 			$token_status = check_token($logged_in_id,$headers['Authorization']);
 			
 			if($token_status == TRUE){
-				$elementsArr = $this->GetSessionProgress_model->get_performance_elements();
-				//print_r($elementsArr); die;
+				$elementsArr = $this->GetSessionProgress_model->get_performance_areas();				
 				
 				if(!empty($elementsArr)){	
 				foreach($elementsArr as $key => $value){
@@ -146,7 +145,7 @@ public function get_answers_of_performance_post(){
 					foreach($resultArr as $key_mc => $value_mc){
 						 $tempArr = array(	
 						 	"answer_id" => $value_mc->id,
-						    "element_name" => $this->GetSessionProgress_model->get_performance_element_name($value_mc->element),
+						    "element_name" => $this->GetSessionProgress_model->get_performance_area_name($value_mc->element),
 							"question_id" => $value_mc->question_id,	
 							"question" => $value_mc->question,				
 							"answer" => $this->GetSessionProgress_model->get_single_answer_of_performance($value_mc->question_id,$customAnswerarr[$value_mc->answer])
@@ -160,7 +159,7 @@ public function get_answers_of_performance_post(){
 
 				/*foreach($resultArr as $key => $value){
 						$data[] = array(	
-							"element_name" => $this->GetSessionProgress_model->get_performance_element_name($value->element),
+							"element_name" => $this->GetSessionProgress_model->get_performance_area_name($value->element),
 							"question_id" => $value->question_id,	
 							"question" => $value->question,				
 							"answer" => $this->GetSessionProgress_model->get_single_answer_of_performance($value->question_id,$customAnswerarr[$value->answer])

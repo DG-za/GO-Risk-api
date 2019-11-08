@@ -31,7 +31,7 @@ class GetPerformanceElements extends REST_Controller {
 			$token_status = check_token($user_id,$headers['Authorization']);
 			
 			if($token_status == TRUE){
-				$All_Performances = $this->GetPerformanceElements_modal->All_Performances_Elements();
+				$All_Performances = $this->GetPerformanceElements_modal->All_Performances_Areas();
 				$Pass_Data = array();
 				if(!empty($All_Performances)){
 					foreach($All_Performances as $key => $value){
@@ -70,7 +70,7 @@ class GetPerformanceElements extends REST_Controller {
 			$token_status = check_token($user_id,$headers['Authorization']);
 			
 			if($token_status == TRUE){
-				$All_Performances = $this->GetPerformanceElements_modal->All_Performances_Elements();
+				$All_Performances = $this->GetPerformanceElements_modal->All_Performances_Areas();
 				$Pass_Data = array();
 				if(!empty($All_Performances)){
 					$Pass_Data["data"][] = $All_Performances;
