@@ -28,6 +28,19 @@ class GetProof_modal extends CI_Model {
 		return $query_result->result();
 	}
 	
+	/* Get Total Users By Element_ID */
+	public function Get_User_count_by_Element_ID($Element_ID){
+		$where_Array = array(
+			"`element`" => $Element_ID,
+		);
+		
+		$this->db->select("COUNT(DISTINCT `user`) as count_user");
+		$this->db->from("`answer_proof`");
+		$this->db->where($where_Array);
+		$query_result = $this->db->get();
+		return $query_result->result();
+	}
+	
 	public function Get_All_Proof_Types(){
 		$this->db->select("`id`,`proof_type_id`,`proof_type_name`");
 		$this->db->from("`proof_types`");
