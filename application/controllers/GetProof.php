@@ -34,6 +34,7 @@ class GetProof extends REST_Controller {
 			
 			if($token_status == TRUE){
 				$All_Proof = $this->GetProof_modal->Get_Proof_by_Element_ID($Element_ID);
+				$User_Count = $this->GetProof_modal->Get_User_count_by_Element_ID($Element_ID);
 				$Pass_Data = array();
 				if(!empty($All_Proof)){
 					foreach($All_Proof as $key => $value){
@@ -41,8 +42,9 @@ class GetProof extends REST_Controller {
 						$amount = 0;
 						if(!empty($Count_Result)){
 							$amount = $Count_Result[0]->count_id;
+							$user = $User_Count[0]->count_user;
 						}
-						$merge_array = array("id" => $value->id,"element" => $value->element,"type" => $value->type,"proof" => $value->proof,"amount" => $amount);
+						$merge_array = array("id" => $value->id,"element" => $value->element,"type" => $value->type,"proof" => $value->proof,"amount" => $amount,"user" => $user);
 						$Pass_Data["data"][] = $merge_array;
 					}
 					$this->set_response($Pass_Data, REST_Controller::HTTP_OK);
