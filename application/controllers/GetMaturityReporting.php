@@ -32,6 +32,7 @@ class GetMaturityReporting extends REST_Controller {
 			$headers = $this->input->request_headers();
 			$token_status = check_token($user_id,$headers['Authorization']);
 			if($token_status == TRUE){
+
 				$results_performance_mc = $this->GetMaturityReporting_modal->GetMaturityReporting_performance_mc();
 				$Pass_Data["data"] = array();
 				if(!empty($results_performance_mc)){
@@ -49,6 +50,7 @@ class GetMaturityReporting extends REST_Controller {
 				}else{
 					$Pass_Data["data"]["performance_mc"] = number_format(0,1);
 				}
+
 				$results_answer_mc = $this->GetMaturityReporting_modal->GetMaturityReporting_answer_mc();
 				if(!empty($results_answer_mc)){
 					$A_Count = 0;
@@ -65,6 +67,40 @@ class GetMaturityReporting extends REST_Controller {
 				}else{
 					$Pass_Data["data"]["answer_mc"] = number_format(0,1);
 				}
+
+				$results_performance_desired = $this->GetMaturityReporting_modal->GetMaturityReporting_performance_desired();
+				if(!empty($results_performance_desired)){
+					$P_Count = 0;
+					$P_D_Count = 0;
+					foreach($results_performance_desired as $RPM){
+						$P_Count++;
+						$P_D_Count += (double)$RPM->count_p_desired;
+					}
+					$P_D_Average = $P_D_Count / $P_Count;
+					if($P_D_Average > 4){
+						$P_D_Average = 4;
+					}
+					$Pass_Data["data"]["performance_desired"] = number_format($P_D_Average,1);
+				}else{
+					$Pass_Data["data"]["performance_desired"] = number_format(0,1);
+				}
+
+			  $results_answer_desired = $this->GetMaturityReporting_modal->GetMaturityReporting_answer_desired();
+				if(!empty($results_answer_desired)){
+					$A_Count = 0;
+					$A_D_Count = 0;
+					foreach($results_answer_desired as $RPM){
+						$A_Count++;
+						$A_D_Count += (double)$RPM->count_a_desired;
+					}
+					$A_D_Average = $A_D_Count / $A_Count;
+					if($A_D_Average > 4){
+						$A_D_Average = 4;
+					}
+					$Pass_Data["data"]["answer_desired"] = number_format($A_D_Average,1);
+				}else{
+					$Pass_Data["data"]["answer_desired"] = number_format(0,1);
+				}
 				$this->set_response($Pass_Data, REST_Controller::HTTP_OK);
 			}else if($token_status == FALSE){
 				$this->set_response($invalid, REST_Controller::HTTP_NON_AUTHORITATIVE_INFORMATION);
@@ -77,3 +113,7 @@ class GetMaturityReporting extends REST_Controller {
 		}
 	}
 }
+
+
+				
+				

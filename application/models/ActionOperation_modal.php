@@ -22,13 +22,13 @@ class ActionOperation_modal extends CI_Model {
    }
    public function getAllActionvictory()
    {
-       $this->db->select('actions_victory.*,actions_risks.risk,actions_risks.element,actions_results.results,actions_measure.measure,user.firstname,user.lastname,performance_elements.name as pename , elements.name as ename');
+       $this->db->select('actions_victory.*,actions_risks.risk,actions_risks.element,actions_results.results,actions_measure.measure,user.firstname,user.lastname,performance_areas.name as pename , elements.name as ename');
        $this->db->from('actions_victory');
        $this->db->join('actions_risks', 'actions_victory.id = actions_risks.victory','left');
        $this->db->join('actions_results', 'actions_victory.id = actions_results.victory','left');
        $this->db->join('actions_measure', 'actions_victory.id = actions_measure.victory','left');
        $this->db->join('user', 'actions_victory.focusareaowner = user.id');
-       $this->db->join('performance_elements', 'performance_elements.id = actions_victory.performance_elements');
+       $this->db->join('performance_areas', 'performance_areas.id = actions_victory.performance_elements');
        $this->db->join('elements', 'actions_victory.element = elements.id');
        $query = $this->db->get();
        $result = $query->result_array();
@@ -111,7 +111,7 @@ class ActionOperation_modal extends CI_Model {
    {
              $this->db->select('name');
              $this->db->where('id', $id);
-             $query = $this->db->get('performance_elements');
+             $query = $this->db->get('performance_areas');
              $query = $query->row();
              return $query;
    }

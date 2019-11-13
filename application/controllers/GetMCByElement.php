@@ -58,8 +58,11 @@ class GetMCByElement extends REST_Controller {
 							"name" => $value->answer,
 							// "count" => $value->count,
 							// "sum" => $value->sum,
-							// "total" => $total,
-							"value" => number_format(($value->sum/$total),1));
+							"total" => $total,
+							"count" => $value->value,
+							// "value" => number_format(($value->sum/$total),1)
+							"value" => number_format(($value->value/$total)*100,1)
+						);
 							// "value" => $value->count);
 						$Pass_Data["data"][] = $merge_array;
 					}

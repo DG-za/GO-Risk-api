@@ -4,7 +4,7 @@ class GetPerformanceMCAll_modal extends CI_Model {
 	/* Get All `elements` by Group by */
 	public function Get_All_Performance_Elements_Function(){
 		$this->db->select("`id`,`name`");
-		$this->db->from("`performance_elements`");
+		$this->db->from("`performance_areas`");
 		$this->db->group_by("`sequence`");
 		$query_result = $this->db->get();
 		return $query_result->result();

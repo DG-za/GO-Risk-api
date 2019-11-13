@@ -1,31 +1,6 @@
 <?php 
 class GetSessionProgress_model extends CI_Model {
-	
-/********** THIS IS FOR THE PERFORMACE MODULE *******/
-/* Count total total_answers of performance */
- /* public function get_count_total_answers_by_performance($user_id){
-  	$this->db->select('count(*)');
-	$this->db->from('performance_mc');
-	$this->db->where('user',user_id);
-	$query_result = $this->db->get();
-	return $query_result->result();
-  }*/
 
-/* Count total elemets of performance*/
-/*public function get_count_total_elemets_by_performance(){
-  	$this->db->select('count(*)');
-	$this->db->from('performance_elements');	
-	$query_result = $this->db->get();
-	return $query_result->result();
-  }*/
-
-/* Count total performance */
-/*public function get_count_total_performance(){
-  	$this->db->select('count(*)');
-	$this->db->from('performance');	
-	$query_result = $this->db->get();
-	return $query_result->result();
-  }*/
 
 public function get_progress_of_performance($user_id){
 	$this->db->select('count(*) as total_answers');
@@ -35,8 +10,8 @@ public function get_progress_of_performance($user_id){
 	$total_answers = $query_result[0]->total_answers;
 
 	$this->db->select('count(*) as total_elements');
-	$this->db->from('performance_elements');	
-	$query_result = $this->db->get()->result();;
+	$this->db->from('performance_areas');	
+	$query_result = $this->db->get()->result();
 	$total_elements = $query_result[0]->total_elements;
 
 	$this->db->select('count(*) as total_performance');
@@ -106,33 +81,87 @@ public function get_single_answer_of_performance($que_id,$ans_arr_id){
 		return $query_result->row($ans_arr_id);	
 }
 
-public function get_performance_element_name($ele_id){
+public function get_performance_area_name($ele_id){
 		$this->db->select('name');
-		$this->db->from("performance_elements");		
+		$this->db->from("performance_areas");		
 		$this->db->where("id" , $ele_id);	
 		$query_result = $this->db->get();		
 		return $query_result->row('name');	
 }
 
 /* Get elemets of performance */
-public function get_performance_elements(){
+public function get_performance_areas(){
 		$this->db->select('*');
-		$this->db->from("performance_elements");
+		$this->db->from("performance_areas");
 		$query_result = $this->db->get();		
 		return $query_result->result();
 }
 
-public function delete_answer_of_performance($del_id){
-		$this->db->where('id', $del_id);
+public function get_proof_by_employee($ele_id,$emp_id){
+		$where_Array = array(
+			"`m_ap`.`element`" => $ele_id,
+			"`m_ap`.`user`" => $emp_id
+		);
+		
+		$this->db->select("`m_p`.`id`,`m_p`.`proof`,`m_p`.`type`");
+		$this->db->from("`proofs` as `m_p`");
+		$this->db->join("`answer_proof` as `m_ap`", "`m_ap`.`proof` = `m_p`.`id`", "INNER");
+		$this->db->where($where_Array);
+		$query_result = $this->db->get();
+		return $query_result->result();
+	}
+
+public function get_gesired_by_employee($ele_id,$emp_id,$assessment_type){
+		$where_Array = array(
+			"`element`" => $ele_id,
+			"`user`" => $emp_id,
+		);
+		
+		$this->db->select("`element`,`desired`,SUM(`desired`=2) AS `n1`, SUM(`desired`=3) AS `n2`, SUM(`desired`=4) AS `n3`, COUNT(*) AS `total`");
+		if($assessment_type == "practice"){
+			$this->db->from("`answer_desired`");
+		}else{
+			$this->db->from("`performance_desired`");
+		}
+		$this->db->where($where_Array);
+		$this->db->group_by("`element`");
+		$this->db->order_by("`element`", "asc");
+		$query_result = $this->db->get();
+		return $query_result->result();
+	}
+
+public function DeleteAnswerOfPerformance($ele_id,$emp_id){
+		$this->db->where('element', $ele_id);
+		$this->db->where('user', $emp_id);
 	    $this->db->delete('performance_mc');   	    
 	    if ( $this->db->affected_rows() > 0 ){
-	    	return 1;
+	    	$this->db->where('element', $ele_id);
+			$this->db->where('user', $emp_id);
+	    	$this->db->delete('performance_desired');
 	    }else { 
 	    	return 0;
 	    }		
 }
 
-/* FUNCTION FOR THE PRACTICE ASSESSMENT */
+public function get_performance_desired_by_employee($ele_id,$emp_id){
+		$where_Array = array(
+			"`element`" => $ele_id,
+			"`user`" => $emp_id,
+		);
+		
+		$this->db->select("`element`,SUM(`desired`=2) AS `n1`, SUM(`desired`=3) AS `n2`, SUM(`desired`=4) AS `n3`, COUNT(*) AS `total`");
+		$this->db->from("`performance_desired`");
+		$this->db->where($where_Array);
+		$this->db->group_by("`element`");
+		$this->db->order_by("`element`", "asc");
+		$query_result = $this->db->get();
+		return $query_result->result();
+	}
+
+
+
+
+/************** FUNCTION FOR THE PRACTICE ASSESSMENT *************/
 /* Get categories of practice */
 public function get_practice_categories(){
 	    $this->db->select('*');
@@ -184,12 +213,25 @@ public function get_single_answer_of_practice($que_id,$ans_arr_id){
 		return $query_result->row($ans_arr_id);	
 }
 
-public function delete_answer_of_practice($del_id){
-		$this->db->where('id', $del_id);
+public function DeleteAnswerOfPractice($ele_id,$employee_id){
+		$this->db->where('element', $ele_id);
+		$this->db->where('user', $employee_id);
 	    $this->db->delete('answer_mc');   	    
 	    if ( $this->db->affected_rows() > 0 ){
-	    	return 1;
-	    }else { 
+	    	$this->db->where('element', $ele_id);
+			$this->db->where('user', $employee_id);
+	    	$this->db->delete('answer_complete');
+	    	if ( $this->db->affected_rows() > 0 ){
+	    		$this->db->where('element', $ele_id);
+				$this->db->where('user', $employee_id);
+		    	$this->db->delete('answer_desired');
+		    	if ( $this->db->affected_rows() > 0 ){
+		    		$this->db->where('element', $ele_id);
+					$this->db->where('user', $employee_id);
+		    		$this->db->delete('answer_proof');
+		    	}
+	    	}   	 
+	    } else { 
 	    	return 0;
 	    }	
 }

@@ -27,6 +27,7 @@ function send_reset_link($type,$email,$data){
 		$array = array('{fullname}','{reset_link}');
 		$replace = array($data['customer_name'],$data['reset_link']);
 		$final = str_replace($array,$replace,$result['message_body']);
+		//$final = $result["message_body"]."\n".$data["reset_link"];		
 		$ci->email->initialize(email_array());					
 		$ci->email->from('christo@crispworks.co.za', 'She Excellence App');
 		$ci->email->to($email);
