@@ -139,7 +139,9 @@ public function get_answers_of_performance_post(){
 				if(!empty($elementsArr)){	
 				foreach($elementsArr as $key => $value){
 					$data["element_name"] = $value->name;
+					$data["element_id"] = $value->id;
 					$data["series"] = array();
+					$data['desired'] = array();
 					$resultArr = $this->GetSessionProgress_model->get_answers_of_performance($employee_id,$value->id);
 					//print_r($data); die;
 					foreach($resultArr as $key_mc => $value_mc){
@@ -151,6 +153,7 @@ public function get_answers_of_performance_post(){
 							"answer" => $this->GetSessionProgress_model->get_single_answer_of_performance($value_mc->question_id,$customAnswerarr[$value_mc->answer])
 						);
 						 $data["series"][] = $tempArr;
+						 $data["desired"] = $this->GetSessionProgress_model->get_performance_desired_by_employee($value->id,$employee_id);
 					}
 					$jsonArr[] = $data;
 					//print_r($data); die;
@@ -212,9 +215,11 @@ public function get_answers_of_practice_post(){
 				$data["category"] = $cat_val->name;
 				$elementsArr = $this->GetSessionProgress_model->get_practice_elements($cat_val->id);
 				$data['elements'] = array();
+				$data['proofs'] = array();
+				$data['desired'] = array();
 				if($elementsArr){
 			   foreach($elementsArr as $key => $ele_val){				
-				 $tempArr1 = array ('element_name' => $ele_val->name);
+				 $tempArr1 = array ('element_name' => $ele_val->name,'element_id' => $ele_val->id);
 				 $resultArr = $this->GetSessionProgress_model->get_answers_of_practice($employee_id,$ele_val->id);
 				 if($resultArr){
 				 foreach($resultArr as $key_mc => $value_mc){	
@@ -229,6 +234,8 @@ public function get_answers_of_practice_post(){
 					  $tempArr1["series"][] = $tempArr;					 
 				}
 				$data['elements'][] = $tempArr1;
+				$data['proofs'] = $this->GetSessionProgress_model->get_proof_by_employee($ele_val->id,$employee_id);
+				$data['desired'] = $this->GetSessionProgress_model->get_gesired_by_employee($ele_val->id,$employee_id,'practice');
 			    }  // if condition of $resultArr			
 												
 				} // foreach loop of $elementsArr	
@@ -255,21 +262,22 @@ public function get_answers_of_practice_post(){
 }
 
 /* Function for the delete answer of performance */
-public function delete_answer_of_performance_post(){		
+public function DeleteAnswerOfPerformance_post(){		
 		$no_found = ['status' => "true","statuscode" => 404,'response' =>"No Record Found"];
 		$invalid = ['status' => "true","statuscode" => 203,'response' =>"In-Valid token"];
 		$not_found = ['status' => "true","statuscode" => 404,'response' =>"Token not found"];
 		
 		$message = 'Required field(s) user_id is missing or empty';
 		$logged_in_id = $this->post('logged_in_id');		
-		$delete_id = $this->post('delete_id');
-		
+		$element_id = $this->post('element_id');
+		$employee_id = $this->post('employee_id');
+
 		if(isset($logged_in_id)){
 			$headers = $this->input->request_headers();
 			$token_status = check_token($logged_in_id,$headers['Authorization']);
 
 			if($token_status == TRUE){
-				$deleteStatus = $this->GetSessionProgress_model->delete_answer_of_performance($delete_id);
+				$deleteStatus = $this->GetSessionProgress_model->DeleteAnswerOfPerformance($element_id,$employee_id);
 				
 				if($deleteStatus == TRUE){
 					$valid = ['status' => "true","statuscode" => 200,'response' =>"Record deleted"];
@@ -290,21 +298,22 @@ public function delete_answer_of_performance_post(){
 }
 
 /* Function for the delete answer of practice */
-public function delete_answer_of_practice_post(){
+public function DeleteAnswerOfPractice_post(){
 		$no_found = ['status' => "true","statuscode" => 404,'response' =>"No Record Found"];
 		$invalid = ['status' => "true","statuscode" => 203,'response' =>"In-Valid token"];
 		$not_found = ['status' => "true","statuscode" => 404,'response' =>"Token not found"];
 		
 		$message = 'Required field(s) user_id is missing or empty';
 		$logged_in_id = $this->post('logged_in_id');		
-		$delete_id = $this->post('delete_id');
-		
+		$delete_id    = $this->post('delete_id');
+		$employee_id  = $this->post('emp_id');
+
 		if(isset($logged_in_id)){
 			$headers = $this->input->request_headers();
 			$token_status = check_token($logged_in_id,$headers['Authorization']);
 
 			if($token_status == TRUE){
-				$deleteStatus = $this->GetSessionProgress_model->delete_answer_of_practice($delete_id);
+				$deleteStatus = $this->GetSessionProgress_model->DeleteAnswerOfPractice($delete_id,$employee_id);
 				
 				if($deleteStatus == TRUE){
 					$valid = ['status' => "true","statuscode" => 200,'response' =>"Record deleted"];
