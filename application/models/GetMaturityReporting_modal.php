@@ -20,4 +20,24 @@ class GetMaturityReporting_modal extends CI_Model {
 		$query_result = $this->db->get();
 		return $query_result->result();
 	}
+	
+	/* Get Maturity Reporting Desired from `perfo_dmanceDesired` */
+	public function GetMaturityReporting_performance_desired(){
+		$Group_by_Array = array("`element`");
+		$this->db->select("desired as `count_p_desired`");
+		$this->db->from("`performance_desired`");
+		$this->db->group_by($Group_by_Array);
+		$query_result = $this->db->get();
+		return $query_result->result();
+	}
+	
+	/* Get Maturity Reporting Desired from `answer_desired` */
+	public function GetMaturityReporting_answer_desired(){
+		$Group_by_Array = array("`element`");
+		$this->db->select("desired as `count_a_desired`");
+		$this->db->from("`answer_desired`");
+		$this->db->group_by($Group_by_Array);
+		$query_result = $this->db->get();
+		return $query_result->result();
+	}
 }
