@@ -58,7 +58,8 @@ class GetMCByElement extends REST_Controller {
 							"name" => $value->answer,
 							// "count" => $value->count,
 							// "sum" => $value->sum,
-							// "total" => $total,
+							"total" => $total,
+							"count" => $value->value,
 							// "value" => number_format(($value->sum/$total),1)
 							"value" => number_format(($value->value/$total)*100,1)
 						);
