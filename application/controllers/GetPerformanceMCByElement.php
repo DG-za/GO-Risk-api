@@ -53,7 +53,9 @@ class GetPerformanceMCByElement extends REST_Controller {
 							// "count" => $value->count,
 							// "sum" => $value->sum,
 							// "total" => $total,
-							"value" => number_format(($value->sum/$total),1));
+							// "value" => number_format(($value->sum/$total),1)
+							"value" => number_format(($value->value/$total)*100,1)
+						);
 							// "value" => $value->num);
 						$Get_Answer_Array[] = $value->answer;
 					}
