@@ -33,36 +33,43 @@ class InviteAttendees extends REST_Controller {
 			$token_status = check_token($user_id,$headers['Authorization']);
 			
 			if($token_status == TRUE){
-				$Insert_Array = array(
-					"`email`" => $email,
-					"`date`" => date('Y-m-d'),
-					"`isexpiry`" => 0,
-				);
-				$Insert_saveUser_Result = $this->InviteAttendees_modal->Insert_User($Insert_Array);
-				$token['id'] = $Insert_saveUser_Result;
-				$token['email'] = $email;
-				$AToken = JWT::encode($token, $this->config->item('jwt_key'));
-				$link = $serverLink."/attendees-registration/".$AToken;
-				$subject = "Invitation: Maturity Assessment";
-				$message = "<p>Hi,</p>";
-				$message .= "<p>You have been invited to complete a Maturity Assessment. Please click on the activation link below to complete your registration.</p>";
-				$message .= "<a href='".$link."' target='_blank'>Create Account</a>";
-				$message .="<p>Kind Regards,<br/>4Xcellence Solutions</p>";
-				$this->InviteAttendees_modal->sendMail($email,$subject,$message);
-				if($Insert_saveUser_Result > 0){
-					$data = [
-						"email" => $email,
-						"date" => date('Y-m-d'),
-						"isexpiry" => 0,
-						"id'"   => $Insert_saveUser_Result
-					];
-					$Pass_Data["data"][] = $data;
-					$inserted = ['status' => "true","statuscode" => 200,'response' => $Pass_Data];
-					$this->set_response($Pass_Data, REST_Controller::HTTP_OK);
+				$Check_Availability_Result = $this->InviteAttendees_modal->Check_User_Availability($email);
+				if($Check_Availability_Result==0){
+					$Insert_Array = array(
+						"`email`" => $email,
+						"`date`" => date('Y-m-d'),
+						"`isexpiry`" => 0,
+					);
+					$Insert_saveUser_Result = $this->InviteAttendees_modal->Insert_User($Insert_Array);
+					$token['id'] = $Insert_saveUser_Result;
+					$token['email'] = $email;
+					$AToken = JWT::encode($token, $this->config->item('jwt_key'));
+					$link = $serverLink."/attendees-registration/".$AToken;
+					$subject = "Invitation: Maturity Assessment";
+					$message = "<p>Hi,</p>";
+					$message .= "<p>You have been invited to complete a Maturity Assessment. Please click on the activation link below to complete your registration.</p>";
+					$message .= "<a href='".$link."' target='_blank'>Create Account</a>";
+					$message .="<p>Kind Regards,<br/>4Xcellence Solutions</p>";
+					$this->InviteAttendees_modal->sendMail($email,$subject,$message);
+					if($Insert_saveUser_Result > 0){
+						$data = [
+							"email" => $email,
+							"date" => date('Y-m-d'),
+							"isexpiry" => 0,
+							"id'"   => $Insert_saveUser_Result
+						];
+						$Pass_Data["data"][] = $data;
+						$inserted = ['status' => "true","statuscode" => 200,'response' => $Pass_Data];
+						$this->set_response($Pass_Data, REST_Controller::HTTP_OK);
+					}else{
+						$not_inserted = ['status' => "true","statuscode" => 200,'response' =>"User not Inserted"];
+						$this->set_response($not_inserted, REST_Controller::HTTP_OK);
+					}
 				}else{
-					$not_inserted = ['status' => "true","statuscode" => 200,'response' =>"User not Inserted"];
-					$this->set_response($not_inserted, REST_Controller::HTTP_OK);
+					$not_available = ['status' => "true","statuscode" => 200,'response' =>"Email ID already Invited."];
+					$this->set_response($not_available, REST_Controller::HTTP_OK);
 				}
+				
 			}else if($token_status == FALSE){
 				$this->set_response($invalid, REST_Controller::HTTP_NON_AUTHORITATIVE_INFORMATION);
 			}else{
