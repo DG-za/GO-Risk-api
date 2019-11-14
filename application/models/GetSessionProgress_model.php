@@ -53,7 +53,7 @@ public function get_progress_of_practice($user_id){
 
 public function getUsersByRole_function($role){
 		$this->db->select("`id`,`email`,`firstname`,`lastname`,`role`");
-		$this->db->where("`role`"  , $role);
+		// $this->db->where("`role`"  , $role);
 		$this->db->from("`user`");
 		$query_result = $this->db->get();
 		return $query_result->result();
