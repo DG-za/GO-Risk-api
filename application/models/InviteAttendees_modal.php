@@ -42,4 +42,10 @@ class InviteAttendees_modal extends CI_Model {
     $query = $query->row();
     return $query->isexpiry;
   }
+  public function Check_User_Availability($email='')
+  {
+  	$this->db->where("`email`",$email);
+	$result = $this->db->get("`inviteattendees`")->num_rows();
+	return $result;
+  }
 }
