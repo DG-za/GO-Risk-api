@@ -44,7 +44,7 @@ class GetProof extends REST_Controller {
 							$amount = $Count_Result[0]->count_id;
 							$user = $User_Count[0]->count_user;
 						}
-						$merge_array = array("id" => $value->id,"element" => $value->element,"type" => $value->type,"proof" => $value->proof,"amount" => $amount,"user" => $user);
+						$merge_array = array("id" => $value->id,"element" => $value->element,"type" => $value->type,"proof" => $value->proof,"amount" => $amount,"user" => $user,"percent" => number_format((float)($amount/$user*100),1,'.',''));
 						$Pass_Data["data"][] = $merge_array;
 					}
 					$this->set_response($Pass_Data, REST_Controller::HTTP_OK);
