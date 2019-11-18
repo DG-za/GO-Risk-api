@@ -2,11 +2,17 @@
 header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, X-Requested-With, Authorization");
 
+// Live credentials
+define('DB_HOST', 'sql25.cpt1.host-h.net');
+define('DB_USER', 'rmscrmvzqx_1');
+define('DB_PASS', 'BpQ4hudiZ4rEnANwe8w8');
+define('DB_NAME', 'rmscrmvzqx_db1');
+
 // db credentials
-define('DB_HOST', 'localhost');
+/*define('DB_HOST', 'localhost');
 define('DB_USER', 'root');
 define('DB_PASS', '');
-define('DB_NAME', 'maturity');
+define('DB_NAME', 'maturity');*/
 
 // Connect with the database.
 function connect()
