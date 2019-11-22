@@ -17,26 +17,20 @@ function email_array(){
 
 /*forgot password email*/
 
-function send_reset_link($type,$email,$data){
+function send_email_function($subject,$email,$body){
 	$ci = get_instance();
 	$ci->load->library('email');	
 	$ci->load->database();
-	$query = $ci->db->get_where('email_template',array('type'=>$type));
-	if($query->num_rows() > 0){
-		$result = $query->row_array();
-		$array = array('{fullname}','{reset_link}');
-		$replace = array($data['customer_name'],$data['reset_link']);
-		$final = str_replace($array,$replace,$result['message_body']);
-		//$final = $result["message_body"]."\n".$data["reset_link"];		
-		$ci->email->initialize(email_array());					
-		$ci->email->from('christo@crispworks.co.za', 'She Excellence App');
-		$ci->email->to($email);
-		$ci->email->subject($result['subject']);
-		$ci->email->message($final);
-		$ci->email->send();	
-		return true;			          
+	$ci->email->initialize(email_array());					
+	$ci->email->from('christo@crispworks.co.za', 'She Excellence App');
+	$ci->email->to($email);
+	$ci->email->subject($subject);
+	$ci->email->message($body);
+	
+	if($ci->email->send()){
+		return true;
 	}else{
-		return false;	
+		return false;
 	}	
 }
 

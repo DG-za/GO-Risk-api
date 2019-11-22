@@ -3,7 +3,7 @@ require_once APPPATH . '/libraries/REST_Controller.php';
 require_once APPPATH . '/libraries/JWT.php';
 use \Firebase\JWT\JWT;
 
-class SendMail extends REST_Controller {
+class ForgotPasswordProcess extends REST_Controller {
 	/***************************************************************
 	*  Project Name : 4Xcellence Solutions
 	*  Created By :   
@@ -32,15 +32,23 @@ class SendMail extends REST_Controller {
 		$userData = $this->user_model->get_user_details_by_mail($user_email);
 
 		if(!empty($userData)){
-			$email_arr = array(
-						'reset_link' => $site_url."/reset-password?id=".base64_encode($userData->id),
-						'customer_name' => $userData->firstname." ".$userData->lastname
-						);
-			$email_status = send_reset_link('forgot_password',$userData->email,$email_arr);
-			if($email_status = true){
-					$this->response($success, REST_Controller::HTTP_OK);
-			}else{
-				$this->response($failed, REST_Controller::HTTP_INTERNAL_SERVER_ERROR);
+			$query = $this->db->get_where('email_template',array('type'=>'forgot_password'));
+			if($query->num_rows() > 0){
+				$result = $query->row_array();
+				$subject=$result['subject'];
+				$body="<p>".$result['header']."<p>";
+				$body.="<p>".$result['body']."<p>";
+				$body.="<p>".$result['footer']."<p>";
+				$array = array('{{first_name}}',' {{last_name}}','{{reset_link}}');
+				$replace = array($userData->firstname,$userData->lastname,$site_url."/reset-password?id=".base64_encode($userData->id));
+				$body = str_replace($array,$replace,$body);
+				$email_status = send_email_function($subject,$user_email,$body);
+				
+				if($email_status){
+						$this->response($success, REST_Controller::HTTP_OK);
+				}else{
+					$this->response($failed, REST_Controller::HTTP_INTERNAL_SERVER_ERROR);
+				}
 			}
 		}else{
 			$this->response($email_err, REST_Controller::HTTP_NOT_FOUND);
