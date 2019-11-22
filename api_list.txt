@@ -1962,3 +1962,17 @@ Response
 			$parameter_required_array = ['status' => "true","statuscode" => 404,'response' => $message];
 			$this->set_response($parameter_required_array, REST_Controller::HTTP_NOT_FOUND);
 		}
+
+
+----------------------------------------------------
+RISK APIs Converted to CI
+-------------------------------------
+http://localhost:8080/she-excellence-ci-api/risk/GetRiskTable
+
+
+
+
+
+
+
+
