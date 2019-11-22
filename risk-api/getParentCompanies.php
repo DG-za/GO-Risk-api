@@ -4,7 +4,16 @@ header('Access-Control-Allow-Methods: POST, GET, OPTIONS');
 require 'connect.php';
 
 $companies = [];
-$sql = "SELECT id, name, parent, total_workforce FROM company order by name";
+// Get the posted data.
+$postdata = file_get_contents("php://input");
+
+//echo json_encode($postdata);
+ if(isset($postdata) && !empty($postdata))
+ {
+  $request = json_decode($postdata);
+  // Sanitize.
+  $id = mysqli_real_escape_string($con, $request->data->id); 
+  $sql = "SELECT id, name, total_workforce FROM company where id='".$id."'";
 
 if($result = mysqli_query($con,$sql))
 
@@ -13,13 +22,8 @@ if($result = mysqli_query($con,$sql))
   $cr = 0;
   while($row = mysqli_fetch_assoc($result))
   {
-    $sql2 = "SELECT name FROM company where id='".$row['parent']."'";
-    $result2 = mysqli_query($con,$sql2);
-    $row2 = mysqli_fetch_assoc($result2);
     $companies[$cr]['id']    = $row['id'];
     $companies[$cr]['name'] = $row['name'];
-    $companies[$cr]['parent_id'] = $row['parent'];
-    $companies[$cr]['parent_name'] = $row2['name'];
     $companies[$cr]['employees'] = $row['total_workforce'];
     $cr++;
   }
@@ -30,5 +34,7 @@ else
 {
   http_response_code(404);
 }
+  }
+
 
 ?>

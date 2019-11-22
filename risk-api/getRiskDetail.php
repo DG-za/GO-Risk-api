@@ -17,11 +17,11 @@ $sql3 = "SELECT * FROM control_check WHERE risk = $riskid WHERE checked=0";
 if ($result2 = mysqli_query($con, $sql2)) {
   $cr2 = 0;
   while ($row = mysqli_fetch_assoc($result2)) {
-    $incidents[$cr2]['id']      = $row['id'];
-    $incidents[$cr2]['date']      = $row['date'];
-    $incidents[$cr2]['type']      = $row['type'];
-    $incidents[$cr2]['incident_desc']      = $row['incident_desc'];
-    $incidents[$cr2]['failed_controls']      = $row['failed_controls'];
+    $incidents[$cr2]['id'] = $row['id'];
+    $incidents[$cr2]['date'] = $row['date'];
+    $incidents[$cr2]['type'] = $row['type'];
+    $incidents[$cr2]['incident_desc'] = $row['incident_desc'];
+    $incidents[$cr2]['failed_controls'] = $row['failed_controls'];
     $cr2++;
   }
 }
