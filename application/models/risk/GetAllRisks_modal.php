@@ -3,8 +3,9 @@ class GetAllRisks_modal extends CI_Model {
 	
 	/* Get All Roles */
 	public function Get_All_Risks(){
-		$this->db->select('`risk`.*, COUNT(`incidents`.`id`) AS incidents, COUNT(`control_check`.`id`) AS controls');
+		$this->db->select('`risk`.*, COUNT(`incidents`.`id`) AS incidents, COUNT(`control_check`.`id`) AS controls, control_hazard.name as hazard_name');
 		$this->db->from('`risk`');
+		$this->db->join('`control_hazard`','`risk`.`hazard_desc` = `control_hazard`.`id`', 'left outer');
 		$this->db->join('`incidents`','`risk`.`id` = `incidents`.`risk`', 'left outer');
 		$this->db->join('`control_check`','`risk`.`id` = `control_check`.`risk` AND checked =0', 'left outer');
 		$this->db->group_by('`risk`.`id`');
