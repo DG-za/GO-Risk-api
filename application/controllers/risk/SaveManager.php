@@ -16,7 +16,7 @@ class SaveManager extends REST_Controller {
   public function __construct() {
     parent::__construct();
     $this->load->helper('check_token');       
-    $this->load->model('risk/SaveManager_modal');
+    $this->load->model('risk/SaveManager_model');
   }
   
   public function index_post(){
@@ -48,7 +48,7 @@ class SaveManager extends REST_Controller {
             'company' => $company,
             'role' => $role
           );
-        $results = $this->SaveManager_modal->save_Manager($saveArr);
+        $results = $this->SaveManager_model->save_Manager($saveArr);
         if(!empty($results)){
           $Pass_Data["data"]['insertId'] = $results;
           $Inserted = ['status' => "true","statuscode" => 200,'response' =>$Pass_Data];

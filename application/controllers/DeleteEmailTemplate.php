@@ -16,7 +16,7 @@ class DeleteEmailTemplate extends REST_Controller {
 	public function __construct() {
 		parent::__construct();
 		$this->load->helper('check_token');				
-		$this->load->model('DeleteEmailTemplate_modal');
+		$this->load->model('DeleteEmailTemplate_model');
 	}
 	
 	public function index_post(){
@@ -37,7 +37,7 @@ class DeleteEmailTemplate extends REST_Controller {
 				$Where_Array = array(
 					"`template_id`" => $email_template_id
 				);
-				$Delete_EmailTemplate = $this->DeleteEmailTemplate_modal->Delete_EmailTemplate($Where_Array);
+				$Delete_EmailTemplate = $this->DeleteEmailTemplate_model->Delete_EmailTemplate($Where_Array);
 				if($Delete_EmailTemplate > 0){
 					$Pass_Data = ['status' => "true","statuscode" => 200,'response' =>"Email Template Deleted"];
 					$this->set_response($Pass_Data, REST_Controller::HTTP_OK);

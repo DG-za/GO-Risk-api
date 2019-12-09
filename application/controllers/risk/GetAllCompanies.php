@@ -16,7 +16,7 @@ class GetAllCompanies extends REST_Controller {
   public function __construct() {
     parent::__construct();
     $this->load->helper('check_token');       
-    $this->load->model('risk/GetAllCompanies_modal');
+    $this->load->model('risk/GetAllCompanies_model');
   }
   
   public function index_post(){
@@ -33,11 +33,11 @@ class GetAllCompanies extends REST_Controller {
       
       if($token_status == TRUE){
         $merge_Array = array();
-        $results = $this->GetAllCompanies_modal->get_All_Companies();
+        $results = $this->GetAllCompanies_model->get_All_Companies();
         if(!empty($results)){
           foreach ($results as $key => $value) {
             if($value->parent){
-             $results1 = $this->GetAllCompanies_modal->get_Parent_Company($value->parent);
+             $results1 = $this->GetAllCompanies_model->get_Parent_Company($value->parent);
               if(!empty($results1)){
                 $merge_Array[$key]['id']    = $value->id;
                 $merge_Array[$key]['name'] = $value->name;

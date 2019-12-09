@@ -16,7 +16,7 @@ class SaveControlCheck extends REST_Controller {
   public function __construct() {
     parent::__construct();
     $this->load->helper('check_token');       
-    $this->load->model('risk/SaveControlCheck_modal');
+    $this->load->model('risk/SaveControlCheck_model');
   }
   
   public function index_post(){
@@ -51,7 +51,7 @@ class SaveControlCheck extends REST_Controller {
             'date' => date("Y-m-d")
           );
         }
-        $results = $this->SaveControlCheck_modal->save_Control_Check($saveArr);
+        $results = $this->SaveControlCheck_model->save_Control_Check($saveArr);
         if(!empty($results)){
           $Pass_Data["data"]['insertId'] = $results;
           $Inserted = ['status' => "true","statuscode" => 200,'response' =>$Pass_Data];

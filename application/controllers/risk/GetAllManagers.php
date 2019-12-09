@@ -16,7 +16,7 @@ class GetAllManagers extends REST_Controller {
   public function __construct() {
     parent::__construct();
     $this->load->helper('check_token');       
-    $this->load->model('risk/GetAllManagers_modal');
+    $this->load->model('risk/GetAllManagers_model');
   }
   
   public function index_post(){
@@ -33,7 +33,7 @@ class GetAllManagers extends REST_Controller {
       
       if($token_status == TRUE){
         $merge_Array = array();
-        $results = $this->GetAllManagers_modal->get_All_Managers();
+        $results = $this->GetAllManagers_model->get_All_Managers();
         if(!empty($results)){
           foreach ($results as $key => $value) {
             $merge_Array[$key]['id']    = $value->id;

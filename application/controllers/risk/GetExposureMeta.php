@@ -16,7 +16,7 @@ class GetExposureMeta extends REST_Controller {
   public function __construct() {
     parent::__construct();
     $this->load->helper('check_token');       
-    $this->load->model('risk/GetExposureMeta_modal');
+    $this->load->model('risk/GetExposureMeta_model');
   }
   
   public function index_post(){
@@ -35,7 +35,7 @@ class GetExposureMeta extends REST_Controller {
       if($token_status == TRUE){
         $merge_Array = array();
         $meta_keys = array();
-        $results = $this->GetExposureMeta_modal->get_Exposure_Meta($risk_conseq_type);
+        $results = $this->GetExposureMeta_model->get_Exposure_Meta($risk_conseq_type);
         if(!empty($results)){
           foreach ($results as $key => $value) {
             array_push($meta_keys, $value->meta_key);

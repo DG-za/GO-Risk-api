@@ -16,7 +16,7 @@ class GetExposureType extends REST_Controller {
   public function __construct() {
     parent::__construct();
     $this->load->helper('check_token');       
-    $this->load->model('risk/GetExposureType_modal');
+    $this->load->model('risk/GetExposureType_model');
   }
   
   public function index_post(){
@@ -33,7 +33,7 @@ class GetExposureType extends REST_Controller {
       
       if($token_status == TRUE){
         $merge_Array = array();
-        $results = $this->GetExposureType_modal->get_Exposure_Type();
+        $results = $this->GetExposureType_model->get_Exposure_Type();
         if(!empty($results)){
           foreach ($results as $key => $value) {
             $merge_Array[$key]["id"] = $value->id;

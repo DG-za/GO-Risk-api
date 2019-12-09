@@ -16,7 +16,7 @@ class GetByID extends REST_Controller {
   public function __construct() {
     parent::__construct();
     $this->load->helper('check_token');       
-    $this->load->model('risk/GetByID_modal');
+    $this->load->model('risk/GetByID_model');
   }
   
   public function index_post(){
@@ -34,7 +34,7 @@ class GetByID extends REST_Controller {
       
       if($token_status == TRUE){
         $merge_Array = array();
-        $results = $this->GetByID_modal->Get_By_ID($unique_id);
+        $results = $this->GetByID_model->Get_By_ID($unique_id);
         $Pass_Data["data"] = $results;
         $this->set_response($Pass_Data, REST_Controller::HTTP_OK);
       }else if($token_status == FALSE){

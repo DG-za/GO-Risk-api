@@ -16,7 +16,7 @@ class GetEmailTemplateDetail extends REST_Controller {
 	public function __construct() {
 		parent::__construct();
 		$this->load->helper('check_token');				
-		$this->load->model('GetEmailTemplateDetail_modal');
+		$this->load->model('GetEmailTemplateDetail_model');
 	}
 	
 	public function index_post(){
@@ -37,7 +37,7 @@ class GetEmailTemplateDetail extends REST_Controller {
 				$WhereArr = array(
 					"`template_id`"=>$template_id
 				);
-				$Get_EmailTemplate_Details = $this->GetEmailTemplateDetail_modal->Get_EmailTemplate_Details($WhereArr);
+				$Get_EmailTemplate_Details = $this->GetEmailTemplateDetail_model->Get_EmailTemplate_Details($WhereArr);
 				if($Get_EmailTemplate_Details){
 					$Pass_Data = ['status' => "true","statuscode" => 200,'response' =>$Get_EmailTemplate_Details];
 					$this->set_response($Pass_Data, REST_Controller::HTTP_OK);

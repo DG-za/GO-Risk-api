@@ -17,7 +17,7 @@ class Auth extends REST_Controller {
 	public function __construct() {
 		parent::__construct();
 		$this->load->model('auth_model');
-		$this->load->model('Performance_modal');
+		$this->load->model('Performance_model');
 		$this->load->helper('check_token');				
 	}
 

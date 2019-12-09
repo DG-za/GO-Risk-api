@@ -16,7 +16,7 @@ class GetRiskFreq extends REST_Controller {
   public function __construct() {
     parent::__construct();
     $this->load->helper('check_token');       
-    $this->load->model('risk/GetRiskFreq_modal');
+    $this->load->model('risk/GetRiskFreq_model');
   }
   
   public function index_post(){
@@ -33,7 +33,7 @@ class GetRiskFreq extends REST_Controller {
       
       if($token_status == TRUE){
         $merge_Array = array();
-        $results = $this->GetRiskFreq_modal->get_Risk_Freq();
+        $results = $this->GetRiskFreq_model->get_Risk_Freq();
         if(!empty($results)){
           foreach ($results as $key => $value) {
             $merge_Array[$key]['id']    = $value->id;

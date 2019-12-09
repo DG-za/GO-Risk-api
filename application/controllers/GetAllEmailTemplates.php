@@ -16,7 +16,7 @@ class GetAllEmailTemplates extends REST_Controller {
 	public function __construct() {
 		parent::__construct();
 		$this->load->helper('check_token');				
-		$this->load->model('GetAllEmailTemplates_modal');
+		$this->load->model('GetAllEmailTemplates_model');
 	}
 	
 	public function index_post(){
@@ -33,7 +33,7 @@ class GetAllEmailTemplates extends REST_Controller {
 			
 			if($token_status == TRUE){
 				$Pass_Data = array();
-				$Get_All_EmailTemplates = $this->GetAllEmailTemplates_modal->Get_All_EmailTemplates();
+				$Get_All_EmailTemplates = $this->GetAllEmailTemplates_model->Get_All_EmailTemplates();
 				if($Get_All_EmailTemplates){
 					$Pass_Data = ['status' => "true","statuscode" => 200,'response' =>$Get_All_EmailTemplates];
 					$this->set_response($Pass_Data, REST_Controller::HTTP_OK);

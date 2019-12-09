@@ -16,7 +16,7 @@ class GetRiskDetail extends REST_Controller {
   public function __construct() {
     parent::__construct();
     $this->load->helper('check_token');       
-    $this->load->model('risk/GetRiskDetail_modal');
+    $this->load->model('risk/GetRiskDetail_model');
   }
   
   public function index_post(){
@@ -36,7 +36,7 @@ class GetRiskDetail extends REST_Controller {
         $risks = array();
         $incidents = array();
         $controls = array();
-        $results = $this->GetRiskDetail_modal->get_Risk_Detail_Incidents($riskid);
+        $results = $this->GetRiskDetail_model->get_Risk_Detail_Incidents($riskid);
         if(!empty($results)){
           foreach ($results as $key => $value) {
             $incidents[$key]["id"] = $value->id;
@@ -46,7 +46,7 @@ class GetRiskDetail extends REST_Controller {
             $incidents[$key]["failed_controls"] = $value->failed_controls;
           }
         }
-        $results1 = $this->GetRiskDetail_modal->get_Risk_Detail_Control_Check($riskid);
+        $results1 = $this->GetRiskDetail_model->get_Risk_Detail_Control_Check($riskid);
         if(!empty($results1)){
           foreach ($results1 as $key => $value) {
             $controls[$key]["id"] = $value->id;
@@ -56,7 +56,7 @@ class GetRiskDetail extends REST_Controller {
             $controls[$key]["control"] = $value->control;
           }
         }
-        $results2 = $this->GetRiskDetail_modal->get_Risk_Detail($riskid);
+        $results2 = $this->GetRiskDetail_model->get_Risk_Detail($riskid);
         if(!empty($results2)){
           foreach ($results2 as $key => $value) {
             $risks[$key]["id"] = $value->id;

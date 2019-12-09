@@ -16,7 +16,7 @@ class GetEventExposureFreq extends REST_Controller {
   public function __construct() {
     parent::__construct();
     $this->load->helper('check_token');       
-    $this->load->model('risk/GetEventExposure_modal');
+    $this->load->model('risk/GetEventExposure_model');
   }
   
   public function index_post(){
@@ -33,7 +33,7 @@ class GetEventExposureFreq extends REST_Controller {
       
       if($token_status == TRUE){
         $merge_Array = array();
-        $results = $this->GetEventExposure_modal->get_Event_Exposure();
+        $results = $this->GetEventExposure_model->get_Event_Exposure();
         if(!empty($results)){
           foreach ($results as $key => $value) {
             $merge_Array[$key]['id']    = $value->id;

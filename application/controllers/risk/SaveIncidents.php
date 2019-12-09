@@ -16,7 +16,7 @@ class SaveIncidents extends REST_Controller {
   public function __construct() {
     parent::__construct();
     $this->load->helper('check_token');       
-    $this->load->model('risk/SaveIncidents_modal');
+    $this->load->model('risk/SaveIncidents_model');
   }
   
   public function index_post(){
@@ -53,7 +53,7 @@ class SaveIncidents extends REST_Controller {
             'failed_controls' => $failed_controls
           );
         }
-        $results = $this->SaveIncidents_modal->save_Incidents($saveArr);
+        $results = $this->SaveIncidents_model->save_Incidents($saveArr);
         if(!empty($results)){
           $Pass_Data["data"]['insertId'] = $results;
           $Inserted = ['status' => "true","statuscode" => 200,'response' =>$Pass_Data];

@@ -15,7 +15,7 @@ class Logout extends REST_Controller {
 	
 	public function __construct() {
 		parent::__construct();			
-		$this->load->model('Logout_modal');
+		$this->load->model('Logout_model');
 	}
 	
 	public function index_post(){
@@ -27,7 +27,7 @@ class Logout extends REST_Controller {
 		$message = 'Required field(s) user_id is missing or empty';
 		$user_id = $this->post('user_id');
 		if(isset($user_id)){
-			$Logout_Result = $this->Logout_modal->Delete_Tokens($user_id);
+			$Logout_Result = $this->Logout_model->Delete_Tokens($user_id);
 			if($Logout_Result){
 				$inserted = ['status' => "true","statuscode" => 200,'response' =>"Logout Successfully"];
 				$this->set_response($inserted, REST_Controller::HTTP_OK);

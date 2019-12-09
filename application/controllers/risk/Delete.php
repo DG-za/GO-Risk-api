@@ -15,7 +15,7 @@ class Delete extends REST_Controller {
 	public function __construct() {
 		parent::__construct();
 		$this->load->helper('check_token');				
-		$this->load->model('risk/Delete_modal');
+		$this->load->model('risk/Delete_model');
 	}
 	public function index_post(){
 		$valid = ['status' => "true","statuscode" => 200,'response' =>"Record Deleted"];
@@ -32,7 +32,7 @@ class Delete extends REST_Controller {
 			$token_status = check_token($user_id,$headers['Authorization']);
 
 			if($token_status == TRUE){
-				$results = $this->Delete_modal->delete($id);
+				$results = $this->Delete_model->delete($id);
 				if(!empty($results)){
 					$this->set_response($valid, REST_Controller::HTTP_OK);
 				}else{

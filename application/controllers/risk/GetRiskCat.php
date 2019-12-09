@@ -16,7 +16,7 @@ class GetRiskCat extends REST_Controller {
   public function __construct() {
     parent::__construct();
     $this->load->helper('check_token');       
-    $this->load->model('risk/GetRiskCat_modal');
+    $this->load->model('risk/GetRiskCat_model');
   }
   
   public function index_post(){
@@ -33,7 +33,7 @@ class GetRiskCat extends REST_Controller {
       
       if($token_status == TRUE){
         $merge_Array = array();
-        $results = $this->GetRiskCat_modal->get_Risk_Cat();
+        $results = $this->GetRiskCat_model->get_Risk_Cat();
         if(!empty($results)){
           foreach ($results as $key => $value) {
             $merge_Array[$key]["id"] = $value->id;
