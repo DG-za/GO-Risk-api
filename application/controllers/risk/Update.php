@@ -16,7 +16,7 @@ class Update extends REST_Controller {
   public function __construct() {
     parent::__construct();
     $this->load->helper('check_token');       
-    $this->load->model('risk/Update_modal');
+    $this->load->model('risk/Update_model');
   }
   
   public function index_post(){
@@ -41,7 +41,7 @@ class Update extends REST_Controller {
             //'score' => $score,
             'cat' => $cat
           );
-        $results = $this->Update_modal->update($updateArr,$id);
+        $results = $this->Update_model->update($updateArr,$id);
         if(!empty($results)){
           $Inserted = ['status' => "true","statuscode" => 200,'response' =>"Record Updated"];
           $this->set_response($Inserted, REST_Controller::HTTP_OK);

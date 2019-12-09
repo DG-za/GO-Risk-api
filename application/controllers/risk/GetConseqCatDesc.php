@@ -16,7 +16,7 @@ class GetConseqCatDesc extends REST_Controller {
   public function __construct() {
     parent::__construct();
     $this->load->helper('check_token');       
-    $this->load->model('risk/GetConseqCatDesc_modal');
+    $this->load->model('risk/GetConseqCatDesc_model');
   }
   
   public function index_post(){
@@ -33,7 +33,7 @@ class GetConseqCatDesc extends REST_Controller {
       
       if($token_status == TRUE){
         $merge_Array = array();
-        $results = $this->GetConseqCatDesc_modal->get_Conseq_Cat_Desc();
+        $results = $this->GetConseqCatDesc_model->get_Conseq_Cat_Desc();
         if(!empty($results)){
           foreach ($results as $key => $value) {
             $merge_Array[$key]['conseq_cat']    = $value->conseq_cat;

@@ -16,7 +16,7 @@ class InviteAttendees extends REST_Controller {
 	public function __construct() {
 		parent::__construct();
 		$this->load->helper('check_token');				
-		$this->load->model('InviteAttendees_modal');
+		$this->load->model('InviteAttendees_model');
 	}
 	
 	public function index_post(){
@@ -33,14 +33,14 @@ class InviteAttendees extends REST_Controller {
 			$token_status = check_token($user_id,$headers['Authorization']);
 			
 			if($token_status == TRUE){
-				$Check_Availability_Result = $this->InviteAttendees_modal->Check_User_Availability($email);
+				$Check_Availability_Result = $this->InviteAttendees_model->Check_User_Availability($email);
 				if($Check_Availability_Result==0){
 					$Insert_Array = array(
 						"`email`" => $email,
 						"`date`" => date('Y-m-d'),
 						"`isexpiry`" => 0,
 					);
-					$Insert_saveUser_Result = $this->InviteAttendees_modal->Insert_User($Insert_Array);
+					$Insert_saveUser_Result = $this->InviteAttendees_model->Insert_User($Insert_Array);
 					$token['id'] = $Insert_saveUser_Result;
 					$token['email'] = $email;
 					$AToken = JWT::encode($token, $this->config->item('jwt_key'));
@@ -50,7 +50,7 @@ class InviteAttendees extends REST_Controller {
 					$message .= "<p>You have been invited to complete a Maturity Assessment. Please click on the activation link below to complete your registration.</p>";
 					$message .= "<a href='".$link."' target='_blank'>Create Account</a>";
 					$message .="<p>Kind Regards,<br/>4Xcellence Solutions</p>";
-					$this->InviteAttendees_modal->sendMail($email,$subject,$message);
+					$this->InviteAttendees_model->sendMail($email,$subject,$message);
 					if($Insert_saveUser_Result > 0){
 						$data = [
 							"email" => $email,
@@ -92,7 +92,7 @@ class InviteAttendees extends REST_Controller {
 		
 		if(isset($id)){
 			$headers = $this->input->request_headers();
-			$Update_InviteStatus_Result = $this->InviteAttendees_modal->Update_InviteStatus($id);
+			$Update_InviteStatus_Result = $this->InviteAttendees_model->Update_InviteStatus($id);
 			$Pass_Data["data"][] = $Update_InviteStatus_Result;
 			$inserted = ['status' => "true","statuscode" => 200,'response' => $Pass_Data];
 			$this->set_response($Pass_Data, REST_Controller::HTTP_OK);
@@ -102,7 +102,7 @@ class InviteAttendees extends REST_Controller {
 	}
 	public function GetExpiredStatus_post(){
 		$id = $this->post('id');
-		$result = $this->InviteAttendees_modal->GetExpiredStatus($id);
+		$result = $this->InviteAttendees_model->GetExpiredStatus($id);
 		$Pass_Data["data"][] =$result;
 		$inserted = ['status' => "true","statuscode" => 200,'response' => $Pass_Data];
 		$this->set_response($Pass_Data, REST_Controller::HTTP_OK);

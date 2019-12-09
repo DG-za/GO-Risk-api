@@ -16,7 +16,7 @@ class SendNotification extends REST_Controller {
   public function __construct() {
     parent::__construct();
     $this->load->helper('check_token');       
-    $this->load->model('risk/SendNotification_modal');
+    $this->load->model('risk/SendNotification_model');
   }
   
   public function index_post(){
@@ -35,7 +35,7 @@ class SendNotification extends REST_Controller {
       
       if($token_status == TRUE){
       	$merge_arr=array();
-        $results = $this->SendNotification_modal->get_Users($manager);
+        $results = $this->SendNotification_model->get_Users($manager);
         if(!empty($results)){
 	        $merge_arr['id']= $results[0]->id;
 	        $merge_arr['firstname']= $results[0]->firstname;

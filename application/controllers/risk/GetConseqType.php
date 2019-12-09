@@ -16,7 +16,7 @@ class GetConseqType extends REST_Controller {
   public function __construct() {
     parent::__construct();
     $this->load->helper('check_token');       
-    $this->load->model('risk/GetConseqType_modal');
+    $this->load->model('risk/GetConseqType_model');
   }
   
   public function index_post(){
@@ -33,7 +33,7 @@ class GetConseqType extends REST_Controller {
       
       if($token_status == TRUE){
         $merge_Array = array();
-        $results = $this->GetConseqType_modal->get_Conseq_Type();
+        $results = $this->GetConseqType_model->get_Conseq_Type();
         if(!empty($results)){
           foreach ($results as $key => $value) {
             $merge_Array[$key]['id']    = $value->id;

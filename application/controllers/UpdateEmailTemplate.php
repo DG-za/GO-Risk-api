@@ -16,7 +16,7 @@ class UpdateEmailTemplate extends REST_Controller {
 	public function __construct() {
 		parent::__construct();
 		$this->load->helper('check_token');				
-		$this->load->model('UpdateEmailTemplate_modal');
+		$this->load->model('UpdateEmailTemplate_model');
 	}
 	
 	public function index_post(){
@@ -52,7 +52,7 @@ class UpdateEmailTemplate extends REST_Controller {
 				$Where_Array = array(
 					"`template_id`" => $email_template_id
 				);
-				$Update_EmailTemplate = $this->UpdateEmailTemplate_modal->Update_EmailTemplate($Update_Array,$Where_Array);
+				$Update_EmailTemplate = $this->UpdateEmailTemplate_model->Update_EmailTemplate($Update_Array,$Where_Array);
 				if($Update_EmailTemplate > 0){
 					$Pass_Data = ['status' => "true","statuscode" => 200,'response' =>"Email Template Updated"];
 					$this->set_response($Pass_Data, REST_Controller::HTTP_OK);
@@ -94,7 +94,7 @@ class UpdateEmailTemplate extends REST_Controller {
 				$Where_Array = array(
 					"`template_id`" => $email_template_id
 				);
-				$Update_EmailTemplate = $this->UpdateEmailTemplate_modal->Update_Status($Update_Array,$Where_Array);
+				$Update_EmailTemplate = $this->UpdateEmailTemplate_model->Update_Status($Update_Array,$Where_Array);
 				if($Update_EmailTemplate > 0){
 					$Pass_Data = ['status' => "true","statuscode" => 200,'response' =>"Email Template Updated"];
 					$this->set_response($Pass_Data, REST_Controller::HTTP_OK);

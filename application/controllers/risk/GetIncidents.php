@@ -16,7 +16,7 @@ class GetIncidents extends REST_Controller {
   public function __construct() {
     parent::__construct();
     $this->load->helper('check_token');       
-    $this->load->model('risk/GetIncidents_modal');
+    $this->load->model('risk/GetIncidents_model');
   }
   
   public function index_post(){
@@ -35,9 +35,9 @@ class GetIncidents extends REST_Controller {
       if($token_status == TRUE){
         $merge_Array = array();
         if(!empty($risk)){
-          $results = $this->GetIncidents_modal->get_Incedents($risk);
+          $results = $this->GetIncidents_model->get_Incedents($risk);
         }else{
-          $results = $this->GetIncidents_modal->get_Incedents();
+          $results = $this->GetIncidents_model->get_Incedents();
         }
         if(!empty($results)){
           foreach ($results as $key => $value) {

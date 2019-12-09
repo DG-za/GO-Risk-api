@@ -16,7 +16,7 @@ class SaveManagerNotification extends REST_Controller {
   public function __construct() {
     parent::__construct();
     $this->load->helper('check_token');       
-    $this->load->model('risk/SaveManagerNotification_modal');
+    $this->load->model('risk/SaveManagerNotification_model');
   }
   
   public function index_post(){
@@ -52,7 +52,7 @@ class SaveManagerNotification extends REST_Controller {
             'complete' => '0',
             'complete_date' => ''
           );
-        $results = $this->SaveManagerNotification_modal->save_Manager_Notification($saveArr);
+        $results = $this->SaveManagerNotification_model->save_Manager_Notification($saveArr);
         if(!empty($results)){
            $notification = array(
            'owner' => $owner,

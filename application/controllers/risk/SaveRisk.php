@@ -16,7 +16,7 @@ class SaveRisk extends REST_Controller {
   public function __construct() {
     parent::__construct();
     $this->load->helper('check_token');       
-    $this->load->model('risk/SaveRisk_modal');
+    $this->load->model('risk/SaveRisk_model');
   }
   
   public function index_post(){
@@ -118,7 +118,7 @@ class SaveRisk extends REST_Controller {
             'management_discretion_desc' => $management_discretion_desc,
             'management_discretion_frequency' => $management_discretion_frequency
           );*/
-        $results = $this->SaveRisk_modal->save_Risk($saveArr);
+        $results = $this->SaveRisk_model->save_Risk($saveArr);
         if(!empty($results)){
           $Pass_Data["data"]['insertId'] = $results;
           $Inserted = ['status' => "true","statuscode" => 200,'response' =>$Pass_Data];

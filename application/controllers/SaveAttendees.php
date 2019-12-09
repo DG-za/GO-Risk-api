@@ -16,7 +16,7 @@ class SaveAttendees extends REST_Controller {
 	public function __construct() {
 		parent::__construct();
 		//$this->load->helper('check_token');				
-		$this->load->model('SaveUser_modal');
+		$this->load->model('SaveUser_model');
 	}
 	
 	public function index_post(){
@@ -37,7 +37,7 @@ class SaveAttendees extends REST_Controller {
 			//$token_status = check_token($user_id,$headers['Authorization']);
 			
 			if(true){
-				$Check_Availability_Result = $this->SaveUser_modal->Check_User_Availability($email);
+				$Check_Availability_Result = $this->SaveUser_model->Check_User_Availability($email);
 				if($Check_Availability_Result==0){
 				$Insert_Array = array(
 					"`email`" => $email,
@@ -46,7 +46,7 @@ class SaveAttendees extends REST_Controller {
 					"`role`" => $role,
 					"`password`" => $password,
 				);
-				$Insert_saveUser_Result = $this->SaveUser_modal->Insert_User($Insert_Array);
+				$Insert_saveUser_Result = $this->SaveUser_model->Insert_User($Insert_Array);
 				if($Insert_saveUser_Result > 0){
 					$data = [
 						'email' => $email,
