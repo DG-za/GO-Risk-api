@@ -9,13 +9,13 @@ There are two main modules in that application:
 
 For API:
 --------------
-1. Controller name must be use with CamelCase
+1. Controller name must be written with UpperCamelCase
 Like: DeleteEmailTemplate.php
 
-2. Models name must be use with CamelCase and suffix will be _model
+2. Models name must be written with UpperCamelCase and suffix will be _model
 Like: DeleteEmailTemplate_model
 
-3. Controller method name should use like given:
+3. Controller method name must be written with lowerCamelCase
 getAllActionvictory_post
 
 At the end as suffix, you can use it as per your API type like: post,put,get,update,delete and so on.
