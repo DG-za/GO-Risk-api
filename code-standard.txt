@@ -28,10 +28,14 @@ For Angular Application:
 ------------------------
 1. For sub modules we have used child method, it mean related files will be import in the related modules only.
 2. Used specific services for the particular modules.
-3. Angular function name must be use with Camel Case
+3. Angular function name must be written with lowerCamelCase
 Like getMilestones
 
-
+For Database:
+--------------
+1. All ommon tables must have prefix "com_"
+2. All Maturity module tables must have prefix "mat_"
+3. All Risk module tables must have prefix "risk_"
 
 
 
