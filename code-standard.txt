@@ -9,13 +9,13 @@ There are two main modules in that application:
 
 For API:
 --------------
-1. Controller name must be use with CamelCase
+1. Controller name must be written with UpperCamelCase
 Like: DeleteEmailTemplate.php
 
-2. Models name must be use with CamelCase and suffix will be _model
+2. Models name must be written with UpperCamelCase and suffix will be _model
 Like: DeleteEmailTemplate_model
 
-3. Controller method name should use like given:
+3. Controller method name must be written with lowerCamelCase
 getAllActionvictory_post
 
 At the end as suffix, you can use it as per your API type like: post,put,get,update,delete and so on.
@@ -28,10 +28,14 @@ For Angular Application:
 ------------------------
 1. For sub modules we have used child method, it mean related files will be import in the related modules only.
 2. Used specific services for the particular modules.
-3. Angular function name must be use with Camel Case
+3. Angular function name must be written with lowerCamelCase
 Like getMilestones
 
-
+For Database:
+--------------
+1. All ommon tables must have prefix "com_"
+2. All Maturity module tables must have prefix "mat_"
+3. All Risk module tables must have prefix "risk_"
 
 
 
