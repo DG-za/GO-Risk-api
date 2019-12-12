@@ -278,8 +278,7 @@ public function DeleteAnswerOfPerformance_post(){
 
 			if($token_status == TRUE){
 				$deleteStatus = $this->GetSessionProgress_model->DeleteAnswerOfPerformance($element_id,$employee_id);
-				
-				if($deleteStatus == TRUE){
+				if($deleteStatus == 1){
 					$valid = ['status' => "true","statuscode" => 200,'response' =>"Record deleted"];
 					$this->set_response($valid, REST_Controller::HTTP_OK);
 				}else{
