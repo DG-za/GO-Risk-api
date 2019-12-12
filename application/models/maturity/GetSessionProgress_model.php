@@ -135,9 +135,14 @@ public function DeleteAnswerOfPerformance($ele_id,$emp_id){
 		$this->db->where('user', $emp_id);
 	    $this->db->delete('mat_performance_mc');   	    
 	    if ( $this->db->affected_rows() > 0 ){
-	    	$this->db->where('element', $ele_id);
-			$this->db->where('user', $emp_id);
-	    	$this->db->delete('mat_performance_desired');
+				$this->db->where('element', $ele_id);
+				$this->db->where('user', $emp_id);
+				$this->db->delete('mat_performance_desired'); 	    
+		    if ( $this->db->affected_rows() > 0 ){
+		    	return 1;
+		    }else{
+		    	return 0;
+		    }
 	    }else { 
 	    	return 0;
 	    }		
