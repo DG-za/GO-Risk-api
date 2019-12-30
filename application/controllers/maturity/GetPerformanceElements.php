@@ -26,6 +26,7 @@ class GetPerformanceElements extends REST_Controller {
 		$not_found = ['status' => "true","statuscode" => 404,'response' =>"Token not found"];
 		$message = 'Required field(s) user_id is missing or empty';
 		$user_id = $this->post('user_id');
+		$selectedSessionId = $this->post('selectedSessionId');
 		if(isset($user_id)){
 			$headers = $this->input->request_headers();
 			$token_status = check_token($user_id,$headers['Authorization']);
@@ -35,10 +36,18 @@ class GetPerformanceElements extends REST_Controller {
 				$Pass_Data = array();
 				if(!empty($All_Performances)){
 					foreach($All_Performances as $key => $value){
-						$Where_Array = array(
-							"`element`" => $value->id,
-							"`user`" => $user_id,
-						);
+						if($selectedSessionId != null && $selectedSessionId != "null"){
+							$Where_Array = array(
+								"`element`" => $value->id,
+								"`user`" => $user_id,
+								"`session_id`" => $selectedSessionId
+							);
+						}else{
+							$Where_Array = array(
+								"`element`" => $value->id,
+								"`user`" => $user_id
+							);
+						}
 						$Show_Check_Bool_Val = $this->GetPerformanceElements_model->Get_All_Answer_is_Done_By_User_ID($Where_Array);
 						$merge_array = array("id" => $value->id,"name" => $value->name,"check_val" => $Show_Check_Bool_Val);
 						$Pass_Data["data"][] = $merge_array;

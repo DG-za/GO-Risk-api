@@ -30,6 +30,10 @@ class SavePerformanceMC extends REST_Controller {
 		$element = $this->post('element');
 		$question = $this->post('question');
 		$answer = $this->post('answer');
+		$selectedSessionId = $this->post('selectedSessionId');
+		if($selectedSessionId == "null"){
+			$selectedSessionId=null;
+		}
 		if(isset($user_id) && isset($element) && isset($question) && isset($answer)){
 			$headers = $this->input->request_headers();
 			$token_status = check_token($user_id,$headers['Authorization']);
@@ -38,7 +42,8 @@ class SavePerformanceMC extends REST_Controller {
 				$Where_Array = array(
 					"`question`" => $question,
 					"`element`" => $element,
-					"`user`" => $user_id,
+					"`session_id`" => $selectedSessionId,
+					"`user`" => $user_id
 				);
 				$Get_Answer_if_Exist = $this->SavePerformanceMC_model->Get_Answer_if_Exist($Where_Array);
 				if($Get_Answer_if_Exist > 0){
@@ -62,6 +67,7 @@ class SavePerformanceMC extends REST_Controller {
 						"`element`" => $element,
 						"`answer`" => $answer,
 						"`user`" => $user_id,
+						"`session_id`" => $selectedSessionId
 					);
 					$Insert_Performance_MC_Result = $this->SavePerformanceMC_model->Insert_Performance_MC($Insert_Array);
 					if($Insert_Performance_MC_Result){

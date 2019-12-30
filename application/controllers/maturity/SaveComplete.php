@@ -29,6 +29,10 @@ class SaveComplete extends REST_Controller {
 		$user_id = $this->post('user');
 		$user = $this->post('user');  
 		$element = $this->post('element');
+		$selectedSessionId = $this->post('selectedSessionId');
+		if($selectedSessionId == "null"){
+			$selectedSessionId=null;
+		}
 		if(isset($user_id)  && isset($element)){
 			$headers = $this->input->request_headers();
 			$token_status = check_token($user_id,$headers['Authorization']);
@@ -36,7 +40,8 @@ class SaveComplete extends REST_Controller {
 			if($token_status == TRUE){
 				 $Insert_SaveComplete_Array = array(
 						"`user`" => $user, 
-						"`element`" => $element
+						"`element`" => $element,
+						"`session_id`" => $selectedSessionId
 				 );
 				 $Insert_Complete_Result = $this->SaveComplete_model->Insert_Complete($Insert_SaveComplete_Array);
 				 if($Insert_Complete_Result){

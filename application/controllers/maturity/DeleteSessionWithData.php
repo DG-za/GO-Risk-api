@@ -3,12 +3,14 @@ require_once APPPATH . '/libraries/REST_Controller.php';
 require_once APPPATH . '/libraries/JWT.php';
 use \Firebase\JWT\JWT;
 
-class GetComplete extends REST_Controller {
+class DeleteSessionWithData extends REST_Controller {
 	/***************************************************************
 	*  Project Name : 4Xcellence Solutions
 	*  Created By :   
-	*  Created Date : 26-09-2019
-	*  Description : A controller contain GetComplete related methods
+	*  Created Date : 18-10-2019
+	*  Description : A controller contain DeleteAnswers related methods, When user 
+	   delete questsion at the same time all answers will be deleted related to that
+	   questions.
 	*  Modification History :
 	*  
 	***************************************************************/
@@ -16,35 +18,30 @@ class GetComplete extends REST_Controller {
 	public function __construct() {
 		parent::__construct();
 		$this->load->helper('check_token');				
-		$this->load->model('maturity/GetComplete_model');
+		$this->load->model('maturity/DeleteSessionWithData_model');
 	}
 	
 	public function index_post(){
 		$valid = ['status' => "true","statuscode" => 200,'response' =>"Token Valid"];
-		$no_found = ['status' => "true","statuscode" => 200,'response' =>"No Record Found"];
+		$no_found = ['status' => "true","statuscode" => 200,'response' =>"No Deleted"];
 		$invalid = ['status' => "true","statuscode" => 203,'response' =>"In-Valid token"];
 		$not_found = ['status' => "true","statuscode" => 404,'response' =>"Token not found"];
 		
-		$message = 'Required field(s) user_id,complete_user_id is missing or empty';
+		$message = 'Required field(s) user_id,session_id is missing or empty';
 		$user_id = $this->post('user_id');
-		$selectedSessionId = $this->post('selectedSessionId');
-		//$C_User_ID = $this->post('complete_user_id');
-		if(isset($user_id)){
+		$session_id = $this->post('session_id');
+		if(isset($user_id) && isset($session_id)){
 			$headers = $this->input->request_headers();
 			$token_status = check_token($user_id,$headers['Authorization']);
 			
 			if($token_status == TRUE){
-				$getComplete_Result = $this->GetComplete_model->getComplete_function($user_id,$selectedSessionId);
-				$Pass_Data = array();
-				if(!empty($getComplete_Result)){
-					foreach($getComplete_Result as $key => $value){
-						$Pass_Data["data"][] = $value->element;
-					}
-					$valid = ['status' => "true","statuscode" => 200,'response' =>$Pass_Data];
-					$this->set_response($Pass_Data, REST_Controller::HTTP_OK);
+				$deleteSessionData_function = $this->DeleteSessionWithData_model->deleteSessionData_function($session_id);
+				if($deleteSessionData_function){
+					$deleted['data'] = ['status' => "true","statuscode" => 200,'response' =>"Session Deleted Successfully"];
+					$this->set_response($deleted, REST_Controller::HTTP_OK);
 				}else{
-					$Pass_Data["data"] = array();
-					$this->set_response($Pass_Data, REST_Controller::HTTP_OK);
+					$not_deleted['data'] = ['status' => "false","statuscode" => 200,'response' =>"Session not Deleted"];
+					$this->set_response($not_deleted, REST_Controller::HTTP_OK);
 				}
 			}else if($token_status == FALSE){
 				$this->set_response($invalid, REST_Controller::HTTP_NON_AUTHORITATIVE_INFORMATION);

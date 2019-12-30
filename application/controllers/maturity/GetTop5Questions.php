@@ -27,12 +27,13 @@ class GetTop5Questions extends REST_Controller {
 		
 		$message = 'Required field(s) user_id is missing or empty';
 		$user_id = $this->post('user_id');
+		$selectedSessionId = $this->post('selectedSessionId');
 		if(isset($user_id)){
 			$headers = $this->input->request_headers();
 			$token_status = check_token($user_id,$headers['Authorization']);
 			
 			if($token_status == TRUE){
-				$getTop5Questions_Result = $this->GetTop5Questions_model->getTop5Questions_function();
+				$getTop5Questions_Result = $this->GetTop5Questions_model->getTop5Questions_function($selectedSessionId);
 				$Pass_Data = array();
 				if(!empty($getTop5Questions_Result)){
 					foreach($getTop5Questions_Result as $key => $value){

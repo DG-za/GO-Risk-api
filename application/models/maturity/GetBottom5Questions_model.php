@@ -2,7 +2,13 @@
 class GetBottom5Questions_model extends CI_Model {
 	
 	/* Get Bottom 5 Elements Function */
-	public function getBottom5Questions_function(){
+	public function getBottom5Questions_function($selectedSessionId){
+		if($selectedSessionId != null && $selectedSessionId != "null"){
+			$whereArr=array(
+				"`m_am`.`session_id`"=>$selectedSessionId
+			);
+			$this->db->where($whereArr);
+		}
 		$this->db->select("`m_e`.`name` AS `element`, `m_q`.`question`, (sum(`m_am`.`answer`) / count(`m_am`.`answer`)) AS `newScore`");
 		$this->db->from("`mat_answer_mc` as `m_am`");
 		$this->db->join("`mat_questions` as `m_q`", "`m_q`.`id` = `m_am`.`question`", "INNER");

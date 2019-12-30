@@ -3,7 +3,7 @@ class SaveMC_model extends CI_Model {
 	
 	/* Get Save MC */
 	public function Get_saveMC($Where_Array){
-		$this->db->select("`id`,`user`,`element`,`question`,`answer`");
+		$this->db->select("`id`,`user`,`element`,`question`,`answer`,`session_id`");
 		$this->db->from("`mat_answer_mc`");
 		$this->db->where($Where_Array);
 		$query_result = $this->db->get();

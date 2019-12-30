@@ -30,6 +30,10 @@ class SaveProof extends REST_Controller {
 		$user = $this->post('user');
 		$element = $this->post('element');
 		$proof = $this->post('proof');
+		$selectedSessionId = $this->post('selectedSessionId');
+		if($selectedSessionId == "null"){
+			$selectedSessionId=null;
+		}
 		if(isset($user_id) && isset($user) && isset($element) && isset($proof)){
 			$headers = $this->input->request_headers();
 			$token_status = check_token($user_id,$headers['Authorization']);
@@ -39,6 +43,7 @@ class SaveProof extends REST_Controller {
 				$Insert_Array = array(
 					"`user`" => $user,
 					"`element`" => $element,
+					"`session_id`" => $selectedSessionId,
 				);
 				$Insert_Answer_Proof_Result = null;
 				foreach($proof as $v){

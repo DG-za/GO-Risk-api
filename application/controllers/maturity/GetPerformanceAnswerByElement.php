@@ -28,13 +28,14 @@ class GetPerformanceAnswerByElement extends REST_Controller {
 		$message = 'Required field(s) user_id,performance_id,element_id is missing or empty';
 		$user_id = $this->post('user_id');
 		$Element_ID = $this->post('element_id');
+		$selectedSessionId = $this->post('selectedSessionId');
 		if(isset($user_id) && isset($Element_ID)){
 			$headers = $this->input->request_headers();
 			$token_status = check_token($user_id,$headers['Authorization']);
 			
 			$Pass_Data["data"] = array();
 			if($token_status == TRUE){
-				$All_Performance_Answer = $this->GetPerformanceAnswerByElement_model->Get_Performance_Answer_by_Element_ID($Element_ID);
+				$All_Performance_Answer = $this->GetPerformanceAnswerByElement_model->Get_Performance_Answer_by_Element_ID($Element_ID,$selectedSessionId);
 				if(!empty($All_Performance_Answer)){
 					foreach($All_Performance_Answer as $key => $value){
 						$merge_array = array("question" => $value->question,"poor" => $value->n1,"mediocre" => $value->n2,"good" => $value->n3,"excellent" => $value->n4,"total" => $value->total);

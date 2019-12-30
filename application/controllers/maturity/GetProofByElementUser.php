@@ -28,13 +28,14 @@ class GetProofByElementUser extends REST_Controller {
 		$message = 'Required field(s) user_id,element_id is missing or empty';
 		$user_id = $this->post('user_id');
 		$Element_ID = $this->post('element_id');
+		$selectedSessionId = $this->post('selectedSessionId');
 
 		if(isset($user_id) && isset($Element_ID)){
 			$headers = $this->input->request_headers();
 			$token_status = check_token($user_id,$headers['Authorization']);
 			
 			if($token_status == TRUE){
-				$All_Proof = $this->GetProofByElementUser_model->Get_Proof_by_Element_ID_User($Element_ID,$user_id);
+				$All_Proof = $this->GetProofByElementUser_model->Get_Proof_by_Element_ID_User($Element_ID,$user_id,$selectedSessionId);
 				$Pass_Data = array();
 				$Pass_Data["data"][1][] = '';
 				$Pass_Data["data"][2][] = '';

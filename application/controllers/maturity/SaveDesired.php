@@ -30,6 +30,10 @@ class SaveDesired extends REST_Controller {
 		$user = $this->post('user');  
 		$element = $this->post('element');
 		$desired = $this->post('desired');
+		$selectedSessionId = $this->post('selectedSessionId');
+		if($selectedSessionId == "null"){
+			$selectedSessionId=null;
+		}
 		if(isset($user_id)  && isset($element) && isset($desired)){
 			$headers = $this->input->request_headers();
 			$token_status = check_token($user_id,$headers['Authorization']);
@@ -38,7 +42,8 @@ class SaveDesired extends REST_Controller {
 				$Insert_Desired_Array = array(
 					"`user`" => $user, 
 					"`element`" => $element,
-					"`desired`" => $desired
+					"`desired`" => $desired,
+					"`session_id`" => $selectedSessionId
 				);
 				$Insert_Desired_Result = $this->SaveDesired_model->Insert_Desired($Insert_Desired_Array);
 				if($Insert_Desired_Result){

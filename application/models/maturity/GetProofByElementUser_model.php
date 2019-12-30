@@ -2,11 +2,20 @@
 class GetProofByElementUser_model extends CI_Model {
 	
 	/* Get All Proof By Element_ID with Join */
-	public function Get_Proof_by_Element_ID_User($Element_ID,$user_id){
-		$where_Array = array(
-			"`m_ap`.`element`" => $Element_ID,
-			"`m_ap`.`user`" => $user_id
-		);
+	public function Get_Proof_by_Element_ID_User($Element_ID,$user_id,$selectedSessionId){
+		if($selectedSessionId != null && $selectedSessionId != "null"){
+			$where_Array = array(
+				"`m_ap`.`element`" => $Element_ID,
+				"`m_ap`.`user`" => $user_id,
+				"`m_ap`.`session_id`" => $selectedSessionId
+			);
+		}else{
+			$where_Array = array(
+				"`m_ap`.`element`" => $Element_ID,
+				"`m_ap`.`user`" => $user_id
+			);
+		}
+		
 		
 		$this->db->select("`m_p`.`id`,`m_p`.`proof`,`m_p`.`type`");
 		$this->db->from("`mat_proofs` as `m_p`");

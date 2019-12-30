@@ -13,20 +13,40 @@ class Get5BiggestGapsPractice_model extends CI_Model {
 	}
 	
 	/* Get All Practice Answers By Element */
-	public function getAllPracticeAnswersByElement_function($elementId) {
+	public function getAllPracticeAnswersByElement_function($elementId,$selectedSessionId) {
+		if($selectedSessionId != null && $selectedSessionId != "null"){
+			$whereArr=array(
+				"`session_id`"=>$selectedSessionId,
+				"`element`"=>$elementId
+			);
+		}else{
+			$whereArr=array(
+				"`element`"=>$elementId
+			);
+		}
 		$this->db->select("sum(`answer`) AS `sum`,count(`answer`) AS `count`");
 		$this->db->from("`mat_answer_mc`");
-		$this->db->where("`element`", $elementId);
+		$this->db->where($whereArr);
 		//$this->db->group_by("`m_am`.`element`");
 		$query_result = $this->db->get();
 		return $query_result->result();
 	}
 	
 	/* Get All Practice Desired By Element */
-	public function getAllPracticeDesiredByElement_function($elementId) {
+	public function getAllPracticeDesiredByElement_function($elementId,$selectedSessionId) {
+		if($selectedSessionId != null && $selectedSessionId != "null"){
+			$whereArr=array(
+				"`session_id`"=>$selectedSessionId,
+				"`element`"=>$elementId
+			);
+		}else{
+			$whereArr=array(
+				"`element`"=>$elementId
+			);
+		}
 		$this->db->select("sum(`desired`) AS `sum`,count(`desired`) AS `count`");
 		$this->db->from("`mat_answer_desired`");
-		$this->db->where("`element`", $elementId);
+		$this->db->where($whereArr);
 		$query_result = $this->db->get();
 		return $query_result->result();
 	}

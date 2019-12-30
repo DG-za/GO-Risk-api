@@ -28,14 +28,15 @@ class GetPerformanceMCByElement extends REST_Controller {
 		$message = 'Required field(s) user_id,element_id is missing or empty';
 		$user_id = $this->post('user_id');
 		$Element_ID = $this->post('element_id');
+		$selectedSessionId = $this->post('selectedSessionId');
 		if(isset($user_id) && isset($Element_ID)){
 			$headers = $this->input->request_headers();
 			$token_status = check_token($user_id,$headers['Authorization']);
 			
 			$Pass_Data["data"] = array();
 			if($token_status == TRUE){
-				$All_Answer = $this->GetPerformanceMCByElement_model->Get_Structured_Performance_Answers_by_Element($Element_ID);
-				$Total_Answers_By_Element = $this->GetPerformanceMCByElement_model->Get_Total_Performance_Answers_by_Element($Element_ID);
+				$All_Answer = $this->GetPerformanceMCByElement_model->Get_Structured_Performance_Answers_by_Element($Element_ID,$selectedSessionId);
+				$Total_Answers_By_Element = $this->GetPerformanceMCByElement_model->Get_Total_Performance_Answers_by_Element($Element_ID,$selectedSessionId);
 
 				$Get_Answer_Array = array();
 				$merge_array = array();

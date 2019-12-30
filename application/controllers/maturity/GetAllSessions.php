@@ -3,12 +3,12 @@ require_once APPPATH . '/libraries/REST_Controller.php';
 require_once APPPATH . '/libraries/JWT.php';
 use \Firebase\JWT\JWT;
 
-class GetComplete extends REST_Controller {
+class GetAllSessions extends REST_Controller {
 	/***************************************************************
 	*  Project Name : 4Xcellence Solutions
 	*  Created By :   
-	*  Created Date : 26-09-2019
-	*  Description : A controller contain GetComplete related methods
+	*  Created Date : 24-10-2019
+	*  Description : A controller contain GetAllUsers related methods
 	*  Modification History :
 	*  
 	***************************************************************/
@@ -16,7 +16,7 @@ class GetComplete extends REST_Controller {
 	public function __construct() {
 		parent::__construct();
 		$this->load->helper('check_token');				
-		$this->load->model('maturity/GetComplete_model');
+		$this->load->model('maturity/GetAllSessions_model');
 	}
 	
 	public function index_post(){
@@ -25,26 +25,36 @@ class GetComplete extends REST_Controller {
 		$invalid = ['status' => "true","statuscode" => 203,'response' =>"In-Valid token"];
 		$not_found = ['status' => "true","statuscode" => 404,'response' =>"Token not found"];
 		
-		$message = 'Required field(s) user_id,complete_user_id is missing or empty';
+		$message = 'Required field(s) user_id is missing or empty';
 		$user_id = $this->post('user_id');
-		$selectedSessionId = $this->post('selectedSessionId');
-		//$C_User_ID = $this->post('complete_user_id');
+		$role = $this->post('role');
 		if(isset($user_id)){
 			$headers = $this->input->request_headers();
 			$token_status = check_token($user_id,$headers['Authorization']);
 			
 			if($token_status == TRUE){
-				$getComplete_Result = $this->GetComplete_model->getComplete_function($user_id,$selectedSessionId);
+				$getAllSessions_Result = $this->GetAllSessions_model->getAllSessions_function($user_id);
 				$Pass_Data = array();
-				if(!empty($getComplete_Result)){
-					foreach($getComplete_Result as $key => $value){
-						$Pass_Data["data"][] = $value->element;
+				if(!empty($getAllSessions_Result)){
+					foreach($getAllSessions_Result as $key => $value){
+						if($value->user != ""){
+							$userArr=array();
+							$userArr=explode(",", $value->user);
+							if($role != "admin"){
+								if(in_array($user_id, $userArr)){
+									$Pass_Data["data"][] = $value;
+								}
+							}else{
+								$Pass_Data["data"][] = $value;
+							}
+							
+						}
 					}
+
 					$valid = ['status' => "true","statuscode" => 200,'response' =>$Pass_Data];
 					$this->set_response($Pass_Data, REST_Controller::HTTP_OK);
 				}else{
-					$Pass_Data["data"] = array();
-					$this->set_response($Pass_Data, REST_Controller::HTTP_OK);
+					$this->set_response($no_found, REST_Controller::HTTP_OK);
 				}
 			}else if($token_status == FALSE){
 				$this->set_response($invalid, REST_Controller::HTTP_NON_AUTHORITATIVE_INFORMATION);
@@ -56,4 +66,5 @@ class GetComplete extends REST_Controller {
 			$this->set_response($parameter_required_array, REST_Controller::HTTP_NOT_FOUND);
 		}
 	}
+
 }

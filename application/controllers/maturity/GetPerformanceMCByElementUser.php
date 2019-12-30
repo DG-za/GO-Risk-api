@@ -28,13 +28,14 @@ class GetPerformanceMCByElementUser extends REST_Controller {
 		$message = 'Required field(s) user_id,element_id is missing or empty';
 		$user_id = $this->post('user_id');
 		$Element_ID = $this->post('element_id');
+		$selectedSessionId = $this->post('selectedSessionId');
 		if(isset($user_id) && isset($Element_ID)){
 			$headers = $this->input->request_headers();
 			$token_status = check_token($user_id,$headers['Authorization']);
 			
 			$Pass_Data["data"] = array();
 			if($token_status == TRUE){
-				$All_Answer = $this->GetPerformanceMCByElementUser_model->Get_Performance_Answer_MC_by_Element_ID_and_User_ID($Element_ID,$user_id);
+				$All_Answer = $this->GetPerformanceMCByElementUser_model->Get_Performance_Answer_MC_by_Element_ID_and_User_ID($Element_ID,$user_id,$selectedSessionId);
 				if(!empty($All_Answer)){
 					foreach($All_Answer as $key => $value){
 						$Pass_Data["data"][$value->question] = $value;

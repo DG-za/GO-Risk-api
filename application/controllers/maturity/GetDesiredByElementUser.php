@@ -29,12 +29,13 @@ class GetDesiredByElementUser extends REST_Controller {
 		$user_id = $this->post('user_id');
 		$Element_ID = $this->post('element_id');
 		$assessment_type = $this->post('assessment_type');
+		$selectedSessionId = $this->post('selectedSessionId');
 		if(isset($user_id) && isset($Element_ID)){
 			$headers = $this->input->request_headers();
 			$token_status = check_token($user_id,$headers['Authorization']);
 			
 			if($token_status == TRUE){
-				$All_Desired = $this->GetDesiredByElementUser_model->Get_Desired_by_Element_ID_User($Element_ID,$user_id,$assessment_type);
+				$All_Desired = $this->GetDesiredByElementUser_model->Get_Desired_by_Element_ID_User($Element_ID,$user_id,$assessment_type,$selectedSessionId);
 				$Pass_Data = array();
 				if(!empty($All_Desired)){
 					foreach($All_Desired as $key => $value){

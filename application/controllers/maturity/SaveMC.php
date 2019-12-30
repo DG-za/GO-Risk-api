@@ -31,6 +31,10 @@ class SaveMC extends REST_Controller {
 		$element = $this->post('element');
 		$question = $this->post('question');
 		$answer = $this->post('answer');
+		$selectedSessionId = $this->post('selectedSessionId');
+		if($selectedSessionId == "null"){
+			$selectedSessionId=null;
+		}
 		if(isset($user_id) && isset($element) && isset($question) && isset($answer)){
 			$headers = $this->input->request_headers();
 			$token_status = check_token($user_id,$headers['Authorization']);
@@ -41,6 +45,7 @@ class SaveMC extends REST_Controller {
 					"`user`" => $user,
 					"`element`" => $element,
 					"`question`" => $question,
+					"`session_id`" => $selectedSessionId,
 				);
 				$Get_saveMC_Result = $this->SaveMC_model->Get_saveMC($Where_Array);
 				if(!empty($Get_saveMC_Result)){
@@ -48,7 +53,8 @@ class SaveMC extends REST_Controller {
 					$r_element = $Get_saveMC_Result[0]->element;
 					$r_question = $Get_saveMC_Result[0]->question;
 					$r_answer = $Get_saveMC_Result[0]->answer;
-					if($r_user == $user && $r_element == $element && $r_question == $question){
+					$r_session_id = $Get_saveMC_Result[0]->session_id;
+					if($r_user == $user && $r_element == $element && $r_question == $question && $r_session_id == $selectedSessionId){
 						$Data_Update = array(
 							"`answer`" => $answer,
 						);
@@ -67,6 +73,7 @@ class SaveMC extends REST_Controller {
 						"`element`" => $element,
 						"`question`" => $question,
 						"`answer`" => $answer,
+						"`session_id`" => $selectedSessionId,
 					);
 					$Insert_saveMC_Result = $this->SaveMC_model->Insert_saveMC($Insert_Array);
 					if($Insert_saveMC_Result){

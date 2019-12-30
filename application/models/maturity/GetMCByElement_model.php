@@ -2,10 +2,17 @@
 class GetMCByElement_model extends CI_Model {
 
 	/* Get All `answer_mc` by Elements_ID */
-	public function Get_Structured_Answers_By_Element($Element_ID){
-		$where_Array = array(
-			"`element`" => $Element_ID,
-		);
+	public function Get_Structured_Answers_By_Element($Element_ID,$selectedSessionId){
+		if($selectedSessionId != null && $selectedSessionId != "null"){
+			$where_Array = array(
+				"`element`" => $Element_ID,
+				"`session_id`" => $selectedSessionId,
+			);
+		}else{
+			$where_Array = array(
+				"`element`" => $Element_ID,
+			);
+		}
 
 		$this->db->select("`answer`, count(`answer`) as `value`, sum(`answer`) as `sum`");
 		$this->db->from("`mat_answer_mc`");
@@ -16,10 +23,17 @@ class GetMCByElement_model extends CI_Model {
 	}
 	
 	/* Get All `answer_mc` */
-	public function Get_Total_Answers_By_Element($Element_ID){
-		$where_Array = array(
-			"`element`" => $Element_ID,
-		);
+	public function Get_Total_Answers_By_Element($Element_ID,$selectedSessionId){
+		if($selectedSessionId != null && $selectedSessionId != "null"){
+			$where_Array = array(
+				"`element`" => $Element_ID,
+				"`session_id`" => $selectedSessionId,
+			);
+		}else{
+			$where_Array = array(
+				"`element`" => $Element_ID,
+			);
+		}
 
 		$this->db->select("count(`answer`) as `total`");
 		$this->db->from("`mat_answer_mc`");

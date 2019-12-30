@@ -27,13 +27,14 @@ class GetMaturityReporting extends REST_Controller {
 		
 		$message = 'Required field(s) user_id is missing or empty';
 		$user_id = $this->post('user_id');
+		$selectedSessionId = $this->post('selectedSessionId');
 		
 		if(isset($user_id)){
 			$headers = $this->input->request_headers();
 			$token_status = check_token($user_id,$headers['Authorization']);
 			if($token_status == TRUE){
 
-				$results_performance_mc = $this->GetMaturityReporting_model->GetMaturityReporting_performance_mc();
+				$results_performance_mc = $this->GetMaturityReporting_model->GetMaturityReporting_performance_mc($selectedSessionId);
 				$Pass_Data["data"] = array();
 				if(!empty($results_performance_mc)){
 					$P_Count = 0;
@@ -51,7 +52,7 @@ class GetMaturityReporting extends REST_Controller {
 					$Pass_Data["data"]["performance_mc"] = number_format(0,1);
 				}
 
-				$results_answer_mc = $this->GetMaturityReporting_model->GetMaturityReporting_answer_mc();
+				$results_answer_mc = $this->GetMaturityReporting_model->GetMaturityReporting_answer_mc($selectedSessionId);
 				if(!empty($results_answer_mc)){
 					$A_Count = 0;
 					$A_A_Count = 0;
@@ -68,7 +69,7 @@ class GetMaturityReporting extends REST_Controller {
 					$Pass_Data["data"]["answer_mc"] = number_format(0,1);
 				}
 
-				$results_performance_desired = $this->GetMaturityReporting_model->GetMaturityReporting_performance_desired();
+				$results_performance_desired = $this->GetMaturityReporting_model->GetMaturityReporting_performance_desired($selectedSessionId);
 				if(!empty($results_performance_desired)){
 					$P_Count = 0;
 					$P_D_Count = 0;
@@ -85,7 +86,7 @@ class GetMaturityReporting extends REST_Controller {
 					$Pass_Data["data"]["performance_desired"] = number_format(0,1);
 				}
 
-			  $results_answer_desired = $this->GetMaturityReporting_model->GetMaturityReporting_answer_desired();
+			  $results_answer_desired = $this->GetMaturityReporting_model->GetMaturityReporting_answer_desired($selectedSessionId);
 				if(!empty($results_answer_desired)){
 					$A_Count = 0;
 					$A_D_Count = 0;

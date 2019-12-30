@@ -32,6 +32,7 @@ class SaveAttendees extends REST_Controller {
 		$lastname = $this->post('lastname');
 		$role = $this->post('role');
 		$password = md5($this->post('password'));
+		$session_id = $this->post('session_id');
 		if(isset($email) && isset($firstname) && isset($lastname) && isset($role) && isset($password)){
 			$headers = $this->input->request_headers();
 			//$token_status = check_token($user_id,$headers['Authorization']);
@@ -46,7 +47,13 @@ class SaveAttendees extends REST_Controller {
 					"`role`" => $role,
 					"`password`" => $password,
 				);
-				$Insert_saveUser_Result = $this->SaveUser_model->Insert_User($Insert_Array);
+
+				if(isset($session_id) && !empty($session_id)){
+					$Insert_saveUser_Result = $this->SaveUser_model->Insert_User($Insert_Array);
+					$this->SaveUser_model->Insert_User_Into_Session($session_id,$Insert_saveUser_Result);
+				}else{
+					$Insert_saveUser_Result = $this->SaveUser_model->Insert_User($Insert_Array);
+				}
 				if($Insert_saveUser_Result > 0){
 					$data = [
 						'email' => $email,

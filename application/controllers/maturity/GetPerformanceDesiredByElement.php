@@ -28,12 +28,13 @@ class GetPerformanceDesiredByElement extends REST_Controller {
 		$message = 'Required field(s) user_id,element_id is missing or empty';
 		$user_id = $this->post('user_id');
 		$Element_ID = $this->post('element_id');
+		$selectedSessionId = $this->post('selectedSessionId');
 		if(isset($user_id) && isset($Element_ID)){
 			$headers = $this->input->request_headers();
 			$token_status = check_token($user_id,$headers['Authorization']);
 			
 			if($token_status == TRUE){
-				$All_Desired = $this->GetPerformanceDesiredByElement_model->Get_Desired_by_Element_ID($Element_ID);
+				$All_Desired = $this->GetPerformanceDesiredByElement_model->Get_Desired_by_Element_ID($Element_ID,$selectedSessionId);
 				$Pass_Data = array();
 				if(!empty($All_Desired)){
 					foreach($All_Desired as $key => $value){

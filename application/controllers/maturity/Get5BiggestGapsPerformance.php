@@ -27,6 +27,7 @@ class Get5BiggestGapsPerformance extends REST_Controller {
 		
 		$message = 'Required field(s) user_id is missing or empty';
 		$user_id = $this->post('user_id');
+		$selectedSessionId = $this->post('selectedSessionId');
 		if(isset($user_id)){
 			$headers = $this->input->request_headers();
 			$token_status = check_token($this->post('user_id'),$headers['Authorization']);
@@ -38,7 +39,7 @@ class Get5BiggestGapsPerformance extends REST_Controller {
 				foreach ($AllElements as $key => $value) {
 					$elementId=$value->id;
 					$elementName=$value->name;
-					$allPerformanceAnswersByElement = $this->Get5BiggestGapsPerformance_model->getAllPerformanceAnswersByElement_function($elementId);					
+					$allPerformanceAnswersByElement = $this->Get5BiggestGapsPerformance_model->getAllPerformanceAnswersByElement_function($elementId,$selectedSessionId);					
 					if(!empty($allPerformanceAnswersByElement)){
 						if($allPerformanceAnswersByElement[0]->count != 0){
 							$allPerformanceAnswersAverage=number_format((float)$allPerformanceAnswersByElement[0]->sum/$allPerformanceAnswersByElement[0]->count,1,'.','');
@@ -48,7 +49,7 @@ class Get5BiggestGapsPerformance extends REST_Controller {
 					}else{
 						$allPerformanceAnswersAverage=0.0;
 					}
-					$allPerformanceDesiredByElement = $this->Get5BiggestGapsPerformance_model->getAllPerformanceDesiredByElement_function($elementId);
+					$allPerformanceDesiredByElement = $this->Get5BiggestGapsPerformance_model->getAllPerformanceDesiredByElement_function($elementId,$selectedSessionId);
 					if(!empty($allPerformanceDesiredByElement)){
 						if($allPerformanceDesiredByElement[0]->count != 0){
 							$allPerformanceDesiredAverage=number_format((float)$allPerformanceDesiredByElement[0]->sum/$allPerformanceDesiredByElement[0]->count,1,'.','');
