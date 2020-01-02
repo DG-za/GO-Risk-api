@@ -54,12 +54,15 @@ class SaveSession extends REST_Controller {
 								if($query->num_rows() > 0){
 									$result = $query->row_array();
 									$subject=$result['subject'];
+									$array = array('{{session_name}}');
+									$replace = array($jsonSession['session_name']);
+									$subject = str_replace($array,$replace,$subject);
 									$user_email=$userData->email;
 									$body="<p>".$result['header']."<p>";
 									$body.="<p>".$result['body']."<p>";
 									$body.="<p>".$result['footer']."<p>";
-									$array = array('{{first_name}}',' {{last_name}}','{{login_url}}');
-									$replace = array($userData->firstname,$userData->lastname,$site_url);
+									$array = array('{{session_name}}','{{first_name}}','{{last_name}}','{{login_url}}');
+									$replace = array($jsonSession['session_name'],$userData->firstname,$userData->lastname,$site_url);
 									$body = str_replace($array,$replace,$body);
 									$email_status = send_email_function($subject,$user_email,$body);
 								}
@@ -77,12 +80,15 @@ class SaveSession extends REST_Controller {
 						if($query->num_rows() > 0){
 							$result = $query->row_array();
 							$subject=$result['subject'];
+							$array = array('{{session_name}}');
+							$replace = array($jsonSession['session_name']);
+							$subject = str_replace($array,$replace,$subject);
 							$user_email=trim($user_email);
 							$body="<p>".$result['header']."<p>";
 							$body.="<p>".$result['body']."<p>";
 							$body.="<p>".$result['footer']."<p>";
-							$array = array('{{email}}','{{session_signup_url}}');
-							$replace = array($user_email,$link);
+							$array = array('{{session_name}}','{{email}}','{{session_signup_url}}');
+							$replace = array($jsonSession['session_name'],$user_email,$link);
 							$body = str_replace($array,$replace,$body);
 							$email_status = send_email_function($subject,$user_email,$body);
 						}
