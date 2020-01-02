@@ -28,21 +28,27 @@ class GetProof extends REST_Controller {
 		$message = 'Required field(s) user_id,element_id is missing or empty';
 		$user_id = $this->post('user_id');
 		$Element_ID = $this->post('element_id');
+		$selectedSessionId = $this->post('selectedSessionId');
 		if(isset($user_id) && isset($Element_ID)){
 			$headers = $this->input->request_headers();
 			$token_status = check_token($user_id,$headers['Authorization']);
 			
 			if($token_status == TRUE){
 				$All_Proof = $this->GetProof_model->Get_Proof_by_Element_ID($Element_ID);
-				$User_Count = $this->GetProof_model->Get_User_count_by_Element_ID($Element_ID);
+				$User_Count = $this->GetProof_model->Get_User_count_by_Element_ID($Element_ID,$selectedSessionId);
+				
 				$Pass_Data = array();
 				if(!empty($All_Proof)){
 					foreach($All_Proof as $key => $value){
-						$Count_Result = $this->GetProof_model->Get_Proof_count_by_Proof_ID($value->id);
+						$Count_Result = $this->GetProof_model->Get_Proof_count_by_Proof_ID($value->id,$selectedSessionId);
 						$amount = 0;
 						if(!empty($Count_Result)){
 							$amount = $Count_Result[0]->count_id;
-							$user = $User_Count[0]->count_user;
+							if($User_Count[0]->count_user == 0){
+								$user = 1;
+							}else{
+								$user = $User_Count[0]->count_user;
+							}
 						}
 						$merge_array = array("id" => $value->id,"element" => $value->element,"type" => $value->type,"proof" => $value->proof,"amount" => $amount,"user" => $user,"percent" => number_format((float)($amount/$user*100),1,'.',''));
 						$Pass_Data["data"][] = $merge_array;

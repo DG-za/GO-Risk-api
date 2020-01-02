@@ -20,8 +20,11 @@ class ActionOperation_model extends CI_Model {
        }
        return $result;
    }
-   public function getAllActionvictory()
+   public function getAllActionvictory($selectedSessionId)
    {
+      if($selectedSessionId != null && $selectedSessionId != "null" ){
+        $this->db->where('mat_actions_victory.session_id', $selectedSessionId);
+      }
        $this->db->select('mat_actions_victory.*,mat_actions_risks.risk,mat_actions_risks.element,mat_actions_results.results,mat_actions_measure.measure,com_user.firstname,com_user.lastname,mat_performance_areas.name as pename ,mat_elements.name as ename');
        $this->db->from('mat_actions_victory');
        $this->db->join('mat_actions_risks', 'mat_actions_victory.id = mat_actions_risks.victory','left');
@@ -30,6 +33,7 @@ class ActionOperation_model extends CI_Model {
        $this->db->join('com_user', 'mat_actions_victory.focusareaowner = com_user.id');
        $this->db->join('mat_performance_areas', 'mat_performance_areas.id = mat_actions_victory.performance_elements');
        $this->db->join('mat_elements', 'mat_actions_victory.element = mat_elements.id');
+
        $query = $this->db->get();
        $result = $query->result_array();
        foreach ($result as $key => $value) {

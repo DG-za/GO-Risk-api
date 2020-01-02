@@ -32,13 +32,14 @@ class ActionOperation extends REST_Controller {
 		$user_id = $this->post('user_id');
 
 		$victory_id=$this->post('victory_id');
+		$selectedSessionId=$this->post('selectedSessionId');
 		
 		if(isset($user_id) ){
 			$headers = $this->input->request_headers();
 			$token_status = check_token($user_id,$headers['Authorization']);
 			
 			if($token_status == TRUE){
-				$Insert_saveQuestion_Result = $this->ActionOperation_model->getAllActionvictory();
+				$Insert_saveQuestion_Result = $this->ActionOperation_model->getAllActionvictory($selectedSessionId);
 				if($Insert_saveQuestion_Result > 0){
 					$Pass_Data["data"][] = $Insert_saveQuestion_Result;
 					$inserted = ['status' => "true","statuscode" => 200,'response' =>$Pass_Data];
@@ -102,9 +103,12 @@ class ActionOperation extends REST_Controller {
 		$user_id = $this->post('user_id');
 		$milestones_data = $this->post('milestones');
 		$update_id = $this->post('id');
+		$selectedSessionId = $this->post('selectedSessionId');
+		
 		$victory_data = array(
 			'element'=>$element = $this->post('element'),
 			'definition'=>$definition = $this->post('definition'),
+			'session_id'=>$selectedSessionId = $this->post('selectedSessionId'),
 			'outcome_id' =>$outcome_id = $this->post('outcome_id'),
 			'teammembers'=>$teammembers = $this->post('teammembers'),
 			'performance_elements'=>$performance_elements = $this->post('performance_elements'),

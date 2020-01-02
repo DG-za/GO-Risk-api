@@ -16,11 +16,17 @@ class GetProof_model extends CI_Model {
 	}
 	
 	/* Get All Proof By Element_ID */
-	public function Get_Proof_count_by_Proof_ID($Proof_ID){
-		$where_Array = array(
-			"`proof`" => $Proof_ID,
-		);
-		
+	public function Get_Proof_count_by_Proof_ID($Proof_ID,$selectedSessionId){
+		if($selectedSessionId != null && $selectedSessionId != "null"){
+			$where_Array = array(
+				"`proof`" => $Proof_ID,
+				"`session_id`"=>$selectedSessionId
+			);
+		}else{
+			$where_Array = array(
+				"`proof`" => $Proof_ID,
+			);
+		}
 		$this->db->select("COUNT(`id`) as `count_id`");
 		$this->db->from("`mat_answer_proof`");
 		$this->db->where($where_Array);
@@ -29,11 +35,17 @@ class GetProof_model extends CI_Model {
 	}
 	
 	/* Get Total Users By Element_ID */
-	public function Get_User_count_by_Element_ID($Element_ID){
-		$where_Array = array(
-			"`element`" => $Element_ID,
-		);
-		
+	public function Get_User_count_by_Element_ID($Element_ID,$selectedSessionId){
+		if($selectedSessionId != null && $selectedSessionId != "null"){
+			$where_Array = array(
+				"`element`" => $Element_ID,
+				"`session_id`"=>$selectedSessionId
+			);
+		}else{
+			$where_Array = array(
+				"`element`" => $Element_ID,
+			);
+		}
 		$this->db->select("COUNT(DISTINCT `user`) as count_user");
 		$this->db->from("`mat_answer_proof`");
 		$this->db->where($where_Array);

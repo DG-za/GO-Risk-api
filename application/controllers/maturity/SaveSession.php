@@ -37,30 +37,32 @@ class SaveSession extends REST_Controller {
 			if($token_status == TRUE){
 				$session_users =array();
 				$session_users = json_decode($jsonSession["session_users"]);
-				$more_users = explode(",", $jsonSession["more_users"]);
-				
-				$Insert_Session_Array = array(
-					"`session_name`" => $jsonSession["session_name"], 
-					"`user`" => implode(",", $session_users), 
-					"`created_at`" => date("Y-m-d h:i:s")
-				);
-				$Insert_Session_Result = $this->SaveSession_model->Insert_Session($Insert_Session_Array);
+				//$more_users = explode(" ", $jsonSession["more_users"]);
+				$more_users = $jsonSession["more_users"];
+				$sessionUsers="";
+				if(isset($jsonSession["session_id"])){
+					$sessionUsers = $this->SaveSession_model->get_session_user_id($jsonSession["session_id"]);
+					$sessionUsers = $sessionUsers->user;
+				}	
+				$Insert_Session_Result = $this->SaveSession_model->Insert_Update_Session($jsonSession);
 				if($Insert_Session_Result){
 					foreach ($session_users as $user){
-						$userData = $this->SaveSession_model->get_user_details_by_id($user);
-						if(isset($userData) && !empty($userData)){
-							$query = $this->db->get_where('com_email_template',array('type'=>'session_notification'));
-							if($query->num_rows() > 0){
-								$result = $query->row_array();
-								$subject=$result['subject'];
-								$user_email=$userData->email;
-								$body="<p>".$result['header']."<p>";
-								$body.="<p>".$result['body']."<p>";
-								$body.="<p>".$result['footer']."<p>";
-								$array = array('{{first_name}}',' {{last_name}}','{{login_url}}');
-								$replace = array($userData->firstname,$userData->lastname,$site_url);
-								$body = str_replace($array,$replace,$body);
-								$email_status = send_email_function($subject,$user_email,$body);
+						if(!in_array($user, explode(",", $sessionUsers))){
+							$userData = $this->SaveSession_model->get_user_details_by_id($user);
+							if(isset($userData) && !empty($userData)){
+								$query = $this->db->get_where('com_email_template',array('type'=>'session_notification'));
+								if($query->num_rows() > 0){
+									$result = $query->row_array();
+									$subject=$result['subject'];
+									$user_email=$userData->email;
+									$body="<p>".$result['header']."<p>";
+									$body.="<p>".$result['body']."<p>";
+									$body.="<p>".$result['footer']."<p>";
+									$array = array('{{first_name}}',' {{last_name}}','{{login_url}}');
+									$replace = array($userData->firstname,$userData->lastname,$site_url);
+									$body = str_replace($array,$replace,$body);
+									$email_status = send_email_function($subject,$user_email,$body);
+								}
 							}
 						}
 					}
@@ -87,14 +89,15 @@ class SaveSession extends REST_Controller {
 					}
 
 					$data = [
-						'status' => "success",
+						'status' => "true",
 						'inserted_id' => $Insert_Session_Result
 					];
 					$Pass_Data["data"] = $data;
 					$this->set_response($Pass_Data, REST_Controller::HTTP_OK);
 				}else{
-					$Not_Inserted = ['status' => "true","statuscode" => 200,'response' =>"Session Not Inserted."];
-					$this->set_response($Not_Inserted, REST_Controller::HTTP_OK);
+					$Not_Inserted = ['status' => "false","statuscode" => 200,'response' =>"Session Not Inserted."];
+					$Pass_Data["data"] = $Not_Inserted;
+					$this->set_response($Pass_Data, REST_Controller::HTTP_OK);
 				}
 			}else if($token_status == FALSE){
 				$this->set_response($invalid, REST_Controller::HTTP_NON_AUTHORITATIVE_INFORMATION);
