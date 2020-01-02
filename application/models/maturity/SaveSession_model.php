@@ -13,6 +13,8 @@ class SaveSession_model extends CI_Model {
 			$this->db->update('mat_session',$Session_Array);
 			if($this->db->affected_rows() > 0){
 				return $jsonSession["session_id"];
+			}else{
+				return $jsonSession["session_id"];
 			}
 		}else{
 			$Session_Array = array(
