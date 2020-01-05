@@ -75,6 +75,7 @@ class GetSessionProgress extends REST_Controller {
 		$message = 'Required field(s) user_id is missing or empty';
 		$user_id = $this->post('user_id');
 		$role = $this->post('role');
+		$selectedSessionId = $this->post('selectedSessionId');
 		if(isset($user_id)){
 			$headers = $this->input->request_headers();
 			$token_status = check_token($user_id,$headers['Authorization']);
@@ -90,8 +91,8 @@ class GetSessionProgress extends REST_Controller {
 							"firstname" => $value->firstname,
 							"lastname" => $value->lastname,
 							"role" => $value->role,
-							"performanceProgress" => $this->GetSessionProgress_model->get_progress_of_performance($value->id),
-							"practiceProgress" => $this->GetSessionProgress_model->get_progress_of_practice($value->id)
+							"performanceProgress" => $this->GetSessionProgress_model->get_progress_of_performance($value->id,$selectedSessionId),
+							"practiceProgress" => $this->GetSessionProgress_model->get_progress_of_practice($value->id,$selectedSessionId)
 						);
 						$Pass_Data["data"][] = $merge_array;
 					}

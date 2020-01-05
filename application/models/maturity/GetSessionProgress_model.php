@@ -2,10 +2,17 @@
 class GetSessionProgress_model extends CI_Model {
 
 
-public function get_progress_of_performance($user_id){
+public function get_progress_of_performance($user_id,$selectedSessionId){
+	
+	if($selectedSessionId != null && $selectedSessionId != "null"){
+		$array = array('user' => $user_id, 'session_id' => $selectedSessionId);
+		$this->db->where($array);
+	}else{
+		$array = array('user' => $user_id);
+		$this->db->where($array);
+	}
 	$this->db->select('count(*) as total_answers');
 	$this->db->from('mat_performance_mc');
-	$this->db->where('user',$user_id);
 	$query_result = $this->db->get()->result();
 	$total_answers = $query_result[0]->total_answers;
 
@@ -31,10 +38,16 @@ public function get_progress_of_performance($user_id){
   }
 
 /********** THIS IS FOR THE PRACTICE MODULE *******/
-public function get_progress_of_practice($user_id){
+public function get_progress_of_practice($user_id,$selectedSessionId){
+	if($selectedSessionId != null && $selectedSessionId != "null"){
+		$array = array('user' => $user_id, 'session_id' => $selectedSessionId);
+		$this->db->where($array);
+	}else{
+		$array = array('user' => $user_id);
+		$this->db->where($array);
+	}
 	$this->db->select('count(*) as total_answers');
 	$this->db->from('mat_answer_mc');
-	$this->db->where('user',$user_id);
 	$query_result = $this->db->get()->result();
 	$total_answers = $query_result[0]->total_answers;
 
@@ -234,6 +247,11 @@ public function DeleteAnswerOfPractice($ele_id,$employee_id){
 		    		$this->db->where('element', $ele_id);
 					$this->db->where('user', $employee_id);
 		    		$this->db->delete('mat_answer_proof');
+		    		if ( $this->db->affected_rows() > 0 ){
+				    	return 1;
+				    }else{
+				    	return 0;
+				    }
 		    	}
 	    	}   	 
 	    } else { 
