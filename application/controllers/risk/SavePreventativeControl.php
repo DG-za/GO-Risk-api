@@ -3,7 +3,7 @@ require_once APPPATH . '/libraries/REST_Controller.php';
 require_once APPPATH . '/libraries/JWT.php';
 use \Firebase\JWT\JWT;
 
-class SaveRiskCat extends REST_Controller {
+class SavePreventativeControl extends REST_Controller {
 	/***************************************************************
 	*  Project Name : 4Xcellence Solutions
 	*  Created By :   
@@ -16,7 +16,7 @@ class SaveRiskCat extends REST_Controller {
 	public function __construct() {
 		parent::__construct();
 		$this->load->helper('check_token');				
-		$this->load->model('risk/SaveRiskCat_model');
+		$this->load->model('risk/SavePreventativeControl_model');
 	}
 	
 	public function index_post(){
@@ -27,21 +27,21 @@ class SaveRiskCat extends REST_Controller {
 		
 		$message = 'Required field(s) user_id,risk_cat_name is missing or empty';
 		$user_id = $this->post('user_id');
-		$risk_cat_name = $this->post('risk_cat_name');
-		if(isset($user_id) && isset($risk_cat_name)){
+		$preventative_name = $this->post('preventative_name');
+		if(isset($user_id) && isset($preventative_name)){
 			$headers = $this->input->request_headers();
 			$token_status = check_token($user_id,$headers['Authorization']);
 			
 			if($token_status == TRUE){
 				$Pass_Data = array();
 				$Insert_Array = array(
-					"`name`" => $risk_cat_name
+					"`name`" => $preventative_name
 				);
-				$Insert_riskCat_Result = $this->SaveRiskCat_model->Insert_Risk_Cat($Insert_Array);
-				if($Insert_riskCat_Result > 0){
+				$Insert_Result = $this->SavePreventativeControl_model->Save_Data($Insert_Array);
+				if($Insert_Result > 0){
 					$data = array(
-						'name' => $risk_cat_name,
-						'id'    => $Insert_riskCat_Result
+						'name' => $preventative_name,
+						'id'    => $Insert_Result
 					);
 					$valid = ['status' => "true","statuscode" => 200,'response' =>$data];
 					$Pass_Data["data"] = $valid;

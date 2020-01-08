@@ -27,7 +27,12 @@ class SaveCompany extends REST_Controller {
 		
 		$message = 'Required field(s) user_id,add_company_name is missing or empty';
 		$user_id = $this->post('user_id');
-		$add_company_name = $this->post('add_company_name');
+		$add_company_name = $this->post('name');
+		$parent_id = $this->post('parent');
+		$workforce = $this->post('total_worforce');
+
+		//print_r($this->post()); die;
+
 		if(isset($user_id) && isset($add_company_name)){
 			$headers = $this->input->request_headers();
 			$token_status = check_token($user_id,$headers['Authorization']);
@@ -35,7 +40,9 @@ class SaveCompany extends REST_Controller {
 			if($token_status == TRUE){
 				$Pass_Data = array();
 				$Insert_Array = array(
-					"`name`" => $add_company_name
+					"`name`" => $add_company_name,
+					"`parent`" => $parent_id,
+					"`total_workforce`" => $workforce
 				);
 				$Insert_Company_Result = $this->SaveCompany_model->Insert_Company($Insert_Array);
 				if($Insert_Company_Result > 0){
