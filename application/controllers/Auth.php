@@ -63,7 +63,7 @@ class Auth extends REST_Controller {
 				$success = ['status' => "true","statuscode" => 200,'response' =>$user_arr];
 				$this->set_response($success, REST_Controller::HTTP_OK);
 			}else {
-				$this->response($invalid_credentials, REST_Controller::HTTP_NOT_FOUND);
+				$this->response($invalid_credentials, REST_Controller::HTTP_OK);
 			}
 		}
 	}
