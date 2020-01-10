@@ -74,12 +74,15 @@ public function getUsersByRole_function($role){
 
 /* FUNCTION FOR THE PERFORMANCE ASSESSMENT */
 /* Get answers of performance */
-public function get_answers_of_performance($emp_id,$element_id){
+public function get_answers_of_performance($emp_id,$element_id,$selectedSessionId){
 		$this->db->select('pm.id,pm.question as question_id,p.question,pm.answer,pm.element');
 		$this->db->from("mat_performance_mc pm");
 		$this->db->join("mat_performance p","p.id = pm.question");
 		$this->db->where("pm.user" , $emp_id);	
-		$this->db->where("pm.element",$element_id);	
+		$this->db->where("pm.element",$element_id);
+		if($selectedSessionId != null && $selectedSessionId != "null"){
+			$this->db->where("pm.session_id",$selectedSessionId);
+		}
 		$this->db->order_by("pm.id","ASC");
 		$query_result = $this->db->get();
 		//echo $this->db->last_query();
@@ -110,11 +113,19 @@ public function get_performance_areas(){
 		return $query_result->result();
 }
 
-public function get_proof_by_employee($ele_id,$emp_id){
+public function get_proof_by_employee($ele_id,$emp_id,$selectedSessionId){
+	if($selectedSessionId !=  null && $selectedSessionId != "null"){
+		$where_Array = array(
+			"`m_ap`.`element`" => $ele_id,
+			"`m_ap`.`user`" => $emp_id,
+			"`m_ap`.`session_id`" => $selectedSessionId
+		);
+	}else{
 		$where_Array = array(
 			"`m_ap`.`element`" => $ele_id,
 			"`m_ap`.`user`" => $emp_id
 		);
+	}
 		
 		$this->db->select("`m_p`.`id`,`m_p`.`proof`,`m_p`.`type`");
 		$this->db->from("`mat_proofs` as `m_p`");
@@ -124,11 +135,20 @@ public function get_proof_by_employee($ele_id,$emp_id){
 		return $query_result->result();
 	}
 
-public function get_gesired_by_employee($ele_id,$emp_id,$assessment_type){
+public function get_gesired_by_employee($ele_id,$emp_id,$assessment_type,$selectedSessionId){
+	if($selectedSessionId !=  null && $selectedSessionId != "null"){
+		$where_Array = array(
+			"`element`" => $ele_id,
+			"`user`" => $emp_id,
+			"`session_id`" => $selectedSessionId
+		);
+	}else{
 		$where_Array = array(
 			"`element`" => $ele_id,
 			"`user`" => $emp_id,
 		);
+	}
+		
 		
 		$this->db->select("`element`,`desired`,SUM(`desired`=2) AS `n1`, SUM(`desired`=3) AS `n2`, SUM(`desired`=4) AS `n3`, COUNT(*) AS `total`");
 		if($assessment_type == "practice"){
@@ -161,11 +181,19 @@ public function DeleteAnswerOfPerformance($ele_id,$emp_id){
 	    }		
 }
 
-public function get_performance_desired_by_employee($ele_id,$emp_id){
+public function get_performance_desired_by_employee($ele_id,$emp_id,$selectedSessionId){
+	if($selectedSessionId != null && $selectedSessionId != "null"){
+		$where_Array = array(
+			"`element`" => $ele_id,
+			"`user`" => $emp_id,
+			"`session_id`" => $selectedSessionId,
+		);
+	}else{
 		$where_Array = array(
 			"`element`" => $ele_id,
 			"`user`" => $emp_id,
 		);
+	}
 		
 		$this->db->select("`element`,SUM(`desired`=2) AS `n1`, SUM(`desired`=3) AS `n2`, SUM(`desired`=4) AS `n3`, COUNT(*) AS `total`");
 		$this->db->from("`mat_performance_desired`");
@@ -201,12 +229,15 @@ public function get_practice_elements($cat_id){
 
 /* Get answers of practice assessment */
 
-public function get_answers_of_practice($emp_id,$element_id){
+public function get_answers_of_practice($emp_id,$element_id,$selectedSessionId){
 		$this->db->select('am.id,am.question as question_id,q.question,am.answer,am.element');
 		$this->db->from("mat_answer_mc am");
 		$this->db->join("mat_questions q","q.id = am.question");
 		$this->db->where("am.user" , $emp_id);	
 		$this->db->where("am.element",$element_id);	
+		if($selectedSessionId != null && $selectedSessionId != "null"){
+			$this->db->where("am.session_id",$selectedSessionId);
+		}
 		$this->db->order_by("am.id","ASC");
 		$query_result = $this->db->get();
 		//echo $this->db->last_query();
