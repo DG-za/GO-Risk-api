@@ -35,7 +35,8 @@ class SavePreventativeControl extends REST_Controller {
 			if($token_status == TRUE){
 				$Pass_Data = array();
 				$Insert_Array = array(
-					"`name`" => $preventative_name
+					"`name`" => $preventative_name,
+					"`hazard_desc`" => 1
 				);
 				$Insert_Result = $this->SavePreventativeControl_model->Save_Data($Insert_Array);
 				if($Insert_Result > 0){
