@@ -123,6 +123,7 @@ public function get_answers_of_performance_post(){
 		$message = 'Required field(s) user_id is missing or empty';
 		$logged_in_id = $this->post('logged_in_id');		
 		$employee_id = $this->post('employee_id');
+		$selectedSessionId = $this->post('selectedSessionId');
 		$customAnswerarr = array(
 			"1" => "poor",
 			"2" => "mediocre",
@@ -143,7 +144,7 @@ public function get_answers_of_performance_post(){
 					$data["element_id"] = $value->id;
 					$data["series"] = array();
 					$data['desired'] = array();
-					$resultArr = $this->GetSessionProgress_model->get_answers_of_performance($employee_id,$value->id);
+					$resultArr = $this->GetSessionProgress_model->get_answers_of_performance($employee_id,$value->id,$selectedSessionId);
 					//print_r($data); die;
 					foreach($resultArr as $key_mc => $value_mc){
 						 $tempArr = array(	
@@ -154,7 +155,7 @@ public function get_answers_of_performance_post(){
 							"answer" => $this->GetSessionProgress_model->get_single_answer_of_performance($value_mc->question_id,$customAnswerarr[$value_mc->answer])
 						);
 						 $data["series"][] = $tempArr;
-						 $data["desired"] = $this->GetSessionProgress_model->get_performance_desired_by_employee($value->id,$employee_id);
+						 $data["desired"] = $this->GetSessionProgress_model->get_performance_desired_by_employee($value->id,$employee_id,$selectedSessionId);
 					}
 					$jsonArr[] = $data;
 					//print_r($data); die;
@@ -198,11 +199,12 @@ public function getAnswersOfPractice_post(){
 	$message = 'Required field(s) user_id is missing or empty';
 	$logged_in_id = $this->post('logged_in_id');		
 	$employee_id = $this->post('employee_id');
+	$selectedSessionId = $this->post('selectedSessionId');
 	$customAnswerarr = array(
 		"1" => "reactive",
 		"2" => "compliant",
 		"3" => "proactive",
-		"4" => "resilent"
+		"4" => "resilient"
 	);
 	
 	if(isset($logged_in_id)){
@@ -221,22 +223,24 @@ public function getAnswersOfPractice_post(){
 				if($elementsArr){
 			   foreach($elementsArr as $key => $ele_val){				
 				 $tempArr1 = array ('element_name' => $ele_val->name,'element_id' => $ele_val->id);
-				 $resultArr = $this->GetSessionProgress_model->get_answers_of_practice($employee_id,$ele_val->id);
+				 $resultArr = $this->GetSessionProgress_model->get_answers_of_practice($employee_id,$ele_val->id,$selectedSessionId);
 				 if($resultArr){
 				 foreach($resultArr as $key_mc => $value_mc){	
 					$tempArr = array(	
 					 	"answer_id" => $value_mc->id,
-					    "element_name" => $this->GetSessionProgress_model->get_practice_element_name($value_mc->element),
+					  "element_name" => $this->GetSessionProgress_model->get_practice_element_name($value_mc->element),
 						"question_id" => $value_mc->question_id,	
 						"question" => $value_mc->question,				
 						"answer" => $this->GetSessionProgress_model->get_single_answer_of_practice($value_mc->question_id,$customAnswerarr[$value_mc->answer])
 					);
 					 //$data["series"][] = $tempArr;	
-					  $tempArr1["series"][] = $tempArr;					 
+					  $tempArr1["series"][] = $tempArr;					  		 
 				}
+				$tempArr1["proofs"] = $this->GetSessionProgress_model->get_proof_by_employee($ele_val->id,$employee_id,$selectedSessionId);	 
+				$tempArr1["desired"] = $this->GetSessionProgress_model->get_gesired_by_employee($ele_val->id,$employee_id,'practice',$selectedSessionId);
 				$data['elements'][] = $tempArr1;
-				$data['proofs'] = $this->GetSessionProgress_model->get_proof_by_employee($ele_val->id,$employee_id);
-				$data['desired'] = $this->GetSessionProgress_model->get_gesired_by_employee($ele_val->id,$employee_id,'practice');
+				/*$data['proofs'] = $this->GetSessionProgress_model->get_proof_by_employee($ele_val->id,$employee_id,$selectedSessionId);
+				$data['desired'] = $this->GetSessionProgress_model->get_gesired_by_employee($ele_val->id,$employee_id,'practice',$selectedSessionId);*/
 			    }  // if condition of $resultArr			
 												
 				} // foreach loop of $elementsArr	
