@@ -16,7 +16,7 @@ class SaveEmailTemplate extends REST_Controller {
 	public function __construct() {
 		parent::__construct();
 		$this->load->helper('check_token');				
-		$this->load->model('SaveEmailTemplate_modal');
+		$this->load->model('SaveEmailTemplate_model');
 	}
 	
 	public function index_post(){
@@ -50,7 +50,7 @@ class SaveEmailTemplate extends REST_Controller {
 					"`created_date`" => date("Y-m-d h:i:s"),
 					"`modified_date`" => date("Y-m-d h:i:s")
 				);
-				$Insert_EmailTemplate_Result = $this->SaveEmailTemplate_modal->Insert_EmailTemplate($Insert_Array);
+				$Insert_EmailTemplate_Result = $this->SaveEmailTemplate_model->Insert_EmailTemplate($Insert_Array);
 				if($Insert_EmailTemplate_Result > 0){
 					$data = [
 						'id'    => $Insert_EmailTemplate_Result,

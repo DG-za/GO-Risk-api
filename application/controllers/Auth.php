@@ -17,7 +17,7 @@ class Auth extends REST_Controller {
 	public function __construct() {
 		parent::__construct();
 		$this->load->model('auth_model');
-		$this->load->model('Performance_modal');
+		$this->load->model('Performance_model');
 		$this->load->helper('check_token');				
 	}
 
@@ -63,7 +63,7 @@ class Auth extends REST_Controller {
 				$success = ['status' => "true","statuscode" => 200,'response' =>$user_arr];
 				$this->set_response($success, REST_Controller::HTTP_OK);
 			}else {
-				$this->response($invalid_credentials, REST_Controller::HTTP_NOT_FOUND);
+				$this->response($invalid_credentials, REST_Controller::HTTP_OK);
 			}
 		}
 	}

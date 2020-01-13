@@ -1,0 +1,42 @@
+Introduction:-
+--------------
+We are using Angular as frontend with Angular 8
+As backend, we are using Mysql with Codeigniter Framework with JWT + Rest Client and Rest Server. 
+
+There are two main modules in that application:
+1. Matuarity Module
+2. Risk Module
+
+For API:
+--------------
+1. Controller name must be written with UpperCamelCase
+Like: DeleteEmailTemplate.php
+
+2. Models name must be written with UpperCamelCase and suffix will be _model
+Like: DeleteEmailTemplate_model
+
+3. Controller method name must be written with lowerCamelCase
+getAllActionvictory_post
+
+At the end as suffix, you can use it as per your API type like: post,put,get,update,delete and so on.
+
+4. Each and every tables have prefix with predefined modules: 
+
+5. Each and every API have token and we are passing token when API call from the application.
+
+For Angular Application:
+------------------------
+1. For sub modules we have used child method, it mean related files will be import in the related modules only.
+2. Used specific services for the particular modules.
+3. Angular function name must be written with lowerCamelCase
+Like getMilestones
+
+For Database:
+--------------
+1. All ommon tables must have prefix "com_"
+2. All Maturity module tables must have prefix "mat_"
+3. All Risk module tables must have prefix "risk_"
+
+
+
+

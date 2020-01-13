@@ -16,7 +16,7 @@ class SaveAttendees extends REST_Controller {
 	public function __construct() {
 		parent::__construct();
 		//$this->load->helper('check_token');				
-		$this->load->model('SaveUser_modal');
+		$this->load->model('SaveUser_model');
 	}
 	
 	public function index_post(){
@@ -32,12 +32,13 @@ class SaveAttendees extends REST_Controller {
 		$lastname = $this->post('lastname');
 		$role = $this->post('role');
 		$password = md5($this->post('password'));
+		$session_id = $this->post('session_id');
 		if(isset($email) && isset($firstname) && isset($lastname) && isset($role) && isset($password)){
 			$headers = $this->input->request_headers();
 			//$token_status = check_token($user_id,$headers['Authorization']);
 			
 			if(true){
-				$Check_Availability_Result = $this->SaveUser_modal->Check_User_Availability($email);
+				$Check_Availability_Result = $this->SaveUser_model->Check_User_Availability($email);
 				if($Check_Availability_Result==0){
 				$Insert_Array = array(
 					"`email`" => $email,
@@ -46,7 +47,13 @@ class SaveAttendees extends REST_Controller {
 					"`role`" => $role,
 					"`password`" => $password,
 				);
-				$Insert_saveUser_Result = $this->SaveUser_modal->Insert_User($Insert_Array);
+
+				if(isset($session_id) && !empty($session_id)){
+					$Insert_saveUser_Result = $this->SaveUser_model->Insert_User($Insert_Array);
+					$this->SaveUser_model->Insert_User_Into_Session($session_id,$Insert_saveUser_Result);
+				}else{
+					$Insert_saveUser_Result = $this->SaveUser_model->Insert_User($Insert_Array);
+				}
 				if($Insert_saveUser_Result > 0){
 					$data = [
 						'email' => $email,

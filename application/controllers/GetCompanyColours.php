@@ -16,7 +16,7 @@ class GetCompanyColours extends REST_Controller {
 	public function __construct() {
 		parent::__construct();
 		$this->load->helper('check_token');				
-		$this->load->model('GetCompanyColours_modal');
+		$this->load->model('GetCompanyColours_model');
 	}
 	
 	public function index_post(){
@@ -31,7 +31,7 @@ class GetCompanyColours extends REST_Controller {
 			$headers = $this->input->request_headers();
 			if(TRUE){
 				$Pass_Data = array();
-				$All_Company = $this->GetCompanyColours_modal->getAllCompanyColours_function();
+				$All_Company = $this->GetCompanyColours_model->getAllCompanyColours_function();
 				if(!empty($All_Company)){
 					$this->set_response($All_Company, REST_Controller::HTTP_OK);
 				}else{
