@@ -2,7 +2,7 @@
 class GetPerformanceMCAll_model extends CI_Model {
 	
 	/* Get All `elements` by Group by */
-	public function Get_All_Performance_Elements_Function(){
+	public function Get_All_performance_areas_Function(){
 		$this->db->select("`id`,`name`");
 		$this->db->from("`mat_performance_areas`");
 		$this->db->group_by("`sequence`");
@@ -11,7 +11,7 @@ class GetPerformanceMCAll_model extends CI_Model {
 	}
 	
 	/* Get All `answer_mc` by Elements_ID */
-	public function Get_Structured_Performance_Answers_By_Element($ID,$selectedSessionId){
+	public function Get_Structured_Performance_Answers_By_Area($ID,$selectedSessionId){
 		if($selectedSessionId != null && $selectedSessionId != "null"){
 			$whereArr=array(
 				"`element`"=>$ID,
@@ -35,7 +35,7 @@ class GetPerformanceMCAll_model extends CI_Model {
 	}
 	
 	/* Get All perfromance answers by Elements_ID */
-	public function Get_Total_Performance_Answers_By_Element($ID,$selectedSessionId){
+	public function Get_Total_Performance_Answers_By_Area($ID,$selectedSessionId){
 		if($selectedSessionId != null && $selectedSessionId != "null"){
 			$whereArr=array(
 				"`element`"=>$ID,

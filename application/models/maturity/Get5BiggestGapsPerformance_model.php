@@ -13,7 +13,7 @@ class Get5BiggestGapsPerformance_model extends CI_Model {
 	}
 	
 	/* Get All Practice Answers By Element */
-	public function getAllPerformanceAnswersByElement_function($elementId,$selectedSessionId) {
+	public function getAllPerformanceAnswersByArea_function($elementId,$selectedSessionId) {
 		if($selectedSessionId != null && $selectedSessionId != "null"){
 			$whereArr=array(
 				"`session_id`"=>$selectedSessionId,
@@ -33,7 +33,7 @@ class Get5BiggestGapsPerformance_model extends CI_Model {
 	}
 	
 	/* Get All Practice Desired By Element */
-	public function getAllPerformanceDesiredByElement_function($elementId,$selectedSessionId) {
+	public function getAllPerformanceDesiredByArea_function($elementId,$selectedSessionId) {
 		if($selectedSessionId != null && $selectedSessionId != "null"){
 			$whereArr=array(
 				"`session_id`"=>$selectedSessionId,

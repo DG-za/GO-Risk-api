@@ -3,12 +3,12 @@ require_once APPPATH . '/libraries/REST_Controller.php';
 require_once APPPATH . '/libraries/JWT.php';
 use \Firebase\JWT\JWT;
 
-class GetPerformanceMCByElementUser extends REST_Controller {
+class GetPerformanceMCByAreaUser extends REST_Controller {
 	/***************************************************************
 	*  Project Name : 4Xcellence Solutions
 	*  Created By :   
 	*  Created Date : 24-09-2019
-	*  Description : A controller contain GetPerformanceMCByElement related methods
+	*  Description : A controller contain GetPerformanceMCByArea related methods
 	*  Modification History :
 	*  
 	***************************************************************/
@@ -16,7 +16,7 @@ class GetPerformanceMCByElementUser extends REST_Controller {
 	public function __construct() {
 		parent::__construct();
 		$this->load->helper('check_token');				
-		$this->load->model('maturity/GetPerformanceMCByElementUser_model');
+		$this->load->model('maturity/GetPerformanceMCByAreaUser_model');
 	}
 	
 	public function index_post(){
@@ -35,7 +35,7 @@ class GetPerformanceMCByElementUser extends REST_Controller {
 			
 			$Pass_Data["data"] = array();
 			if($token_status == TRUE){
-				$All_Answer = $this->GetPerformanceMCByElementUser_model->Get_Performance_Answer_MC_by_Element_ID_and_User_ID($Element_ID,$user_id,$selectedSessionId);
+				$All_Answer = $this->GetPerformanceMCByAreaUser_model->Get_Performance_Answer_MC_by_Area_ID_and_User_ID($Element_ID,$user_id,$selectedSessionId);
 				if(!empty($All_Answer)){
 					foreach($All_Answer as $key => $value){
 						$Pass_Data["data"][$value->question] = $value;

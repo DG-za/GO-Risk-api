@@ -99,7 +99,7 @@ class ActionOperation extends REST_Controller {
 		$invalid = ['status' => "true","statuscode" => 203,'response' =>"In-Valid token"];
 		$not_found = ['status' => "true","statuscode" => 404,'response' =>"Token not found"];
 		
-		$message = 'Required field(s) user_id,element,definition,teammembers,performance_elements, is missing or empty,focusareaname,focusareaowner,risk,results,measure';
+		$message = 'Required field(s) user_id,element,definition,teammembers,performance_areas, is missing or empty,focusareaname,focusareaowner,risk,results,measure';
 		$user_id = $this->post('user_id');
 		$milestones_data = $this->post('milestones');
 		$update_id = $this->post('id');
@@ -111,7 +111,7 @@ class ActionOperation extends REST_Controller {
 			'session_id'=>$selectedSessionId = $this->post('selectedSessionId'),
 			'outcome_id' =>$outcome_id = $this->post('outcome_id'),
 			'teammembers'=>$teammembers = $this->post('teammembers'),
-			'performance_elements'=>$performance_elements = $this->post('performance_elements'),
+			'performance_areas'=>$performance_areas = $this->post('performance_areas'),
 			'focusareaname'=>$focusareaname = $this->post('focusareaname'),
 			'focusareaowner'=>$focusareaowner = $this->post('focusareaowner'));
 		$risk_data = array(
@@ -126,7 +126,7 @@ class ActionOperation extends REST_Controller {
 			'element'=>$element = $this->post('element'),
 			'measure'=>$measure = $this->post('measure')
 		);
-		if(isset($user_id) && isset($element) && isset($definition) && isset($measure) && isset($results) && isset($milestones_data) && isset($risk) && isset($teammembers) && isset($performance_elements) && isset($focusareaname) && isset($focusareaowner) ){
+		if(isset($user_id) && isset($element) && isset($definition) && isset($measure) && isset($results) && isset($milestones_data) && isset($risk) && isset($teammembers) && isset($performance_areas) && isset($focusareaname) && isset($focusareaowner) ){
 			$headers = $this->input->request_headers();
 			$token_status = check_token($user_id,$headers['Authorization']);
 			
@@ -185,7 +185,7 @@ class ActionOperation extends REST_Controller {
 			$this->set_response($parameter_required_array, REST_Controller::HTTP_NOT_FOUND);
 		}
   }
-  public function performance_elements_post(){
+  public function performance_areas_post(){
 		$valid = ['status' => "true","statuscode" => 200,'response' =>"Token Valid"];
 		$no_found = ['status' => "true","statuscode" => 200,'response' =>"No Record Found"];
 		$invalid = ['status' => "true","statuscode" => 203,'response' =>"In-Valid token"];
@@ -201,7 +201,7 @@ class ActionOperation extends REST_Controller {
 			$token_status = check_token($user_id,$headers['Authorization']);
 			
 			if($token_status == TRUE){
-				$Insert_saveQuestion_Result = $this->ActionOperation_model->performance_elements($id);
+				$Insert_saveQuestion_Result = $this->ActionOperation_model->performance_areas($id);
 				if(!empty($Insert_saveQuestion_Result)){
 					$Pass_Data["data"][] = $Insert_saveQuestion_Result;
 					$inserted = ['status' => "true","statuscode" => 200,'response' =>$Pass_Data];

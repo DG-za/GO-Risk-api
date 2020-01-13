@@ -3,12 +3,12 @@ require_once APPPATH . '/libraries/REST_Controller.php';
 require_once APPPATH . '/libraries/JWT.php';
 use \Firebase\JWT\JWT;
 
-class GetPerformanceDesiredByElement extends REST_Controller {
+class SavePerformanceArea extends REST_Controller {
 	/***************************************************************
 	*  Project Name : 4Xcellence Solutions
 	*  Created By :   
-	*  Created Date : 25-09-2019
-	*  Description : A controller contain GetDesiredByElement related methods
+	*  Created Date : 28-09-2019
+	*  Description : A controller contain SaveProof related methods
 	*  Modification History :
 	*  
 	***************************************************************/
@@ -16,7 +16,7 @@ class GetPerformanceDesiredByElement extends REST_Controller {
 	public function __construct() {
 		parent::__construct();
 		$this->load->helper('check_token');				
-		$this->load->model('maturity/GetPerformanceDesiredByElement_model');
+		$this->load->model('maturity/Saveperformance_model');
 	}
 	
 	public function index_post(){
@@ -25,37 +25,27 @@ class GetPerformanceDesiredByElement extends REST_Controller {
 		$invalid = ['status' => "true","statuscode" => 203,'response' =>"In-Valid token"];
 		$not_found = ['status' => "true","statuscode" => 404,'response' =>"Token not found"];
 		
-		$message = 'Required field(s) user_id,element_id is missing or empty';
+		$message = 'Required field(s) name is missing or empty';
 		$user_id = $this->post('user_id');
-		$Element_ID = $this->post('element_id');
-		$selectedSessionId = $this->post('selectedSessionId');
-		if(isset($user_id) && isset($Element_ID)){
+		$name = $this->post('name');
+
+		if(isset($user_id) && isset($name)){
 			$headers = $this->input->request_headers();
 			$token_status = check_token($user_id,$headers['Authorization']);
 			
 			if($token_status == TRUE){
-				$All_Desired = $this->GetPerformanceDesiredByElement_model->Get_Desired_by_Element_ID($Element_ID,$selectedSessionId);
-				$Pass_Data = array();
-				if(!empty($All_Desired)){
-					foreach($All_Desired as $key => $value){
-						$merge_array[0]['name'] = 'resilient';
-						$merge_array[0]['value'] = $value->n3;
-						$merge_array[1]['name'] = 'proactive';
-						$merge_array[1]['value'] = $value->n2;
-						$merge_array[2]['name'] = 'compliant';
-						$merge_array[2]['value'] = $value->n1;
-					}
-					$Pass_Data["data"] = $merge_array;
+				
+				$Result = $this->Saveperformance_model->Save_performance_area($name);
+				
+				if($Result){
+					$data = [
+						'status' => "success"
+					];
+					$Pass_Data["data"] = $data;
 					$this->set_response($Pass_Data, REST_Controller::HTTP_OK);
 				}else{
-					$merge_array[0]['name'] = 'resilient';
-					$merge_array[0]['value'] = 0;
-					$merge_array[1]['name'] = 'proactive';
-					$merge_array[1]['value'] = 0;
-					$merge_array[2]['name'] = 'compliant';
-					$merge_array[2]['value'] = 0;
-					$Pass_Data["data"] = $merge_array;
-					$this->set_response($Pass_Data, REST_Controller::HTTP_OK);
+					$not_inserted = ['status' => "true","statuscode" => 200,'response' =>"Proof not Inserted"];
+					$this->set_response($not_inserted, REST_Controller::HTTP_OK);
 				}
 			}else if($token_status == FALSE){
 				$this->set_response($invalid, REST_Controller::HTTP_NON_AUTHORITATIVE_INFORMATION);

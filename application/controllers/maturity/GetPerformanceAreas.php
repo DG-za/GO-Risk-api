@@ -3,12 +3,12 @@ require_once APPPATH . '/libraries/REST_Controller.php';
 require_once APPPATH . '/libraries/JWT.php';
 use \Firebase\JWT\JWT;
 
-class GetPerformanceElements extends REST_Controller {
+class GetPerformanceAreas extends REST_Controller {
 	/***************************************************************
 	*  Project Name : 4Xcellence Solutions
 	*  Created By :   
 	*  Created Date : 23-09-2019
-	*  Description : A controller contain GetPerformanceElements related methods
+	*  Description : A controller contain GetPerformanceAreas related methods
 	*  Modification History :
 	*  
 	***************************************************************/
@@ -16,7 +16,7 @@ class GetPerformanceElements extends REST_Controller {
 	public function __construct() {
 		parent::__construct();
 		$this->load->helper('check_token');				
-		$this->load->model('maturity/GetPerformanceElements_model');
+		$this->load->model('maturity/GetPerformanceAreas_model');
 	}
 	
 	public function index_post(){
@@ -32,7 +32,7 @@ class GetPerformanceElements extends REST_Controller {
 			$token_status = check_token($user_id,$headers['Authorization']);
 			
 			if($token_status == TRUE){
-				$All_Performances = $this->GetPerformanceElements_model->All_Performances_Areas();
+				$All_Performances = $this->GetPerformanceAreas_model->All_Performances_Areas();
 				$Pass_Data = array();
 				if(!empty($All_Performances)){
 					foreach($All_Performances as $key => $value){
@@ -48,7 +48,7 @@ class GetPerformanceElements extends REST_Controller {
 								"`user`" => $user_id
 							);
 						}
-						$Show_Check_Bool_Val = $this->GetPerformanceElements_model->Get_All_Answer_is_Done_By_User_ID($Where_Array);
+						$Show_Check_Bool_Val = $this->GetPerformanceAreas_model->Get_All_Answer_is_Done_By_User_ID($Where_Array);
 						$merge_array = array("id" => $value->id,"name" => $value->name,"check_val" => $Show_Check_Bool_Val);
 						$Pass_Data["data"][] = $merge_array;
 					}
@@ -79,7 +79,7 @@ class GetPerformanceElements extends REST_Controller {
 			$token_status = check_token($user_id,$headers['Authorization']);
 			
 			if($token_status == TRUE){
-				$All_Performances = $this->GetPerformanceElements_model->All_Performances_Areas();
+				$All_Performances = $this->GetPerformanceAreas_model->All_Performances_Areas();
 				$Pass_Data = array();
 				if(!empty($All_Performances)){
 					$Pass_Data["data"][] = $All_Performances;

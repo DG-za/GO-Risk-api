@@ -29,7 +29,7 @@ class SaveActionsVictory extends REST_Controller {
 		//$Element_ID = $this->post('element_id');
 		$element = $this->post('element');
 		$teammembers = json_encode($this->post('teammembers'));
-		$performance_elements = $this->post('performance_elements') ;
+		$performance_areas = $this->post('performance_areas') ;
 		$focusareaname= $this->post('focusareaname');
 		$focusareaowner=$this->post('focusareaowner');
 		$victory = $this->post('victory');  
@@ -43,7 +43,7 @@ class SaveActionsVictory extends REST_Controller {
 					"`element`" => $element,
 					"`definition`" => $victory,
 					"`teammembers`" => $teammembers,
-					"`performance_elements`" => $performance_elements,
+					"`performance_areas`" => $performance_areas,
 					"`focusareaname`" => $focusareaname,
 					"`focusareaowner`" => $focusareaowner,
 

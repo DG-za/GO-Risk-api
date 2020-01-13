@@ -1,7 +1,7 @@
 <?php 
-class GetPerformanceDesiredByElement_model extends CI_Model {
+class GetPerformanceDesiredByArea_model extends CI_Model {
 	
-	/* Get All Desired By Element_ID */
+	/* Get All Desired By Area_ID */
 	public function Get_Desired_by_Element_ID($Element_ID,$selectedSessionId){
 		if($selectedSessionId != null && $selectedSessionId != "null"){
 			$where_Array = array(

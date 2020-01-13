@@ -1,8 +1,8 @@
 <?php 
-class GetPerformanceMCByElement_model extends CI_Model {
+class GetPerformanceMCByArea_model extends CI_Model {
 	
 	/* Get All Answer MC By Element_ID */
-	public function Get_Structured_Performance_Answers_By_Element($ID,$selectedSessionId){
+	public function Get_Structured_Performance_Answers_By_Area($ID,$selectedSessionId){
 		if($selectedSessionId != null && $selectedSessionId != "null"){
 			$whereArr=array(
 				"`element`"=>$ID,
@@ -24,7 +24,7 @@ class GetPerformanceMCByElement_model extends CI_Model {
 	}
 	
 	/* Get All perfromance answers by Elements_ID */
-	public function Get_Total_Performance_Answers_By_Element($ID,$selectedSessionId){
+	public function Get_Total_Performance_Answers_By_Area($ID,$selectedSessionId){
 		if($selectedSessionId != null && $selectedSessionId != "null"){
 			$whereArr=array(
 				"`element`"=>$ID,

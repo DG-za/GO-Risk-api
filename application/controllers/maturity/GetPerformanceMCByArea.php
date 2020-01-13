@@ -3,12 +3,12 @@ require_once APPPATH . '/libraries/REST_Controller.php';
 require_once APPPATH . '/libraries/JWT.php';
 use \Firebase\JWT\JWT;
 
-class GetPerformanceMCByElement extends REST_Controller {
+class GetPerformanceMCByArea extends REST_Controller {
 	/***************************************************************
 	*  Project Name : 4Xcellence Solutions
 	*  Created By :   
 	*  Created Date : 24-09-2019
-	*  Description : A controller contain GetPerformanceMCByElement related methods
+	*  Description : A controller contain GetPerformanceMCByArea related methods
 	*  Modification History :
 	*  
 	***************************************************************/
@@ -16,7 +16,7 @@ class GetPerformanceMCByElement extends REST_Controller {
 	public function __construct() {
 		parent::__construct();
 		$this->load->helper('check_token');				
-		$this->load->model('maturity/GetPerformanceMCByElement_model');
+		$this->load->model('maturity/GetPerformanceMCByArea_model');
 	}
 	
 	public function index_post(){
@@ -35,8 +35,8 @@ class GetPerformanceMCByElement extends REST_Controller {
 			
 			$Pass_Data["data"] = array();
 			if($token_status == TRUE){
-				$All_Answer = $this->GetPerformanceMCByElement_model->Get_Structured_Performance_Answers_by_Element($Element_ID,$selectedSessionId);
-				$Total_Answers_By_Element = $this->GetPerformanceMCByElement_model->Get_Total_Performance_Answers_by_Element($Element_ID,$selectedSessionId);
+				$All_Answer = $this->GetPerformanceMCByArea_model->Get_Structured_Performance_Answers_by_Area($Element_ID,$selectedSessionId);
+				$Total_Answers_By_Element = $this->GetPerformanceMCByArea_model->Get_Total_Performance_Answers_by_Area($Element_ID,$selectedSessionId);
 
 				$Get_Answer_Array = array();
 				$merge_array = array();

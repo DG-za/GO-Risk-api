@@ -8,7 +8,7 @@ class Logout extends REST_Controller {
 	*  Project Name : 4Xcellence Solutions
 	*  Created By :   
 	*  Created Date : 23-09-2019
-	*  Description : A controller contain GetPerformanceElements related methods
+	*  Description : A controller contain GetPerformanceAreas related methods
 	*  Modification History :
 	*  
 	***************************************************************/

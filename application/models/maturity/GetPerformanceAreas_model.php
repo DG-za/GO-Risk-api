@@ -1,7 +1,7 @@
 <?php 
-class GetPerformanceElements_model extends CI_Model {
+class GetPerformanceAreas_model extends CI_Model {
 	
-	/* Get All Performances_Elements */
+	/* Get All Performances_Areas */
 	public function All_Performances_Areas(){
 		$this->db->select("`id`,`name`");
 		$this->db->from("`mat_performance_areas`");
@@ -10,7 +10,7 @@ class GetPerformanceElements_model extends CI_Model {
 		return $query_result->result();
 	}
 	
-	/* Get performance_elements ans given by same user_ID */
+	/* Get performance_areas ans given by same user_ID */
 	public function Get_All_Answer_is_Done_By_User_ID($Where_Array){
 		$this->db->select("COUNT(`id`) as `count_id`");
 		$this->db->from("`mat_performance`");

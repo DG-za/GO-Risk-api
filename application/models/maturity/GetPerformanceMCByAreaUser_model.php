@@ -1,8 +1,8 @@
 <?php 
-class GetPerformanceMCByElementUser_model extends CI_Model {
+class GetPerformanceMCByAreaUser_model extends CI_Model {
 	
 	/* Get All Answer MC By Element_ID And User_ID */
-	public function Get_Performance_Answer_MC_by_Element_ID_and_User_ID($Element_ID,$user_id,$selectedSessionId){
+	public function Get_Performance_Answer_MC_by_Area_ID_and_User_ID($Element_ID,$user_id,$selectedSessionId){
 		if($selectedSessionId != null && $selectedSessionId != "null"){
 			$where_Array = array(
 				"`element`" => $Element_ID,

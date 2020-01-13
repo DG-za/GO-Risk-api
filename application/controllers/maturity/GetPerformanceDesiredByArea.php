@@ -3,12 +3,12 @@ require_once APPPATH . '/libraries/REST_Controller.php';
 require_once APPPATH . '/libraries/JWT.php';
 use \Firebase\JWT\JWT;
 
-class GetPerformanceAnswerByElement extends REST_Controller {
+class GetPerformanceDesiredByArea extends REST_Controller {
 	/***************************************************************
 	*  Project Name : 4Xcellence Solutions
 	*  Created By :   
-	*  Created Date : 24-09-2019
-	*  Description : A controller contain GetPerformanceAnswerByElement related methods
+	*  Created Date : 25-09-2019
+	*  Description : A controller contain GetDesiredByElement related methods
 	*  Modification History :
 	*  
 	***************************************************************/
@@ -16,7 +16,7 @@ class GetPerformanceAnswerByElement extends REST_Controller {
 	public function __construct() {
 		parent::__construct();
 		$this->load->helper('check_token');				
-		$this->load->model('maturity/GetPerformanceAnswerByElement_model');
+		$this->load->model('maturity/GetPerformanceDesiredByArea_model');
 	}
 	
 	public function index_post(){
@@ -25,7 +25,7 @@ class GetPerformanceAnswerByElement extends REST_Controller {
 		$invalid = ['status' => "true","statuscode" => 203,'response' =>"In-Valid token"];
 		$not_found = ['status' => "true","statuscode" => 404,'response' =>"Token not found"];
 		
-		$message = 'Required field(s) user_id,performance_id,element_id is missing or empty';
+		$message = 'Required field(s) user_id,element_id is missing or empty';
 		$user_id = $this->post('user_id');
 		$Element_ID = $this->post('element_id');
 		$selectedSessionId = $this->post('selectedSessionId');
@@ -33,26 +33,29 @@ class GetPerformanceAnswerByElement extends REST_Controller {
 			$headers = $this->input->request_headers();
 			$token_status = check_token($user_id,$headers['Authorization']);
 			
-			$Pass_Data["data"] = array();
 			if($token_status == TRUE){
-				$All_Performance_Answer = $this->GetPerformanceAnswerByElement_model->Get_Performance_Answer_by_Element_ID($Element_ID,$selectedSessionId);
-				if(!empty($All_Performance_Answer)){
-					foreach($All_Performance_Answer as $key => $value){
-						$merge_array = array("question" => $value->question,"poor" => $value->n1,"mediocre" => $value->n2,"good" => $value->n3,"excellent" => $value->n4,"total" => $value->total);
-						$Pass_Data["data"][] = $merge_array;
+				$All_Desired = $this->GetPerformanceDesiredByArea_model->Get_Desired_by_Element_ID($Element_ID,$selectedSessionId);
+				$Pass_Data = array();
+				if(!empty($All_Desired)){
+					foreach($All_Desired as $key => $value){
+						$merge_array[0]['name'] = 'resilient';
+						$merge_array[0]['value'] = $value->n3;
+						$merge_array[1]['name'] = 'proactive';
+						$merge_array[1]['value'] = $value->n2;
+						$merge_array[2]['name'] = 'compliant';
+						$merge_array[2]['value'] = $value->n1;
 					}
+					$Pass_Data["data"] = $merge_array;
 					$this->set_response($Pass_Data, REST_Controller::HTTP_OK);
 				}else{
-					$All_Performance_Quetion_ID = $this->GetPerformanceAnswerByElement_model->Get_Performance_Quetion_ID();
-					if(!empty($All_Performance_Quetion_ID)){
-						foreach($All_Performance_Quetion_ID as $key => $value){
-						$merge_array = array("question" => $value->id,"poor" => "0","mediocre" => "0","good" => "0","excellent" => "0","total" => "0");
-						$Pass_Data["data"][] = $merge_array;
-					}
+					$merge_array[0]['name'] = 'resilient';
+					$merge_array[0]['value'] = 0;
+					$merge_array[1]['name'] = 'proactive';
+					$merge_array[1]['value'] = 0;
+					$merge_array[2]['name'] = 'compliant';
+					$merge_array[2]['value'] = 0;
+					$Pass_Data["data"] = $merge_array;
 					$this->set_response($Pass_Data, REST_Controller::HTTP_OK);
-					}else{
-						$this->set_response($no_found, REST_Controller::HTTP_OK);
-					}
 				}
 			}else if($token_status == FALSE){
 				$this->set_response($invalid, REST_Controller::HTTP_NON_AUTHORITATIVE_INFORMATION);

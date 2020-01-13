@@ -39,20 +39,20 @@ class Get5BiggestGapsPerformance extends REST_Controller {
 				foreach ($AllElements as $key => $value) {
 					$elementId=$value->id;
 					$elementName=$value->name;
-					$allPerformanceAnswersByElement = $this->Get5BiggestGapsPerformance_model->getAllPerformanceAnswersByElement_function($elementId,$selectedSessionId);					
-					if(!empty($allPerformanceAnswersByElement)){
-						if($allPerformanceAnswersByElement[0]->count != 0){
-							$allPerformanceAnswersAverage=number_format((float)$allPerformanceAnswersByElement[0]->sum/$allPerformanceAnswersByElement[0]->count,1,'.','');
+					$allPerformanceAnswersByArea = $this->Get5BiggestGapsPerformance_model->getAllPerformanceAnswersByArea_function($elementId,$selectedSessionId);					
+					if(!empty($allPerformanceAnswersByArea)){
+						if($allPerformanceAnswersByArea[0]->count != 0){
+							$allPerformanceAnswersAverage=number_format((float)$allPerformanceAnswersByArea[0]->sum/$allPerformanceAnswersByArea[0]->count,1,'.','');
 						}else{
 							$allPerformanceAnswersAverage=0.0;
 						}
 					}else{
 						$allPerformanceAnswersAverage=0.0;
 					}
-					$allPerformanceDesiredByElement = $this->Get5BiggestGapsPerformance_model->getAllPerformanceDesiredByElement_function($elementId,$selectedSessionId);
-					if(!empty($allPerformanceDesiredByElement)){
-						if($allPerformanceDesiredByElement[0]->count != 0){
-							$allPerformanceDesiredAverage=number_format((float)$allPerformanceDesiredByElement[0]->sum/$allPerformanceDesiredByElement[0]->count,1,'.','');
+					$allPerformanceDesiredByArea = $this->Get5BiggestGapsPerformance_model->getAllPerformanceDesiredByArea_function($elementId,$selectedSessionId);
+					if(!empty($allPerformanceDesiredByArea)){
+						if($allPerformanceDesiredByArea[0]->count != 0){
+							$allPerformanceDesiredAverage=number_format((float)$allPerformanceDesiredByArea[0]->sum/$allPerformanceDesiredByArea[0]->count,1,'.','');
 						}else{
 							$allPerformanceDesiredAverage=0.0;
 						}

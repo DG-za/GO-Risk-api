@@ -33,7 +33,7 @@ class GetPerformanceMCAll extends REST_Controller {
 			$token_status = check_token($this->post('user_id'),$headers['Authorization']);
 			
 			if($token_status == TRUE){
-				$All_Elements = $this->GetPerformanceMCAll_model->Get_All_Performance_Elements_Function();
+				$All_Elements = $this->GetPerformanceMCAll_model->Get_All_performance_areas_Function();
 				$Pass_Data["data"] = array();
 				if(!empty($All_Elements)){
 					foreach($All_Elements as $key => $value){
@@ -42,25 +42,25 @@ class GetPerformanceMCAll extends REST_Controller {
 						$name = $value->name;
 						$merge_array["name"] = $name;
 						$merge_array["series"] = array();
-						$All_Performance_Answers_By_Element = $this->GetPerformanceMCAll_model->Get_Structured_Performance_Answers_By_Element($id,$selectedSessionId);
-						$Total_Performance_Answers_By_Element = $this->GetPerformanceMCAll_model->Get_Total_Performance_Answers_By_Element($id,$selectedSessionId);
+						$All_Performance_Answers_By_Area = $this->GetPerformanceMCAll_model->Get_Structured_Performance_Answers_By_Area($id,$selectedSessionId);
+						$Total_Performance_Answers_By_Area = $this->GetPerformanceMCAll_model->Get_Total_Performance_Answers_By_Area($id,$selectedSessionId);
 
 						$elementsArr = [];
-						if(!empty($All_Performance_Answers_By_Element)){
+						if(!empty($All_Performance_Answers_By_Area)){
 							/* Add matched elemets to the $elementsArr */		
 							for($i=0; $i<4; $i++){
-								if(isset($All_Performance_Answers_By_Element[$i]->name)){
-								$elementsArr[$i] = $All_Performance_Answers_By_Element[$i]->name;
+								if(isset($All_Performance_Answers_By_Area[$i]->name)){
+								$elementsArr[$i] = $All_Performance_Answers_By_Area[$i]->name;
 								}
 							}
 
 							/* Get total count of answers for this element */
-							foreach($Total_Performance_Answers_By_Element as $key => $value){
+							foreach($Total_Performance_Answers_By_Area as $key => $value){
 								$total = $value->total;
 							}
 
 							/* Build array for chart */
-							foreach($All_Performance_Answers_By_Element as $key_mc => $value_mc){
+							foreach($All_Performance_Answers_By_Area as $key_mc => $value_mc){
 								$merge_array_mc = array(
 									"name" => $value_mc->name,
 									"value" => number_format(($value_mc->value/$total)*100,1),

@@ -1,8 +1,8 @@
 <?php 
-class GetPerformanceAnswerByElement_model extends CI_Model {
+class GetPerformanceAnswerByArea_model extends CI_Model {
 	
-	/* Get All Performance Answer By Element_ID */
-	public function Get_Performance_Answer_by_Element_ID($Element_ID,$selectedSessionId){
+	/* Get All Performance Answer By Area_ID */
+	public function Get_Performance_Answer_by_Area_ID($Element_ID,$selectedSessionId){
 		if($selectedSessionId != null && $selectedSessionId != "null"){
 			$where_Array = array(
 				"`element`" => $Element_ID,
