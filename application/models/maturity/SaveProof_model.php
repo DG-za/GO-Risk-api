@@ -12,4 +12,7 @@ class SaveProof_model extends CI_Model {
 				return $result;
 			}
 	}
+	public function Delete_Answer_Proof($whereArr){
+			$this->db->delete("`mat_answer_proof`",$whereArr);
+	}
 }
