@@ -45,7 +45,12 @@ class SaveDesired extends REST_Controller {
 					"`desired`" => $desired,
 					"`session_id`" => $selectedSessionId
 				);
-				$Insert_Desired_Result = $this->SaveDesired_model->Insert_Desired($Insert_Desired_Array);
+				$whereArr = array(
+					"`user`" => $user, 
+					"`element`" => $element,
+					"`session_id`" => $selectedSessionId
+				);
+				$Insert_Desired_Result = $this->SaveDesired_model->Insert_Desired($Insert_Desired_Array,$whereArr);
 				if($Insert_Desired_Result){
 					$data = [
 						'status' => "success"
