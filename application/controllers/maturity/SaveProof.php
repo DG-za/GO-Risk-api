@@ -45,6 +45,12 @@ class SaveProof extends REST_Controller {
 					"`element`" => $element,
 					"`session_id`" => $selectedSessionId,
 				);
+				$whereArr = array(
+					"`user`" => $user,
+					"`element`" => $element,
+					"`session_id`" => $selectedSessionId,
+				);
+				$this->SaveProof_model->Delete_Answer_Proof($whereArr);
 				$Insert_Answer_Proof_Result = null;
 				foreach($proof as $v){
 					$Insert_Array["proof"] = $v;
