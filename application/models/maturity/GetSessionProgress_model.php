@@ -72,6 +72,22 @@ public function getUsersByRole_function($role){
 		return $query_result->result();
 }
 
+public function getUsersById($userID){
+		$this->db->select("`id`,`email`,`firstname`,`lastname`,`role`");
+		$this->db->where("`id`"  , $userID);
+		$this->db->from("`com_user`");
+		$query_result = $this->db->get();
+		return $query_result->result();
+}
+
+public function getSessionUsers($selectedSessionId){
+		$this->db->select("user");
+		$this->db->where("`id` "  , $selectedSessionId);
+		$this->db->from("`mat_session`");
+		$query_result = $this->db->get();
+		return $query_result->row();
+	}
+
 /* FUNCTION FOR THE PERFORMANCE ASSESSMENT */
 /* Get answers of performance */
 public function get_answers_of_performance($emp_id,$element_id,$selectedSessionId){
