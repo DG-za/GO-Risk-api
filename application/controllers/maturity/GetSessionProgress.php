@@ -64,6 +64,61 @@ class GetSessionProgress extends REST_Controller {
 		}
 	}*/
 
+/* Get users list base on Session */
+
+	public function getUsersBySession_post(){
+		$valid = ['status' => "true","statuscode" => 200,'response' =>"Token Valid"];
+		$no_found = ['status' => "true","statuscode" => 200,'response' =>"No Record Found"];
+		$invalid = ['status' => "true","statuscode" => 203,'response' =>"In-Valid token"];
+		$not_found = ['status' => "true","statuscode" => 404,'response' =>"Token not found"];
+		
+		$message = 'Required field(s) user_id is missing or empty';
+		$user_id = $this->post('user_id');
+		$role = $this->post('role');
+		$selectedSessionId = $this->post('selectedSessionId');
+		if(isset($user_id)){
+			$headers = $this->input->request_headers();
+			$token_status = check_token($user_id,$headers['Authorization']);
+
+			if($token_status == TRUE){
+				$Pass_Data = array();
+				$getAllSession_Result = $this->GetSessionProgress_model->getSessionUsers($selectedSessionId);
+				$getAllSession_Result=explode(",", $getAllSession_Result->user);
+				if(!empty($getAllSession_Result)){
+					foreach ($getAllSession_Result as $userID) {
+						$merge_array = array();			
+						$getAllUsers_Result = $this->GetSessionProgress_model->getUsersById($userID);
+						if(!empty($getAllUsers_Result[0])){
+								$merge_array = array(
+									"id" => $getAllUsers_Result[0]->id,
+									"email" => $getAllUsers_Result[0]->email,
+									"firstname" => $getAllUsers_Result[0]->firstname,
+									"lastname" => $getAllUsers_Result[0]->lastname,
+									"role" => $getAllUsers_Result[0]->role,
+									"performanceProgress" => $this->GetSessionProgress_model->get_progress_of_performance($getAllUsers_Result[0]->id,$selectedSessionId),
+									"practiceProgress" => $this->GetSessionProgress_model->get_progress_of_practice($getAllUsers_Result[0]->id,$selectedSessionId)
+								);
+						}else{
+							$this->set_response($no_found, REST_Controller::HTTP_OK);
+						}
+						$Pass_Data["data"][] = $merge_array;
+					}
+				}else{
+					$this->set_response($no_found, REST_Controller::HTTP_OK);
+				}
+				$valid = ['status' => "true","statuscode" => 200,'response' =>$Pass_Data];
+				$this->set_response($Pass_Data, REST_Controller::HTTP_OK);
+			}else if($token_status == FALSE){
+				$this->set_response($invalid, REST_Controller::HTTP_NON_AUTHORITATIVE_INFORMATION);
+			}else{
+				$this->set_response($not_found, REST_Controller::HTTP_NOT_FOUND);
+			}
+		}else{
+			$parameter_required_array = ['status' => "true","statuscode" => 404,'response' => $message];
+			$this->set_response($parameter_required_array, REST_Controller::HTTP_NOT_FOUND);
+		}
+	}
+
 /* Get users list base on user's role */
 
 	public function getUsersByRole_post(){
