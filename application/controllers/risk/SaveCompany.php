@@ -39,6 +39,12 @@ class SaveCompany extends REST_Controller {
 			
 			if($token_status == TRUE){
 				$Pass_Data = array();
+				if(!$parent_id){
+					$parent_id=Null;
+				}
+				if(!$workforce){
+					$workforce=Null;
+				}
 				$Insert_Array = array(
 					"`name`" => $add_company_name,
 					"`parent`" => $parent_id,

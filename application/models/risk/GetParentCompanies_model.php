@@ -8,7 +8,7 @@ class GetParentCompanies_model extends CI_Model {
 			);
 			$this->db->where($whereArr);
 		$this->db->select('*');
-		$this->db->from('`risk_company`');
+		$this->db->from('`com_company`');
 		$query_result = $this->db->get();
 		return $query_result->result();
 	}

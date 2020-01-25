@@ -31,7 +31,7 @@ class ActionOperation_model extends CI_Model {
        $this->db->join('mat_actions_results', 'mat_actions_victory.id = mat_actions_results.victory','left');
        $this->db->join('mat_actions_measure', 'mat_actions_victory.id = mat_actions_measure.victory','left');
        $this->db->join('com_user', 'mat_actions_victory.focusareaowner = com_user.id');
-       $this->db->join('mat_performance_areas', 'mat_performance_areas.id = mat_actions_victory.performance_areas');
+       $this->db->join('mat_performance_areas', 'mat_performance_areas.id = mat_actions_victory.performance_elements');
        $this->db->join('mat_elements', 'mat_actions_victory.element = mat_elements.id');
 
        $query = $this->db->get();

@@ -4,7 +4,7 @@ class GetAllCompanies_model extends CI_Model {
 	/* Get All Companies */
 	public function get_All_Companies(){
 		$this->db->select('*');
-		$this->db->from('`risk_company`');
+		$this->db->from('`com_company`');
 		$query_result = $this->db->get();
 		return $query_result->result();
 	}
@@ -16,7 +16,7 @@ class GetAllCompanies_model extends CI_Model {
 		);
 		$this->db->where($whereArr);
 		$this->db->select('`id`,`name`');
-		$this->db->from('`risk_company`');
+		$this->db->from('`com_company`');
 		$query_result = $this->db->get();
 		return $query_result->result();
 	}
