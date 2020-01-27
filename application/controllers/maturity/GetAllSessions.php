@@ -27,20 +27,13 @@ class GetAllSessions extends REST_Controller {
 		
 		$message = 'Required field(s) user_id is missing or empty';
 		$user_id = $this->post('user_id');
-		
 		$role = $this->post('role');
 		if(isset($user_id)){
 			$headers = $this->input->request_headers();
 			$token_status = check_token($user_id,$headers['Authorization']);
 			
 			if($token_status == TRUE){
-				if($this->post('company_id') != null && $this->post('company_id') != "null"){
-					$company_id = $this->post('company_id');
-					$getAllSessions_Result = $this->GetAllSessions_model->getAllSessions_function($user_id,$company_id);
-				}else{
-					$getAllSessions_Result = $this->GetAllSessions_model->getAllSessions_function($user_id);
-				}
-				
+				$getAllSessions_Result = $this->GetAllSessions_model->getAllSessions_function($user_id);
 				$Pass_Data = array();
 				if(!empty($getAllSessions_Result)){
 					foreach($getAllSessions_Result as $key => $value){
