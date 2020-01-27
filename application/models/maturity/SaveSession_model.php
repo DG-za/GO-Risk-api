@@ -7,7 +7,7 @@ class SaveSession_model extends CI_Model {
 		if(isset($jsonSession["session_id"])){
 			$Session_Array = array(
 				"`session_name`" => $jsonSession["session_name"], 
-				"`company_id`" => $jsonSession["company_id"], 
+			//	"`company_id`" => $jsonSession["company_id"], 
 				"`user`" => implode(",", $session_users)
 			);
 			$this->db->where('id',$jsonSession["session_id"]);
@@ -20,7 +20,7 @@ class SaveSession_model extends CI_Model {
 		}else{
 			$Session_Array = array(
 				"`session_name`" => $jsonSession["session_name"], 
-				"`company_id`" => $jsonSession["company_id"], 
+			//	"`company_id`" => $jsonSession["company_id"], 
 				"`user`" => implode(",", $session_users), 
 				"`created_at`" => date("Y-m-d h:i:s")
 			);
