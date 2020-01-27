@@ -27,25 +27,50 @@ class GetAllSessions extends REST_Controller {
 		
 		$message = 'Required field(s) user_id is missing or empty';
 		$user_id = $this->post('user_id');
+		
 		$role = $this->post('role');
 		if(isset($user_id)){
 			$headers = $this->input->request_headers();
 			$token_status = check_token($user_id,$headers['Authorization']);
-			
+			$companyArr=array();
 			if($token_status == TRUE){
+				if($this->post('company_id') != null && $this->post('company_id') != "null"){
+					$company_id = $this->post('company_id');
+					$companyArr[]=$company_id;
+					$AllChildCompanies = $this->GetAllSessions_model->getAllChildCompanies_function($company_id,$company_id);
+					foreach ($AllChildCompanies as $key => $value) {
+						$companyArr[]= $value->id;
+					}
+				}
+				/*print_r($companyArr);
+				die();*/
 				$getAllSessions_Result = $this->GetAllSessions_model->getAllSessions_function($user_id);
+				
 				$Pass_Data = array();
 				if(!empty($getAllSessions_Result)){
 					foreach($getAllSessions_Result as $key => $value){
+
 						if($value->user != ""){
 							$userArr=array();
 							$userArr=explode(",", $value->user);
 							if($role != "admin"){
 								if(in_array($user_id, $userArr)){
-									$Pass_Data["data"][] = $value;
+									if($companyArr){
+										if(in_array($value->company_id, $companyArr)){
+											$Pass_Data["data"][] = $value;
+										}
+									}else{
+										$Pass_Data["data"][] = $value;
+									}
 								}
 							}else{
-								$Pass_Data["data"][] = $value;
+								if($companyArr){
+									if(in_array($value->company_id, $companyArr)){
+										$Pass_Data["data"][] = $value;
+									}
+								}else{
+									$Pass_Data["data"][] = $value;
+								}
 							}
 							
 						}
