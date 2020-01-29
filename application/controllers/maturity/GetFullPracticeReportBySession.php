@@ -38,6 +38,7 @@ class GetFullPracticeReportBySession extends REST_Controller {
 				if(!empty($All_Category)){
 					foreach($All_Category as $catkey => $catValue){
 						$elementArr=array();
+						$t=0;
 						$Cat_ID=$catValue->id;
 						$getElementsByCat_Result = $this->GetFullPracticeReportBySession_model->getElementsByCat_function($Cat_ID);
 						if(!empty($getElementsByCat_Result)){
@@ -78,7 +79,7 @@ class GetFullPracticeReportBySession extends REST_Controller {
 										}
 									}
 								}else{
-									$All_Question = $this->GetFullPracticeReportBySession_model->Get_Question_by_Element_ID($Element_ID);
+									/*$All_Question = $this->GetFullPracticeReportBySession_model->Get_Question_by_Element_ID($Element_ID);
 									if(!empty($All_Question)){
 										foreach($All_Question as $key => $value){
 											$answerTempArr=array();
@@ -87,7 +88,7 @@ class GetFullPracticeReportBySession extends REST_Controller {
 										}
 									}else{
 										$this->set_response($no_found, REST_Controller::HTTP_OK);
-									}
+									}*/
 								}
 
 								$All_Desired = $this->GetFullPracticeReportBySession_model->Get_Desired_by_Element_ID($Element_ID,$selectedSessionId);
@@ -103,13 +104,13 @@ class GetFullPracticeReportBySession extends REST_Controller {
 									}
 									$desiredArr = $desiredTempArr;
 								}else{
-									$desiredTempArr[0]['name'] = 'resilient';
+									/*$desiredTempArr[0]['name'] = 'resilient';
 									$desiredTempArr[0]['value'] = 0;
 									$desiredTempArr[1]['name'] = 'proactive';
 									$desiredTempArr[1]['value'] = 0;
 									$desiredTempArr[2]['name'] = 'compliant';
 									$desiredTempArr[2]['value'] = 0;
-									$desiredArr = $desiredTempArr;
+									$desiredArr = $desiredTempArr;*/
 								}
 
 								$All_MCAnswer = $this->GetFullPracticeReportBySession_model->Get_Structured_Answers_by_Element($Element_ID,$selectedSessionId);
@@ -162,10 +163,10 @@ class GetFullPracticeReportBySession extends REST_Controller {
 									array_multisort($price, SORT_ASC, $MCArr);
 
 								}else{
-									$MCArr[0] = array("name" => 1,"value" => 0);
+									/*$MCArr[0] = array("name" => 1,"value" => 0);
 									$MCArr[1] = array("name" => 2,"value" => 0);
 									$MCArr[2] = array("name" => 3,"value" => 0);
-									$MCArr[3] = array("name" => 4,"value" => 0);
+									$MCArr[3] = array("name" => 4,"value" => 0);*/
 								}
 
 								$All_Proof = $this->GetFullPracticeReportBySession_model->Get_Proof_by_Element_ID($Element_ID);
@@ -191,12 +192,20 @@ class GetFullPracticeReportBySession extends REST_Controller {
 									$this->set_response($no_found, REST_Controller::HTTP_OK);
 								}
 								$elementTempArr=array("id" => $elementValue->id,"name" => $elementValue->name,"category" => $elementValue->cat,"questions" => $questionArr,"answers" => $answerArr,"desired" => $desiredArr,"ratedMaturity" => $MCArr,"proofs" => $proofsArr);
-								$elementArr[]=$elementTempArr;
+								$elementArr[]=$elementTempArr;								
+								if(empty($answerArr)){
+									$t++;
+								}
 							}
 						}else{
 							$this->set_response($no_found, REST_Controller::HTTP_OK);
 						}
-						$catArr=array("id" => $catValue->id,"name" => $catValue->name,"byline" => $catValue->byline,"image" => $catValue->image,"elements" => $elementArr);
+						if($t == sizeof($elementArr)){
+							$isShow=false;
+						}else{
+							$isShow=true;
+						}
+						$catArr=array("id" => $catValue->id,"name" => $catValue->name,"byline" => $catValue->byline,"image" => $catValue->image,"elements" => $elementArr,"isShow" => $isShow);
 						$Pass_Data["data"][] = $catArr;
 					}
 					$this->set_response($Pass_Data, REST_Controller::HTTP_OK);

@@ -68,7 +68,7 @@ class GetFullPerformanceReportBySession extends REST_Controller {
 							}
 							$elementArr["answers"]=$allPerformanceAnswerArr;
 						}else{
-							$All_Performance_Quetion_ID = $this->GetFullPerformanceReportBySession_model->Get_Performance_Quetion_ID();
+							/*$All_Performance_Quetion_ID = $this->GetFullPerformanceReportBySession_model->Get_Performance_Quetion_ID();
 							if(!empty($All_Performance_Quetion_ID)){
 								foreach($All_Performance_Quetion_ID as $questionsKey => $questionsValue){
 									$allPerformanceQuetionIdTempArr=array();
@@ -78,7 +78,8 @@ class GetFullPerformanceReportBySession extends REST_Controller {
 								$elementArr["answers"]=$allPerformanceQuetionIdArr;
 							}else{
 								$this->set_response($no_found, REST_Controller::HTTP_OK);
-							}
+							}*/
+							$elementArr["answers"]=$allPerformanceQuetionIdArr;
 						}
 
 						$All_Answer = $this->GetFullPerformanceReportBySession_model->Get_Structured_Performance_Answers_by_Area($Element_ID,$selectedSessionId);
@@ -118,11 +119,11 @@ class GetFullPerformanceReportBySession extends REST_Controller {
 							}
 							$elementArr["ratedMaturity"]=$allAnswersArr;
 						}else{
-							$Answer_Array = array("1","2","3","4");
+							/*$Answer_Array = array("1","2","3","4");
 							foreach($Answer_Array as $AA){
 								$allAnswerMergeArr = array("name" => $AA,"value" => 0);
 								$allAnswersArr[] = $allAnswerMergeArr;
-							}
+							}*/
 							$elementArr["ratedMaturity"]=$allAnswersArr;
 						}
 
@@ -140,17 +141,21 @@ class GetFullPerformanceReportBySession extends REST_Controller {
 							}
 							$elementArr["desired"]=$allDesiredArr;
 						}else{
-							$allDesiredMergeArr=array();
+							/*$allDesiredMergeArr=array();
 							$allDesiredMergeArr[0]['name'] = 'resilient';
 							$allDesiredMergeArr[0]['value'] = 0;
 							$allDesiredMergeArr[1]['name'] = 'proactive';
 							$allDesiredMergeArr[1]['value'] = 0;
 							$allDesiredMergeArr[2]['name'] = 'compliant';
 							$allDesiredMergeArr[2]['value'] = 0;
-							$allDesiredArr=$allDesiredMergeArr;
+							$allDesiredArr=$allDesiredMergeArr;*/
 							$elementArr["desired"]=$allDesiredArr;
 						}
-
+						if(sizeof($allPerformanceAnswerArr) == sizeof($allPerformanceQuestionsArr)){
+							$elementArr["isShow"]=true;
+						}else{
+							$elementArr["isShow"]=false;
+						}
 						$Pass_Data["data"][]=$elementArr;
 					}
 					$this->set_response($Pass_Data, REST_Controller::HTTP_OK);
