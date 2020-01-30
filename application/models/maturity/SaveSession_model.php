@@ -7,8 +7,8 @@ class SaveSession_model extends CI_Model {
 		if(isset($jsonSession["session_id"])){
 			$Session_Array = array(
 				"`session_name`" => $jsonSession["session_name"], 
-				"`company_id`" => $jsonSession["company_id"], 
-				"`user`" => implode(",", $session_users)
+				"`access_pin`" => $jsonSession["session_access_pin"], 
+				"`company_id`" => $jsonSession["company_id"]
 			);
 			$this->db->where('id',$jsonSession["session_id"]);
 			$this->db->update('mat_session',$Session_Array);
@@ -20,8 +20,8 @@ class SaveSession_model extends CI_Model {
 		}else{
 			$Session_Array = array(
 				"`session_name`" => $jsonSession["session_name"], 
+				"`access_pin`" => $jsonSession["session_access_pin"], 
 				"`company_id`" => $jsonSession["company_id"], 
-				"`user`" => implode(",", $session_users), 
 				"`created_at`" => date("Y-m-d h:i:s")
 			);
 			$this->db->insert('mat_session',$Session_Array);
@@ -41,6 +41,18 @@ class SaveSession_model extends CI_Model {
 	public function get_session_user_id($id) {
     $this->db->select('`user`');      
     $this->db->where(['id'=>$id]);      
+    $query = $this->db->get('mat_session');     
+    if($this->db->affected_rows() > 0){
+         return  $query->row();
+    }
+  }
+
+	public function get_session_access_pin($accessPin,$selectedSessionId=null) {
+		if($selectedSessionId != null){
+			$this->db->where(['id != '=>$selectedSessionId]);     
+		}
+    $this->db->select('`access_pin`');       
+    $this->db->where(['access_pin'=>$accessPin]);     
     $query = $this->db->get('mat_session');     
     if($this->db->affected_rows() > 0){
          return  $query->row();

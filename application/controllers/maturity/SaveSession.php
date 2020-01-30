@@ -36,42 +36,36 @@ class SaveSession extends REST_Controller {
 			
 			if($token_status == TRUE){
 				$session_users =array();
-				$session_users = json_decode($jsonSession["session_users"]);
-				//$more_users = explode(" ", $jsonSession["more_users"]);
+				if($jsonSession["session_users"] != '""'){
+					$session_users = json_decode($jsonSession["session_users"]);
+				}
 				$more_users = $jsonSession["more_users"];
-				$sessionUsers="";
-				if(isset($jsonSession["session_id"])){
-					$sessionUsers = $this->SaveSession_model->get_session_user_id($jsonSession["session_id"]);
-					$sessionUsers = $sessionUsers->user;
-				}	
+				$access_pin=$jsonSession["session_access_pin"];
 				$Insert_Session_Result = $this->SaveSession_model->Insert_Update_Session($jsonSession);
 				if($Insert_Session_Result){
 					foreach ($session_users as $user){
-						if(!in_array($user, explode(",", $sessionUsers))){
-							$userData = $this->SaveSession_model->get_user_details_by_id($user);
-							if(isset($userData) && !empty($userData)){
-								$query = $this->db->get_where('com_email_template',array('type'=>'session_notification'));
-								if($query->num_rows() > 0){
-									$result = $query->row_array();
-									$subject=$result['subject'];
-									$array = array('{{session_name}}');
-									$replace = array($jsonSession['session_name']);
-									$subject = str_replace($array,$replace,$subject);
-									$user_email=$userData->email;
-									$body="<p>".$result['header']."<p>";
-									$body.="<p>".$result['body']."<p>";
-									$body.="<p>".$result['footer']."<p>";
-									$array = array('{{session_name}}','{{first_name}}','{{last_name}}','{{login_url}}');
-									$replace = array($jsonSession['session_name'],$userData->firstname,$userData->lastname,$site_url);
-									$body = str_replace($array,$replace,$body);
-									$email_status = send_email_function($subject,$user_email,$body);
-								}
+						$userData = $this->SaveSession_model->get_user_details_by_id($user);
+						if(isset($userData) && !empty($userData)){
+							$query = $this->db->get_where('com_email_template',array('type'=>'session_notification'));
+							if($query->num_rows() > 0){
+								$result = $query->row_array();
+								$subject=$result['subject'];
+								$array = array('{{session_name}}');
+								$replace = array($jsonSession['session_name']);
+								$subject = str_replace($array,$replace,$subject);
+								$user_email=$userData->email;
+								$body="<p>".$result['header']."<p>";
+								$body.="<p>".$result['body']."<p>";
+								$body.="<p>".$result['footer']."<p>";
+								$array = array('{{session_name}}','{{first_name}}','{{last_name}}','{{access_pin}}','{{login_url}}');
+								$replace = array($jsonSession['session_name'],$userData->firstname,$userData->lastname,$access_pin,$site_url);
+								$body = str_replace($array,$replace,$body);
+								$email_status = send_email_function($subject,$user_email,$body);
 							}
 						}
 					}
 					$link="";
 					foreach ($more_users as $user_email){
-						$token['session_id'] = $Insert_Session_Result;
 						$token['email'] = $user_email;
 						$token['id'] = $user_id;
 						$AToken = JWT::encode($token, $this->config->item('jwt_key'));
@@ -87,8 +81,8 @@ class SaveSession extends REST_Controller {
 							$body="<p>".$result['header']."<p>";
 							$body.="<p>".$result['body']."<p>";
 							$body.="<p>".$result['footer']."<p>";
-							$array = array('{{session_name}}','{{email}}','{{session_signup_url}}');
-							$replace = array($jsonSession['session_name'],$user_email,$link);
+							$array = array('{{session_name}}','{{email}}','{{access_pin}}','{{session_signup_url}}');
+							$replace = array($jsonSession['session_name'],$user_email,$access_pin,$link);
 							$body = str_replace($array,$replace,$body);
 							$email_status = send_email_function($subject,$user_email,$body);
 						}
@@ -105,6 +99,81 @@ class SaveSession extends REST_Controller {
 					$Pass_Data["data"] = $Not_Inserted;
 					$this->set_response($Pass_Data, REST_Controller::HTTP_OK);
 				}
+			}else if($token_status == FALSE){
+				$this->set_response($invalid, REST_Controller::HTTP_NON_AUTHORITATIVE_INFORMATION);
+			}else{
+				$this->set_response($not_found, REST_Controller::HTTP_NOT_FOUND);
+			}
+		}else{
+			$parameter_required_array = ['status' => "true","statuscode" => 404,'response' => $message];
+			$this->set_response($parameter_required_array, REST_Controller::HTTP_NOT_FOUND);
+		}
+	}
+
+	public function isAccessPINUnique_post(){
+		$not_exists = ["statuscode"=> 200,"status"=> "true","response"=> "Access PIN avilable for use"];
+		$exists = ['error' => "Bad Request","statuscode" => 400,'message' =>"Access PIN already used"];
+		$invalid = ['status' => "true","statuscode" => 203,'response' =>"In-Valid token"];
+		$not_found = ['status' => "true","statuscode" => 404,'response' =>"Token not found"];
+		
+		$message = 'Required field(s) user_id,access_pin is missing or empty';
+		$json_object = $this->post('json_object');
+		$user_id = $json_object["user_id"];
+		//$user_id = $this->post('user_id');
+		$accessPin = $this->post('accessPin');
+		if(isset($json_object["selectedSessionId"])){
+			$selectedSessionId = $json_object["selectedSessionId"];	
+		}
+		
+		if(isset($user_id) && !empty($user_id) && isset($accessPin) && !empty($accessPin)){
+			$headers = $this->input->request_headers();
+			$token_status = check_token($user_id,$headers['Authorization']);
+			if($token_status == TRUE){
+				if(!isset($json_object["selectedSessionId"])){
+					$isUnique = $this->SaveSession_model->get_session_access_pin($accessPin);
+				}else{
+					$isUnique = $this->SaveSession_model->get_session_access_pin($accessPin,$selectedSessionId);
+				}
+				if($isUnique){
+					$this->set_response($exists, REST_Controller::HTTP_OK);
+				}else{
+					$this->set_response($not_exists, REST_Controller::HTTP_OK);
+				}
+			}else if($token_status == FALSE){
+				$this->set_response($invalid, REST_Controller::HTTP_NON_AUTHORITATIVE_INFORMATION);
+			}else{
+				$this->set_response($not_found, REST_Controller::HTTP_NOT_FOUND);
+			}
+		}else{
+			$parameter_required_array = ['status' => "true","statuscode" => 404,'response' => $message];
+			$this->set_response($parameter_required_array, REST_Controller::HTTP_NOT_FOUND);
+		}
+	}
+
+	public function getInviteURL_post()
+	{
+		$valid = ['status' => "true","statuscode" => 200,'response' =>"Token Valid"];
+		$no_found = ['status' => "true","statuscode" => 200,'response' =>"No Record Found"];
+		$invalid = ['status' => "true","statuscode" => 203,'response' =>"In-Valid token"];
+		$not_found = ['status' => "true","statuscode" => 404,'response' =>"Token not found"];
+		
+		$message = 'Required field(s) user_id,site_url is missing or empty';
+		$user_id = $this->post('user_id');
+		$site_url = $this->post('site_url');
+
+		if(isset($user_id) && !empty($user_id) && isset($site_url) && !empty($site_url)){
+			$headers = $this->input->request_headers();
+			$token_status = check_token($user_id,$headers['Authorization']);
+			
+			if($token_status == TRUE){
+					
+				$link="";
+				$token['id'] = $user_id;
+				$AToken = JWT::encode($token, $this->config->item('jwt_key'));
+				$link = $site_url."/attendees-registration/".$AToken;
+				$data = ['status' => "true",'inviteURL' => $link];
+				$Pass_Data["data"] = $data;
+				$this->set_response($Pass_Data, REST_Controller::HTTP_OK);
 			}else if($token_status == FALSE){
 				$this->set_response($invalid, REST_Controller::HTTP_NON_AUTHORITATIVE_INFORMATION);
 			}else{

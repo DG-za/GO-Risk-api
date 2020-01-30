@@ -17,12 +17,31 @@ class GetAllUsers_model extends CI_Model {
 		return $query_result->result();
 	}
 	
-	public function getSessionUsers_function($selectedSessionId){
+	/*public function getSessionUsers_function($selectedSessionId){
 		$this->db->select("user");
 		$this->db->where("`id` "  , $selectedSessionId);
 		$this->db->from("`mat_session`");
 		$query_result = $this->db->get();
 		return $query_result->row();
+	}*/
+	public function getSessionUsers_function($user,$selectedSessionId){
+		$this->db->select("`id`");
+		$this->db->where("`user` "  , $user);
+		$this->db->where("`session_id` "  , $selectedSessionId);
+		$this->db->from("`mat_answer_mc`");
+		$query_result = $this->db->get();
+		if($query_result->num_rows()){
+			return 1;
+		}else{
+			$this->db->select("`id`");
+			$this->db->where("`user` "  , $user);
+			$this->db->where("`session_id` "  , $selectedSessionId);
+			$this->db->from("`mat_performance_mc`");
+			$query_result2 = $this->db->get();
+			if($query_result2->num_rows()){
+				return 1;
+			}
+		}
 	}
 
 	

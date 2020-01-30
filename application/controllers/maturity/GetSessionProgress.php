@@ -82,32 +82,38 @@ class GetSessionProgress extends REST_Controller {
 
 			if($token_status == TRUE){
 				$Pass_Data = array();
-				$getAllSession_Result = $this->GetSessionProgress_model->getSessionUsers($selectedSessionId);
-				$getAllSession_Result=explode(",", $getAllSession_Result->user);
-				if(!empty($getAllSession_Result)){
-					foreach ($getAllSession_Result as $userID) {
+				$userArr = array();
+				$getAllUser_Result = $this->GetSessionProgress_model->getAllUsers();
+				
+				//$getAllSession_Result=explode(",", $getAllSession_Result->user);
+				if(!empty($getAllUser_Result)){
+					foreach ($getAllUser_Result as $user) {
 						$merge_array = array();			
-						$getAllUsers_Result = $this->GetSessionProgress_model->getUsersById($userID);
-						if(!empty($getAllUsers_Result[0])){
+						$getSessionUsers_Result = $this->GetSessionProgress_model->getSessionUsers($user->id,$selectedSessionId);
+						if(!empty($getSessionUsers_Result)){
 								$merge_array = array(
-									"id" => $getAllUsers_Result[0]->id,
-									"email" => $getAllUsers_Result[0]->email,
-									"firstname" => $getAllUsers_Result[0]->firstname,
-									"lastname" => $getAllUsers_Result[0]->lastname,
-									"role" => $getAllUsers_Result[0]->role,
-									"performanceProgress" => $this->GetSessionProgress_model->get_progress_of_performance($getAllUsers_Result[0]->id,$selectedSessionId),
-									"practiceProgress" => $this->GetSessionProgress_model->get_progress_of_practice($getAllUsers_Result[0]->id,$selectedSessionId)
+									"id" => $user->id,
+									"email" => $user->email,
+									"firstname" => $user->firstname,
+									"lastname" => $user->lastname,
+									"role" => $user->role,
+									"performanceProgress" => $this->GetSessionProgress_model->get_progress_of_performance($user->id,$selectedSessionId),
+									"practiceProgress" => $this->GetSessionProgress_model->get_progress_of_practice($user->id,$selectedSessionId)
 								);
-						}else{
-							$this->set_response($no_found, REST_Controller::HTTP_OK);
+						$userArr[] = $merge_array;
 						}
-						$Pass_Data["data"][] = $merge_array;
+					}
+
+					//$valid = ['status' => "true","statuscode" => 200,'response' =>$Pass_Data];
+					if(!empty($userArr)){
+						$Pass_Data["data"] = $userArr;
+						$this->set_response($Pass_Data, REST_Controller::HTTP_OK);
+					}else{
+						$this->set_response($Pass_Data, REST_Controller::HTTP_OK);
 					}
 				}else{
 					$this->set_response($no_found, REST_Controller::HTTP_OK);
 				}
-				$valid = ['status' => "true","statuscode" => 200,'response' =>$Pass_Data];
-				$this->set_response($Pass_Data, REST_Controller::HTTP_OK);
 			}else if($token_status == FALSE){
 				$this->set_response($invalid, REST_Controller::HTTP_NON_AUTHORITATIVE_INFORMATION);
 			}else{

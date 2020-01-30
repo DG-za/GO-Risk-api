@@ -74,13 +74,14 @@ class GetAllUsers extends REST_Controller {
 				$getAllUsers_Result = $this->GetAllUsers_model->getUsers_function();
 
 				$Pass_Data = array();
-				$sessionUsers="";
+				//$sessionUsers="";
 				if(!empty($getAllUsers_Result)){
 					if($selectedSessionId != null && $selectedSessionId != "null"){
-						$sessionUsers = $this->GetAllUsers_model->getSessionUsers_function($selectedSessionId);
-						$sessionUsers=explode(",",$sessionUsers->user);
+						
+						//$sessionUsers=explode(",",$sessionUsers->user);
 						foreach($getAllUsers_Result as $key => $value){
-							if(in_array($value->id, $sessionUsers)){
+							$sessionUsers = $this->GetAllUsers_model->getSessionUsers_function($value->id,$selectedSessionId);
+							if(!empty($sessionUsers)){
 								$merge_array = array("id" => $value->id,"email" => $value->email,"firstname" => $value->firstname,"lastname" => $value->lastname,"role" => $value->role);
 								$Pass_Data["data"][] = $merge_array;
 							}

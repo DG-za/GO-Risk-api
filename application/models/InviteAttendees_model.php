@@ -40,7 +40,7 @@ class InviteAttendees_model extends CI_Model {
     $this->db->where('id', $id);
     $query = $this->db->get('com_invite_attendees');
     $query = $query->row();
-    return $query->isexpiry;
+    return $query['isexpiry'];
   }
   public function Check_User_Availability($email='')
   {

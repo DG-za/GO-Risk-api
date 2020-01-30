@@ -42,28 +42,13 @@ class GetAllSessions extends REST_Controller {
 						$companyArr[]= $value->id;
 					}
 				}
-				/*print_r($companyArr);
-				die();*/
 				$getAllSessions_Result = $this->GetAllSessions_model->getAllSessions_function($user_id);
 				
 				$Pass_Data = array();
 				if(!empty($getAllSessions_Result)){
 					foreach($getAllSessions_Result as $key => $value){
 
-						if($value->user != ""){
-							$userArr=array();
-							$userArr=explode(",", $value->user);
-							if($role != "admin"){
-								if(in_array($user_id, $userArr)){
-									if($companyArr){
-										if(in_array($value->company_id, $companyArr)){
-											$Pass_Data["data"][] = $value;
-										}
-									}else{
-										$Pass_Data["data"][] = $value;
-									}
-								}
-							}else{
+						if($role != "admin"){
 								if($companyArr){
 									if(in_array($value->company_id, $companyArr)){
 										$Pass_Data["data"][] = $value;
@@ -71,9 +56,16 @@ class GetAllSessions extends REST_Controller {
 								}else{
 									$Pass_Data["data"][] = $value;
 								}
+						}else{
+							if($companyArr){
+								if(in_array($value->company_id, $companyArr)){
+									$Pass_Data["data"][] = $value;
+								}
+							}else{
+								$Pass_Data["data"][] = $value;
 							}
-							
 						}
+							
 					}
 
 					$valid = ['status' => "true","statuscode" => 200,'response' =>$Pass_Data];
