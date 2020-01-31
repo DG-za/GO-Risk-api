@@ -32,7 +32,7 @@ class ForgotPasswordProcess extends REST_Controller {
 		$userData = $this->user_model->get_user_details_by_mail($user_email);
 
 		if(!empty($userData)){
-			$query = $this->db->get_where('email_template',array('type'=>'forgot_password'));
+			$query = $this->db->get_where('com_email_template',array('type'=>'forgot_password'));
 			if($query->num_rows() > 0){
 				$result = $query->row_array();
 				$subject=$result['subject'];

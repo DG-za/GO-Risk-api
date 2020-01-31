@@ -65,7 +65,7 @@ class SaveAttendees extends REST_Controller {
 					$this->set_response($not_inserted, REST_Controller::HTTP_OK);
 				}
 			}else{
-					$not_available = ['status' => "true","statuscode" => 200,'response' =>"Email ID already registered."];
+					$not_available = ['status' => "true","statuscode" => 200,'response' =>"Email Address already registered. Please proceed to the Login page."];
 					$this->set_response($not_available, REST_Controller::HTTP_OK);
 			}
 			}else if($token_status == FALSE){
