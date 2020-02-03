@@ -337,13 +337,19 @@ public function DeleteAnswerOfPerformance_post(){
 		$logged_in_id = $this->post('logged_in_id');		
 		$element_id = $this->post('element_id');
 		$employee_id = $this->post('employee_id');
+		$selectedSessionId  = $this->post('selectedSessionId');
 
 		if(isset($logged_in_id)){
 			$headers = $this->input->request_headers();
 			$token_status = check_token($logged_in_id,$headers['Authorization']);
 
 			if($token_status == TRUE){
-				$deleteStatus = $this->GetSessionProgress_model->DeleteAnswerOfPerformance($element_id,$employee_id);
+				if($selectedSessionId != null && $selectedSessionId != "null"){
+					$deleteStatus = $this->GetSessionProgress_model->DeleteAnswerOfPerformance($element_id,$employee_id,$selectedSessionId);
+				}else{
+					$deleteStatus = $this->GetSessionProgress_model->DeleteAnswerOfPerformance($element_id,$employee_id);
+				}
+				
 				if($deleteStatus == 1){
 					$valid = ['status' => "true","statuscode" => 200,'response' =>"Record deleted"];
 					$this->set_response($valid, REST_Controller::HTTP_OK);
@@ -372,13 +378,19 @@ public function DeleteAnswerOfPractice_post(){
 		$logged_in_id = $this->post('logged_in_id');		
 		$delete_id    = $this->post('delete_id');
 		$employee_id  = $this->post('emp_id');
+		$selectedSessionId  = $this->post('selectedSessionId');
 
+		
 		if(isset($logged_in_id)){
 			$headers = $this->input->request_headers();
 			$token_status = check_token($logged_in_id,$headers['Authorization']);
 
 			if($token_status == TRUE){
-				$deleteStatus = $this->GetSessionProgress_model->DeleteAnswerOfPractice($delete_id,$employee_id);
+				if($selectedSessionId != null && $selectedSessionId != "null"){
+					$deleteStatus = $this->GetSessionProgress_model->DeleteAnswerOfPractice($delete_id,$employee_id,$selectedSessionId);
+				}else{
+					$deleteStatus = $this->GetSessionProgress_model->DeleteAnswerOfPractice($delete_id,$employee_id);
+				}
 				
 				if($deleteStatus == TRUE){
 					$valid = ['status' => "true","statuscode" => 200,'response' =>"Record deleted"];

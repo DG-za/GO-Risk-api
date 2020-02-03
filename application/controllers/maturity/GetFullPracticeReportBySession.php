@@ -183,10 +183,11 @@ class GetFullPracticeReportBySession extends REST_Controller {
 												$user = 1;
 											}else{
 												$user = $User_Count[0]->count_user;
+												$proofsTempArr = array("id" => $value->id,"element" => $value->element,"type" => $value->type,"proof" => $value->proof,"amount" => $amount,"user" => $user,"percent" => number_format((float)($amount/$user*100),1,'.',''));
+												$proofsArr[] = $proofsTempArr;
 											}
 										}
-										$proofsTempArr = array("id" => $value->id,"element" => $value->element,"type" => $value->type,"proof" => $value->proof,"amount" => $amount,"user" => $user,"percent" => number_format((float)($amount/$user*100),1,'.',''));
-										$proofsArr[] = $proofsTempArr;
+										
 									}
 								}else{
 									$this->set_response($no_found, REST_Controller::HTTP_OK);
