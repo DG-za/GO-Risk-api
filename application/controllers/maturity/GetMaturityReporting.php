@@ -28,13 +28,18 @@ class GetMaturityReporting extends REST_Controller {
 		$message = 'Required field(s) user_id is missing or empty';
 		$user_id = $this->post('user_id');
 		$selectedSessionId = $this->post('selectedSessionId');
-		
+		$toUserId = $this->post('to_user_id');
+
 		if(isset($user_id)){
 			$headers = $this->input->request_headers();
 			$token_status = check_token($user_id,$headers['Authorization']);
 			if($token_status == TRUE){
-
-				$results_performance_mc = $this->GetMaturityReporting_model->GetMaturityReporting_performance_mc($selectedSessionId);
+				if(isset($toUserId) && $toUserId != 'all'){
+					$results_performance_mc = $this->GetMaturityReporting_model->GetMaturityReporting_performance_mc_User($selectedSessionId,$toUserId);
+				}else{
+					$results_performance_mc = $this->GetMaturityReporting_model->GetMaturityReporting_performance_mc($selectedSessionId);
+				}
+				
 				$Pass_Data["data"] = array();
 				if(!empty($results_performance_mc)){
 					$P_Count = 0;
@@ -51,8 +56,12 @@ class GetMaturityReporting extends REST_Controller {
 				}else{
 					$Pass_Data["data"]["performance_mc"] = number_format(0,1);
 				}
-
-				$results_answer_mc = $this->GetMaturityReporting_model->GetMaturityReporting_answer_mc($selectedSessionId);
+				if(isset($toUserId) && $toUserId != 'all'){
+					$results_answer_mc = $this->GetMaturityReporting_model->GetMaturityReporting_answer_mc_User($selectedSessionId,$toUserId);
+				}else{
+					$results_answer_mc = $this->GetMaturityReporting_model->GetMaturityReporting_answer_mc($selectedSessionId);
+				}
+				
 				if(!empty($results_answer_mc)){
 					$A_Count = 0;
 					$A_A_Count = 0;
@@ -68,8 +77,12 @@ class GetMaturityReporting extends REST_Controller {
 				}else{
 					$Pass_Data["data"]["answer_mc"] = number_format(0,1);
 				}
-
-				$results_performance_desired = $this->GetMaturityReporting_model->GetMaturityReporting_performance_desired($selectedSessionId);
+				if(isset($toUserId) && $toUserId != 'all'){
+					$results_performance_desired = $this->GetMaturityReporting_model->GetMaturityReporting_performance_desired_User($selectedSessionId,$toUserId);
+				}else{
+					$results_performance_desired = $this->GetMaturityReporting_model->GetMaturityReporting_performance_desired($selectedSessionId);
+				}
+				
 				if(!empty($results_performance_desired)){
 					$P_Count = 0;
 					$P_D_Count = 0;

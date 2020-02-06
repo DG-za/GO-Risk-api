@@ -28,6 +28,8 @@ class Get5BiggestGapsPerformance extends REST_Controller {
 		$message = 'Required field(s) user_id is missing or empty';
 		$user_id = $this->post('user_id');
 		$selectedSessionId = $this->post('selectedSessionId');
+		$toUserId = $this->post('to_user_id');
+
 		if(isset($user_id)){
 			$headers = $this->input->request_headers();
 			$token_status = check_token($this->post('user_id'),$headers['Authorization']);
@@ -39,7 +41,12 @@ class Get5BiggestGapsPerformance extends REST_Controller {
 				foreach ($AllElements as $key => $value) {
 					$elementId=$value->id;
 					$elementName=$value->name;
-					$allPerformanceAnswersByArea = $this->Get5BiggestGapsPerformance_model->getAllPerformanceAnswersByArea_function($elementId,$selectedSessionId);					
+					if(isset($toUserId) && $toUserId != 'all'){
+						$allPerformanceAnswersByArea = $this->Get5BiggestGapsPerformance_model->getAllPerformanceAnswersByArea_function_User($elementId,$selectedSessionId,$toUserId);
+					}else{
+						$allPerformanceAnswersByArea = $this->Get5BiggestGapsPerformance_model->getAllPerformanceAnswersByArea_function($elementId,$selectedSessionId);
+					}
+										
 					if(!empty($allPerformanceAnswersByArea)){
 						if($allPerformanceAnswersByArea[0]->count != 0){
 							$allPerformanceAnswersAverage=number_format((float)$allPerformanceAnswersByArea[0]->sum/$allPerformanceAnswersByArea[0]->count,1,'.','');
@@ -49,7 +56,12 @@ class Get5BiggestGapsPerformance extends REST_Controller {
 					}else{
 						$allPerformanceAnswersAverage=0.0;
 					}
-					$allPerformanceDesiredByArea = $this->Get5BiggestGapsPerformance_model->getAllPerformanceDesiredByArea_function($elementId,$selectedSessionId);
+					if(isset($toUserId) && $toUserId != 'all'){
+						$allPerformanceDesiredByArea = $this->Get5BiggestGapsPerformance_model->getAllPerformanceDesiredByArea_function_User($elementId,$selectedSessionId,$toUserId);
+					}else{
+						$allPerformanceDesiredByArea = $this->Get5BiggestGapsPerformance_model->getAllPerformanceDesiredByArea_function($elementId,$selectedSessionId);
+					}
+					
 					if(!empty($allPerformanceDesiredByArea)){
 						if($allPerformanceDesiredByArea[0]->count != 0){
 							$allPerformanceDesiredAverage=number_format((float)$allPerformanceDesiredByArea[0]->sum/$allPerformanceDesiredByArea[0]->count,1,'.','');

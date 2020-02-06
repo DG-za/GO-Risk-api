@@ -22,4 +22,26 @@ class GetPerformanceDesiredByArea_model extends CI_Model {
 		$query_result = $this->db->get();
 		return $query_result->result();
 	}
+
+	public function Get_Desired_by_Element_ID_User($Element_ID,$selectedSessionId,$toUserId){
+		if($selectedSessionId != null && $selectedSessionId != "null"){
+			$where_Array = array(
+				"`element`" => $Element_ID,
+				"`session_id`" => $selectedSessionId,
+				"`user`" => $toUserId
+			);
+		}else{
+			$where_Array = array(
+				"`element`" => $Element_ID,
+			);
+		}
+		
+		$this->db->select("`element`,SUM(`desired`=2) AS `n1`, SUM(`desired`=3) AS `n2`, SUM(`desired`=4) AS `n3`, COUNT(*) AS `total`");
+		$this->db->from("`mat_performance_desired`");
+		$this->db->where($where_Array);
+		$this->db->group_by("`element`");
+		$this->db->order_by("`element`", "asc");
+		$query_result = $this->db->get();
+		return $query_result->result();
+	}
 }

@@ -27,7 +27,33 @@ class GetAllUsers extends REST_Controller {
 		
 		$message = 'Required field(s) user_id is missing or empty';
 		$user_id = $this->post('user_id');
-		if(isset($user_id)){
+		$selectedSessionId = $this->post('currentSesisonId');
+
+		if(isset($user_id) && isset($selectedSessionId)){
+			$headers = $this->input->request_headers();
+			$token_status = check_token($user_id,$headers['Authorization']);
+			
+			if($token_status == TRUE){
+				$getAllUsers_Result = $this->GetAllUsers_model->getAllUsers_function();
+				$Pass_Data = array();
+				if(!empty($getAllUsers_Result)){
+					foreach($getAllUsers_Result as $key => $value){
+						if($value->role != "admin"){
+							$merge_array = array("id" => $value->id,"email" => $value->email,"firstname" => $value->firstname,"lastname" => $value->lastname,"role" => $value->role,"password" => $value->password);
+							$Pass_Data["data"][] = $merge_array;
+						}
+					}
+					$valid = ['status' => "true","statuscode" => 200,'response' =>$Pass_Data];
+					$this->set_response($Pass_Data, REST_Controller::HTTP_OK);
+				}else{
+					$this->set_response($no_found, REST_Controller::HTTP_OK);
+				}
+			}else if($token_status == FALSE){
+				$this->set_response($invalid, REST_Controller::HTTP_NON_AUTHORITATIVE_INFORMATION);
+			}else{
+				$this->set_response($not_found, REST_Controller::HTTP_NOT_FOUND);
+			}
+		}else if(isset($user_id)){
 			$headers = $this->input->request_headers();
 			$token_status = check_token($user_id,$headers['Authorization']);
 			

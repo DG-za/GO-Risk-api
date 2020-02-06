@@ -29,13 +29,20 @@ class GetPerformanceAnswerByArea extends REST_Controller {
 		$user_id = $this->post('user_id');
 		$Element_ID = $this->post('element_id');
 		$selectedSessionId = $this->post('selectedSessionId');
+		$toUserId = $this->post('to_user_id');
+
 		if(isset($user_id) && isset($Element_ID)){
 			$headers = $this->input->request_headers();
 			$token_status = check_token($user_id,$headers['Authorization']);
 			
 			$Pass_Data["data"] = array();
 			if($token_status == TRUE){
-				$All_Performance_Answer = $this->GetPerformanceAnswerByArea_model->Get_Performance_Answer_by_Area_ID($Element_ID,$selectedSessionId);
+				if(isset($toUserId) && $toUserId != 'all'){
+					$All_Performance_Answer = $this->GetPerformanceAnswerByArea_model->Get_Performance_Answer_by_Area_ID_User($Element_ID,$selectedSessionId,$toUserId);
+				}else{
+					$All_Performance_Answer = $this->GetPerformanceAnswerByArea_model->Get_Performance_Answer_by_Area_ID($Element_ID,$selectedSessionId);
+				}
+				
 				if(!empty($All_Performance_Answer)){
 					foreach($All_Performance_Answer as $key => $value){
 						$merge_array = array("question" => $value->question,"poor" => $value->n1,"mediocre" => $value->n2,"good" => $value->n3,"excellent" => $value->n4,"total" => $value->total);

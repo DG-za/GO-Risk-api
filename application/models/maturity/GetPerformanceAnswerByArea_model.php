@@ -24,6 +24,29 @@ class GetPerformanceAnswerByArea_model extends CI_Model {
 		return $query_result->result();
 	}
 	
+	public function Get_Performance_Answer_by_Area_ID_User($Element_ID,$selectedSessionId,$toUserId){
+		if($selectedSessionId != null && $selectedSessionId != "null"){
+			$where_Array = array(
+				"`element`" => $Element_ID,
+				"`session_id`" => $selectedSessionId,
+				"`user`" => $toUserId
+			);
+		}else{
+			$where_Array = array(
+				"`element`" => $Element_ID,
+			);
+		}
+		
+		
+		$this->db->select("`question`,SUM(`answer`=1) AS `n1`,SUM(`answer`=2) AS `n2`,SUM(`answer`=3) AS `n3`,SUM(`answer`=4) AS `n4`,COUNT(*) AS `total`");
+		$this->db->from("`mat_performance_mc`");
+		$this->db->where($where_Array);
+		$this->db->group_by("`question`");
+		$this->db->order_by("`question`", "asc");
+		$query_result = $this->db->get();
+		return $query_result->result();
+	}
+
 	/* Get All Performance Quetion ID */
 	public function Get_Performance_Quetion_ID(){
 		$this->db->select("`id`");

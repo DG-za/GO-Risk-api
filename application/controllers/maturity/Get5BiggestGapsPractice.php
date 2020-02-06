@@ -28,6 +28,8 @@ class Get5BiggestGapsPractice extends REST_Controller {
 		$message = 'Required field(s) user_id is missing or empty';
 		$user_id = $this->post('user_id');
 		$selectedSessionId = $this->post('selectedSessionId');
+		$toUserId = $this->post('to_user_id');
+
 		if(isset($user_id)){
 			$headers = $this->input->request_headers();
 			$token_status = check_token($this->post('user_id'),$headers['Authorization']);
@@ -39,7 +41,12 @@ class Get5BiggestGapsPractice extends REST_Controller {
 				foreach ($AllElements as $key => $value) {
 					$elementId=$value->id;
 					$elementName=$value->name;
-					$allPracticeAnswersByElement = $this->Get5BiggestGapsPractice_model->getAllPracticeAnswersByElement_function($elementId,$selectedSessionId);
+					if(isset($toUserId) && $toUserId != 'all'){
+						$allPracticeAnswersByElement = $this->Get5BiggestGapsPractice_model->getAllPracticeAnswersByElement_function_User($elementId,$selectedSessionId,$toUserId);
+					}else{
+						$allPracticeAnswersByElement = $this->Get5BiggestGapsPractice_model->getAllPracticeAnswersByElement_function($elementId,$selectedSessionId);	
+					}
+					
 					if(!empty($allPracticeAnswersByElement)){
 						if($allPracticeAnswersByElement[0]->count != 0){
 							$allPracticeAnswersAverage=number_format((float)$allPracticeAnswersByElement[0]->sum/$allPracticeAnswersByElement[0]->count,1,'.','');
@@ -49,7 +56,12 @@ class Get5BiggestGapsPractice extends REST_Controller {
 					}else{
 						$allPracticeAnswersAverage=0.0;
 					}
-					$allPracticeDesiredByElement = $this->Get5BiggestGapsPractice_model->getAllPracticeDesiredByElement_function($elementId,$selectedSessionId);
+					if(isset($toUserId) && $toUserId != 'all'){
+						$allPracticeDesiredByElement = $this->Get5BiggestGapsPractice_model->getAllPracticeDesiredByElement_function_User($elementId,$selectedSessionId,$toUserId);
+					}else{
+						$allPracticeDesiredByElement = $this->Get5BiggestGapsPractice_model->getAllPracticeDesiredByElement_function($elementId,$selectedSessionId);
+					}
+					
 					if(!empty($allPracticeDesiredByElement)){
 						if($allPracticeDesiredByElement[0]->count != 0){
 							$allPracticeDesiredAverage=number_format((float)$allPracticeDesiredByElement[0]->sum/$allPracticeDesiredByElement[0]->count,1,'.','');

@@ -29,13 +29,19 @@ class GetDesiredByElement extends REST_Controller {
 		$user_id = $this->post('user_id');
 		$Element_ID = $this->post('element_id');
 		$selectedSessionId = $this->post('selectedSessionId');
+		$toUserId = $this->post('to_user_id');
+
 		if(isset($user_id) && isset($Element_ID)){
 			$headers = $this->input->request_headers();
 			$token_status = check_token($user_id,$headers['Authorization']);
 			
 			if($token_status == TRUE){
-				$All_Desired = $this->GetDesiredByElement_model->Get_Desired_by_Element_ID($Element_ID,$selectedSessionId);
-				$Pass_Data = array();
+				if(isset($toUserId) && $toUserId != 'all'){
+				$All_Desired = $this->GetDesiredByElement_model->Get_Desired_by_Element_ID_User($Element_ID,$selectedSessionId,$toUserId);
+				}else{
+					$All_Desired = $this->GetDesiredByElement_model->Get_Desired_by_Element_ID($Element_ID,$selectedSessionId);
+				}
+					$Pass_Data = array();
 				if(!empty($All_Desired)){
 					foreach($All_Desired as $key => $value){
 						$merge_array[0]['name'] = 'resilient';

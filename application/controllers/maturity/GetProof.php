@@ -29,18 +29,29 @@ class GetProof extends REST_Controller {
 		$user_id = $this->post('user_id');
 		$Element_ID = $this->post('element_id');
 		$selectedSessionId = $this->post('selectedSessionId');
+		$toUserId = $this->post('to_user_id');
+
 		if(isset($user_id) && isset($Element_ID)){
 			$headers = $this->input->request_headers();
 			$token_status = check_token($user_id,$headers['Authorization']);
 			
 			if($token_status == TRUE){
+
 				$All_Proof = $this->GetProof_model->Get_Proof_by_Element_ID($Element_ID);
+			if(isset($toUserId) && $toUserId != 'all'){
+				$User_Count = $this->GetProof_model->Get_User_count_by_Element_ID_User($Element_ID,$selectedSessionId,$toUserId);
+			}else{
 				$User_Count = $this->GetProof_model->Get_User_count_by_Element_ID($Element_ID,$selectedSessionId);
+			}
 				
 				$Pass_Data = array();
 				if(!empty($All_Proof)){
 					foreach($All_Proof as $key => $value){
+					if($toUserId == 'all'){
 						$Count_Result = $this->GetProof_model->Get_Proof_count_by_Proof_ID($value->id,$selectedSessionId);
+					}else{
+						$Count_Result = $this->GetProof_model->Get_Proof_count_by_Proof_ID_User($value->id,$selectedSessionId,$toUserId);
+					}
 						$amount = 0;
 						if(!empty($Count_Result)){
 							$amount = $Count_Result[0]->count_id;
