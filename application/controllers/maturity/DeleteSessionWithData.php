@@ -30,12 +30,18 @@ class DeleteSessionWithData extends REST_Controller {
 		$message = 'Required field(s) user_id,session_id is missing or empty';
 		$user_id = $this->post('user_id');
 		$session_id = $this->post('session_id');
+		$toUserId = $this->post('to_user_id');
+
 		if(isset($user_id) && isset($session_id)){
 			$headers = $this->input->request_headers();
 			$token_status = check_token($user_id,$headers['Authorization']);
 			
 			if($token_status == TRUE){
+				if(isset($toUserId) && $toUserId != 'all'){
+				$deleteSessionData_function = $this->DeleteSessionWithData_model->deleteSessionData_User($session_id,$toUserId);
+			}else{
 				$deleteSessionData_function = $this->DeleteSessionWithData_model->deleteSessionData_function($session_id);
+			}
 				if($deleteSessionData_function){
 					$deleted['data'] = ['status' => "true","statuscode" => 200,'response' =>"Session Deleted Successfully"];
 					$this->set_response($deleted, REST_Controller::HTTP_OK);
