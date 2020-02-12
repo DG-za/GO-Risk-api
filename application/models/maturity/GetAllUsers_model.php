@@ -44,5 +44,23 @@ class GetAllUsers_model extends CI_Model {
 		}
 	}
 
+	public function checkIsAnswered_function($user){
+		$this->db->select("`id`");
+		$this->db->where("`user` "  , $user);
+		$this->db->from("`mat_answer_mc`");
+		$query_result = $this->db->get();
+		if($query_result->num_rows()){
+			return 1;
+		}else{
+			$this->db->select("`id`");
+			$this->db->where("`user` "  , $user);
+			$this->db->from("`mat_performance_mc`");
+			$query_result2 = $this->db->get();
+			if($query_result2->num_rows()){
+				return 1;
+			}
+		}
+	}
+
 	
 }

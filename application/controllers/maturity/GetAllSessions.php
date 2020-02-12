@@ -45,9 +45,11 @@ class GetAllSessions extends REST_Controller {
 				}
 
 				if(isset($toUserId) && $toUserId != 'all'){
-				$getAllSessions_Result = $this->GetAllSessions_model->getAllSessions_User($toUserId);
+					$getAllSessions_Result = $this->GetAllSessions_model->getAllSessions_User($toUserId);
+					/*print_r($getAllSessions_Result);
+					die();*/
 				}else{
-				$getAllSessions_Result = $this->GetAllSessions_model->getAllSessions();
+					$getAllSessions_Result = $this->GetAllSessions_model->getAllSessions();
 				}
 				$Pass_Data = array();
 				if(!empty($getAllSessions_Result)){

@@ -38,10 +38,10 @@ class GetAllUsers extends REST_Controller {
 				$Pass_Data = array();
 				if(!empty($getAllUsers_Result)){
 					foreach($getAllUsers_Result as $key => $value){
-						if($value->role != "admin"){
+						//if($value->role != "admin"){
 							$merge_array = array("id" => $value->id,"email" => $value->email,"firstname" => $value->firstname,"lastname" => $value->lastname,"role" => $value->role,"password" => $value->password);
 							$Pass_Data["data"][] = $merge_array;
-						}
+						//}
 					}
 					$valid = ['status' => "true","statuscode" => 200,'response' =>$Pass_Data];
 					$this->set_response($Pass_Data, REST_Controller::HTTP_OK);
@@ -64,6 +64,12 @@ class GetAllUsers extends REST_Controller {
 					foreach($getAllUsers_Result as $key => $value){
 						if($value->role != "admin"){
 							$merge_array = array("id" => $value->id,"email" => $value->email,"firstname" => $value->firstname,"lastname" => $value->lastname,"role" => $value->role,"password" => $value->password);
+							$isAnswered = $this->GetAllUsers_model->checkIsAnswered_function($value->id);
+							if($isAnswered){
+								$merge_array['isAnswered']=True;
+							}else{
+								$merge_array['isAnswered']=False;
+							}
 							$Pass_Data["data"][] = $merge_array;
 						}
 					}
