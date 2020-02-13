@@ -13,16 +13,31 @@ class GetMCAll_model extends CI_Model {
 	}
 	
 	/* Get All `answer_mc` by Elements_ID */
-	public function Get_Structured_Answers_By_Element($ID,$selectedSessionId){
+	public function Get_Structured_Answers_By_Element($ID,$selectedSessionId,$toUserId = Null){
 		if($selectedSessionId != null && $selectedSessionId != "null"){
-			$whereArr=array(
-				"`element`"=>$ID,
-				"`session_id`"=>$selectedSessionId
-			);
+			if($toUserId == Null || $toUserId == "all"){
+				$whereArr=array(
+					"`element`"=>$ID,
+					"`session_id`"=>$selectedSessionId
+				);	
+			}else{
+				$whereArr=array(
+					"`element`"=>$ID,
+					"`user`"=>$toUserId,
+					"`session_id`"=>$selectedSessionId
+				);
+			}
 		}else{
-			$whereArr=array(
-				"`element`"=>$ID
-			);
+			if($toUserId == Null || $toUserId == "all"){
+				$whereArr=array(
+					"`element`"=>$ID
+				);	
+			}else{
+				$whereArr=array(
+					"`element`"=>$ID,
+					"`user`"=>$toUserId,
+				);
+			}
 		}
 		
 		$this->db->select("`answer` as `name`, count(`answer`) as `value`, sum(`answer`) as `sum`");
@@ -34,16 +49,31 @@ class GetMCAll_model extends CI_Model {
 	}
 	
 	/* Get All `answer_mc` */
-	public function Get_Total_Answers_By_Element($ID,$selectedSessionId){
+	public function Get_Total_Answers_By_Element($ID,$selectedSessionId,$toUserId = Null){
 		if($selectedSessionId != null && $selectedSessionId != "null"){
-			$whereArr=array(
-				"`element`"=>$ID,
-				"`session_id`"=>$selectedSessionId
-			);
+			if($toUserId == Null || $toUserId == "all"){
+				$whereArr=array(
+					"`element`"=>$ID,
+					"`session_id`"=>$selectedSessionId
+				);
+			}else{
+				$whereArr=array(
+					"`element`"=>$ID,
+					"`user`"=>$toUserId,
+					"`session_id`"=>$selectedSessionId
+				);
+			}
 		}else{
-			$whereArr=array(
-				"`element`"=>$ID
-			);
+			if($toUserId == Null || $toUserId == "all"){
+				$whereArr=array(
+					"`element`"=>$ID
+				);
+			}else{
+				$whereArr=array(
+					"`element`"=>$ID,
+					"`user`"=>$toUserId
+				);
+			}
 		}
 		$this->db->select("count(`answer`) as `total`");
 		$this->db->from("`mat_answer_mc`");

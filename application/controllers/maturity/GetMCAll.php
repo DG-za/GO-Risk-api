@@ -27,6 +27,8 @@ class GetMCAll extends REST_Controller {
 		$message = 'Required field(s) user_id is missing or empty';
 		$user_id = $this->post('user_id');
 		$selectedSessionId = $this->post('selectedSessionId');
+		$toUserId = $this->post('to_user_id');
+
 		if(isset($user_id)){
 			$headers = $this->input->request_headers();
 			$token_status = check_token($this->post('user_id'),$headers['Authorization']);
@@ -41,8 +43,8 @@ class GetMCAll extends REST_Controller {
 				$name = $value->name;
 				$merge_array["name"] = $name;
 				$merge_array["series"] = array();
-				$All_Answers_By_Element = $this->GetMCAll_model->Get_Structured_Answers_By_Element($id,$selectedSessionId);
-				$Total_Answers_By_Element = $this->GetMCAll_model->Get_Total_Answers_By_Element($id,$selectedSessionId);
+				$All_Answers_By_Element = $this->GetMCAll_model->Get_Structured_Answers_By_Element($id,$selectedSessionId,$toUserId);
+				$Total_Answers_By_Element = $this->GetMCAll_model->Get_Total_Answers_By_Element($id,$selectedSessionId,$toUserId);
 				
 				$elementsArr = [];
 				if(!empty($All_Answers_By_Element)){

@@ -28,12 +28,13 @@ class GetBottom5Elements extends REST_Controller {
 		$message = 'Required field(s) user_id is missing or empty';
 		$user_id = $this->post('user_id');
 		$selectedSessionId = $this->post('selectedSessionId');
+		$toUserId = $this->post('to_user_id');
 		if(isset($user_id)){
 			$headers = $this->input->request_headers();
 			$token_status = check_token($user_id,$headers['Authorization']);
 			
 			if($token_status == TRUE){
-				$getBottom5Elements_Result = $this->GetBottom5Elements_model->getBottom5Elements_function($selectedSessionId);
+				$getBottom5Elements_Result = $this->GetBottom5Elements_model->getBottom5Elements_function($selectedSessionId,$toUserId);
 				$Pass_Data = array();
 				if(!empty($getBottom5Elements_Result)){
 					foreach($getBottom5Elements_Result as $key => $value){
