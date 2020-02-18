@@ -3,6 +3,7 @@ class GetBottom5Questions_model extends CI_Model {
 	
 	/* Get Bottom 5 Elements Function */
 	public function getBottom5Questions_function($selectedSessionId,$toUserId = Null){
+		$whereArr=array();
 		if($selectedSessionId != null && $selectedSessionId != "null"){
 			if($toUserId == Null || $toUserId == "all"){
 				$whereArr=array(
