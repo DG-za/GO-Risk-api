@@ -3,6 +3,7 @@ class GetTop5Questions_model extends CI_Model {
 	
 	/* Get Top 5 Questions */
 	public function getTop5Questions_function($selectedSessionId,$toUserId = Null){
+		$whereArr=array();
 		if($selectedSessionId != null && $selectedSessionId != "null"){
 			if($toUserId == Null || $toUserId == "all"){
 				$whereArr=array(
@@ -11,7 +12,7 @@ class GetTop5Questions_model extends CI_Model {
 			}else{
 				$whereArr=array(
 					"`m_am`.`session_id`"=>$selectedSessionId,
-					"`m_am`.`user`"=>$selectedSessionId,
+					"`m_am`.`user`"=>$toUserId,
 
 				);
 			}
@@ -20,7 +21,7 @@ class GetTop5Questions_model extends CI_Model {
 							
 			}else{
 				$whereArr=array(
-					"`m_am`.`user`"=>$selectedSessionId,
+					"`m_am`.`user`"=>$toUserId,
 
 				);
 			}
