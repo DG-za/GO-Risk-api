@@ -202,24 +202,16 @@ public function DeleteAnswerOfPerformance($ele_id,$emp_id,$selectedSessionId=Nul
 	$this->db->where('element', $ele_id);
 	$this->db->where('user', $emp_id);
 	if($selectedSessionId == Null){
-		$this->db->where('session_id', $selectedSessionId);
+	$this->db->where('session_id', $selectedSessionId);
 	}
-	$this->db->delete('mat_performance_mc');   	    
-  if ( $this->db->affected_rows() > 0 ){
-		$this->db->where('element', $ele_id);
-		$this->db->where('user', $emp_id);
-		if($selectedSessionId == Null){
-			$this->db->where('session_id', $selectedSessionId);
-		}
-		$this->db->delete('mat_performance_desired'); 	    
-    if ( $this->db->affected_rows() > 0 ){
-    	return 1;
-    }else{
-    	return 0;
-    }
-  }else { 
-  	return 0;
-  }		
+	$this->db->delete('mat_performance_mc');
+	$this->db->where('element', $ele_id);
+	$this->db->where('user', $emp_id);
+	if($selectedSessionId == Null){
+	$this->db->where('session_id', $selectedSessionId);
+	}
+	$this->db->delete('mat_performance_desired'); 
+	return 1;
 }
 
 public function get_performance_desired_by_employee($ele_id,$emp_id,$selectedSessionId){
@@ -307,40 +299,28 @@ public function DeleteAnswerOfPractice($ele_id,$employee_id,$selectedSessionId=N
 	$this->db->where('element', $ele_id);
 	$this->db->where('user', $employee_id);
 	if($selectedSessionId!=Null && $selectedSessionId!="Null"){
-		$this->db->where('session_id', $selectedSessionId);
+	$this->db->where('session_id', $selectedSessionId);
 	}
-  $this->db->delete('mat_answer_mc');   	    
-  if ( $this->db->affected_rows() > 0 ){
-  	$this->db->where('element', $ele_id);
-		$this->db->where('user', $employee_id);
-		if($selectedSessionId!=Null && $selectedSessionId!="Null"){
-			$this->db->where('session_id', $selectedSessionId);
-		}
-  	$this->db->delete('mat_answer_complete');
-  	if ( $this->db->affected_rows() > 0 ){
-  		$this->db->where('element', $ele_id);
-			$this->db->where('user', $employee_id);
-			if($selectedSessionId!=Null && $selectedSessionId!="Null"){
-				$this->db->where('session_id', $selectedSessionId);
-			}
-    	$this->db->delete('mat_answer_desired');
-    	if ( $this->db->affected_rows() > 0 ){
-    		$this->db->where('element', $ele_id);
-				$this->db->where('user', $employee_id);
-				if($selectedSessionId!=Null && $selectedSessionId!="Null"){
-					$this->db->where('session_id', $selectedSessionId);
-				}
-    		$this->db->delete('mat_answer_proof');
-    		if ( $this->db->affected_rows() > 0 ){
-		    	return 1;
-		    }else{
-		    	return 0;
-		    }
-    	}
-  	}   	 
-  } else { 
-  	return 0;
-  }	
+	$this->db->delete('mat_answer_mc');   	    
+	$this->db->where('element', $ele_id);
+	$this->db->where('user', $employee_id);
+	if($selectedSessionId!=Null && $selectedSessionId!="Null"){
+	$this->db->where('session_id', $selectedSessionId);
+	}
+	$this->db->delete('mat_answer_complete');
+	$this->db->where('element', $ele_id);
+	$this->db->where('user', $employee_id);
+	if($selectedSessionId!=Null && $selectedSessionId!="Null"){
+	$this->db->where('session_id', $selectedSessionId);
+	}
+	$this->db->delete('mat_answer_desired');
+	$this->db->where('element', $ele_id);
+	$this->db->where('user', $employee_id);
+	if($selectedSessionId!=Null && $selectedSessionId!="Null"){
+	$this->db->where('session_id', $selectedSessionId);
+	}
+	$this->db->delete('mat_answer_proof');
+	return 1;
 }
 
 }
