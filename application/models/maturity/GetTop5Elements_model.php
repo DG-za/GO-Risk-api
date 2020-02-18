@@ -3,6 +3,7 @@ class GetTop5Elements_model extends CI_Model {
 	
 	/* Get Top 5 Elements */
 	public function getTop5Elements_function($selectedSessionId,$toUserId = Null) {
+		$whereArr=array();
 		if($selectedSessionId != null && $selectedSessionId != "null"){
 			if($toUserId == Null || $toUserId == "all"){
 				$whereArr=array(
@@ -11,7 +12,7 @@ class GetTop5Elements_model extends CI_Model {
 			}else{
 				$whereArr=array(
 					"`m_am`.`session_id`"=>$selectedSessionId,
-					"`m_am`.`user`"=>$selectedSessionId,
+					"`m_am`.`user`"=>$toUserId,
 
 				);
 			}
@@ -21,6 +22,7 @@ class GetTop5Elements_model extends CI_Model {
 			}else{
 				$whereArr=array(
 					"`m_am`.`session_id`"=>$selectedSessionId,
+					"`m_am`.`user`"=>$toUserId,
 				);
 			}
 		}
