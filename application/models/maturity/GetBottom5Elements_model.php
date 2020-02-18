@@ -3,6 +3,7 @@ class GetBottom5Elements_model extends CI_Model {
 	
 	/* Get Bottom 5 Elements Function */
 	public function getBottom5Elements_function($selectedSessionId,$toUserId = Null){
+		$whereArr=array();
 		if($selectedSessionId != null && $selectedSessionId != "null"){
 			if($toUserId == Null || $toUserId == "all"){
 				$whereArr=array(
@@ -11,7 +12,7 @@ class GetBottom5Elements_model extends CI_Model {
 			}else{
 				$whereArr=array(
 					"`m_am`.`session_id`"=>$selectedSessionId,
-					"`m_am`.`user`"=>$selectedSessionId,
+					"`m_am`.`user`"=>$toUserId,
 				);
 			}
 			$whereArr=array(
@@ -23,7 +24,7 @@ class GetBottom5Elements_model extends CI_Model {
 							
 			}else{
 				$whereArr=array(
-					"`m_am`.`user`"=>$selectedSessionId,
+					"`m_am`.`user`"=>$toUserId,
 
 				);
 			}
