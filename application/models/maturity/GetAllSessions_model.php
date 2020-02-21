@@ -10,6 +10,40 @@ class GetAllSessions_model extends CI_Model {
 		return $query_result->result();
 	}
 
+	/* getPracticeUserCountBySession */
+	public function getPracticeUserCountBySession($sessionId){
+		$userIdArr=array();
+		$this->db->select("user");
+		$this->db->from("`mat_answer_mc`");
+		$this->db->where("session_id",$sessionId);
+		$this->db->group_by("user");
+		$query_result = $this->db->get();
+		$data = $query_result->result();
+		if($query_result->num_rows()){
+			foreach ($data as $key => $value) {
+				$userIdArr[]=$value->user;
+			}
+		}
+		return $userIdArr;
+	}
+
+	/* getPerformanceUserCountBySession */
+	public function getPerformanceUserCountBySession($sessionId){
+		$userIdArr=array();
+		$this->db->select("user");
+		$this->db->from("`mat_performance_mc`");
+		$this->db->where("session_id",$sessionId);
+		$this->db->group_by("user");
+		$query_result = $this->db->get();
+		$data = $query_result->result();
+		if($query_result->num_rows()){
+			foreach ($data as $key => $value) {
+				$userIdArr[]=$value->user;
+			}
+		}
+		return $userIdArr;
+	}
+
     // Fetch userwise sessions
 	public function getAllSessions_User($toUserId){
 		$sessionIdArr=array();

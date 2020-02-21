@@ -52,8 +52,20 @@ class GetAllSessions extends REST_Controller {
 					$getAllSessions_Result = $this->GetAllSessions_model->getAllSessions();
 				}
 				$Pass_Data = array();
+				$totalCompleted = array();
 				if(!empty($getAllSessions_Result)){
 					foreach($getAllSessions_Result as $key => $value){
+						$practiceUserCountBySession = $this->GetAllSessions_model->getPracticeUserCountBySession($value->id);
+						$performanceUserCountBySession = $this->GetAllSessions_model->getPerformanceUserCountBySession($value->id);
+						$value->practiceUserCount=sizeof($practiceUserCountBySession);
+						$value->performanceUserCount=sizeof($performanceUserCountBySession);
+						$totalCompleted = array_intersect($practiceUserCountBySession,$performanceUserCountBySession);
+						$value->sessionCompletedUserCount=sizeof($totalCompleted);
+						if(sizeof($practiceUserCountBySession) > sizeof($performanceUserCountBySession)){
+							$value->totalUserCount=sizeof($practiceUserCountBySession);
+						}else{
+							$value->totalUserCount=sizeof($performanceUserCountBySession);
+						}
 
 						if($role != "admin"){
 								if($companyArr){
