@@ -126,6 +126,204 @@ class GetMaturityReporting extends REST_Controller {
 			$this->set_response($parameter_required_array, REST_Controller::HTTP_NOT_FOUND);
 		}
 	}
+
+
+	public function GetCurrentReport_post(){
+		$valid = ['status' => "true","statuscode" => 200,'response' =>"Token Valid"];
+		$no_found = ['status' => "true","statuscode" => 200,'response' =>"No Record Found"];
+		$invalid = ['status' => "true","statuscode" => 203,'response' =>"In-Valid token"];
+		$not_found = ['status' => "true","statuscode" => 404,'response' =>"Token not found"];
+		$message = 'Required field(s) user_id is missing or empty';
+		$user_id = $this->post('user_id');
+		$selectedSessionId = $this->post('selectedSessionId');
+		$toUserId = $this->post('to_user_id');
+
+		if(isset($user_id)){
+			$headers = $this->input->request_headers();
+			$token_status = check_token($this->post('user_id'),$headers['Authorization']);
+			
+			if($token_status == TRUE){
+				$All_Elements = $this->GetMaturityReporting_model->Get_All_Elements_Function();
+				$Pass_Data = array();				
+				if(!empty($All_Elements)){
+					foreach($All_Elements as $key => $value){
+				$customArr = array('1','2','3','4');
+				$id = $value->id;
+				$name = $value->name;
+				$merge_array["name"] = $name;
+				$merge_array["series"] = array();
+				$merge_array["pgrand_total"] = array();
+				$merge_array["vgrand_total"] = array();
+				$All_Answers_By_Element = $this->GetMaturityReporting_model->Get_Structured_Answers_By_Element($id,$selectedSessionId,$toUserId);
+				$Total_Answers_By_Element = $this->GetMaturityReporting_model->Get_Total_Answers_By_Element($id,$selectedSessionId,$toUserId);
+				
+				$elementsArr = [];
+				if(!empty($All_Answers_By_Element)){
+				    /* Add matched elemets to the $elementsArr */			
+					for($i=0; $i<4; $i++){
+						if(isset($All_Answers_By_Element[$i]->name)){
+						$elementsArr[$i] = $All_Answers_By_Element[$i]->name;
+						}
+					}
+
+					/* Get total count of answers for this element */
+					foreach($Total_Answers_By_Element as $key => $value){
+						$total = $value->total;
+					}
+
+					/* Build array for chart */
+					$pgrandtotal = 0;
+					$vgrandtotal = 0;
+					foreach($All_Answers_By_Element as $key_mc => $value_mc){
+						$merge_array_mc = array(
+							"name" => $value_mc->name,
+							"percentage" => number_format(($value_mc->value/$total)*100,1),
+							"value" => $value_mc->value,
+							"count"=>$value_mc->value,
+							"sum"=>$value_mc->sum,
+							"total" => $total
+						);
+						$pgrandtotal = $pgrandtotal + $merge_array_mc['percentage'];
+						$vgrandtotal = $vgrandtotal + $merge_array_mc['value'];
+						$merge_array["series"][] = $merge_array_mc;
+
+					}
+					$merge_array["pgrand_total"] = number_format($pgrandtotal,2);
+					$merge_array["vgrand_total"] = $vgrandtotal;
+					/* Adding Blank Json Object to main array */
+					$customTempArr = array_diff($customArr, $elementsArr);
+					foreach($customTempArr as $key => $value) {
+						$merge_array_mc = array(
+							"name" => $value,
+							"value" => 0,
+							"sum"=>'0'
+						);
+						$merge_array["series"][] =$merge_array_mc;
+					}
+
+					/* Sorting Array in Ascending order like name wise */
+					$price = array_column($merge_array["series"], 'name');
+					array_multisort($price, SORT_ASC, $merge_array["series"]);
+
+							$Pass_Data["data"][] = $merge_array;
+						}
+					}
+					$valid = ['status' => "true","statuscode" => 200,'response' =>$Pass_Data];
+					$this->set_response($Pass_Data, REST_Controller::HTTP_OK);
+				}else{
+					$this->set_response($no_found, REST_Controller::HTTP_OK);
+				}
+			}else if($token_status == FALSE){
+				$this->set_response($invalid, REST_Controller::HTTP_NON_AUTHORITATIVE_INFORMATION);
+			}else{
+				$this->set_response($not_found, REST_Controller::HTTP_NOT_FOUND);
+			}
+		}else{
+			$parameter_required_array = ['status' => "true","statuscode" => 404,'response' => $message];
+			$this->set_response($parameter_required_array, REST_Controller::HTTP_NOT_FOUND);
+		}
+	}
+
+
+	public function GetDesiredReport_post(){
+		$valid = ['status' => "true","statuscode" => 200,'response' =>"Token Valid"];
+		$no_found = ['status' => "true","statuscode" => 200,'response' =>"No Record Found"];
+		$invalid = ['status' => "true","statuscode" => 203,'response' =>"In-Valid token"];
+		$not_found = ['status' => "true","statuscode" => 404,'response' =>"Token not found"];
+		
+		$message = 'Required field(s) user_id is missing or empty';
+		$user_id = $this->post('user_id');
+		$selectedSessionId = $this->post('selectedSessionId');
+		$toUserId = $this->post('to_user_id');
+
+		if(isset($user_id)){
+			$headers = $this->input->request_headers();
+			$token_status = check_token($this->post('user_id'),$headers['Authorization']);
+			
+			if($token_status == TRUE){
+
+				$All_Elements = $this->GetMaturityReporting_model->Get_All_performance_areas_Function();
+				$Pass_Data["data"] = array();
+				if(!empty($All_Elements)){
+					foreach($All_Elements as $key => $value){
+						$customArr = array('1','2','3','4');
+						$id = $value->id;
+						$name = $value->name;
+						$merge_array["name"] = $name;
+						$merge_array["series"] = array();
+						$merge_array["pgrand_total"] = array();
+						$merge_array["vgrand_total"] = array();
+						if($toUserId == 'all'){
+						$All_Performance_Answers_By_Area = $this->GetMaturityReporting_model->Get_Structured_Performance_Answers_By_Area($id,$selectedSessionId);
+						$Total_Performance_Answers_By_Area = $this->GetMaturityReporting_model->Get_Total_Performance_Answers_By_Area($id,$selectedSessionId);
+					}else{
+						$All_Performance_Answers_By_Area = $this->GetMaturityReporting_model->Get_Structured_Performance_Answers_By_Area_User($id,$selectedSessionId,$toUserId);
+						$Total_Performance_Answers_By_Area = $this->GetMaturityReporting_model->Get_Total_Performance_Answers_By_Area_User($id,$selectedSessionId,$toUserId);
+					}
+						$elementsArr = [];
+						if(!empty($All_Performance_Answers_By_Area)){
+							/* Add matched elemets to the $elementsArr */		
+							for($i=0; $i<4; $i++){
+								if(isset($All_Performance_Answers_By_Area[$i]->name)){
+								$elementsArr[$i] = $All_Performance_Answers_By_Area[$i]->name;
+								}
+							}
+
+							/* Get total count of answers for this element */
+							foreach($Total_Performance_Answers_By_Area as $key => $value){
+								$total = $value->total;
+							}
+
+							/* Build array for chart */
+							$pgrandtotal = 0;
+							$vgrandtotal = 0;
+							foreach($All_Performance_Answers_By_Area as $key_mc => $value_mc){
+								$merge_array_mc = array(
+									"name" => $value_mc->name,
+									"percentage" => number_format(($value_mc->value/$total)*100,1),
+									"value" => $value_mc->value,
+									"count"=>$value_mc->value,
+									"sum"=>$value_mc->sum,
+									"total" => $total
+								);			
+								$pgrandtotal = $pgrandtotal + $merge_array_mc['percentage'];
+								$vgrandtotal = $vgrandtotal + $merge_array_mc['value'];				
+								$merge_array["series"][] = $merge_array_mc;
+							}
+
+							$merge_array["pgrand_total"] = number_format($pgrandtotal,2);
+							$merge_array["vgrand_total"] = $vgrandtotal;
+						/* Adding Blank Json Object to main array */
+						$customTempArr = array_diff($customArr, $elementsArr);
+						foreach($customTempArr as $key => $value) {
+							$merge_array_mc = array(
+								"name" => $value,
+								"value" => 0,
+								"sum"=>'0'
+							);
+							$merge_array["series"][] =$merge_array_mc;
+						}
+
+					/* Sorting Array in Ascending order like name wise */
+					$price = array_column($merge_array["series"], 'name');
+					array_multisort($price, SORT_ASC, $merge_array["series"]);
+					$Pass_Data["data"][] = $merge_array;
+						}
+					}
+					$this->set_response($Pass_Data, REST_Controller::HTTP_OK);
+				}else{
+					$this->set_response($no_found, REST_Controller::HTTP_OK);
+				}
+			}else if($token_status == FALSE){
+				$this->set_response($invalid, REST_Controller::HTTP_NON_AUTHORITATIVE_INFORMATION);
+			}else{
+				$this->set_response($not_found, REST_Controller::HTTP_NOT_FOUND);
+			}
+		}else{
+			$parameter_required_array = ['status' => "true","statuscode" => 404,'response' => $message];
+			$this->set_response($parameter_required_array, REST_Controller::HTTP_NOT_FOUND);
+		}
+	}
 }
 
 
