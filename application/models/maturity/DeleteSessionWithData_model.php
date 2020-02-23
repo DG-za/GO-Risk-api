@@ -16,9 +16,7 @@ class DeleteSessionWithData_model extends CI_Model {
 		$this->db->delete("`mat_performance_mc`",$data_Delete);
 		$this->db->delete("`mat_performance_desired`",$data_Delete);
 		$this->db->delete("`mat_session`",$data_Delete2);
-		if($this->db->affected_rows()){
-			return true;
-		}
+		return true;
 	}
 
 
@@ -33,8 +31,6 @@ class DeleteSessionWithData_model extends CI_Model {
 		$this->db->delete("`mat_answer_complete`",$data_Delete);
 		$this->db->delete("`mat_performance_mc`",$data_Delete);
 		$this->db->delete("`mat_performance_desired`",$data_Delete);
-		if($this->db->affected_rows()){
-			return true;
-		}
+		return true;
 	}
 }	
