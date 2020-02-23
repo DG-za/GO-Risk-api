@@ -350,7 +350,7 @@ public function DeleteAnswerOfPerformance_post(){
 					$deleteStatus = $this->GetSessionProgress_model->DeleteAnswerOfPerformance($element_id,$employee_id);
 				}
 				
-				if($deleteStatus == 1){
+				if($deleteStatus){
 					$valid = ['status' => "true","statuscode" => 200,'response' =>"Record deleted"];
 					$this->set_response($valid, REST_Controller::HTTP_OK);
 				}else{
@@ -392,7 +392,7 @@ public function DeleteAnswerOfPractice_post(){
 					$deleteStatus = $this->GetSessionProgress_model->DeleteAnswerOfPractice($delete_id,$employee_id);
 				}
 				
-				if($deleteStatus == TRUE){
+				if($deleteStatus){
 					$valid = ['status' => "true","statuscode" => 200,'response' =>"Record deleted"];
 					$this->set_response($valid, REST_Controller::HTTP_OK);
 				}else{
