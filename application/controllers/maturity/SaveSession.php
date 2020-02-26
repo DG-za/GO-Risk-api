@@ -29,6 +29,10 @@ class SaveSession extends REST_Controller {
 		$user_id = $this->post('user_id');
 		$jsonSession = $this->post('jsonSession');
 		$site_url = $this->post('site_url');
+		$hidden_practices_elements = $this->post('hidden_practices_elements');
+		$hidden_performance_areas = $this->post('hidden_performance_areas');
+
+
 
 		if(isset($user_id) && !empty($user_id) && isset($jsonSession) && !empty($jsonSession)){
 			$headers = $this->input->request_headers();

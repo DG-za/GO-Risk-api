@@ -8,7 +8,9 @@ class SaveSession_model extends CI_Model {
 			$Session_Array = array(
 				"`session_name`" => $jsonSession["session_name"], 
 				"`access_pin`" => $jsonSession["session_access_pin"], 
-				"`company_id`" => $jsonSession["company_id"]
+				"`company_id`" => $jsonSession["company_id"],
+				"`hidden_practices_elements`" => $jsonSession["hidden_practices_elements"],
+				"`hidden_performance_areas`" => $jsonSession["hidden_performance_areas"]
 			);
 			$this->db->where('id',$jsonSession["session_id"]);
 			$this->db->update('mat_session',$Session_Array);
@@ -22,6 +24,8 @@ class SaveSession_model extends CI_Model {
 				"`session_name`" => $jsonSession["session_name"], 
 				"`access_pin`" => $jsonSession["session_access_pin"], 
 				"`company_id`" => $jsonSession["company_id"], 
+				"`hidden_practices_elements`" => $jsonSession["hidden_practices_elements"],
+				"`hidden_performance_areas`" => $jsonSession["hidden_performance_areas"],
 				"`created_at`" => date("Y-m-d h:i:s")
 			);
 			$this->db->insert('mat_session',$Session_Array);
