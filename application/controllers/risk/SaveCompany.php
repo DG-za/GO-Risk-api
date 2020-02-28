@@ -26,6 +26,7 @@ class SaveCompany extends REST_Controller {
 		$not_found = ['status' => "true","statuscode" => 404,'response' =>"Token not found"];
 		
 		$message = 'Required field(s) user_id,add_company_name is missing or empty';
+		
 		$user_id = $this->post('user_id');
 		$add_company_name = $this->post('name');
 		$parent_id = $this->post('parent');
@@ -45,16 +46,28 @@ class SaveCompany extends REST_Controller {
 				if(!$workforce){
 					$workforce=Null;
 				}
-				$Insert_Array = array(
-					"`name`" => $add_company_name,
-					"`parent`" => $parent_id,
-					"`total_workforce`" => $workforce
-				);
-				$Insert_Company_Result = $this->SaveCompany_model->Insert_Company($Insert_Array);
-				if($Insert_Company_Result > 0){
+				/*print_r($this->post('id'));
+				die();*/
+				if($this->post('id') != ""){
+					$Update_Array = array(
+						"`name`" => $add_company_name,
+						"`parent`" => $parent_id,
+						"`total_workforce`" => $workforce
+					);
+					$Company_Result = $this->SaveCompany_model->Update_Company($Update_Array,$this->post('id'));
+				}else{
+					$Insert_Array = array(
+						"`name`" => $add_company_name,
+						"`parent`" => $parent_id,
+						"`total_workforce`" => $workforce
+					);
+					$Company_Result = $this->SaveCompany_model->Insert_Company($Insert_Array);
+				}
+				
+				if($Company_Result > 0){
 					$data = array(
 						'name' => $add_company_name,
-						'id'    => $Insert_Company_Result
+						'id'    => $Company_Result
 					);
 					$valid = ['status' => "true","statuscode" => 200,'response' =>$data];
 					$Pass_Data["data"] = $valid;

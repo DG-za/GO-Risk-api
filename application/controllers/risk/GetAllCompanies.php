@@ -68,5 +68,48 @@ class GetAllCompanies extends REST_Controller {
       $this->set_response($parameter_required_array, REST_Controller::HTTP_NOT_FOUND);
     }
   }
+  
+  public function getParentCompanyWithChild_post(){
+    $valid = ['status' => "true","statuscode" => 200,'response' =>"Token Valid"];
+    $no_found = ['status' => "true","statuscode" => 200,'response' =>"No Record Found"];
+    $invalid = ['status' => "true","statuscode" => 203,'response' =>"In-Valid token"];
+    $not_found = ['status' => "true","statuscode" => 404,'response' =>"Token not found"];
+    
+    $message = 'Required field(s) user_id is missing or empty';
+    $user_id = $this->post('user_id');
+    if(isset($user_id) && !empty($user_id)){
+      $headers = $this->input->request_headers();
+      $token_status = check_token($user_id,$headers['Authorization']);
+      
+      if($token_status == TRUE){
+        $mainArr = array();
+        $results = $this->GetAllCompanies_model->get_All_Companies();
+        if(!empty($results)){
+          foreach ($results as $key => $value) {
+              $merge_Array = array();
+              $mainArr[$key]=$value;
+              $results1 = $this->GetAllCompanies_model->get_Child_Companies($value->id);
+              if(!empty($results1)){
+                foreach ($results1 as $key1 => $value1) {
+                    $merge_Array[] = $value1;
+                }
+              }
+              $mainArr[$key]->children=$merge_Array;
+          }
+          $Pass_Data["data"] = $mainArr;
+          $this->set_response($Pass_Data, REST_Controller::HTTP_OK);
+        }else{
+          $this->set_response($no_found, REST_Controller::HTTP_OK);
+        }
+      }else if($token_status == FALSE){
+        $this->set_response($invalid, REST_Controller::HTTP_NON_AUTHORITATIVE_INFORMATION);
+      }else{
+        $this->set_response($not_found, REST_Controller::HTTP_NOT_FOUND);
+      }
+    }else{
+      $parameter_required_array = ['status' => "true","statuscode" => 404,'response' => $message];
+      $this->set_response($parameter_required_array, REST_Controller::HTTP_NOT_FOUND);
+    }
+  }
 }
 ?>

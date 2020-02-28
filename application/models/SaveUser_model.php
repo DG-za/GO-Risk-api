@@ -6,6 +6,12 @@ class SaveUser_model extends CI_Model {
 		$result = $this->db->insert("`com_user`",$Insert_Array);
 		return $this->db->insert_id();
 	}
+	/* Update_User */
+	public function Update_User($update_Array,$edit_user_id){
+		$this->db->where("`id`",$edit_user_id);
+		$this->db->update("`com_user`",$update_Array);
+		return true;
+	}
 	/* Insert_User_Into_Session */
 	public function Insert_User_Into_Session($session_id,$Insert_saveUser_Result){
 		$this->db->select("*");

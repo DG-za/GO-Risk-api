@@ -20,4 +20,16 @@ class GetAllCompanies_model extends CI_Model {
 		$query_result = $this->db->get();
 		return $query_result->result();
 	}
+
+	/* Get All Companies */
+	public function get_Child_Companies($id){
+		$this->db->select('*');
+		$this->db->from('`com_company`');
+		$whereArr= array(
+			'`parent`'=>$id
+		);
+		$this->db->where($whereArr);
+		$query_result = $this->db->get();
+		return $query_result->result();
+	}
 }

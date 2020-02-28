@@ -15,7 +15,7 @@ class SaveAttendees extends REST_Controller {
 	
 	public function __construct() {
 		parent::__construct();
-		//$this->load->helper('check_token');				
+		$this->load->helper('check_token');				
 		$this->load->model('SaveUser_model');
 	}
 	
@@ -68,6 +68,51 @@ class SaveAttendees extends REST_Controller {
 					$not_available = ['status' => "true","statuscode" => 200,'response' =>"Email Address already registered. Please proceed to the Login page."];
 					$this->set_response($not_available, REST_Controller::HTTP_OK);
 			}
+			}else if($token_status == FALSE){
+				$this->set_response($invalid, REST_Controller::HTTP_NON_AUTHORITATIVE_INFORMATION);
+			}else{
+				$this->set_response($not_found, REST_Controller::HTTP_NOT_FOUND);
+			}
+		}else{
+			$parameter_required_array = ['status' => "true","statuscode" => 404,'response' => $message];
+			$this->set_response($parameter_required_array, REST_Controller::HTTP_NOT_FOUND);
+		}
+	}
+
+	public function update_user_post(){
+		$valid = ['status' => "true","statuscode" => 200,'response' =>"Token Valid"];
+		$no_found = ['status' => "true","statuscode" => 200,'response' =>"No Record Found"];
+		$invalid = ['status' => "true","statuscode" => 203,'response' =>"In-Valid token"];
+		$not_found = ['status' => "true","statuscode" => 404,'response' =>"Token not found"];
+		
+		$message = 'Required field(s) user_id,email,firstname,lastname,role is missing or empty';
+		$user_id = $this->post('user_id');
+		$edit_user_id = $this->post('edit_user_id');
+		$email = $this->post('email');
+		$firstname = $this->post('firstname');
+		$lastname = $this->post('lastname');
+		$role = $this->post('role');
+
+		if(isset($email) && isset($firstname) && isset($lastname) && isset($role) && isset($edit_user_id)){
+			$headers = $this->input->request_headers();
+			$token_status = check_token($user_id,$headers['Authorization']);
+			
+			if($token_status){
+				$update_Array = array(
+					"`email`" => $email,
+					"`firstname`" => $firstname,
+					"`lastname`" => $lastname,
+					"`role`" => $role
+				);
+
+				$Update_User_Result = $this->SaveUser_model->Update_User($update_Array,$edit_user_id);
+				if($Update_User_Result){
+					$Update = ['status' => "true","statuscode" => 200,'response' => "User Updated"];
+					$this->set_response($Update, REST_Controller::HTTP_OK);
+				}else{
+					$not_Update = ['status' => "true","statuscode" => 200,'response' =>"User not Updated"];
+					$this->set_response($not_Update, REST_Controller::HTTP_OK);
+				}
 			}else if($token_status == FALSE){
 				$this->set_response($invalid, REST_Controller::HTTP_NON_AUTHORITATIVE_INFORMATION);
 			}else{
