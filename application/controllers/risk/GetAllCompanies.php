@@ -69,6 +69,22 @@ class GetAllCompanies extends REST_Controller {
     }
   }
   
+  function fnTemp($value){
+    $merge_Array = array();
+    $result1 = $this->GetAllCompanies_model->get_Child_Companies($value->id);
+    if(!empty($result1)){
+      $i=1;
+      foreach ($result1 as $key1 => $value1) {
+        $value1->index=$i;
+        $value1->parentChildren=sizeof($result1);
+        $merge_Array[$key1] = $value1;
+        $merge_Array[$key1]->children=$this->fnTemp($value1);
+        $i++;
+      }
+    }
+    return $merge_Array;
+  }
+
   public function getParentCompanyWithChild_post(){
     $valid = ['status' => "true","statuscode" => 200,'response' =>"Token Valid"];
     $no_found = ['status' => "true","statuscode" => 200,'response' =>"No Record Found"];
@@ -83,18 +99,17 @@ class GetAllCompanies extends REST_Controller {
       
       if($token_status == TRUE){
         $mainArr = array();
-        $results = $this->GetAllCompanies_model->get_All_Companies();
+        $results = $this->GetAllCompanies_model->get_All_Parent_Companies();
         if(!empty($results)){
+          // print_r(sizeof($results));
+          // die();
+          $i=1;
           foreach ($results as $key => $value) {
-              $merge_Array = array();
-              $mainArr[$key]=$value;
-              $results1 = $this->GetAllCompanies_model->get_Child_Companies($value->id);
-              if(!empty($results1)){
-                foreach ($results1 as $key1 => $value1) {
-                    $merge_Array[] = $value1;
-                }
-              }
-              $mainArr[$key]->children=$merge_Array;
+            $value->index=$i;
+            $value->parentChildren=sizeof($results);
+            $mainArr[$key]=$value;
+            $mainArr[$key]->children=$this->fnTemp($value);
+            $i++;
           }
           $Pass_Data["data"] = $mainArr;
           $this->set_response($Pass_Data, REST_Controller::HTTP_OK);
