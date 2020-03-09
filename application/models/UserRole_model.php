@@ -1,10 +1,8 @@
 <?php 
 class UserRole_model extends CI_Model {
-
   public function Get_modules(){
     $this->db->select('*');    
-    $query = $this->db->get('com_modules');
-    //$query = $query->row();
+    $query = $this->db->get('com_modules');    
     return $query->result();
   }
 

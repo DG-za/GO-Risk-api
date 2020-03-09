@@ -16,7 +16,7 @@ class UserRole extends REST_Controller {
 	public function __construct() {
 		parent::__construct();
 		$this->load->helper('check_token');				
-		$this->load->model('UserRole_model');
+		$this->load->model('UserRole_model'); 
 	}
 	
 	public function index_post(){
