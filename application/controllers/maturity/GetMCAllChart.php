@@ -13,19 +13,24 @@ class GetMCAllChart extends REST_Controller {
 	public function index_get(){
 
 		$selectedSessionId = $this->get('selectedSessionId');
-
+		$elementsArr=array();
 		$elementsArr = $this->GetMCAllChart_Model->getAllData($selectedSessionId);
+		if(!empty($elementsArr)){		
+			$productsTitles = array();
+			$productsTitlesnew = array();
+			foreach ($elementsArr as $product) {
+				$productsTitles[$product->category][$product->element_id][$product->answer][] = $product;
+			}
 
-		$productsTitles = array();
-		$productsTitlesnew = array();
-		foreach ($elementsArr as $product) {
-			$productsTitles[$product->category][$product->element_id][$product->answer][] = $product;
+			$productsTitlesnew['success'] = true;
+			$productsTitlesnew['data'] = $productsTitles;
+
+			$this->set_response($productsTitlesnew, REST_Controller::HTTP_OK);
+		}else{
+			$productsTitlesnew['success'] = false;
+			$productsTitlesnew['data'] = $elementsArr;
+			$this->set_response($productsTitlesnew, REST_Controller::HTTP_OK);
 		}
-
-		$productsTitlesnew['success'] = true;
-		$productsTitlesnew['data'] = $productsTitles;
-
-		$this->set_response($productsTitlesnew, REST_Controller::HTTP_OK);
 	}
 
 }
