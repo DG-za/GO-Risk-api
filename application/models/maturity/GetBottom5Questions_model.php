@@ -12,20 +12,16 @@ class GetBottom5Questions_model extends CI_Model {
 			}else{
 				$whereArr=array(
 					"`m_am`.`session_id`"=>$selectedSessionId,
-					"`m_am`.`user`"=>$selectedSessionId,
+					"`m_am`.`user`"=>$toUserId,
 				);
 			}
-			$whereArr=array(
-				"`m_am`.`session_id`"=>$selectedSessionId
-			);
 			$this->db->where($whereArr);
 		}else{
 			if($toUserId == Null || $toUserId == "all"){
 							
 			}else{
 				$whereArr=array(
-					"`m_am`.`user`"=>$selectedSessionId,
-
+					"`m_am`.`user`"=>$toUserId,
 				);
 			}
 		}
