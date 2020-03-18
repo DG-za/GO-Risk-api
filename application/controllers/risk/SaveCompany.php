@@ -30,7 +30,7 @@ class SaveCompany extends REST_Controller {
 		$user_id = $this->post('user_id');
 		$add_company_name = $this->post('name');
 		$parent_id = $this->post('parent');
-		$workforce = $this->post('total_worforce');
+		$workforce = $this->post('total_workforce');
 
 		//print_r($this->post()); die;
 
