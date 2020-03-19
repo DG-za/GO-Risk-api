@@ -30,9 +30,9 @@ class SaveAttendees extends REST_Controller {
 		$email = $this->post('email');
 		$firstname = $this->post('firstname');
 		$lastname = $this->post('lastname');
-		$role = $this->post('role');
+		$user_role_id = $this->post('user_role_id');
 		$password = md5($this->post('password'));
-		if(isset($email) && isset($firstname) && isset($lastname) && isset($role) && isset($password)){
+		if(isset($email) && isset($firstname) && isset($lastname) && isset($user_role_id) && isset($password)){
 			$headers = $this->input->request_headers();
 			//$token_status = check_token($user_id,$headers['Authorization']);
 			
@@ -43,7 +43,7 @@ class SaveAttendees extends REST_Controller {
 					"`email`" => $email,
 					"`firstname`" => $firstname,
 					"`lastname`" => $lastname,
-					"`role`" => $role,
+					"`user_role_id`" => $user_role_id,
 					"`password`" => $password,
 				);
 
@@ -53,7 +53,7 @@ class SaveAttendees extends REST_Controller {
 						'email' => $email,
 						'firstname' => $firstname,
 						'lastname' => $lastname,
-						'role' => $role,
+						'user_role_id' => $user_role_id,
 						'password' => $password,
 						'id'    => $Insert_saveUser_Result
 					];
