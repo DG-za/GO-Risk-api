@@ -28,10 +28,4 @@ class ManageModule_model extends CI_Model {
     $this->db->update("`com_modules`",$moduleObject);
 		return 1;
   }
-
-  public function update_Module($moduleObject,$id){
-    $this->db->where("`id`",$id);
-    $this->db->update("`com_modules`",$moduleObject);
-		return 1;
-  }
 }
