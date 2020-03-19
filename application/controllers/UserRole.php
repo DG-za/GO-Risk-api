@@ -79,6 +79,7 @@ class UserRole extends REST_Controller {
 						$ResultArr = $this->UserRole_model->Set_modules($data[$i]);	
 					}
 					
+
 				}				
 				
 			if($ResultArr > 0){
@@ -229,6 +230,116 @@ class UserRole extends REST_Controller {
 			$token_status = check_token($user_id,$headers['Authorization']);
 			
 			if($token_status == TRUE){
+				$ResultArr = $this->UserRole_model->Get_roles();
+				if($ResultArr){					
+					$Pass_Data["data"] = $ResultArr;
+						$inserted = ['status' => "true","statuscode" => 200,'response' => $Pass_Data];
+						$this->set_response($Pass_Data, REST_Controller::HTTP_OK);					
+				}else{
+					$not_available = ['status' => "true","statuscode" => 200,'response' =>"Data not found"];
+					$this->set_response($not_available, REST_Controller::HTTP_OK);
+				}
+				
+			}else if($token_status == FALSE){
+				$this->set_response($invalid, REST_Controller::HTTP_NON_AUTHORITATIVE_INFORMATION);
+			}else{
+				$this->set_response($not_found, REST_Controller::HTTP_NOT_FOUND);
+			}
+		}else{
+			$parameter_required_array = ['status' => "true","statuscode" => 404,'response' => $message];
+			$this->set_response($parameter_required_array, REST_Controller::HTTP_NOT_FOUND);
+		}
+	}
+	
+
+	public function addRole_post(){
+		$valid = ['status' => "true","statuscode" => 200,'response' =>"Token Valid"];
+		$no_found = ['status' => "true","statuscode" => 200,'response' =>"No Record Found"];
+		$invalid = ['status' => "true","statuscode" => 203,'response' =>"In-Valid token"];
+		$not_found = ['status' => "true","statuscode" => 404,'response' =>"Token not found"];
+		$message = 'Required field(s) user_id is missing or empty';
+		$user_id = $this->post('user_id');
+		$user_role_name = $this->post('role_name');		
+		if(isset($user_id)){
+			$headers = $this->input->request_headers();
+			$token_status = check_token($user_id,$headers['Authorization']);			
+			if($token_status == TRUE){
+				$ResultArr = $this->UserRole_model->Add_role($user_role_name);
+				if($ResultArr > 0){
+					$Pass_Data = ['status' => "true", "statuscode" => 200,'response' => 'Successfully Added'];
+					$this->set_response($Pass_Data, REST_Controller::HTTP_OK);
+				}else{
+					$not_inserted = ['status' => "true","statuscode" => 200,'response' =>"Something wrong"];
+					$this->set_response($not_inserted, REST_Controller::HTTP_OK);
+				}				
+			}else if($token_status == FALSE){
+				$this->set_response($invalid, REST_Controller::HTTP_NON_AUTHORITATIVE_INFORMATION);
+			}else{
+				$this->set_response($not_found, REST_Controller::HTTP_NOT_FOUND);
+			}
+		}else{
+			$parameter_required_array = ['status' => "true","statuscode" => 404,'response' => $message];
+			$this->set_response($parameter_required_array, REST_Controller::HTTP_NOT_FOUND);
+		}
+
+	}
+
+
+	// Fetch permission for the single module
+
+	public function fetchModulePermissions_post(){
+		$valid = ['status' => "true","statuscode" => 200,'response' =>"Token Valid"];
+		$no_found = ['status' => "true","statuscode" => 200,'response' =>"No Record Found"];
+		$invalid = ['status' => "true","statuscode" => 203,'response' =>"In-Valid token"];
+		$not_found = ['status' => "true","statuscode" => 404,'response' =>"Token not found"];
+		$message = 'Required field(s) user_id is missing or empty';
+		$user_id = $this->post('user_id');
+		$role_id = $this->post('user_role_id');
+		$module_id = $this->post('module_id');
+		
+		if(isset($user_id)){
+			$headers = $this->input->request_headers();
+			$token_status = check_token($user_id,$headers['Authorization']);
+			
+			if($token_status == TRUE){
+				$ResultArr = $this->UserRole_model->Fetch_Module_Permissions($role_id,$module_id);
+				//print_r($ResultArr); die;
+				if($ResultArr){					
+					$Pass_Data["data"] = $ResultArr;
+						$inserted = ['status' => "true","statuscode" => 200,'response' => $Pass_Data];
+						$this->set_response($Pass_Data, REST_Controller::HTTP_OK);					
+				}else{
+					$not_available = ['status' => "true","statuscode" => 200,'response' =>"Data not found"];
+					$this->set_response($not_available, REST_Controller::HTTP_OK);
+				}
+				
+			}else if($token_status == FALSE){
+				$this->set_response($invalid, REST_Controller::HTTP_NON_AUTHORITATIVE_INFORMATION);
+			}else{
+				$this->set_response($not_found, REST_Controller::HTTP_NOT_FOUND);
+			}
+		}else{
+			$parameter_required_array = ['status' => "true","statuscode" => 404,'response' => $message];
+			$this->set_response($parameter_required_array, REST_Controller::HTTP_NOT_FOUND);
+		}
+	}
+
+// Admin can fetch single module permissions base on module Alias
+	public function fetchModulePermissionsBaseOnAlias_post(){
+		$valid = ['status' => "true","statuscode" => 200,'response' =>"Token Valid"];
+		$no_found = ['status' => "true","statuscode" => 200,'response' =>"No Record Found"];
+		$invalid = ['status' => "true","statuscode" => 203,'response' =>"In-Valid token"];
+		$not_found = ['status' => "true","statuscode" => 404,'response' =>"Token not found"];
+		$message = 'Required field(s) user_id is missing or empty';
+		$user_id = $this->post('user_id');
+		$role_id = $this->post('user_role_id');
+		$module_alias = $this->post('module_alias');
+		
+		if(isset($user_id)){
+			$headers = $this->input->request_headers();
+			$token_status = check_token($user_id,$headers['Authorization']);
+			
+			if($token_status == TRUE){
 				$ResultArr = $this->UserRole_model->Fetch_Module_Permissions_Base_On_Alias($role_id,$module_alias);				
 				if($ResultArr){					
 					$Pass_Data["data"] = $ResultArr;
@@ -249,6 +360,7 @@ class UserRole extends REST_Controller {
 			$this->set_response($parameter_required_array, REST_Controller::HTTP_NOT_FOUND);
 		}
 	}
+
 
 
 	// Fetch permission for the single module

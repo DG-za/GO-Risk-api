@@ -72,6 +72,8 @@ class UserRole_model extends CI_Model {
 		return $query->result();	
 	}
 
+	
+
 	// Fetch module permissions base on role  id
 	public function Fetch_Role_Permissions($role_id){
 		$this->db->select('*');    
@@ -80,14 +82,4 @@ class UserRole_model extends CI_Model {
 		return $query->result();
 	}
 
-	// Admin can fetch single module permissions base on module Alias
-	// public function Fetch_Module_Permissions_Base_On_Alias($role_id,$module_alias){		
-	// 	$this->db->select('m.module_alias,urp.*');    
-	// 	$this->db->from('com_modules m');
-	// 	$this->db->from('com_user_roles_permission')
-	// 	$this->db->where('user_role_id',$role_id);
-	// 	$this->db->where('module_alias',$module_alias);
-	// 	$query = $this->db->get('com_user_roles_permission');    
-	// 	return $query->result();	
-	// }
 }

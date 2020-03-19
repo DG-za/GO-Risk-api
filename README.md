@@ -19,4 +19,4 @@ DB Connection: <br />
 'hostname' => 'sql25.cpt1.host-h.net', <br />
 'username' => 'rmscrmvzqx_1', <br />
 'password' => 'BpQ4hudiZ4rEnANwe8w8', <br />
-'database' => 'rmscrmvzqx_db1', <br />
+'database' => 'rmscrmvzqx_db1', <br /> 

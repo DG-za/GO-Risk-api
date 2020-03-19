@@ -90,7 +90,17 @@ class ManageModule extends REST_Controller {
 			$not_inserted = ['status' => "false","statuscode" => 404,'response' => "No record found"];
 			$this->set_response($not_inserted, REST_Controller::HTTP_OK);
 		}
-		
-		
 	}
+
+	public function GetParentModules_post(){
+		$result = $this->ManageModule_model->get_parent_modules();
+		if(!empty($result)){
+			$inserted = ['status' => "true","statuscode" => 200,'response' => $result];
+			$this->set_response($inserted, REST_Controller::HTTP_OK);
+		}else{
+			$not_inserted = ['status' => "false","statuscode" => 404,'response' => "No record found"];
+			$this->set_response($not_inserted, REST_Controller::HTTP_OK);
+		}
+	}
+
 }
