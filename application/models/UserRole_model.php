@@ -1,50 +1,93 @@
 <?php 
 class UserRole_model extends CI_Model {
-  public function Get_modules(){
-    $this->db->select('*');    
-    $query = $this->db->get('com_modules');    
-    return $query->result();
-  }
+	public function Get_modules(){
+		$this->db->select('*');    
+		$query = $this->db->get('com_modules');    
+		return $query->result();
+	}
 
 	/* Insert User */
-	public function Insert_User($Insert_Array){
-		$result = $this->db->insert("`com_invite_attendees`",$Insert_Array);
-		return $this->db->insert_id();
+	public function Set_modules($Insert_Array){
+		$result = $this->db->insert("`com_user_roles_permission`",$Insert_Array);
+		$insert_id = $this->db->insert_id();
+		return $insert_id;
 	}
-	public function sendMail($emaila,$subject,$messages){
-		$config = Array(
-			'protocol' => 'smtp',
-			'smtp_host' => 'smtp.she-excellence.co.za',
-			'smtp_port' => 587,
-			'smtp_user' => 'noreply@she-excellence.co.za',
-			'smtp_pass' => 'Crispworks123!',
-			'smtp_timeout' => '4',
-			'mailtype'  => 'html',
-			'charset'   => 'iso-8859-1'
+
+	/* Insert User */
+	public function Update_modules($Update_Array){
+		$Where_Array=array(
+			"user_role_id"=>$Update_Array['user_role_id'],
+			"module_id"=>$Update_Array['module_id']
 		);
-		$this->load->library('email', $config);
-		$this->email->set_newline("\r\n");
-		$from_email = "noreply@she-excellence.co.za";
-		$this->email->from($from_email, '4Xcellence Solutions');
-		$this->email->to($emaila);
-		$this->email->subject($subject);
-		$message = $messages;
-		$this->email->message($message);
-		$this->email->send();
+		$dataArr=array(
+			"can_read"=>$Update_Array['can_read'],
+			"can_update"=>$Update_Array['can_update'],
+			"can_delete"=>$Update_Array['can_delete']
+		);
+		$this->db->where($Where_Array);
+		$this->db->update("`com_user_roles_permission`",$dataArr);
+		return true;
 	}
-  public function Update_InviteStatus($id){  
-		$this->db->where('id', $id);
-		if($this->db->update('com_invite_attendees', array('isexpiry' => 1))){
-			return true;
-		}else{
-			return false;
-		}
-  } 
-  
-  public function Check_User_Availability($email='')
-  {
-  	$this->db->where("`email`",$email);
-	$result = $this->db->get("`com_invite_attendees`")->num_rows();
-	return $result;
-  }
+
+	// Fetch users roles
+	public function Get_roles(){
+		$this->db->select('*');    
+		$query = $this->db->get('com_user_roles');    
+		return $query->result();
+	}
+
+
+	public function Add_role($role_name){
+		$result = $this->db->insert("`com_user_roles`",array('name' => $role_name, 'is_permission_assign' => 'no'));
+		$insert_id = $this->db->insert_id();
+		return $insert_id;		
+	}
+
+	// update is_permission_assign status to yes when assign permissions
+	public function Update_role_status($role_id){
+		$Update_Array = array('is_permission_assign' => 'yes');
+		$Where_Array = array('id' => $role_id );
+		$this->db->where($Where_Array);
+		$result = $this->db->update("`com_user_roles`",$Update_Array);
+		return $result;
+	}
+
+	// Fetch module permissions base on role and module id
+	public function Fetch_Module_Permissions($role_id, $module_id){
+		$this->db->select('*');    
+		$this->db->where('user_role_id',$role_id);
+		$this->db->where('module_id',$module_id);
+		$query = $this->db->get('com_user_roles_permission');    
+		return $query->result();
+	}
+
+	// Admin can fetch single module permissions base on module Alias
+	public function Fetch_Module_Permissions_Base_On_Alias($role_id,$module_alias){		
+		$this->db->select('m.module_alias,urp.*');    
+		$this->db->from('com_modules m');
+		$this->db->join('com_user_roles_permission urp','urp.module_id = m.id');
+		$this->db->where('user_role_id',$role_id);
+		$this->db->where('module_alias',$module_alias);
+		$query = $this->db->get();    
+		return $query->result();	
+	}
+
+	// Fetch module permissions base on role  id
+	public function Fetch_Role_Permissions($role_id){
+		$this->db->select('*');    
+		$this->db->where('user_role_id',$role_id);
+		$query = $this->db->get('com_user_roles_permission');    
+		return $query->result();
+	}
+
+	// Admin can fetch single module permissions base on module Alias
+	// public function Fetch_Module_Permissions_Base_On_Alias($role_id,$module_alias){		
+	// 	$this->db->select('m.module_alias,urp.*');    
+	// 	$this->db->from('com_modules m');
+	// 	$this->db->from('com_user_roles_permission')
+	// 	$this->db->where('user_role_id',$role_id);
+	// 	$this->db->where('module_alias',$module_alias);
+	// 	$query = $this->db->get('com_user_roles_permission');    
+	// 	return $query->result();	
+	// }
 }

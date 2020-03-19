@@ -43,6 +43,7 @@ class InviteAttendees extends REST_Controller {
 					$Insert_saveUser_Result = $this->InviteAttendees_model->Insert_User($Insert_Array);
 					$token['id'] = $Insert_saveUser_Result;
 					$token['email'] = $email;
+					$token['user_role'] = 4;
 					$AToken = JWT::encode($token, $this->config->item('jwt_key'));
 					$link = $serverLink."/attendees-registration/".$AToken;
 					$subject = "Invitation: Maturity Assessment";
