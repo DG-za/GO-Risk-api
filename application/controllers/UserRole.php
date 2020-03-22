@@ -199,10 +199,10 @@ class UserRole extends REST_Controller {
 				//print_r($ResultArr); die;
 				if($ResultArr){					
 					$Pass_Data["data"] = $ResultArr;
-						$inserted = ['status' => "true","statuscode" => 200,'response' => $Pass_Data];
-						$this->set_response($Pass_Data, REST_Controller::HTTP_OK);					
+						$inserted = ['status' => "true","statuscode" => 200,'response' => $ResultArr];
+						$this->set_response($inserted, REST_Controller::HTTP_OK);					
 				}else{
-					$not_available = ['status' => "true","statuscode" => 200,'response' =>"Data not found"];
+					$not_available = ['status' => "false","statuscode" => 404,'response' =>"Data not found"];
 					$this->set_response($not_available, REST_Controller::HTTP_OK);
 				}
 				
@@ -236,10 +236,10 @@ if($token_status == TRUE){
 $ResultArr = $this->UserRole_model->Fetch_Module_Permissions_Base_On_Alias($role_id,$module_alias);
 if($ResultArr){
 $Pass_Data["data"] = $ResultArr;
-$inserted = ['status' => "true","statuscode" => 200,'response' => $Pass_Data];
-$this->set_response($Pass_Data, REST_Controller::HTTP_OK);
+$inserted = ['status' => "true","statuscode" => 200,'response' => $ResultArr];
+$this->set_response($inserted, REST_Controller::HTTP_OK);
 }else{
-$not_available = ['status' => "true","statuscode" => 200,'response' =>"Data not found"];
+$not_available = ['status' => "false","statuscode" => 200,'response' =>"Data not found"];
 $this->set_response($not_available, REST_Controller::HTTP_OK);
 }
 

@@ -3,8 +3,9 @@ class GetAllUsers_model extends CI_Model {
 	
 	/* Get All Users */
 	public function getAllUsers_function(){
-		$this->db->select("`id`,`email`,`firstname`,`lastname`,`role`,`password`");
+		$this->db->select("`com_user`.`id`,`email`,`firstname`,`lastname`,`password`,`com_user_roles`.`name` as `role`");
 		$this->db->from("`com_user`");
+		$this->db->join("`com_user_roles`","`com_user_roles`.`id`=`com_user`.`user_role_id`","LEFT");
 		$query_result = $this->db->get();
 		return $query_result->result();
 	}
