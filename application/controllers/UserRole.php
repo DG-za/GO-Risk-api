@@ -126,7 +126,7 @@ class UserRole extends REST_Controller {
 						$inserted = ['status' => "true","statuscode" => 200,'response' => $Pass_Data];
 						$this->set_response($Pass_Data, REST_Controller::HTTP_OK);					
 				}else{
-					$not_available = ['status' => "true","statuscode" => 200,'response' =>"Data not found"];
+					$not_available = ['status' => "false","statuscode" => 200,'response' =>"Data not found"];
 					$this->set_response($not_available, REST_Controller::HTTP_OK);
 				}
 				
