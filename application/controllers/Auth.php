@@ -38,12 +38,12 @@ class Auth extends REST_Controller {
       $token['exp'] = $date->getTimestamp() + 60*60*5;
 
       $permissions = $this->auth_model->get_permissions($user->user_role_id);
-      $permissionsarray = array();
-      foreach ($permissions as $element) {
-        if($element->parent!='' && $element->parent!=null){
-          $permissionsarray[$element->parent][] = $element;
-        }
-      }
+      // $permissionsarray = array();
+      // foreach ($permissions as $element) {
+      //   if($element->parent!='' && $element->parent!=null){
+      //     $permissionsarray[$element->parent][] = $element;
+      //   }
+      // }
 
       $user_arr = array(
         'id'       => $user->id,
@@ -54,7 +54,7 @@ class Auth extends REST_Controller {
         'user_role'     => $user->name,	
         'user_role_id'     => $user->user_role_id,	
         'session_access' => $user->session_access,
-        'permissions'   => $permissionsarray,
+        'permissions'   => $permissions,
         // 'permissions'   => $permissions,
         'token'         => JWT::encode($token, $this->config->item('jwt_key'))
       ); 

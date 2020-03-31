@@ -24,13 +24,20 @@ class Auth_model extends CI_Model {
 
 
     public function get_permissions($user_role_id){
-  $this->db->select("urp.*,m.module_name,m.module_alias,m.parent");     
-  $this->db->from("`com_user_roles_permission` urp");    
-  $this->db->join("`com_modules` m","m.id = urp.module_id", "left");    
-  $this->db->where('urp.user_role_id',$user_role_id); 
-  $query = $this->db->get();      
-  return  $query->result();
-}
+      $this->db->select("*");     
+      $this->db->from("`com_user_roles_permission`");    
+      $this->db->where('user_role_id',$user_role_id); 
+      $query = $this->db->get();      
+      return  $query->result();
+    }
+// public function get_permissions($user_role_id){
+//       $this->db->select("urp.*,m.module_name,m.module_alias,m.parent");     
+//       $this->db->from("`com_user_roles_permission` urp");    
+//       $this->db->join("`com_modules` m","m.id = urp.module_id", "left");    
+//       $this->db->where('urp.user_role_id',$user_role_id); 
+//       $query = $this->db->get();      
+//       return  $query->result();
+//     }
 
 
     /*log session data*/

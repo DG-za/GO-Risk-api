@@ -63,11 +63,9 @@ class UserRole_model extends CI_Model {
 
 	// Admin can fetch single module permissions base on module Alias
 	public function Fetch_Module_Permissions_Base_On_Alias($role_id,$module_alias){		
-		$this->db->select('m.module_alias,urp.*');    
-		$this->db->from('com_modules m');
-		$this->db->join('com_user_roles_permission urp','urp.module_id = m.id');
+		$this->db->select('*');    
+		$this->db->from('com_user_roles_permission');
 		$this->db->where('user_role_id',$role_id);
-		$this->db->where('module_alias',$module_alias);
 		$query = $this->db->get();    
 		return $query->result();	
 	}
