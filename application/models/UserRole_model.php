@@ -38,7 +38,7 @@ class UserRole_model extends CI_Model {
 
 
 	public function Add_role($role_name){
-		$result = $this->db->insert("`com_user_roles`",array('name' => $role_name, 'is_permission_assign' => 'no'));
+		$result = $this->db->insert("`com_user_roles`",array('name' => $role_name, 'session_access' => 'accessDialog', 'is_permission_assign' => 'no'));
 		$insert_id = $this->db->insert_id();
 		return $insert_id;		
 	}

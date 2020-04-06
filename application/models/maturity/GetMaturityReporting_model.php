@@ -245,16 +245,41 @@ class GetMaturityReporting_model extends CI_Model {
 	}
 	
 	public function Get_Structured_Performance_Answers_By_Area_User($ID,$selectedSessionId,$toUserId){
+		// if($selectedSessionId != null && $selectedSessionId != "null"){
+		// 	$whereArr=array(
+		// 		"`element`"=>$ID,
+		// 		"`session_id`"=>$selectedSessionId,
+		// 		"`user`" => $toUserId
+		// 	);
+		// }else{
+		// 	$whereArr=array(
+		// 		"`element`"=>$ID
+		// 	);
+		// }
 		if($selectedSessionId != null && $selectedSessionId != "null"){
-			$whereArr=array(
-				"`element`"=>$ID,
-				"`session_id`"=>$selectedSessionId,
-				"`user`" => $toUserId
-			);
+			if($toUserId == Null || $toUserId == "all"){
+				$whereArr=array(
+					"`element`"=>$ID,
+					"`session_id`"=>$selectedSessionId
+				);
+			}else{
+				$whereArr=array(
+					"`element`"=>$ID,
+					"`user`"=>$toUserId,
+					"`session_id`"=>$selectedSessionId
+				);
+			}
 		}else{
-			$whereArr=array(
-				"`element`"=>$ID
-			);
+			if($toUserId == Null || $toUserId == "all"){
+				$whereArr=array(
+					"`element`"=>$ID
+				);
+			}else{
+				$whereArr=array(
+					"`element`"=>$ID,
+					"`user`"=>$toUserId
+				);
+			}
 		}
 		$this->db->select("`answer` as `name`, count(`answer`) as `value`, sum(`answer`) as `sum`");
 		// Old query // $this->db->select("`answer` as `name`, count(DISTINCT `user`) as `value`, count(`answer`) as `score`");
@@ -288,16 +313,41 @@ class GetMaturityReporting_model extends CI_Model {
 	}
 
 	public function Get_Total_Performance_Answers_By_Area_User($ID,$selectedSessionId,$toUserId){
+		// if($selectedSessionId != null && $selectedSessionId != "null"){
+		// 	$whereArr=array(
+		// 		"`element`"=>$ID,
+		// 		"`session_id`"=>$selectedSessionId,
+		// 		"`user`" => $toUserId
+		// 	);
+		// }else{
+		// 	$whereArr=array(
+		// 		"`element`"=>$ID
+		// 	);
+		// }
 		if($selectedSessionId != null && $selectedSessionId != "null"){
-			$whereArr=array(
-				"`element`"=>$ID,
-				"`session_id`"=>$selectedSessionId,
-				"`user`" => $toUserId
-			);
+			if($toUserId == Null || $toUserId == "all"){
+				$whereArr=array(
+					"`element`"=>$ID,
+					"`session_id`"=>$selectedSessionId
+				);
+			}else{
+				$whereArr=array(
+					"`element`"=>$ID,
+					"`user`"=>$toUserId,
+					"`session_id`"=>$selectedSessionId
+				);
+			}
 		}else{
-			$whereArr=array(
-				"`element`"=>$ID
-			);
+			if($toUserId == Null || $toUserId == "all"){
+				$whereArr=array(
+					"`element`"=>$ID
+				);
+			}else{
+				$whereArr=array(
+					"`element`"=>$ID,
+					"`user`"=>$toUserId
+				);
+			}
 		}
 		$this->db->select("count(`answer`) as `total`");
 		$this->db->from("`mat_performance_mc`");

@@ -15,9 +15,6 @@ class GetBottom5Elements_model extends CI_Model {
 					"`m_am`.`user`"=>$toUserId,
 				);
 			}
-			$whereArr=array(
-				"`m_am`.`session_id`"=>$selectedSessionId
-			);
 			$this->db->where($whereArr);
 		}else{
 			if($toUserId == Null || $toUserId == "all"){
