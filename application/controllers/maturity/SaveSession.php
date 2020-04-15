@@ -69,9 +69,16 @@ class SaveSession extends REST_Controller {
 						}
 					}
 					$link="";
+					$roleArr = $this->SaveSession_model->Get_Default_Role_ID();
+					if(!empty($roleArr)){
+						$roleId=$roleArr->id;
+					}else{
+						$roleId=null;
+					}
 					foreach ($more_users as $user_email){
 						$token['email'] = $user_email;
 						$token['id'] = $user_id;
+						$token['user_role'] = $roleId;
 						$AToken = JWT::encode($token, $this->config->item('jwt_key'));
 						$link = $site_url."/attendees-registration/".$AToken;
 						$query = $this->db->get_where('com_email_template',array('type'=>'session_invitation_signup'));

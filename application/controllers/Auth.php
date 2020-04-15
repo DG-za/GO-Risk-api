@@ -24,49 +24,63 @@ class Auth extends REST_Controller {
 	
 	/* User can login into the application using auth token */
 	public function user_login_post(){
-		$username = $this->post('email');
-		$password = $this->post('password');
-		$invalid_credentials = ['status' => "false","statuscode"=> 404,'response' =>"Invalid username and password"];
-		
-		if(isset($username) && isset($password)) {
-			$user = $this->auth_model->user_login($username,$password);
-			if($user) {
-				$token['id'] = $user->id;
-				$token['username'] = $user->email;
-				$date = new DateTime();
-				$token['iat'] = $date->getTimestamp();
-				$token['exp'] = $date->getTimestamp() + 60*60*5;
-				$user_arr = array(
-					'id'       => $user->id,
-					'email'    		=> $user->email,		
-					'firstname'     => $user->firstname,				
-					'lastname'      => $user->lastname,			
-					'role'     => $user->role,				
-					'token'         => JWT::encode($token, $this->config->item('jwt_key'))
-				); 
+  $username = $this->post('email');
+  $password = $this->post('password');
+  $invalid_credentials = ['status' => "false","statuscode"=> 404,'response' =>"Invalid username and password"];
+  
+  if(isset($username) && isset($password)) {
+    $user = $this->auth_model->user_login($username,$password);
+    if($user) {
+      $token['id'] = $user->id;
+      $token['username'] = $user->email;
+      $date = new DateTime();
+      $token['iat'] = $date->getTimestamp();
+      $token['exp'] = $date->getTimestamp() + 60*60*5;
 
-				/* You can change token key from the following file 
-				excellence-api\application\config
-				filename: jwt.php*/
+      $permissions = $this->auth_model->get_permissions($user->user_role_id);
+      // $permissionsarray = array();
+      // foreach ($permissions as $element) {
+      //   if($element->parent!='' && $element->parent!=null){
+      //     $permissionsarray[$element->parent][] = $element;
+      //   }
+      // }
 
-				/* store session info and token info to ci_session */         
-				$ci_session = array(                
-					'ip_address'=> $_SERVER['REMOTE_ADDR'],
-					'id' => bin2hex(openssl_random_pseudo_bytes(8)),
-					'token' => $user_arr['token'],
-					'user_id'      => $user->id,
-				);
+      $user_arr = array(
+        'id'       => $user->id,
+        'email'    		=> $user->email,		
+        'firstname'     => $user->firstname,				
+        'lastname'      => $user->lastname,			
+        'role'          => $user->role,			
+        'user_role'     => $user->name,	
+        'user_role_id'     => $user->user_role_id,	
+        'session_access' => $user->session_access,
+        'permissions'   => $permissions,
+        // 'permissions'   => $permissions,
+        'token'         => JWT::encode($token, $this->config->item('jwt_key'))
+      ); 
 
-				/* It will be final array after successfully logged */
-				$this->auth_model->session_log($ci_session);
-				
-				$success = ['status' => "true","statuscode" => 200,'response' =>$user_arr];
-				$this->set_response($success, REST_Controller::HTTP_OK);
-			}else {
-				$this->response($invalid_credentials, REST_Controller::HTTP_OK);
-			}
-		}
-	}
+      /* You can change token key from the following file 
+      excellence-api\application\config
+      filename: jwt.php*/
+
+      /* store session info and token info to ci_session */         
+      $ci_session = array(                
+        'ip_address'=> $_SERVER['REMOTE_ADDR'],
+        'id' => bin2hex(openssl_random_pseudo_bytes(8)),
+        'token' => $user_arr['token'],
+        'user_id'      => $user->id,
+      );
+
+      /* It will be final array after successfully logged */
+      $this->auth_model->session_log($ci_session);
+      
+      $success = ['status' => "true","statuscode" => 200,'response' =>$user_arr];
+      $this->set_response($success, REST_Controller::HTTP_OK);
+    }else {
+      $this->response($invalid_credentials, REST_Controller::HTTP_OK);
+    }
+  }
+}
 	/*public function sendMail_post(){
 		return $this->auth_model->sendMail();
 	}*/

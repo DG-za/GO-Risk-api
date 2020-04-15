@@ -3,8 +3,13 @@
 class GetMCAllChart_Model extends CI_Model {
 	
 	
-	public function getAllData($selectedSessionId){
-
+	public function getAllData($selectedSessionId,$user_id){
+		if($user_id!= "all"){
+			$where=" AND matans.user =  $user_id ";
+		}else{
+			$where=" ";
+		}
+		
 		$query1 = $this->db->query("
 			SELECT  
 
@@ -31,13 +36,13 @@ class GetMCAllChart_Model extends CI_Model {
 			JOIN mat_questions as matque
 			ON matque.id = matans.question
 	
-			WHERE matans.session_id =  $selectedSessionId
+			WHERE matans.session_id =  $selectedSessionId ".$where."
 			
 			ORDER BY maccat.name ASC
 		
 		");
 		$data1 = $query1->result();
-
+		
 		return $data1;
 	}
 

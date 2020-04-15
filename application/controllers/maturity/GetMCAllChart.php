@@ -13,8 +13,11 @@ class GetMCAllChart extends REST_Controller {
 	public function index_get(){
 
 		$selectedSessionId = $this->get('selectedSessionId');
+		$user_id = $this->get('user_id');
+
 		$elementsArr=array();
-		$elementsArr = $this->GetMCAllChart_Model->getAllData($selectedSessionId);
+		$elementsArr = $this->GetMCAllChart_Model->getAllData($selectedSessionId,$user_id);
+		
 		if(!empty($elementsArr)){		
 			$productsTitles = array();
 			$productsTitlesnew = array();

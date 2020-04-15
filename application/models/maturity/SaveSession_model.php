@@ -62,4 +62,10 @@ class SaveSession_model extends CI_Model {
          return  $query->row();
     }
   }
+  public function Get_Default_Role_ID()
+  {
+  	$this->db->where("`name`","Default");
+	$result = $this->db->get("`com_user_roles`")->row();
+	return $result;
+  }
 }

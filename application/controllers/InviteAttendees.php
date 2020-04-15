@@ -34,6 +34,12 @@ class InviteAttendees extends REST_Controller {
 			
 			if($token_status == TRUE){
 				$Check_Availability_Result = $this->InviteAttendees_model->Check_User_Availability($email);
+				$roleArr = $this->InviteAttendees_model->Get_Default_Role_ID();
+				if(!empty($roleArr)){
+					$roleId=$roleArr->id;
+				}else{
+					$roleId=null;
+				}
 				if($Check_Availability_Result==0){
 					$Insert_Array = array(
 						"`email`" => $email,
@@ -43,6 +49,7 @@ class InviteAttendees extends REST_Controller {
 					$Insert_saveUser_Result = $this->InviteAttendees_model->Insert_User($Insert_Array);
 					$token['id'] = $Insert_saveUser_Result;
 					$token['email'] = $email;
+					$token['user_role'] = $roleId;
 					$AToken = JWT::encode($token, $this->config->item('jwt_key'));
 					$link = $serverLink."/attendees-registration/".$AToken;
 					$subject = "Invitation: Maturity Assessment";

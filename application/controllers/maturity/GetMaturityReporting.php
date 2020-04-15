@@ -99,7 +99,12 @@ class GetMaturityReporting extends REST_Controller {
 					$Pass_Data["data"]["performance_desired"] = number_format(0,1);
 				}
 
-			  $results_answer_desired = $this->GetMaturityReporting_model->GetMaturityReporting_answer_desired($selectedSessionId);
+				if(isset($toUserId) && $toUserId != 'all'){
+					$results_answer_desired = $this->GetMaturityReporting_model->GetMaturityReporting_answer_desired_User($selectedSessionId,$toUserId);
+				}else{
+					$results_answer_desired = $this->GetMaturityReporting_model->GetMaturityReporting_answer_desired($selectedSessionId);
+				}
+			  
 				if(!empty($results_answer_desired)){
 					$A_Count = 0;
 					$A_D_Count = 0;

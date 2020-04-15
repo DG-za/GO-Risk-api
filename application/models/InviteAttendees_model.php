@@ -48,4 +48,10 @@ class InviteAttendees_model extends CI_Model {
 	$result = $this->db->get("`com_invite_attendees`")->num_rows();
 	return $result;
   }
+  public function Get_Default_Role_ID()
+  {
+  	$this->db->where("`name`","Default");
+	$result = $this->db->get("`com_user_roles`")->row();
+	return $result;
+  }
 }

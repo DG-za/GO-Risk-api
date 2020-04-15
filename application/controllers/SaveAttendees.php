@@ -30,9 +30,9 @@ class SaveAttendees extends REST_Controller {
 		$email = $this->post('email');
 		$firstname = $this->post('firstname');
 		$lastname = $this->post('lastname');
-		$role = $this->post('role');
+		$user_role_id = $this->post('user_role_id');
 		$password = md5($this->post('password'));
-		if(isset($email) && isset($firstname) && isset($lastname) && isset($role) && isset($password)){
+		if(isset($email) && isset($firstname) && isset($lastname) && isset($user_role_id) && isset($password)){
 			$headers = $this->input->request_headers();
 			//$token_status = check_token($user_id,$headers['Authorization']);
 			
@@ -43,7 +43,7 @@ class SaveAttendees extends REST_Controller {
 					"`email`" => $email,
 					"`firstname`" => $firstname,
 					"`lastname`" => $lastname,
-					"`role`" => $role,
+					"`user_role_id`" => $user_role_id,
 					"`password`" => $password,
 				);
 
@@ -53,7 +53,7 @@ class SaveAttendees extends REST_Controller {
 						'email' => $email,
 						'firstname' => $firstname,
 						'lastname' => $lastname,
-						'role' => $role,
+						'user_role_id' => $user_role_id,
 						'password' => $password,
 						'id'    => $Insert_saveUser_Result
 					];
@@ -85,15 +85,15 @@ class SaveAttendees extends REST_Controller {
 		$invalid = ['status' => "true","statuscode" => 203,'response' =>"In-Valid token"];
 		$not_found = ['status' => "true","statuscode" => 404,'response' =>"Token not found"];
 		
-		$message = 'Required field(s) user_id,email,firstname,lastname,role is missing or empty';
+		$message = 'Required field(s) user_id,email,firstname,lastname,user_role_id is missing or empty';
 		$user_id = $this->post('user_id');
 		$edit_user_id = $this->post('edit_user_id');
 		$email = $this->post('email');
 		$firstname = $this->post('firstname');
 		$lastname = $this->post('lastname');
-		$role = $this->post('role');
+		$user_role_id = $this->post('user_role_id');
 
-		if(isset($email) && isset($firstname) && isset($lastname) && isset($role) && isset($edit_user_id)){
+		if(isset($email) && isset($firstname) && isset($lastname) && isset($user_role_id) && isset($edit_user_id)){
 			$headers = $this->input->request_headers();
 			$token_status = check_token($user_id,$headers['Authorization']);
 			
@@ -102,7 +102,7 @@ class SaveAttendees extends REST_Controller {
 					"`email`" => $email,
 					"`firstname`" => $firstname,
 					"`lastname`" => $lastname,
-					"`role`" => $role
+					"`user_role_id`" => $user_role_id
 				);
 
 				$Update_User_Result = $this->SaveUser_model->Update_User($update_Array,$edit_user_id);
