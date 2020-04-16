@@ -20,3 +20,9 @@ DB Connection: <br />
 'username' => 'rmscrmvzqx_1', <br />
 'password' => 'BpQ4hudiZ4rEnANwe8w8', <br />
 'database' => 'rmscrmvzqx_db1', <br /> 
+
+SHE TEMPLATE DB (This is our central up to date db structure): <br />
+'hostname' => 'sql26.cpt1.host-h.net', <br />
+'username' => 'she_templ_dbu', <br />
+'password' => 'a9g35hzviJasSGCpkDU8', <br />
+'database' => 'she_template_db', <br /> 
