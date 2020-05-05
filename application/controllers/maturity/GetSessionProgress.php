@@ -84,7 +84,8 @@ class GetSessionProgress extends REST_Controller {
 				$Pass_Data = array();
 				$userArr = array();
 				$getAllUser_Result = $this->GetSessionProgress_model->getAllUsers();
-				
+				// print_r($getAllUser_Result);
+				// die();
 				//$getAllSession_Result=explode(",", $getAllSession_Result->user);
 				if(!empty($getAllUser_Result)){
 					foreach ($getAllUser_Result as $user) {
@@ -96,7 +97,7 @@ class GetSessionProgress extends REST_Controller {
 									"email" => $user->email,
 									"firstname" => $user->firstname,
 									"lastname" => $user->lastname,
-									"role" => $user->role,
+									"role" => $user->name,
 									"performanceProgress" => $this->GetSessionProgress_model->get_progress_of_performance($user->id,$selectedSessionId),
 									"practiceProgress" => $this->GetSessionProgress_model->get_progress_of_practice($user->id,$selectedSessionId)
 								);
