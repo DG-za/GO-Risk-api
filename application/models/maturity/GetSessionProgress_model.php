@@ -101,8 +101,9 @@ public function getSessionUsers($user,$selectedSessionId){
 	}
 
 public function getAllUsers(){
-		$this->db->select("*");
-		$this->db->from("`com_user`");
+		$this->db->select("u.*,ur.name,ur.session_access");
+		$this->db->from("`com_user` u");    
+    $this->db->join("`com_user_roles` ur", "ur.id = u.user_role_id", "left");
 		$query_result = $this->db->get();
 		return $query_result->result();
 	}

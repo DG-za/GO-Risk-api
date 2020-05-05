@@ -44,13 +44,12 @@ class Auth extends REST_Controller {
       //     $permissionsarray[$element->parent][] = $element;
       //   }
       // }
-
       $user_arr = array(
         'id'       => $user->id,
         'email'    		=> $user->email,		
         'firstname'     => $user->firstname,				
         'lastname'      => $user->lastname,			
-        'role'          => $user->role,			
+        'role'          => $user->name,			
         'user_role'     => $user->name,	
         'user_role_id'     => $user->user_role_id,	
         'session_access' => $user->session_access,

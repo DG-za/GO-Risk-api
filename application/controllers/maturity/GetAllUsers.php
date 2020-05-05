@@ -104,7 +104,6 @@ class GetAllUsers extends REST_Controller {
 			
 			if($token_status == TRUE){
 				$getAllUsers_Result = $this->GetAllUsers_model->getUsers_function();
-
 				$Pass_Data = array();
 				//$sessionUsers="";
 				if(!empty($getAllUsers_Result)){
@@ -113,6 +112,7 @@ class GetAllUsers extends REST_Controller {
 						//$sessionUsers=explode(",",$sessionUsers->user);
 						foreach($getAllUsers_Result as $key => $value){
 							$sessionUsers = $this->GetAllUsers_model->getSessionUsers_function($value->id,$selectedSessionId);
+							
 							if(!empty($sessionUsers)){
 								$merge_array = array("id" => $value->id,"email" => $value->email,"firstname" => $value->firstname,"lastname" => $value->lastname,"role" => $value->role);
 								$Pass_Data["data"][] = $merge_array;

@@ -11,9 +11,10 @@ class GetAllUsers_model extends CI_Model {
 	}
 	
 	public function getUsers_function(){
-		$this->db->select("`id`,`email`,`firstname`,`lastname`,`role`");
-		$this->db->where("`role` !="  , 'admin');
-		$this->db->from("`com_user`");
+		$this->db->select("`u`.`id`,`u`.`email`,`u`.`firstname`,`u`.`lastname`,`ur`.`name` as `role`,ur.session_access");
+		$this->db->from("`com_user` u");    
+    $this->db->join("`com_user_roles` ur", "ur.id = u.user_role_id", "LEFT");
+		$this->db->where("`ur`.`name` !="  , 'Admin');
 		$query_result = $this->db->get();
 		return $query_result->result();
 	}
@@ -31,7 +32,7 @@ class GetAllUsers_model extends CI_Model {
 		$this->db->where("`session_id` "  , $selectedSessionId);
 		$this->db->from("`mat_answer_mc`");
 		$query_result = $this->db->get();
-		if($query_result->num_rows()){
+		if($query_result->num_rows()>0){
 			return 1;
 		}else{
 			$this->db->select("`id`");
@@ -39,7 +40,7 @@ class GetAllUsers_model extends CI_Model {
 			$this->db->where("`session_id` "  , $selectedSessionId);
 			$this->db->from("`mat_performance_mc`");
 			$query_result2 = $this->db->get();
-			if($query_result2->num_rows()){
+			if($query_result2->num_rows()>0){
 				return 1;
 			}
 		}
