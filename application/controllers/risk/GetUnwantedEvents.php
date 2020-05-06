@@ -3,7 +3,7 @@ require_once APPPATH . '/libraries/REST_Controller.php';
 require_once APPPATH . '/libraries/JWT.php';
 use \Firebase\JWT\JWT;
 
-class GetRiskTable extends REST_Controller {
+class GetUnwantedEvents extends REST_Controller {
   /***************************************************************
   *  Project Name : 4Xcellence Solutions
   *  Created By :   
@@ -16,7 +16,7 @@ class GetRiskTable extends REST_Controller {
   public function __construct() {
     parent::__construct();
     $this->load->helper('check_token');       
-    $this->load->model('risk/GetRiskTable_model');
+    $this->load->model('risk/GetUnwantedEvent_model');
   }
   
   public function index_post(){
@@ -33,15 +33,12 @@ class GetRiskTable extends REST_Controller {
       
       if($token_status == TRUE){
         $merge_Array = array();
-        $results = $this->GetRiskTable_model->get_Risk_Table();
+        $results = $this->GetUnwantedEvent_model->get_UnwantedEvents();
         if(!empty($results)){
           foreach ($results as $key => $value) {
-            $merge_Array[$key]['level']    = $value->level;
-            $merge_Array[$key]['1'] = $value->not_likely;
-            $merge_Array[$key]['2'] = $value->slight;
-            $merge_Array[$key]['3']    = $value->likely;
-            $merge_Array[$key]['4'] = $value->highly_likely;
-            $merge_Array[$key]['5'] = $value->expected;
+            $merge_Array[$key]["id"] = $value->id;
+            $merge_Array[$key]["name"] = $value->name;
+            $merge_Array[$key]["category_id"] = $value->category_id;
           }
         }
         $Pass_Data["data"] = $merge_Array;
