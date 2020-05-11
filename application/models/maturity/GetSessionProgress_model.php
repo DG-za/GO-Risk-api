@@ -65,9 +65,10 @@ public function get_progress_of_practice($user_id,$selectedSessionId){
 }
 
 public function getUsersByRole_function($role){
-		$this->db->select("`id`,`email`,`firstname`,`lastname`,`role`");
+		$this->db->select("`u`.`id`,`u`.`email`,`u`.`firstname`,`u`.`lastname`,`ur`.`name` as `role`");
 		// $this->db->where("`role`"  , $role);
-		$this->db->from("`com_user`");
+		$this->db->from("`com_user` u");    
+    $this->db->join("`com_user_roles` ur", "ur.id = u.user_role_id", "left");
 		$query_result = $this->db->get();
 		return $query_result->result();
 }
