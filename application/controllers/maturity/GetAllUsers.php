@@ -39,7 +39,7 @@ class GetAllUsers extends REST_Controller {
 				if(!empty($getAllUsers_Result)){
 					foreach($getAllUsers_Result as $key => $value){
 						//if($value->role != "admin"){
-							$merge_array = array("id" => $value->id,"email" => $value->email,"firstname" => $value->firstname,"lastname" => $value->lastname,"role" => $value->role,"password" => $value->password);
+							$merge_array = array("id" => $value->id,"email" => $value->email,"firstname" => $value->firstname,"lastname" => $value->lastname,"role" => $value->role,"password" => $value->password,"createdDate" => $value->created_date);
 							$Pass_Data["data"][] = $merge_array;
 						//}
 					}
@@ -63,7 +63,7 @@ class GetAllUsers extends REST_Controller {
 				if(!empty($getAllUsers_Result)){
 					foreach($getAllUsers_Result as $key => $value){
 						if($value->role != "admin"){
-							$merge_array = array("id" => $value->id,"email" => $value->email,"firstname" => $value->firstname,"lastname" => $value->lastname,"role" => $value->role,"password" => $value->password,"userRoleId" => $value->userRoleId);
+							$merge_array = array("id" => $value->id,"email" => $value->email,"firstname" => $value->firstname,"lastname" => $value->lastname,"role" => $value->role,"password" => $value->password,"userRoleId" => $value->userRoleId,"createdDate" => $value->created_date);
 							$isAnswered = $this->GetAllUsers_model->checkIsAnswered_function($value->id);
 							if($isAnswered){
 								$merge_array['isAnswered']=True;
