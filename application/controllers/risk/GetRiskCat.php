@@ -40,6 +40,7 @@ class GetRiskCat extends REST_Controller
 					foreach ($results as $key => $value) {
 						$merge_Array[$key]["id"] = $value->id;
 						$merge_Array[$key]["name"] = $value->name;
+						$merge_Array[$key]["short"] = $value->short;
 					}
 				}
 				$Pass_Data["data"] = $merge_Array;
