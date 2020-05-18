@@ -2,56 +2,44 @@
 require_once APPPATH . '/libraries/REST_Controller.php';
 require_once APPPATH . '/libraries/JWT.php';
 
-class SaveProcessStep extends REST_Controller
+class DeleteProcessStep extends REST_Controller
 {
+	/***************************************************************
+	 *  Project Name : 4Xcellence Solutions
+	 *  Created By :
+	 *  Created Date : 05-11-2019
+	 *  Description : A controller contain Deletion related methods
+	 *  Modification History :
+	 *
+	 ***************************************************************/
 	public function __construct()
 	{
 		parent::__construct();
 		$this->load->helper('check_token');
-		$this->load->model('risk/SaveProcessStep_model');
+		$this->load->model('risk/DeleteProcessStep_model');
 	}
 
 	public function index_post()
 	{
+		$valid = ['status' => "true", "statuscode" => 200, 'response' => "Record Deleted"];
+		$no_found = ['status' => "true", "statuscode" => 200, 'response' => "Record Not Deleted"];
 		$invalid = ['status' => "true", "statuscode" => 203, 'response' => "In-Valid token"];
 		$not_found = ['status' => "true", "statuscode" => 404, 'response' => "Token not found"];
 
-		$message = 'Required field(s) user_id, name, or company_id is missing or empty';
-
-		$id = $this->post('id');
+		$message = 'Required field(s) id is missing or empty';
 		$user_id = $this->post('user_id');
-		$name = $this->post('name');
-		$company_id = $this->post('company_id');
+		$id = $this->post('id');
 
-		if (isset($user_id) && isset($name) && isset($company_id)) {
+		if (isset($id) && !empty($id) && isset($user_id) && !empty($user_id)) {
 			$headers = $this->input->request_headers();
 			$token_status = check_token($user_id, $headers['Authorization']);
 
 			if ($token_status == TRUE) {
-				$insertArray = array(
-					"`name`" => $name,
-					"`company_id`" => $company_id,
-				);
-
-				if (!isset($id) || $id == 0 || $id == "0") {
-					$id = $this->SaveProcessStep_model->Save_Data($insertArray);
-				} else {
-					$this->SaveProcessStep_model->Update_Data($insertArray, $id);
-				}
-
-
-				if ($id > 0) {
-					$data = array(
-						'name' => $name,
-						'id' => $id,
-						"company_id" => $company_id,
-					);
-
-					$valid = ['status' => "true", "statuscode" => 200, 'response' => $data];
+				$results = $this->DeleteProcessStep_model->delete($id);
+				if (!empty($results)) {
 					$this->set_response($valid, REST_Controller::HTTP_OK);
 				} else {
-					$not_inserted = ['status' => "true", "statuscode" => 200, 'response' => "Save Element not Inserted"];
-					$this->set_response($not_inserted, REST_Controller::HTTP_OK);
+					$this->set_response($no_found, REST_Controller::HTTP_OK);
 				}
 			} else if ($token_status == FALSE) {
 				$this->set_response($invalid, REST_Controller::HTTP_NON_AUTHORITATIVE_INFORMATION);

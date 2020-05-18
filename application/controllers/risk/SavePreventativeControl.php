@@ -37,7 +37,6 @@ class SavePreventativeControl extends REST_Controller
 			$token_status = check_token($user_id, $headers['Authorization']);
 
 			if ($token_status == TRUE) {
-				$Pass_Data = array();
 				$Insert_Array = array(
 					"`name`" => $name,
 					"`hazard_desc`" => 1,
@@ -55,12 +54,10 @@ class SavePreventativeControl extends REST_Controller
 						"control_type" => $type,
 					);
 					$valid = ['status' => "true", "statuscode" => 200, 'response' => $data];
-					$Pass_Data["data"] = $valid;
-					$this->set_response($Pass_Data, REST_Controller::HTTP_OK);
+					$this->set_response($valid, REST_Controller::HTTP_OK);
 				} else {
-					$not_inserted = ['status' => "true", "statuscode" => 200, 'response' => "Save Element not Inserted"];
-					$Pass_Data["data"] = $not_inserted;
-					$this->set_response($Pass_Data, REST_Controller::HTTP_OK);
+					$not_inserted = ['status' => "true", "statuscode" => 200, 'response' => "Save element not Inserted"];
+					$this->set_response($not_inserted, REST_Controller::HTTP_OK);
 				}
 			} else if ($token_status == FALSE) {
 				$this->set_response($invalid, REST_Controller::HTTP_NON_AUTHORITATIVE_INFORMATION);

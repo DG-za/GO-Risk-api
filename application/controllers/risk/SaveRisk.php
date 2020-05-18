@@ -26,11 +26,14 @@ class SaveRisk extends REST_Controller
 		$no_found = ['status' => "true", "statuscode" => 200, 'response' => "No Record Found"];
 		$invalid = ['status' => "true", "statuscode" => 203, 'response' => "In-Valid token"];
 		$not_found = ['status' => "true", "statuscode" => 404, 'response' => "Token not found"];
+
 		$saveArr = array();
+
 		$message = 'Required field(s) user_id,company,hazard,risk is missing or empty';
 		$user_id = $this->post('user_id');
 		$risk_id = $this->post('risk_id');
 		$saveArr[] = $this->post('saveRiskArr');
+
 		if (isset($user_id) && !empty($user_id) && isset($saveArr) && !empty($saveArr)) {
 			$headers = $this->input->request_headers();
 			$token_status = check_token($user_id, $headers['Authorization']);
@@ -43,7 +46,8 @@ class SaveRisk extends REST_Controller
 				}
 
 				if (!empty($results)) {
-					$Pass_Data["data"]['insertId'] = $results;
+					$Pass_Data = $saveArr;
+					$Pass_Data['id'] = $results;
 					$Inserted = ['status' => "true", "statuscode" => 200, 'response' => $Pass_Data];
 					$this->set_response($Inserted, REST_Controller::HTTP_OK);
 				} else {
@@ -61,5 +65,3 @@ class SaveRisk extends REST_Controller
 		}
 	}
 }
-
-?>
