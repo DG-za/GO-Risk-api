@@ -74,15 +74,18 @@ $active_group = 'default';
 $query_builder = TRUE;
 
 $db['default'] = array(
-	'dsn'	=> '',
+
 	'hostname' => 'localhost',
 	'username' => 'root',
 	'password' => '',
 	'database' => 'she_excellence',
+
 //	'hostname' => 'database-aeci-1-instance-1.cre6veiv4t8h.af-south-1.rds.amazonaws.com',
 //	'username' => 'admin_4x',
 //	'password' => 'v21ZTTVOShBP1Tv9Wbxd',
 //	'database' => 'aeci_compliance_db1',
+
+	'dsn'	=> '',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
