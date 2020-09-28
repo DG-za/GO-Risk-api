@@ -25,7 +25,11 @@ class InviteAttendees_model extends CI_Model {
 		$this->email->subject($subject);
 		$message = $messages;
 		$this->email->message($message);
-		$this->email->send();
+		if($this->email->send()){
+			return true;
+		}else{
+			return false;
+		}
 	}
   public function Update_InviteStatus($id){  
 		$this->db->where('id', $id);

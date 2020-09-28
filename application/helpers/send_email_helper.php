@@ -34,6 +34,35 @@ function send_email_function($subject,$email,$body){
 	}	
 }
 
+function sendMail($subject,$email,$body){
+	$ci = get_instance();
+
+	$config = Array(
+		'protocol' => 'smtp',
+		'smtp_host' => 'smtp.she-excellence.co.za',
+		'smtp_port' => 587,
+		'smtp_user' => 'noreply@she-excellence.co.za',
+		'smtp_pass' => 'Crispworks123!',
+		'smtp_timeout' => '8',
+		'mailtype'  => 'html',
+		'charset'   => 'iso-8859-1'
+	);
+	$from_email = "noreply@she-excellence.co.za";
+	$message = $body;
+
+	$ci->load->library('email', $config);
+	$ci->email->set_newline("\r\n");
+	$ci->email->from($from_email, '4Xcellence Solutions');
+	$ci->email->to($email);
+	$ci->email->subject($subject);
+	$ci->email->message($message);
+	if($ci->email->send()){
+		return true;
+	}else{
+		return false;
+	}
+}
+
 
 /*function send_otp($type,$email,$data){
 	$ci = get_instance();

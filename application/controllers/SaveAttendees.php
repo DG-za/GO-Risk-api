@@ -1,30 +1,32 @@
 <?php
 require_once APPPATH . '/libraries/REST_Controller.php';
 require_once APPPATH . '/libraries/JWT.php';
-use \Firebase\JWT\JWT;
 
-class SaveAttendees extends REST_Controller {
+class SaveAttendees extends REST_Controller
+{
 	/***************************************************************
-	*  Project Name : 4Xcellence Solutions
-	*  Created By :   
-	*  Created Date : 28-09-2019
-	*  Description : A controller contain SaveAttendees related methods
-	*  Modification History :
-	*  
-	***************************************************************/
-	
-	public function __construct() {
+	 *  Project Name : 4Xcellence Solutions
+	 *  Created By :
+	 *  Created Date : 28-09-2019
+	 *  Description : A controller contain SaveAttendees related methods
+	 *  Modification History :
+	 *
+	 ***************************************************************/
+
+	public function __construct()
+	{
 		parent::__construct();
-		$this->load->helper('check_token');				
+		$this->load->helper('check_token');
 		$this->load->model('SaveUser_model');
 	}
-	
-	public function index_post(){
-		$valid = ['status' => "true","statuscode" => 200,'response' =>"Token Valid"];
-		$no_found = ['status' => "true","statuscode" => 200,'response' =>"No Record Found"];
-		$invalid = ['status' => "true","statuscode" => 203,'response' =>"In-Valid token"];
-		$not_found = ['status' => "true","statuscode" => 404,'response' =>"Token not found"];
-		
+
+	public function index_post()
+	{
+		$valid = ['status' => "true", "statuscode" => 200, 'response' => "Token Valid"];
+		$no_found = ['status' => "true", "statuscode" => 200, 'response' => "No Record Found"];
+		$invalid = ['status' => "true", "statuscode" => 203, 'response' => "In-Valid token"];
+		$not_found = ['status' => "true", "statuscode" => 404, 'response' => "Token not found"];
+
 		$message = 'Required field(s) user_id,email,firstname,lastname,role,password is missing or empty';
 		$user_id = $this->post('user_id');
 		$email = $this->post('email');
@@ -32,59 +34,64 @@ class SaveAttendees extends REST_Controller {
 		$lastname = $this->post('lastname');
 		$user_role_id = $this->post('user_role_id');
 		$password = md5($this->post('password'));
-		if(isset($email) && isset($firstname) && isset($lastname) && isset($user_role_id) && isset($password)){
+		$company_id = $this->post('company_id');
+		if (isset($email) && isset($firstname) && isset($lastname) && isset($user_role_id) && isset($password)) {
 			$headers = $this->input->request_headers();
 			//$token_status = check_token($user_id,$headers['Authorization']);
-			
-			if(true){
-				$Check_Availability_Result = $this->SaveUser_model->Check_User_Availability($email);
-				if($Check_Availability_Result==0){
-				$Insert_Array = array(
-					"`email`" => $email,
-					"`firstname`" => $firstname,
-					"`lastname`" => $lastname,
-					"`user_role_id`" => $user_role_id,
-					"`password`" => $password,
-				);
 
-				$Insert_saveUser_Result = $this->SaveUser_model->Insert_User($Insert_Array);
-				if($Insert_saveUser_Result > 0){
-					$data = [
-						'email' => $email,
-						'firstname' => $firstname,
-						'lastname' => $lastname,
-						'user_role_id' => $user_role_id,
-						'password' => $password,
-						'id'    => $Insert_saveUser_Result
-					];
-					$Pass_Data["data"][] = $data;
-					$inserted = ['status' => "true","statuscode" => 200,'response' => $Pass_Data];
-					$this->set_response($Pass_Data, REST_Controller::HTTP_OK);
-				}else{
-					$not_inserted = ['status' => "true","statuscode" => 200,'response' =>"User not Inserted"];
-					$this->set_response($not_inserted, REST_Controller::HTTP_OK);
-				}
-			}else{
-					$not_available = ['status' => "true","statuscode" => 200,'response' =>"Email Address already registered. Please proceed to the Login page."];
+			if (true) {
+				$Check_Availability_Result = $this->SaveUser_model->Check_User_Availability($email);
+				if ($Check_Availability_Result == 0) {
+					$Insert_Array = array(
+						"`email`" => $email,
+						"`firstname`" => $firstname,
+						"`lastname`" => $lastname,
+						"`user_role_id`" => $user_role_id,
+						"`password`" => $password,
+						"`company`" => $company_id
+					);
+
+					$Insert_saveUser_Result = $this->SaveUser_model->Insert_User($Insert_Array);
+
+					if ($Insert_saveUser_Result > 0) {
+						$data = [
+							'email' => $email,
+							'firstname' => $firstname,
+							'lastname' => $lastname,
+							'user_role_id' => $user_role_id,
+							'password' => $password,
+							'id' => $Insert_saveUser_Result,
+							'company' => $company_id
+						];
+						$Pass_Data["data"][] = $data;
+						$inserted = ['status' => "true", "statuscode" => 200, 'response' => $Pass_Data];
+						$this->set_response($Pass_Data, REST_Controller::HTTP_OK);
+					} else {
+						$not_inserted = ['status' => "true", "statuscode" => 200, 'response' => "User not Inserted"];
+						$this->set_response($not_inserted, REST_Controller::HTTP_OK);
+					}
+				} else {
+					$not_available = ['status' => "true", "statuscode" => 200, 'response' => "Email Address already registered. Please proceed to the Login page."];
 					$this->set_response($not_available, REST_Controller::HTTP_OK);
-			}
-			}else if($token_status == FALSE){
+				}
+			} else if ($token_status == FALSE) {
 				$this->set_response($invalid, REST_Controller::HTTP_NON_AUTHORITATIVE_INFORMATION);
-			}else{
+			} else {
 				$this->set_response($not_found, REST_Controller::HTTP_NOT_FOUND);
 			}
-		}else{
-			$parameter_required_array = ['status' => "true","statuscode" => 404,'response' => $message];
+		} else {
+			$parameter_required_array = ['status' => "true", "statuscode" => 404, 'response' => $message];
 			$this->set_response($parameter_required_array, REST_Controller::HTTP_NOT_FOUND);
 		}
 	}
 
-	public function update_user_post(){
-		$valid = ['status' => "true","statuscode" => 200,'response' =>"Token Valid"];
-		$no_found = ['status' => "true","statuscode" => 200,'response' =>"No Record Found"];
-		$invalid = ['status' => "true","statuscode" => 203,'response' =>"In-Valid token"];
-		$not_found = ['status' => "true","statuscode" => 404,'response' =>"Token not found"];
-		
+	public function update_user_post()
+	{
+		$valid = ['status' => "true", "statuscode" => 200, 'response' => "Token Valid"];
+		$no_found = ['status' => "true", "statuscode" => 200, 'response' => "No Record Found"];
+		$invalid = ['status' => "true", "statuscode" => 203, 'response' => "In-Valid token"];
+		$not_found = ['status' => "true", "statuscode" => 404, 'response' => "Token not found"];
+
 		$message = 'Required field(s) user_id,email,firstname,lastname,user_role_id is missing or empty';
 		$user_id = $this->post('user_id');
 		$edit_user_id = $this->post('edit_user_id');
@@ -92,34 +99,36 @@ class SaveAttendees extends REST_Controller {
 		$firstname = $this->post('firstname');
 		$lastname = $this->post('lastname');
 		$user_role_id = $this->post('user_role_id');
+		$company_id = $this->post('company_id');
 
-		if(isset($email) && isset($firstname) && isset($lastname) && isset($user_role_id) && isset($edit_user_id)){
+		if (isset($email) && isset($firstname) && isset($lastname) && isset($user_role_id) && isset($edit_user_id)) {
 			$headers = $this->input->request_headers();
-			$token_status = check_token($user_id,$headers['Authorization']);
-			
-			if($token_status){
+			$token_status = check_token($user_id, $headers['Authorization']);
+
+			if ($token_status) {
 				$update_Array = array(
 					"`email`" => $email,
 					"`firstname`" => $firstname,
 					"`lastname`" => $lastname,
-					"`user_role_id`" => $user_role_id
+					"`user_role_id`" => $user_role_id,
+					"`company`" => $company_id
 				);
 
-				$Update_User_Result = $this->SaveUser_model->Update_User($update_Array,$edit_user_id);
-				if($Update_User_Result){
-					$Update = ['status' => "true","statuscode" => 200,'response' => "User Updated"];
+				$Update_User_Result = $this->SaveUser_model->Update_User($update_Array, $edit_user_id);
+				if ($Update_User_Result) {
+					$Update = ['status' => "true", "statuscode" => 200, 'response' => "User Updated"];
 					$this->set_response($Update, REST_Controller::HTTP_OK);
-				}else{
-					$not_Update = ['status' => "true","statuscode" => 200,'response' =>"User not Updated"];
+				} else {
+					$not_Update = ['status' => "true", "statuscode" => 200, 'response' => "User not Updated"];
 					$this->set_response($not_Update, REST_Controller::HTTP_OK);
 				}
-			}else if($token_status == FALSE){
+			} else if ($token_status == FALSE) {
 				$this->set_response($invalid, REST_Controller::HTTP_NON_AUTHORITATIVE_INFORMATION);
-			}else{
+			} else {
 				$this->set_response($not_found, REST_Controller::HTTP_NOT_FOUND);
 			}
-		}else{
-			$parameter_required_array = ['status' => "true","statuscode" => 404,'response' => $message];
+		} else {
+			$parameter_required_array = ['status' => "true", "statuscode" => 404, 'response' => $message];
 			$this->set_response($parameter_required_array, REST_Controller::HTTP_NOT_FOUND);
 		}
 	}
